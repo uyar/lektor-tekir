@@ -21,7 +21,10 @@ classifiers = [
 ]
 
 requires-python = "~=3.8"
-dependencies = ["lektor"]
+dependencies = [
+    "Lektor",
+    "Flask-Babel",
+]
 
 [project.optional-dependencies]
 style = ["ruff"]

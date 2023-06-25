@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ get_locale() }}">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Lektorly Admin Panel</title>
+  <title>{{ _("Lektorly Admin Panel") }}</title>
   <link rel="stylesheet" href="{{ url_for('lektorly.static', filename='lektorly.css') }}">
   <script src="{{ url_for('lektorly.static', filename='htmx.min.js') }}"></script>
 </head>
 <body>
-  <h1>Lektorly Admin Panel</h1>
+  <h1>{{ _("Lektorly Admin Panel") }}</h1>
   <nav>
     <ul>
-      <li>Home</li>
-      <li>Content</li>
+      <li>{{ _("Home") }}</li>
+      <li>{{ _("Content") }}</li>
     </ul>
   </nav>
   <main>
