@@ -8,6 +8,15 @@
   <script src="{{ url_for('lektorly.static', filename='htmx.min.js') }}"></script>
 </head>
 <body>
-  {% block body %}{% endblock %}
+  <h1>Lektorly Admin Panel</h1>
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li>Content</li>
+    </ul>
+  </nav>
+  <main>
+    {% block body %}{% endblock %}
+  </main>
 </body>
 </html>

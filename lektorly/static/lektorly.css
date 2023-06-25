@@ -21,3 +21,57 @@ textarea,
 select {
   font: inherit;
 }
+
+body {
+  display: grid;
+  grid-template-areas:
+    ".   header"
+    "nav content";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, monospace;
+}
+
+h1,
+nav,
+main {
+  padding: 1rem;
+}
+
+h1 {
+  grid-area: header;
+  width: 100%;
+  margin: 0;
+  background-color: hsl(240, 50%, 50%);
+  color: white;
+  font-size: 1.5em;
+}
+
+nav {
+  grid-area: nav;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav ul {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main {
+  grid-area: content;
+}
