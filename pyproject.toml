@@ -1,0 +1,49 @@
+[project]
+name = "lektorly"
+version = "0.1"
+description = "An alternative admin panel for Lektor."
+readme = "README.rst"
+
+authors = [{name = "H. Turgut Uyar", email = "uyar@tekir.org"}]
+license = {file = "LICENSE.txt"}
+
+keywords = ["lektor", "cms"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Framework :: Lektor",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+requires-python = "~=3.8"
+dependencies = ["lektor"]
+
+[project.optional-dependencies]
+style = ["ruff"]
+dev = [
+    "lektorly[style]",
+    "build",
+]
+
+[project.urls]
+repository = "https://github.com/uyar/lektorly"
+
+[tool.setuptools]
+packages = ["lektorly"]
+
+[tool.ruff]
+select = ["E", "F", "I"]
+ignore = ["E731"]
+line-length = 79
+
+[tool.ruff.isort]
+lines-after-imports = 2
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
