@@ -30,6 +30,9 @@ dev = [
     "build",
 ]
 
+[project.scripts]
+lektorly = "lektorly.cli:main"
+
 [project.urls]
 repository = "https://github.com/uyar/lektorly"
 

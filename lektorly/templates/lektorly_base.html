@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Lektorly Admin Panel</title>
+  <link rel="stylesheet" href="{{ url_for('lektorly.static', filename='lektorly.css') }}">
+  <script src="{{ url_for('lektorly.static', filename='htmx.min.js') }}"></script>
+</head>
+<body>
+  {% block body %}{% endblock %}
+</body>
+</html>
