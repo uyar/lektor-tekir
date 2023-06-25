@@ -10,13 +10,16 @@ from flask_babel import Babel, get_locale
 from lektor.admin.webui import WebUI
 from lektor.cli import cli
 
-from lektorly import dash
+from lektorly import api, dash
 
 
 class LektorlyUI(WebUI):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.register_blueprint(dash.bp)
+        self.register_blueprint(api.bp)
+
         locale_dir = Path(__file__).parent / "translations"
         _ = Babel(self, locale_selector=lambda: "tr",
                   default_translation_directories=str(locale_dir))

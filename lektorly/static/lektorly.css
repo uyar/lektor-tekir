@@ -1,3 +1,9 @@
+:root {
+  --color: hsl(232, 58%, 59%);
+}
+
+/* RESET */
+
 *,
 *::before,
 *::after {
@@ -15,12 +21,24 @@ svg {
   height: auto;
 }
 
+nav a {
+  text-decoration: none;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 input,
 button,
 textarea,
 select {
   font: inherit;
 }
+
+/* GENERAL */
 
 body {
   display: grid;
@@ -40,38 +58,42 @@ pre {
   font-family: ui-monospace, monospace;
 }
 
-h1,
-nav,
-main {
-  padding: 1rem;
-}
-
 h1 {
   grid-area: header;
   width: 100%;
   margin: 0;
-  background-color: hsl(240, 50%, 50%);
+  padding: 1rem;
+  background-color: var(--color);
   color: white;
   font-size: 1.5em;
 }
 
 nav {
   grid-area: nav;
-}
-
-nav a {
-  text-decoration: none;
+  padding: 1rem;
+  font-size: 90%;
 }
 
 nav ul {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   gap: 1em;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 main {
   grid-area: content;
+  padding: 4rem 2rem;
+}
+
+/* CUSTOM */
+
+#page-count h2 {
+  margin: 0;
+  color: var(--color);
+  font-size: 1.1em;
+}
+
+#page-count p {
+  margin: 0.25em 0;
+  font-size: 2em;
 }
