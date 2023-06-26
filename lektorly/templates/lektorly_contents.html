@@ -1,0 +1,14 @@
+{% extends "lektorly_base.html" %}
+{% block body %}
+  <div class="lektorly-contents">
+    <section class="lektorly-subpages">
+      <h2>{{ _("Subpages") }}</h2>
+      <ul hx-get="/lektorly/api/subpages?path=/" hx-trigger="load"></ul>
+    </section>
+
+    <section class="lektorly-attachments">
+      <h2>{{ _("Attachments") }}</h2>
+      <ul hx-get="/lektorly/api/attachments?path=/" hx-trigger="load"></ul>
+    </section>
+  </div>
+{% endblock %}

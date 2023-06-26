@@ -1,6 +1,6 @@
 {% extends "lektorly_base.html" %}
 {% block body %}
-  <section id="page-count">
+  <section class="lektorly-page-count">
     <h2>{{ _("Number of Pages") }}</h2>
     <p hx-get="/lektorly/api/page-count" hx-trigger="load"></p>
   </section>

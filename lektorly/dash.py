@@ -16,3 +16,8 @@ bp = Blueprint("lektorly", __name__, url_prefix="/lektorly",
 @bp.route("/")
 def dashboard():
     return render_template("lektorly_dashboard.html")
+
+
+@bp.route("/contents")
+def contents():
+    return render_template("lektorly_contents.html")

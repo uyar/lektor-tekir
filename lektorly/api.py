@@ -5,20 +5,35 @@
 
 from pathlib import Path
 
-from flask import Blueprint, g
+from flask import Blueprint, g, request
 from lektor.admin.modules.common import AdminContext
+from lektor.db import TreeItem
 
 
 bp = Blueprint("lektorly_api", __name__, url_prefix="/lektorly/api")
-
-
-def get_page_count(root: Path) -> int:
-    pages = {c.parent for c in root.glob("**/contents*.lr")}
-    return len(pages)
 
 
 @bp.route("/page-count")
 def page_count() -> str:
     context: AdminContext = g.admin_context
     root_path = Path(context.pad.env.root_path)
-    return str(get_page_count(root_path))
+    pages = {c.parent for c in root_path.glob("**/contents*.lr")}
+    return str(len(pages))
+
+
+@bp.route("/subpages")
+def subpages() -> str:
+    path: str = request.args.get("path")
+    context: AdminContext = g.admin_context
+    page: TreeItem = context.tree.get(path)
+    subpages = [f"<li>{c.path}</li>" for c in page.iter_subpages()]
+    return "\n".join(subpages)
+
+
+@bp.route("/attachments")
+def attachments() -> str:
+    path: str = request.args.get("path")
+    context: AdminContext = g.admin_context
+    page: TreeItem = context.tree.get(path)
+    attachments = [f"<li>{c.path}</li>" for c in page.iter_attachments()]
+    return "\n".join(attachments)
