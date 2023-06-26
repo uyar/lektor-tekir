@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>{{ _("Lektorly Admin Panel") }}</title>
+  <title>{{ g.admin_context.pad.env.project.name }} - {{ _("Admin Panel") }}</title>
   <link rel="stylesheet" href="{{ url_for('lektorly.static', filename='lektorly.css') }}">
   <script src="{{ url_for('lektorly.static', filename='htmx.min.js') }}"></script>
 </head>
 <body>
-  <h1>{{ _("Lektorly Admin Panel") }}</h1>
+  <h1>{{ _("Admin Panel") }}</h1>
   <nav>
     <ul>
       <li>{{ _("Home") }}</li>

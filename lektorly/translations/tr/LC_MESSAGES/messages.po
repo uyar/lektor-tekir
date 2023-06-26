@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-25 21:54+0300\n"
+"POT-Creation-Date: 2023-06-26 12:40+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -20,8 +20,8 @@ msgstr ""
 
 #: lektorly/templates/lektorly_base.html:6
 #: lektorly/templates/lektorly_base.html:11
-msgid "Lektorly Admin Panel"
-msgstr "Lektorly Yönetim Paneli"
+msgid "Admin Panel"
+msgstr "Yönetim Paneli"
 
 #: lektorly/templates/lektorly_base.html:14
 msgid "Home"
@@ -34,3 +34,4 @@ msgstr "İçerik"
 #: lektorly/templates/lektorly_dashboard.html:4
 msgid "Number of Pages"
 msgstr "Sayfa Sayısı"
+
