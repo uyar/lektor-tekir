@@ -25,7 +25,7 @@ def get_subpage_count(node):
     return n_subpages + len(subpages)
 
 
-@bp.route("/pagecount")
+@bp.route("/page-count")
 def get_page_count():
     root = g.admin_context.tree.get("/")
     return str(get_subpage_count(root))
