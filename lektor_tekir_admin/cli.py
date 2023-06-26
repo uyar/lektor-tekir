@@ -6,6 +6,7 @@
 from pathlib import Path
 from unittest.mock import patch
 
+from flask import request
 from flask_babel import Babel, get_locale
 from lektor.admin.webui import WebUI
 from lektor.cli import cli
@@ -21,7 +22,7 @@ class TekirAdminUI(WebUI):
         self.register_blueprint(api.bp)
 
         locale_dir = Path(__file__).parent / "translations"
-        _ = Babel(self, locale_selector=lambda: "tr",
+        _ = Babel(self, locale_selector=lambda: request.args.get("lang", "en"),
                   default_translation_directories=str(locale_dir))
         self.jinja_env.globals["get_locale"] = get_locale
 

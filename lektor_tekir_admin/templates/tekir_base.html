@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ get_locale() }}">
+{% set lang = get_locale() %}
+<html lang="{{ lang }}">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,10 +10,16 @@
 </head>
 <body>
   <h1>{{ _("Admin Panel") }}</h1>
+  <div id="langs">
+    <ul>
+      <li><a href="{{ request.url }}&lang=en">English</li>
+      <li><a href="{{ request.url }}&lang=tr">Türkçe</li>
+    </ul>
+  </div>
   <nav>
     <ul>
-      <li><a href="/admin_tekir/">{{ _("Home") }}</a></li>
-      <li><a href="/admin_tekir/contents?path=/">{{ _("Contents") }}</a></li>
+      <li><a href="/admin_tekir/?lang={{ lang }}">{{ _("Home") }}</a></li>
+      <li><a href="/admin_tekir/contents?path=/&lang={{ lang }}">{{ _("Contents") }}</a></li>
     </ul>
   </nav>
   <main>
