@@ -1,5 +1,7 @@
 :root {
-  --color: hsl(232, 58%, 59%);
+  --color-bg: hsl(0, 0%, 95%);
+  --color-text: hsl(0, 0%, 0%);
+  --color: hsl(32, 66%, 37%);
 }
 
 /* RESET */
@@ -8,6 +10,10 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+* {
+  line-height: calc(1em + 0.5rem);
 }
 
 body {
@@ -48,6 +54,8 @@ body {
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: system-ui, sans-serif;
 }
 
@@ -80,9 +88,20 @@ nav ul {
   gap: 1em;
 }
 
+nav li {
+  display: contents;
+}
+
+nav a {
+  padding: 0.5rem;
+  border: 1px solid;
+  border-radius: 2px;
+  color: inherit;
+}
+
 main {
   grid-area: content;
-  padding: 3rem 2rem;
+  padding: 2rem;
 }
 
 /* CUSTOM */
@@ -101,4 +120,13 @@ main {
 .lektorly-contents {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+
+/* MEDIA QUERIES */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: hsl(0, 0%, 5%);
+    --color-text: hsl(0, 0%, 100%);
+  }
 }
