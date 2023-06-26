@@ -106,18 +106,18 @@ main {
 
 /* CUSTOM */
 
-.lektorly-page-count h2 {
+.tekir-page-count h2 {
   margin: 0;
   color: var(--color);
   font-size: 1.1em;
 }
 
-.lektorly-page-count p {
+.tekir-page-count p {
   margin: 0.25em 0;
   font-size: 2em;
 }
 
-.lektorly-contents {
+.tekir-contents {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }

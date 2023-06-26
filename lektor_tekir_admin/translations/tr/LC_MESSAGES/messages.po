@@ -18,28 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektorly/templates/lektorly_base.html:6
-#: lektorly/templates/lektorly_base.html:11
+#: lektor_tekir_admin/templates/tekir_base.html:6
+#: lektor_tekir_admin/templates/tekir_base.html:11
 msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
-#: lektorly/templates/lektorly_base.html:14
+#: lektor_tekir_admin/templates/tekir_base.html:14
 msgid "Home"
 msgstr "Ana Sayfa"
 
-#: lektorly/templates/lektorly_base.html:15
+#: lektor_tekir_admin/templates/tekir_base.html:15
 msgid "Contents"
 msgstr "İçindekiler"
 
-#: lektorly/templates/lektorly_contents.html:5
+#: lektor_tekir_admin/templates/tekir_contents.html:5
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektorly/templates/lektorly_contents.html:10
+#: lektor_tekir_admin/templates/tekir_contents.html:10
 msgid "Attachments"
 msgstr "Ekler"
 
-#: lektorly/templates/lektorly_dashboard.html:4
+#: lektor_tekir_admin/templates/tekir_dashboard.html:4
 msgid "Number of Pages"
 msgstr "Sayfa Sayısı"
 

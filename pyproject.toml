@@ -1,5 +1,5 @@
 [project]
-name = "lektorly"
+name = "lektor-tekir-admin"
 version = "0.1"
 description = "An alternative admin panel for Lektor."
 readme = "README.rst"
@@ -27,19 +27,19 @@ dependencies = ["lektor", "flask-babel"]
 types = ["mypy"]
 style = ["ruff"]
 dev = [
-    "lektorly[types,style]",
+    "lektor-tekir-admin[types,style]",
     "build",
     "tox",
 ]
 
 [project.scripts]
-lektorly = "lektorly.cli:main"
+lektor-tekir = "lektor_tekir_admin.cli:main"
 
 [project.urls]
-repository = "https://github.com/uyar/lektorly"
+repository = "https://github.com/uyar/lektor-tekir-admin"
 
 [tool.setuptools]
-packages = ["lektorly"]
+packages = ["lektor_tekir_admin"]
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -62,13 +62,13 @@ isolated_build = True
 skip_install = true
 deps = mypy
 commands =
-    mypy lektorly
+    mypy lektor_tekir_admin
 
 [testenv:style]
 skip_install = true
 deps = ruff
 commands =
-    ruff lektorly
+    ruff lektor_tekir_admin
 """
 
 [build-system]

@@ -1,6 +1,6 @@
 # Copyright (C) 2023 H. Turgut Uyar <uyar@tekir.org>
 #
-# lektorly is released under the BSD license.
+# lektor-tekir-admin is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
 from pathlib import Path
@@ -10,10 +10,10 @@ from flask_babel import Babel, get_locale
 from lektor.admin.webui import WebUI
 from lektor.cli import cli
 
-from lektorly import api, dash
+from lektor_tekir_admin import api, dash
 
 
-class LektorlyUI(WebUI):
+class TekirAdminUI(WebUI):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -27,5 +27,5 @@ class LektorlyUI(WebUI):
 
 
 def main():
-    with patch("lektor.admin.WebAdmin", LektorlyUI):
+    with patch("lektor.admin.WebAdmin", TekirAdminUI):
         cli()

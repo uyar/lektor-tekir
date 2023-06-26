@@ -4,15 +4,15 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>{{ g.admin_context.pad.env.project.name }} - {{ _("Admin Panel") }}</title>
-  <link rel="stylesheet" href="{{ url_for('lektorly.static', filename='lektorly.css') }}">
-  <script src="{{ url_for('lektorly.static', filename='htmx.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('admin_tekir.static', filename='tekir-admin.css') }}">
+  <script src="{{ url_for('admin_tekir.static', filename='htmx.min.js') }}"></script>
 </head>
 <body>
   <h1>{{ _("Admin Panel") }}</h1>
   <nav>
     <ul>
-      <li><a href="/lektorly/">{{ _("Home") }}</a></li>
-      <li><a href="/lektorly/contents?path=/">{{ _("Contents") }}</a></li>
+      <li><a href="/admin_tekir/">{{ _("Home") }}</a></li>
+      <li><a href="/admin_tekir/contents?path=/">{{ _("Contents") }}</a></li>
     </ul>
   </nav>
   <main>

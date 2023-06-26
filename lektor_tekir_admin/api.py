@@ -1,6 +1,6 @@
 # Copyright (C) 2023 H. Turgut Uyar <uyar@tekir.org>
 #
-# lektorly is released under the BSD license.
+# lektor-tekir-admin is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
 from pathlib import Path
@@ -10,7 +10,7 @@ from flask import Blueprint, g, request
 from lektor.db import Attachment, Page, TreeItem
 
 
-bp = Blueprint("lektorly_api", __name__, url_prefix="/lektorly/api")
+bp = Blueprint("admin_tekir_api", __name__, url_prefix="/admin_tekir/api")
 
 
 @bp.route("/page-count")
