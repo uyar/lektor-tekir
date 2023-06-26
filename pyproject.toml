@@ -21,16 +21,15 @@ classifiers = [
 ]
 
 requires-python = "~=3.8"
-dependencies = [
-    "Lektor",
-    "Flask-Babel",
-]
+dependencies = ["lektor", "flask-babel"]
 
 [project.optional-dependencies]
+types = ["mypy"]
 style = ["ruff"]
 dev = [
-    "lektorly[style]",
+    "lektorly[types,style]",
     "build",
+    "tox",
 ]
 
 [project.scripts]
@@ -42,6 +41,9 @@ repository = "https://github.com/uyar/lektorly"
 [tool.setuptools]
 packages = ["lektorly"]
 
+[tool.mypy]
+ignore_missing_imports = true
+
 [tool.ruff]
 select = ["E", "F", "I"]
 ignore = ["E731"]
@@ -49,6 +51,25 @@ line-length = 79
 
 [tool.ruff.isort]
 lines-after-imports = 2
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = types, style
+isolated_build = True
+
+[testenv:types]
+skip_install = true
+deps = mypy
+commands =
+    mypy lektorly
+
+[testenv:style]
+skip_install = true
+deps = ruff
+commands =
+    ruff lektorly
+"""
 
 [build-system]
 requires = ["setuptools", "setuptools-scm"]
