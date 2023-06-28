@@ -2,6 +2,8 @@
 {% block body %}
   {% set path = request.args.get("path", "/") %}
   <div class="tekir-contents">
+    <h2>{{ record.title }}</h2>
+
     <section class="tekir-subpages">
       <h2>{{ _("Subpages") }}</h2>
       <ul hx-get="{{ url_for('admin_tekir_api.subpages', path=path, lang=g.lang_code) }}" hx-trigger="load"></ul>

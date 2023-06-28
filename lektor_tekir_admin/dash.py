@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from flask import Blueprint, g, render_template
+from flask import Blueprint, g, render_template, request
 
 
 bp = Blueprint("admin_tekir", __name__, url_prefix="/admin-tekir/<lang_code>",
@@ -30,4 +30,6 @@ def dashboard():
 
 @bp.route("/contents/")
 def contents():
-    return render_template("tekir_contents.html")
+    path = request.args.get("path", "/")
+    node = g.admin_context.tree.get(path)
+    return render_template("tekir_contents.html", record=node._primary_record)
