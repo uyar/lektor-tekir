@@ -1,6 +1,33 @@
 {% extends "tekir_base.html" %}
 {% block body %}
   <form class="tekir-content-edit">
-    <h2>{{ record.title }}</h2>
+    {% for field in record.datamodel.fields %}
+      <div class="field">
+        <label for="{{ field.name }}">{{ field.label }}</label>
+        {% if field.type.name == "datetime" %}
+          <input type="datetime-local" id="{{ field.name }}" name="{{ field.name }}"
+              value="{{ record[field.name] }}" />
+        {% elif field.type.widget == "checkbox" %}
+          <input type="checkbox" id="{{ field.name }}" name="{{ field.name }}"
+              {{ 'checked' if record[field.name] else '' }} />
+        {% elif field.type.widget == "select" %}
+          <select id="{{ field.name }}" name="{{ field.name }}">
+            <option value="">----</option>
+            {% set choices = field.type.options.get("choices", "").split(",") %}
+            {% set labels = field.type.options.get("choice_labels", "").split(",") %}
+            {% for choice, label in zip(choices, labels) %}
+              <option value="{{ choice.strip() }}"
+                  {{ 'selected' if record[field.name] == choice else '' }}>{{ label.strip() }}</option>
+            {% endfor %}
+          </select>
+        {% elif field.type.widget == "singleline-text" %}
+          <input type="text" id="{{ field.name }}" name="{{ field.name }}"
+              value="{{ record[field.name] }}" />
+        {% elif field.type.widget == "multiline-text" %}
+          <textarea id="{{ field.name }}" name="{{ field.name }}"
+              {{ 'class=code' if field.type.name in ("markdown", "html") else '' }}>{{ record[field.name] }}</textarea>
+        {% endif %}
+      </div>
+    {% endfor %}
   </form>
 {% endblock %}

@@ -35,7 +35,7 @@ def contents():
     return render_template("tekir_contents.html", record=record)
 
 
-@bp.route("/edit/content/")
+@bp.route("/content/edit")
 def edit_content():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record

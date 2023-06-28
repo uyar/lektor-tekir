@@ -27,7 +27,8 @@ body {
 code,
 kbd,
 samp,
-pre {
+pre,
+.code {
   font-family: ui-monospace, monospace;
 }
 
@@ -68,27 +69,24 @@ body {
     "nav content";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 h1 {
   grid-area: header;
   width: 100%;
   margin: 0;
+  padding: 1rem;
 }
 
 nav {
   grid-area: nav;
+  padding: 1rem;
 }
 
 main {
   grid-area: content;
-}
-
-h1,
-nav,
-main {
-  padding: 1rem;
+  padding: 2rem;
 }
 
 /* HEADING */
@@ -172,6 +170,30 @@ h2 + p {
 
 .tekir-attachments {
   grid-area: attachments;
+}
+
+/* FORMS */
+
+.field {
+  margin-block: 1em;
+}
+
+label {
+  display: block;
+  margin-block-end: 0.25rem;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  height: 10em;
+}
+
+select {
+  padding: 0.25rem;
 }
 
 /* MEDIA QUERIES */

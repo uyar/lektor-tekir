@@ -25,6 +25,7 @@ class TekirAdminUI(WebUI):
         _ = Babel(self, locale_selector=lambda: g.lang_code,
                   default_translation_directories=str(locale_dir))
         self.jinja_env.globals["get_locale"] = get_locale
+        self.jinja_env.globals["zip"] = zip
 
 
 def main():
