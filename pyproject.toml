@@ -24,12 +24,10 @@ requires-python = "~=3.8"
 dependencies = ["lektor", "flask-babel"]
 
 [project.optional-dependencies]
-types = ["mypy"]
 style = ["ruff"]
 dev = [
-    "lektor-tekir-admin[types,style]",
+    "lektor-tekir-admin[style]",
     "build",
-    "tox",
 ]
 
 [project.scripts]
@@ -41,9 +39,6 @@ repository = "https://github.com/uyar/lektor-tekir-admin"
 [tool.setuptools]
 packages = ["lektor_tekir_admin"]
 
-[tool.mypy]
-ignore_missing_imports = true
-
 [tool.ruff]
 select = ["E", "F", "I"]
 ignore = ["E731"]
@@ -51,25 +46,6 @@ line-length = 79
 
 [tool.ruff.isort]
 lines-after-imports = 2
-
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-envlist = types, style
-isolated_build = True
-
-[testenv:types]
-skip_install = true
-deps = mypy
-commands =
-    mypy lektor_tekir_admin
-
-[testenv:style]
-skip_install = true
-deps = ruff
-commands =
-    ruff lektor_tekir_admin
-"""
 
 [build-system]
 requires = ["setuptools", "setuptools-scm"]
