@@ -9,15 +9,22 @@ license = {file = "LICENSE.txt"}
 
 keywords = ["lektor", "cms"]
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
     "Framework :: Lektor",
+    "Intended Audience :: End Users/Desktop",
     "License :: OSI Approved :: BSD License",
+    "Natural Language :: English",
+    "Natural Language :: Turkish",
+    "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Topic :: Internet",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
 ]
 
 requires-python = "~=3.8"
