@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-28 18:21+0300\n"
+"POT-Creation-Date: 2023-06-28 19:02+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -32,10 +32,14 @@ msgid "Content"
 msgstr "İçerik"
 
 #: lektor_tekir_admin/templates/tekir_contents.html:6
+msgid "Edit"
+msgstr "Düzenle"
+
+#: lektor_tekir_admin/templates/tekir_contents.html:9
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir_admin/templates/tekir_contents.html:11
+#: lektor_tekir_admin/templates/tekir_contents.html:14
 msgid "Attachments"
 msgstr "Ekler"
 

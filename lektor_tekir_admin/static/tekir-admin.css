@@ -155,15 +155,15 @@ h2 + p {
 
 .tekir-contents {
   display: grid;
-  grid-gap: 1em;
+  grid-gap: 2em 1em;
   grid-template-areas:
-    "header   header"
+    "summary  summary"
     "subpages attachments";
   grid-template-columns: 1fr 1fr;
 }
 
-.tekir-contents h2 {
-  grid-area: header;
+.tekir-summary {
+  grid-area: summary;
 }
 
 .tekir-subpages {

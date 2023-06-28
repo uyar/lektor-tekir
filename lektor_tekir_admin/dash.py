@@ -31,5 +31,12 @@ def dashboard():
 @bp.route("/contents/")
 def contents():
     path = request.args.get("path", "/")
-    node = g.admin_context.tree.get(path)
-    return render_template("tekir_contents.html", record=node._primary_record)
+    record = g.admin_context.tree.get(path)._primary_record
+    return render_template("tekir_contents.html", record=record)
+
+
+@bp.route("/edit/content/")
+def edit_content():
+    path = request.args.get("path", "/")
+    record = g.admin_context.tree.get(path)._primary_record
+    return render_template("tekir_content_edit.html", record=record)

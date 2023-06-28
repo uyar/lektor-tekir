@@ -1,17 +1,18 @@
 {% extends "tekir_base.html" %}
 {% block body %}
-  {% set path = request.args.get("path", "/") %}
   <div class="tekir-contents">
-    <h2>{{ record.title }}</h2>
-
+    <div class="tekir-summary">
+      <h2>{{ record.title }}</h2>
+      <a href="{{ url_for('admin_tekir.edit_content', path=record.path) }}">{{ _("Edit") }}</a>
+    </div>
     <section class="tekir-subpages">
       <h2>{{ _("Subpages") }}</h2>
-      <ul hx-get="{{ url_for('admin_tekir_api.subpages', path=path, lang=g.lang_code) }}" hx-trigger="load"></ul>
+      <ul hx-get="{{ url_for('admin_tekir_api.subpages', path=record.path, lang=g.lang_code) }}" hx-trigger="load"></ul>
     </section>
 
     <section class="tekir-attachments">
       <h2>{{ _("Attachments") }}</h2>
-      <ul hx-get="{{ url_for('admin_tekir_api.attachments', path=path, lang=g.lang_code) }}" hx-trigger="load"></ul>
+      <ul hx-get="{{ url_for('admin_tekir_api.attachments', path=record.path, lang=g.lang_code) }}" hx-trigger="load"></ul>
     </section>
   </div>
 {% endblock %}
