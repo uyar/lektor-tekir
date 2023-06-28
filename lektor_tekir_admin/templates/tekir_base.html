@@ -10,16 +10,10 @@
 </head>
 <body>
   <h1>{{ _("Admin Panel") }}</h1>
-  <div id="langs">
-    <ul>
-      <li><a href="{{ request.url }}&lang=en">English</li>
-      <li><a href="{{ request.url }}&lang=tr">Türkçe</li>
-    </ul>
-  </div>
   <nav>
     <ul>
-      <li><a href="/admin-tekir/?lang={{ lang }}">{{ _("Home") }}</a></li>
-      <li><a href="/admin-tekir/contents?path=/&lang={{ lang }}">{{ _("Contents") }}</a></li>
+      <li><a href="/admin-tekir/{{ g.lang_code }}/">{{ _("Home") }}</a></li>
+      <li><a href="/admin-tekir/{{ g.lang_code }}/contents/?path=/">{{ _("Contents") }}</a></li>
     </ul>
   </nav>
   <main>
