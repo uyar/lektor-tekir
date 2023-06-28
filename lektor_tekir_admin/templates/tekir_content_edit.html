@@ -24,7 +24,7 @@
           <input type="text" id="{{ field.name }}" name="{{ field.name }}"
               value="{{ record[field.name] }}" />
         {% elif field.type.widget == "multiline-text" %}
-          <textarea id="{{ field.name }}" name="{{ field.name }}"
+          <textarea id="{{ field.name }}" name="{{ field.name }}" rows="10"
               {{ 'class=code' if field.type.name in ("markdown", "html") else '' }}>{{ record[field.name] }}</textarea>
         {% endif %}
       </div>
