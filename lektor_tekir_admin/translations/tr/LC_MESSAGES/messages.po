@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-26 13:23+0300\n"
+"POT-Creation-Date: 2023-06-28 18:21+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -18,24 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir_admin/templates/tekir_base.html:6
-#: lektor_tekir_admin/templates/tekir_base.html:11
+#: lektor_tekir_admin/templates/tekir_base.html:7
+#: lektor_tekir_admin/templates/tekir_base.html:12
 msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
-#: lektor_tekir_admin/templates/tekir_base.html:14
+#: lektor_tekir_admin/templates/tekir_base.html:15
 msgid "Home"
 msgstr "Ana Sayfa"
 
-#: lektor_tekir_admin/templates/tekir_base.html:15
-msgid "Contents"
-msgstr "İçindekiler"
+#: lektor_tekir_admin/templates/tekir_base.html:16
+msgid "Content"
+msgstr "İçerik"
 
-#: lektor_tekir_admin/templates/tekir_contents.html:5
+#: lektor_tekir_admin/templates/tekir_contents.html:6
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir_admin/templates/tekir_contents.html:10
+#: lektor_tekir_admin/templates/tekir_contents.html:11
 msgid "Attachments"
 msgstr "Ekler"
 
