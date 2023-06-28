@@ -9,7 +9,14 @@
   <script src="{{ url_for('admin_tekir.static', filename='htmx.min.js') }}"></script>
 </head>
 <body>
-  <h1>{{ _("Admin Panel") }}</h1>
+  <header>
+    <h1>{{ _("Admin Panel") }}</h1>
+    <ul>
+      {% for locale in translations() %}
+        <li><a href="/admin-tekir/{{ locale }}/{{ '/'.join(request.full_path.split('/')[3:]) }}">{{ locale }}</a></li>
+      {% endfor %}
+    </ul>
+  </header>
   <nav>
     <ul>
       <li><a href="/admin-tekir/{{ g.lang_code }}/">{{ _("Home") }}</a></li>

@@ -67,39 +67,52 @@ body {
   grid-template-areas:
     ".   header"
     "nav content";
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 10em 1fr;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
 
-h1 {
+body > header {
   grid-area: header;
-  width: 100%;
-  margin: 0;
-  padding: 1rem;
 }
 
 nav {
   grid-area: nav;
-  padding: 1rem;
 }
 
 main {
   grid-area: content;
-  padding: 2rem;
 }
 
 /* HEADING */
 
-h1 {
+body > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
   background-color: var(--color);
+}
+
+h1 {
+  margin: 0;
   color: white;
   font-size: 1.5em;
+}
+
+body > header > ul {
+  display: inline-flex;
+  gap: 1em;
+  margin: 0;
+  padding: 0;
+  font-size: 90%;
+  list-style: none;
 }
 
 /* NAV */
 
 nav {
+  padding: 1rem;
   font-size: 90%;
 }
 
@@ -115,12 +128,14 @@ nav li {
 
 nav a {
   padding: 0.5rem;
-  border: 1px solid;
-  border-radius: 2px;
   color: inherit;
 }
 
 /* MAIN */
+
+main {
+  padding: 2rem;
+}
 
 section {
   padding: 1em;
