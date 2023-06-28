@@ -6,8 +6,11 @@
 from pathlib import Path
 from typing import List
 
-from flask import Blueprint, g, request
-from lektor.db import Attachment, Page, TreeItem
+from flask import Blueprint, g, request, url_for
+from lektor.db import TreeItem
+
+
+LINKED_LISTITEM = """<li><a href="%(url)s">%(title)s</a></li>"""
 
 
 bp = Blueprint("admin_tekir_api", __name__, url_prefix="/admin-tekir/api")
@@ -22,18 +25,29 @@ def page_count() -> str:
 
 @bp.route("/subpages")
 def subpages() -> str:
+    g.lang_code = request.args.get("lang", "en")
     path: str = request.args.get("path")
     node: TreeItem = g.admin_context.tree.get(path)
-    subs: List[Page] = [p._primary_record for p in node.iter_subpages()]
-    markup = [f"<li>{c['title'] or c.path}</li>" for c in subs]
-    return "\n".join(markup)
+    items: List[str] = [
+        LINKED_LISTITEM % {
+            "url": url_for("admin_tekir.contents", path=c.path),
+            "title": c["title"],
+        }
+        for c in [p._primary_record for p in node.iter_subpages()]
+    ]
+    return "\n".join(items)
 
 
 @bp.route("/attachments")
 def attachments() -> str:
+    g.lang_code = request.args.get("lang", "en")
     path: str = request.args.get("path")
     node: TreeItem = g.admin_context.tree.get(path)
-    subs: List[Attachment] = [a._primary_record
-                              for a in node.iter_attachments()]
-    markup = [f"<li>{node._primary_record.url_to(c)}</li>" for c in subs]
-    return "\n".join(markup)
+    items: List[str] = [
+        LINKED_LISTITEM % {
+            "url": url_for("admin_tekir.contents", path=c.path),
+            "title": node._primary_record.url_to(c),
+        }
+        for c in [p._primary_record for p in node.iter_attachments()]
+    ]
+    return "\n".join(items)

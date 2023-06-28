@@ -1,14 +1,15 @@
 {% extends "tekir_base.html" %}
 {% block body %}
+  {% set path = request.args.get("path", "/") %}
   <div class="tekir-contents">
     <section class="tekir-subpages">
       <h2>{{ _("Subpages") }}</h2>
-      <ul hx-get="/admin-tekir/api/subpages?path=/" hx-trigger="load"></ul>
+      <ul hx-get="{{ url_for('admin_tekir_api.subpages', path=path, lang=g.lang_code) }}" hx-trigger="load"></ul>
     </section>
 
     <section class="tekir-attachments">
       <h2>{{ _("Attachments") }}</h2>
-      <ul hx-get="/admin-tekir/api/attachments?path=/" hx-trigger="load"></ul>
+      <ul hx-get="{{ url_for('admin_tekir_api.attachments', path=path, lang=g.lang_code) }}" hx-trigger="load"></ul>
     </section>
   </div>
 {% endblock %}
