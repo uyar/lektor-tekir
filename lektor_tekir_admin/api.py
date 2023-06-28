@@ -10,7 +10,7 @@ from flask import Blueprint, g, request
 from lektor.db import Attachment, Page, TreeItem
 
 
-bp = Blueprint("admin_tekir_api", __name__, url_prefix="/admin_tekir/api")
+bp = Blueprint("admin_tekir_api", __name__, url_prefix="/admin-tekir/api")
 
 
 @bp.route("/page-count")

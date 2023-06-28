@@ -8,7 +8,7 @@ from pathlib import Path
 from flask import Blueprint, render_template
 
 
-bp = Blueprint("admin_tekir", __name__, url_prefix="/admin_tekir",
+bp = Blueprint("admin_tekir", __name__, url_prefix="/admin-tekir",
                template_folder=Path(__file__).parent / "templates",
                static_folder=Path(__file__).parent / "static")
 
