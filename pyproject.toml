@@ -34,6 +34,7 @@ dependencies = ["lektor", "flask-babel"]
 style = ["ruff"]
 dev = [
     "lektor-tekir[style]",
+    "babel",
     "build",
 ]
 
@@ -43,8 +44,8 @@ lektor-tekir = "lektor_tekir.cli:main"
 [project.urls]
 repository = "https://github.com/uyar/lektor-tekir"
 
-[tool.setuptools]
-packages = ["lektor_tekir"]
+[tool.setuptools.package-data]
+lektor_tekir = ["**/*.mo"]
 
 [tool.ruff]
 select = ["E", "F", "I"]
@@ -55,5 +56,5 @@ line-length = 79
 lines-after-imports = 2
 
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
