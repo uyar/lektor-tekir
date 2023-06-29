@@ -8,12 +8,16 @@
 
     <section class="tekir-subpages">
       <h2>{{ _("Subpages") }}</h2>
-      <ul hx-get="{{ url_for('admin_tekir_api.subpages', path=record.path, lang=g.lang_code) }}" hx-trigger="load"></ul>
+      <div hx-get="{{ url_for('admin_tekir_api.subpages', path=record.path, lang=g.lang_code) }}"
+          hx-swap="outerHTML"
+          hx-trigger="load"></div>
     </section>
 
     <section class="tekir-attachments">
       <h2>{{ _("Attachments") }}</h2>
-      <ul hx-get="{{ url_for('admin_tekir_api.attachments', path=record.path, lang=g.lang_code) }}" hx-trigger="load"></ul>
+      <div hx-get="{{ url_for('admin_tekir_api.attachments', path=record.path, lang=g.lang_code) }}"
+          hx-swap="outerHTML"
+          hx-trigger="load"></div>
     </section>
   </div>
 {% endblock %}
