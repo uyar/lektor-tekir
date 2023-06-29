@@ -25,7 +25,7 @@
               value="{{ record[field.name] }}" />
         {% elif field.type.widget == "multiline-text" %}
           <textarea id="{{ field.name }}" name="{{ field.name }}" rows="10"
-              {{ 'class=code' if field.type.name in ("markdown", "html") else '' }}>{{ record[field.name] }}</textarea>
+              {{ 'class=code' if field.type.name in ("markdown", "html", "rst") else '' }}>{{ record[field.name].source }}</textarea>
         {% endif %}
       </div>
     {% endfor %}
