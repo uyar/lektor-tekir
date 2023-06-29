@@ -1,9 +1,5 @@
 <ul>
-  {% for record in records %}
-    <li>
-      <a href="{{ url_for('admin_tekir.contents', path=record.path) }}">
-        {{ current.url_to(record) }}
-      </a>
-    </li>
-  {% endfor %}
+{% for record in records %}
+  <li><a href="{{ url_for('admin_tekir.contents', path=record.path) }}">{{ current.url_to(record) }}</a></li>
+{% endfor %}
 </ul>
