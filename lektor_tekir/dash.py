@@ -1,6 +1,6 @@
 # Copyright (C) 2023 H. Turgut Uyar <uyar@tekir.org>
 #
-# lektor-tekir-admin is released under the BSD license.
+# lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
 from pathlib import Path

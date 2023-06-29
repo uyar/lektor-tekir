@@ -18,32 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir_admin/templates/tekir_base.html:7
-#: lektor_tekir_admin/templates/tekir_base.html:12
+#: lektor_tekir/templates/tekir_base.html:7
+#: lektor_tekir/templates/tekir_base.html:12
 msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
-#: lektor_tekir_admin/templates/tekir_base.html:15
+#: lektor_tekir/templates/tekir_base.html:15
 msgid "Home"
 msgstr "Ana Sayfa"
 
-#: lektor_tekir_admin/templates/tekir_base.html:16
+#: lektor_tekir/templates/tekir_base.html:16
 msgid "Content"
 msgstr "İçerik"
 
-#: lektor_tekir_admin/templates/tekir_contents.html:6
+#: lektor_tekir/templates/tekir_contents.html:6
 msgid "Edit"
 msgstr "Düzenle"
 
-#: lektor_tekir_admin/templates/tekir_contents.html:9
+#: lektor_tekir/templates/tekir_contents.html:9
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir_admin/templates/tekir_contents.html:14
+#: lektor_tekir/templates/tekir_contents.html:14
 msgid "Attachments"
 msgstr "Ekler"
 
-#: lektor_tekir_admin/templates/tekir_dashboard.html:4
+#: lektor_tekir/templates/tekir_dashboard.html:4
 msgid "Number of Pages"
 msgstr "Sayfa Sayısı"
 

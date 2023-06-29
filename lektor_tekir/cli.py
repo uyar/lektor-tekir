@@ -1,6 +1,6 @@
 # Copyright (C) 2023 H. Turgut Uyar <uyar@tekir.org>
 #
-# lektor-tekir-admin is released under the BSD license.
+# lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
 from pathlib import Path
@@ -11,7 +11,7 @@ from flask_babel import Babel, get_locale
 from lektor.admin.webui import WebUI
 from lektor.cli import cli
 
-from lektor_tekir_admin import api, dash
+from lektor_tekir import api, dash
 
 
 class TekirAdminUI(WebUI):
