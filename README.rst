@@ -1,7 +1,7 @@
-lektor-tekir-admin
-==================
+lektor-tekir
+============
 
-lektor-tekir-admin is an alternative admin panel for `Lektor`_.
+lektor-tekir is an alternative admin panel for `Lektor`_.
 It doesn't modify existing behavior, but only adds new routes
 for the new panel.
 

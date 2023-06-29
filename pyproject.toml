@@ -1,5 +1,5 @@
 [project]
-name = "lektor-tekir-admin"
+name = "lektor-tekir"
 version = "0.1"
 description = "An alternative admin panel for Lektor."
 readme = "README.rst"
@@ -33,18 +33,18 @@ dependencies = ["lektor", "flask-babel"]
 [project.optional-dependencies]
 style = ["ruff"]
 dev = [
-    "lektor-tekir-admin[style]",
+    "lektor-tekir[style]",
     "build",
 ]
 
 [project.scripts]
-lektor-tekir = "lektor_tekir_admin.cli:main"
+lektor-tekir = "lektor_tekir.cli:main"
 
 [project.urls]
-repository = "https://github.com/uyar/lektor-tekir-admin"
+repository = "https://github.com/uyar/lektor-tekir"
 
 [tool.setuptools]
-packages = ["lektor_tekir_admin"]
+packages = ["lektor_tekir"]
 
 [tool.ruff]
 select = ["E", "F", "I"]
