@@ -36,6 +36,8 @@ dev = [
     "lektor-tekir[style]",
     "babel",
     "build",
+    "twine",
+    "tox",
 ]
 
 [project.scripts]
@@ -54,6 +56,32 @@ line-length = 79
 
 [tool.ruff.isort]
 lines-after-imports = 2
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = style
+isolated_build = True
+
+[testenv:style]
+skip_install = true
+deps =
+    ruff
+commands =
+    ruff lektor_tekir
+
+[testenv:package]
+skip_install = true
+deps =
+    babel
+    build
+    twine
+commands =
+    pybabel compile -d lektor_tekir/translations/
+    python -c "import shutil; shutil.rmtree('dist')"
+    python -m build
+    twine check dist/*
+"""
 
 [build-system]
 requires = ["setuptools"]
