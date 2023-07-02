@@ -14,8 +14,8 @@
     <select id="{{ field_id }}" name="{{ field_id }}">
       <option value="">----</option>
       {% for choice, label in field.type.source.iter_choices(pad, record) %}
-      <option value="{{ choice['en'] }}"
-          {{ 'selected' if choice['en'] == default else '' }}>{{ label["en"] }}</option>
+      <option value="{{ choice }}"
+          {{ 'selected' if choice == field_value else '' }}>{{ label["en"] }}</option>
       {% endfor %}
     </select>
     {% elif field.type.name in ("string", "integer", "float", "url", "sort_key") %}
