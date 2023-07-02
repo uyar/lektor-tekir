@@ -2,34 +2,36 @@
   {% set value = record[field.name] %}
   <div class="field">
     <label>{{ field.label }}</label>
-  {% if field.type.name == "datetime" %}
+    {% if field.type.name == "datetime" %}
     <input type="datetime-local" name="{{ field.name }}" value="{{ value }}" />
-  {% elif field.type.widget == "checkbox" %}
+    {% elif field.type.widget == "checkbox" %}
     <input type="checkbox" name="{{ field.name }}" {{ 'checked' if value else '' }} />
-  {% elif field.type.widget == "select" %}
-    {% set choices = field.type.options.get("choices", "").split(",") %}
-    {% set labels = field.type.options.get("choice_labels", "").split(",") %}
+    {% elif field.type.widget == "select" %}
+      {% set choices = field.type.options.get("choices", "").split(",") %}
+      {% set labels = field.type.options.get("choice_labels", "").split(",") %}
     <select name="{{ field.name }}">
       <option value="">----</option>
-    {% for choice, label in zip(choices, labels) %}
+      {% for choice, label in zip(choices, labels) %}
       <option value="{{ choice.strip() }}" {{ 'selected' if choice == value else '' }}>{{ label.strip() }}</option>
-    {% endfor %}
+      {% endfor %}
     </select>
-  {% elif field.type.widget == "singleline-text" %}
+    {% elif field.type.widget == "singleline-text" %}
     <input type="text" name="{{ field.name }}" value="{{ value }}" />
-  {% elif field.type.widget == "multiline-text" %}
+    {% elif field.type.widget == "multiline-text" %}
     <textarea name="{{ field.name }}" rows="10"
         {{ 'class=code' if field.type.name in ("markdown", "html", "rst") else '' }}>{{ value }}</textarea>
-  {% elif field.type.name == "flow" %}
-    {% if value %}{% for block in value.blocks %}
+    {% elif field.type.name == "flow" %}
+      {% if value %}
+        {% for block in value.blocks %}
     <details>
       <summary>{{ block.flowblockmodel.name }}</summary>
-        {% for block_field in block.flowblockmodel.fields %}
-          {{ render_field(block, block_field) }}
-        {% endfor %}
+      {% for block_field in block.flowblockmodel.fields %}
+        {{ render_field(block, block_field) }}
+      {% endfor %}
     </details>
-    {% endfor %}{% endif %}
-  {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
   </div>
 {% endmacro %}
 

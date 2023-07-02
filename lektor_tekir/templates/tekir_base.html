@@ -12,9 +12,9 @@
   <header>
     <h1>{{ _("Admin Panel") }}</h1>
     <ul>
-    {% for locale in translations() %}
+      {% for locale in translations() %}
       <li><a href="/admin-tekir/{{ locale }}/{{ '/'.join(request.full_path.split('/')[3:]) }}">{{ locale }}</a></li>
-    {% endfor %}
+      {% endfor %}
     </ul>
   </header>
   <nav>
