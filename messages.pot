@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-29 20:15+0300\n"
+"POT-Creation-Date: 2023-07-02 18:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,26 +23,26 @@ msgid "Admin Panel"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:22
-msgid "Home"
+msgid "Summary"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:23
 msgid "Content"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:6
+#: lektor_tekir/templates/tekir_contents.html:7
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:10
+#: lektor_tekir/templates/tekir_contents.html:11
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:15
+#: lektor_tekir/templates/tekir_contents.html:17
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_dashboard.html:4
+#: lektor_tekir/templates/tekir_summary.html:4
 msgid "Number of Pages"
 msgstr ""
 

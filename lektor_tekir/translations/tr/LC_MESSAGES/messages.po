@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-29 20:15+0300\n"
+"POT-Creation-Date: 2023-07-02 18:40+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -24,26 +24,26 @@ msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
 #: lektor_tekir/templates/tekir_base.html:22
-msgid "Home"
-msgstr "Ana Sayfa"
+msgid "Summary"
+msgstr "Özet"
 
 #: lektor_tekir/templates/tekir_base.html:23
 msgid "Content"
 msgstr "İçerik"
 
-#: lektor_tekir/templates/tekir_contents.html:6
+#: lektor_tekir/templates/tekir_contents.html:7
 msgid "Edit"
 msgstr "Düzenle"
 
-#: lektor_tekir/templates/tekir_contents.html:10
+#: lektor_tekir/templates/tekir_contents.html:11
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir/templates/tekir_contents.html:15
+#: lektor_tekir/templates/tekir_contents.html:17
 msgid "Attachments"
 msgstr "Ekler"
 
-#: lektor_tekir/templates/tekir_dashboard.html:4
+#: lektor_tekir/templates/tekir_summary.html:4
 msgid "Number of Pages"
 msgstr "Sayfa Sayısı"
 

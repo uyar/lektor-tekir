@@ -24,8 +24,8 @@ def pull_lang_code(endpoint, values):
 
 
 @bp.route("/")
-def dashboard():
-    return render_template("tekir_dashboard.html")
+def summary():
+    return render_template("tekir_summary.html")
 
 
 @bp.route("/contents/")
