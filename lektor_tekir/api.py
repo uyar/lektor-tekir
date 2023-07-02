@@ -6,6 +6,10 @@
 from pathlib import Path
 
 from flask import Blueprint, g, render_template, request
+from flask_babel import gettext as _
+
+
+MULTILINE = {"text", "strings", "markdown", "html", "rst"}
 
 
 bp = Blueprint("admin_tekir_api", __name__, url_prefix="/admin-tekir/api")
@@ -36,3 +40,22 @@ def attachments():
     children = [c._primary_record for c in node.iter_attachments()]
     return render_template("tekir_attachments.html",
                            current=node._primary_record, records=children)
+
+
+@bp.route("/save_content", methods=["POST"])
+def save_content():
+    g.lang_code = request.args.get("lang", "en")
+    path = request.args.get("path")
+    node = g.admin_context.tree.get(path)
+    entries = []
+    for field in node._primary_record.datamodel.fields:
+        value = request.form.get(field.name)
+        if value is not None:
+            value = value.strip()
+            if len(value) > 0:
+                if field.type.name in MULTILINE:
+                    entries.append(f"{field.name}:\n\n{value}")
+                else:
+                    entries.append(f"{field.name}: {value}")
+    # print("\n---\n".join(entries))
+    return _("Content saved.")
