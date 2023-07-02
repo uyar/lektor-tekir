@@ -1,6 +1,6 @@
-{% macro render_field(record, field, prefix) %}
+{% macro render_field(item, field, prefix) %}
   {% set field_id = prefix + field.name %}
-  {% set field_value = record[field.name] %}
+  {% set field_value = item[field.name] %}
   <div class="field">
     <label for="{{ field_id }}">{{ field.label }}</label>
     {% if field.type.name == "datetime" %}
@@ -8,14 +8,14 @@
     {% elif field.type.name == "date" %}
     <input type="date" id="{{ field_id }}" name="{{ field_id }}" value="{{ field_value }}" />
     {% elif field.type.name == "boolean" %}
-    <input type="checkbox" id="{{ field_id }}" name="{{ field_id }}" {{ 'checked' if field_value else '' }} />
+    <input type="checkbox" id="{{ field_id }}" name="{{ field_id }}"
+        {{ 'checked' if field_value else '' }} />
     {% elif field.type.name == "select" %}
-      {% set choices = field.type.options.get("choices", "").split(",") %}
-      {% set labels = field.type.options.get("choice_labels", "").split(",") %}
     <select id="{{ field_id }}" name="{{ field_id }}">
       <option value="">----</option>
-      {% for choice, label in zip(choices, labels) %}
-      <option value="{{ choice.strip() }}" {{ 'selected' if choice == field_value else '' }}>{{ label.strip() }}</option>
+      {% for choice, label in field.type.source.iter_choices(pad, record) %}
+      <option value="{{ choice['en'] }}"
+          {{ 'selected' if choice['en'] == default else '' }}>{{ label["en"] }}</option>
       {% endfor %}
     </select>
     {% elif field.type.name in ("string", "integer", "float", "url", "sort_key") %}
