@@ -1,37 +1,39 @@
-{% macro render_field(record, field) %}
-  {% set value = record[field.name] %}
+{% macro render_field(record, field, prefix) %}
+  {% set field_id = prefix + field.name %}
+  {% set field_value = record[field.name] %}
   <div class="field">
-    <label>{{ field.label }}</label>
+    <label for="{{ field_id }}">{{ field.label }}</label>
     {% if field.type.name == "datetime" %}
-    <input type="datetime-local" name="{{ field.name }}" value="{{ value }}" />
+    <input type="datetime-local" id="{{ field_id }}" name="{{ field_id }}" value="{{ field_value }}" />
     {% elif field.type.name == "date" %}
-    <input type="date" name="{{ field.name }}" value="{{ value }}" />
+    <input type="date" id="{{ field_id }}" name="{{ field_id }}" value="{{ field_value }}" />
     {% elif field.type.name == "boolean" %}
-    <input type="checkbox" name="{{ field.name }}" {{ 'checked' if value else '' }} />
+    <input type="checkbox" id="{{ field_id }}" name="{{ field_id }}" {{ 'checked' if field_value else '' }} />
     {% elif field.type.name == "select" %}
       {% set choices = field.type.options.get("choices", "").split(",") %}
       {% set labels = field.type.options.get("choice_labels", "").split(",") %}
-    <select name="{{ field.name }}">
+    <select id="{{ field_id }}" name="{{ field_id }}">
       <option value="">----</option>
       {% for choice, label in zip(choices, labels) %}
-      <option value="{{ choice.strip() }}" {{ 'selected' if choice == value else '' }}>{{ label.strip() }}</option>
+      <option value="{{ choice.strip() }}" {{ 'selected' if choice == field_value else '' }}>{{ label.strip() }}</option>
       {% endfor %}
     </select>
     {% elif field.type.name in ("string", "integer", "float", "url", "sort_key") %}
-    <input type="text" name="{{ field.name }}" value="{{ value }}" />
+    <input type="text" id="{{ field_id }}" name="{{ field_id }}" value="{{ field_value }}" />
     {% elif field.type.name in ("text", "strings") %}
-    <textarea name="{{ field.name }}" rows="10">{{ value }}</textarea>
+    <textarea id="{{ field_id }}" name="{{ field_id }}" rows="10">{{ field_value }}</textarea>
     {% elif field.type.name in ("markdown", "html") %}
-    <textarea name="{{ field.name }}" rows="10" class="code">{{ value }}</textarea>
+    <textarea id="{{ field_id }}" name="{{ field_id }}" rows="10" class="code">{{ field_value }}</textarea>
     {% elif field.type.name == "rst" %}
-    <textarea name="{{ field.name }}" rows="10" class="code">{{ value.source }}</textarea>
+    <textarea id="{{ field_id }}" name="{{ field_id }}" rows="10" class="code">{{ field_value.source }}</textarea>
     {% elif field.type.name == "flow" %}
-      {% if value %}
-        {% for block in value.blocks %}
+      {% if field_value %}
+        {% for block in field_value.blocks %}
+          {% set block_index = loop.index0 %}
     <details>
       <summary>{{ block.flowblockmodel.name }}</summary>
       {% for block_field in block.flowblockmodel.fields %}
-        {{ render_field(block, block_field) }}
+        {{ render_field(block, block_field, prefix="%s-%d-" % (field_id, block_index)) }}
       {% endfor %}
     </details>
         {% endfor %}
@@ -45,7 +47,7 @@
 {% block body %}
   <form class="tekir-content-edit">
     {% for field in record.datamodel.fields %}
-      {{ render_field(record, field) }}
+      {{ render_field(record, field, prefix="field-") }}
     {% endfor %}
   </form>
 {% endblock %}
