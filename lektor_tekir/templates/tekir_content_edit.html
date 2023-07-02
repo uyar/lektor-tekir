@@ -4,9 +4,11 @@
     <label>{{ field.label }}</label>
     {% if field.type.name == "datetime" %}
     <input type="datetime-local" name="{{ field.name }}" value="{{ value }}" />
-    {% elif field.type.widget == "checkbox" %}
+    {% elif field.type.name == "date" %}
+    <input type="date" name="{{ field.name }}" value="{{ value }}" />
+    {% elif field.type.name == "boolean" %}
     <input type="checkbox" name="{{ field.name }}" {{ 'checked' if value else '' }} />
-    {% elif field.type.widget == "select" %}
+    {% elif field.type.name == "select" %}
       {% set choices = field.type.options.get("choices", "").split(",") %}
       {% set labels = field.type.options.get("choice_labels", "").split(",") %}
     <select name="{{ field.name }}">
@@ -15,11 +17,14 @@
       <option value="{{ choice.strip() }}" {{ 'selected' if choice == value else '' }}>{{ label.strip() }}</option>
       {% endfor %}
     </select>
-    {% elif field.type.widget == "singleline-text" %}
+    {% elif field.type.name in ("string", "integer", "float", "url", "sort_key") %}
     <input type="text" name="{{ field.name }}" value="{{ value }}" />
-    {% elif field.type.widget == "multiline-text" %}
-    <textarea name="{{ field.name }}" rows="10"
-        {{ 'class=code' if field.type.name in ("markdown", "html", "rst") else '' }}>{{ value }}</textarea>
+    {% elif field.type.name in ("text", "strings") %}
+    <textarea name="{{ field.name }}" rows="10">{{ value }}</textarea>
+    {% elif field.type.name in ("markdown", "html") %}
+    <textarea name="{{ field.name }}" rows="10" class="code">{{ value }}</textarea>
+    {% elif field.type.name == "rst" %}
+    <textarea name="{{ field.name }}" rows="10" class="code">{{ value.source }}</textarea>
     {% elif field.type.name == "flow" %}
       {% if value %}
         {% for block in value.blocks %}
