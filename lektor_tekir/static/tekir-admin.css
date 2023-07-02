@@ -219,4 +219,12 @@ textarea {
     --color-text: hsl(0, 0%, 100%);
     --color-link: hsl(240, 100%, 85%);
   }
+
+  input {
+    color-scheme: dark;
+  }
+
+  select option {
+    background-color: var(--color-bg);
+  }
 }
