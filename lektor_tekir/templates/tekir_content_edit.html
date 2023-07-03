@@ -30,11 +30,11 @@
     {% elif field.type.name == "flow" %}
       {% if field_value %}
         {% for block in field_value.blocks %}
-          {% set block_index = loop.index0 %}
+          {% set block_index = loop.index %}
     <details>
       <summary>{{ block.flowblockmodel.name }}</summary>
       {% for block_field in block.flowblockmodel.fields %}
-        {{ render_field(block, block_field, prefix="%s-%d-" % (field_name, block_index)) }}
+        {{ render_field(block, block_field, prefix="%s-%d-%s-" % (field_name, block_index, block.flowblockmodel.id)) }}
       {% endfor %}
     </details>
         {% endfor %}
