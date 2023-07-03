@@ -33,12 +33,14 @@
         {% for block in field_value.blocks %}
           {% set block_index = loop.index %}
     <details id="{{ "%s-%d" % (field_name, block_index) }}">
-      <summary>{{ block.flowblockmodel.name }}</summary>
-      <fieldset>
+      <summary>
+        {{ block.flowblockmodel.name }}
         <button class="delete-flowblock">Delete</button>
         {% if block_index != 1 %}
         <button class="up-flowblock">Move up</button>
         {% endif %}
+      </summary>
+      <fieldset>
         {% for block_field in block.flowblockmodel.fields %}
           {{ render_field(block, block_field, prefix="%s-%d-%s-" % (field_name, block_index, block.flowblockmodel.id)) }}
         {% endfor %}
@@ -102,18 +104,29 @@
     });
 
     document.querySelectorAll(".delete-flowblock").forEach((el) => {
-        el.addEventListener("click", () => {
-            el.closest("details").remove();
+        el.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            details = el.closest("details");
+            if (details.querySelectorAll(".up-flowblock").length == 0) {
+                up_summary = el.closest("summary");
+                down = details.nextElementSibling;
+                down_summary = down.querySelector("summary");
+                down_summary.after(up_summary);
+                down_summary.remove();
+            }
+            details.remove();
         });
     });
 
     document.querySelectorAll(".up-flowblock").forEach((el) => {
         el.addEventListener("click", (ev) => {
             ev.preventDefault();
-            details = el.closest("details");
-            clone = details.cloneNode(true);
-            details.previousElementSibling.before(clone);
-            details.remove();
+            down = el.closest("details");
+            down_fieldset = down.querySelector("fieldset");
+            up = down.previousElementSibling;
+            up_fieldset = up.querySelector("fieldset");
+            down.append(up_fieldset);
+            up.append(down_fieldset);
         });
     });
   </script>
