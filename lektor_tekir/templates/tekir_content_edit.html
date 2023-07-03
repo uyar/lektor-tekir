@@ -51,39 +51,47 @@
       {{ render_field(record, field, prefix="") }}
     {% endfor %}
 
-    <button data-report-open hx-post="{{ url_for('admin_tekir_api.save_content', path=record.path, lang=g.lang_code) }}"
+    <button id="report-open" hx-post="{{ url_for('admin_tekir_api.save_content', path=record.path, lang=g.lang_code) }}"
         hx-target="#save-result">{{ _('Save') }}</button>
-    <button data-warning-open hx-post="{{ url_for('admin_tekir_api.check_changes', path=record.path, lang=g.lang_code) }}"
-        hx-target="#check-result">{{ _('Done') }}</button>
+    <button id="warning-open" hx-post="{{ url_for('admin_tekir_api.check_changes', path=record.path, lang=g.lang_code) }}"
+        hx-target="#check-changes">{{ _('Done') }}</button>
   </form>
 
-  <dialog data-report>
+  <dialog id="report-dialog">
     <p id="save-result"></p>
-    <button data-report-close>{{ _("Close") }}</button>
+    <button id="report-close">{{ _("Close") }}</button>
   </dialog>
 
-  <dialog data-warning>
-    <p id="check-result"></p>
-    <button data-warning-continue>{{ _("Continue") }}</button>
-    <button data-warning-cancel>{{ _("Cancel") }}</button>
+  <dialog id="warning-dialog">
+    <p id="check-changes"></p>
+    <button id="warning-continue">{{ _("Continue") }}</button>
+    <button id="warning-cancel">{{ _("Cancel") }}</button>
   </dialog>
 
   <script>
-    const openReport = document.querySelector("[data-report-open]")
-    const closeReport = document.querySelector("[data-report-close]")
-    const report = document.querySelector("[data-report]")
-    openReport.addEventListener("click", () => { report.showModal(); })
-    closeReport.addEventListener("click", () => { report.close(); })
+    const reportDialog = document.getElementById("report-dialog");
 
-    const openWarning = document.querySelector("[data-warning-open]")
-    const continueWarning = document.querySelector("[data-warning-continue]")
-    const cancelWarning = document.querySelector("[data-warning-cancel]")
-    const warning = document.querySelector("[data-warning]")
-    openWarning.addEventListener("click", () => { warning.showModal(); })
-    continueWarning.addEventListener("click", () => {
-        warning.close();
+    document.getElementById("report-open").addEventListener("click", () => {
+        reportDialog.showModal();
+    });
+
+    document.getElementById("report-close").addEventListener("click", () => {
+        reportDialog.close();
+    });
+
+    const warningDialog = document.getElementById("warning-dialog");
+
+    document.getElementById("warning-open").addEventListener("click", () => {
+        warningDialog.showModal();
+    });
+
+    document.getElementById("warning-continue").addEventListener("click", () => {
+        warningDialog.close();
         window.location.href = "{{ url_for('admin_tekir.contents', path=record.path) }}";
     })
-    cancelWarning.addEventListener("click", () => { warning.close(); })
+
+    document.getElementById("warning-cancel").addEventListener("click", () => {
+        warningDialog.close();
+    });
   </script>
 {% endblock %}

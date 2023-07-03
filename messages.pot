@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-03 18:07+0300\n"
+"POT-Creation-Date: 2023-07-03 18:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,7 +98,7 @@ msgid "attachment"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:51
-msgid "Do you really want to delete this item?"
+msgid "Do you really want to delete this content?"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_summary.html:4

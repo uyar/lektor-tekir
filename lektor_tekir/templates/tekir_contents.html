@@ -25,7 +25,7 @@
       <tr>
         <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item["title"] }}</a></td>
         <td>
-          <button data-warning-delete-open data-type={{ item['_model'] }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
+          <button class="delete-content" data-type={{ item['_model'] }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
         </td>
       </tr>
       {% endfor %}
@@ -39,7 +39,7 @@
       <tr>
         <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
         <td>
-          <button data-warning-delete-open data-type={{ _('attachment') }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
+          <button class="delete-content" data-type={{ _('attachment') }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
         </td>
       </tr>
       {% endfor %}
@@ -47,37 +47,36 @@
   </section>
 </div>
 
-<dialog data-warning-delete>
+<dialog id="warning-delete">
   <p>{{ _("Do you really want to delete this content?") }}</p>
   <p><span id="delete-item-path">.</span> (<span id="delete-item-type">.</span>)</p>
-  <button data-warning-delete-continue
+  <button id="delete-continue"
       hx-get="{{ url_for('admin_tekir_api.delete_item', lang=g.lang_code) }}">{{ _("Delete") }}</button>
-  <button data-warning-delete-cancel>{{ _("Cancel") }}</button>
+  <button id="delete-cancel">{{ _("Cancel") }}</button>
 </dialog>
 
 <script>
-  const deleteWarning = document.querySelector("[data-warning-delete]");
+  const deleteDialog = document.getElementById("warning-delete");
 
-  document.querySelectorAll("[data-warning-delete-open]").forEach((el) => {
+  document.querySelectorAll(".delete-content").forEach((el) => {
       el.addEventListener("click", () => {
           document.getElementById("delete-item-type").innerHTML = el.dataset.type;
           document.getElementById("delete-item-path").innerHTML = el.dataset.path;
-          document.querySelector("[data-warning-delete-continue]").setAttribute(
+          document.getElementById("delete-continue").setAttribute(
             "hx-vals",
             "js:{'path': document.getElementById('delete-item-path').innerHTML}"
           );
-          deleteWarning.showModal();
+          deleteDialog.showModal();
       });
   });
 
-  document.querySelector("[data-warning-delete-continue]").addEventListener("click", () => {
-      deleteWarning.close();
+  document.getElementById("delete-continue").addEventListener("click", () => {
+      deleteDialog.close();
       window.location.reload();
   });
 
-  document.querySelector("[data-warning-delete-cancel]").addEventListener("click", () => {
-      deleteWarning.close();
-      window.location.href = "{{ url_for('admin_tekir.contents', path=record.path) }}";
+  document.getElementById("delete-cancel").addEventListener("click", () => {
+      deleteDialog.close();
   });
 </script>
 {% endblock %}
