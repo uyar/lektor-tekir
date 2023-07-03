@@ -35,9 +35,9 @@
     <details id="{{ "%s-%d" % (field_name, block_index) }}">
       <summary>
         {{ block.flowblockmodel.name }}
-        <button class="delete-flowblock">Delete</button>
+        <button class="delete-block">{{ _("Delete") }}</button>
         {% if block_index != 1 %}
-        <button class="up-flowblock">Move up</button>
+        <button class="up-block">{{ _("Move up") }}</button>
         {% endif %}
       </summary>
       <fieldset>
@@ -103,30 +103,29 @@
         warningDialog.close();
     });
 
-    document.querySelectorAll(".delete-flowblock").forEach((el) => {
+    document.querySelectorAll(".delete-block").forEach((el) => {
         el.addEventListener("click", (ev) => {
             ev.preventDefault();
             details = el.closest("details");
-            if (details.querySelectorAll(".up-flowblock").length == 0) {
-                up_summary = el.closest("summary");
-                down = details.nextElementSibling;
-                down_summary = down.querySelector("summary");
-                down_summary.after(up_summary);
-                down_summary.remove();
+            if (details.querySelectorAll(".up-block").length == 0) {
+                summary = el.closest("summary");
+                downSummary = details.nextElementSibling.querySelector("summary");
+                downSummary.after(summary);
+                downSummary.remove();
             }
             details.remove();
         });
     });
 
-    document.querySelectorAll(".up-flowblock").forEach((el) => {
+    document.querySelectorAll(".up-block").forEach((el) => {
         el.addEventListener("click", (ev) => {
             ev.preventDefault();
-            down = el.closest("details");
-            down_fieldset = down.querySelector("fieldset");
-            up = down.previousElementSibling;
-            up_fieldset = up.querySelector("fieldset");
-            down.append(up_fieldset);
-            up.append(down_fieldset);
+            details = el.closest("details");
+            fieldset = details.querySelector("fieldset");
+            upDetails = details.previousElementSibling;
+            upFieldset = upDetails.querySelector("fieldset");
+            details.append(upFieldset);
+            upDetails.append(fieldset);
         });
     });
   </script>

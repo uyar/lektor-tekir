@@ -71,8 +71,11 @@
   });
 
   document.getElementById("delete-continue").addEventListener("click", () => {
+      const deletedItemPath = document.getElementById('delete-item-path').innerHTML;
+      const deletedButton = document.querySelector("button[data-path='" + deletedItemPath + "']");
+      const deletedRow = deletedButton.closest("tr");
+      deletedRow.remove();
       deleteDialog.close();
-      window.location.reload();
   });
 
   document.getElementById("delete-cancel").addEventListener("click", () => {
