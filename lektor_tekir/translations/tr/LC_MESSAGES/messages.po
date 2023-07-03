@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-03 15:57+0300\n"
+"POT-Creation-Date: 2023-07-03 18:07+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -18,21 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:144
+#: lektor_tekir/api.py:112
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:146
+#: lektor_tekir/api.py:114
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:158
+#: lektor_tekir/api.py:126
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
-#: lektor_tekir/api.py:159
+#: lektor_tekir/api.py:127
 msgid "Are you sure?"
 msgstr "Emin misiniz?"
+
+#: lektor_tekir/api.py:141
+msgid "Deleted."
+msgstr "Silindi."
 
 #: lektor_tekir/templates/tekir_base.html:7
 #: lektor_tekir/templates/tekir_base.html:13
@@ -46,10 +50,6 @@ msgstr "Özet"
 #: lektor_tekir/templates/tekir_base.html:23
 msgid "Content"
 msgstr "İçerik"
-
-#: lektor_tekir/templates/tekir_breadcrumbs.html:3
-msgid "home"
-msgstr "ana sayfa"
 
 #: lektor_tekir/templates/tekir_content_edit.html:55
 msgid "Save"
@@ -68,20 +68,39 @@ msgid "Continue"
 msgstr "Devam et"
 
 #: lektor_tekir/templates/tekir_content_edit.html:68
+#: lektor_tekir/templates/tekir_contents.html:55
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: lektor_tekir/templates/tekir_contents.html:11
+#: lektor_tekir/templates/tekir_contents.html:7
+msgid "home"
+msgstr "ana sayfa"
+
+#: lektor_tekir/templates/tekir_contents.html:18
 msgid "Edit"
 msgstr "Düzenle"
 
-#: lektor_tekir/templates/tekir_contents.html:15
+#: lektor_tekir/templates/tekir_contents.html:22
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir/templates/tekir_contents.html:21
+#: lektor_tekir/templates/tekir_contents.html:28
+#: lektor_tekir/templates/tekir_contents.html:42
+#: lektor_tekir/templates/tekir_contents.html:54
+msgid "Delete"
+msgstr "Sil"
+
+#: lektor_tekir/templates/tekir_contents.html:36
 msgid "Attachments"
 msgstr "Ekler"
+
+#: lektor_tekir/templates/tekir_contents.html:42
+msgid "attachment"
+msgstr "ek"
+
+#: lektor_tekir/templates/tekir_contents.html:51
+msgid "Do you really want to delete this content?"
+msgstr "Bu içeriği silmek istediğinizden emin misiniz?"
 
 #: lektor_tekir/templates/tekir_summary.html:4
 msgid "Number of Pages"

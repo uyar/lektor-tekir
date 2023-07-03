@@ -32,7 +32,14 @@ def summary():
 def contents():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
-    return render_template("tekir_contents.html", record=record)
+    parents = []
+    current = record
+    while current.parent:
+        current = current.parent
+        parents.append(current)
+    parents.reverse()
+    return render_template("tekir_contents.html", record=record,
+                           parents=parents)
 
 
 @bp.route("/content/edit")

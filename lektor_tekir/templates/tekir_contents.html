@@ -1,8 +1,15 @@
 {% extends "tekir_base.html" %}
 
 {% block body %}
-<div class="tekir-breadcrumbs" hx-get="{{ url_for('admin_tekir_api.breadcrumbs', path=record.path, lang=g.lang_code) }}"
-    hx-trigger="load">
+<div class="tekir-breadcrumbs">
+  {% if parents %}
+  <ul>
+    <li><a href="{{ url_for('admin_tekir.contents', path='/') }}">{{ _("home") }}</a></li>
+    {% for item in parents[1:] %}
+    <li><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item._slug }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
 
 <div class="tekir-contents">
@@ -13,14 +20,64 @@
 
   <section class="tekir-subpages">
     <h2>{{ _("Subpages") }}</h2>
-    <div hx-get="{{ url_for('admin_tekir_api.subpages', path=record.path, lang=g.lang_code) }}"
-        hx-swap="outerHTML" hx-trigger="load"></div>
+    <table>
+      {% for item in record.children %}
+      <tr>
+        <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item["title"] }}</a></td>
+        <td>
+          <button data-warning-delete-open data-type={{ item['_model'] }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
   </section>
 
   <section class="tekir-attachments">
     <h2>{{ _("Attachments") }}</h2>
-    <div hx-get="{{ url_for('admin_tekir_api.attachments', path=record.path, lang=g.lang_code) }}"
-        hx-swap="outerHTML" hx-trigger="load"></div>
+    <table>
+      {% for item in record.attachments %}
+      <tr>
+        <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
+        <td>
+          <button data-warning-delete-open data-type={{ _('attachment') }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
   </section>
 </div>
+
+<dialog data-warning-delete>
+  <p>{{ _("Do you really want to delete this content?") }}</p>
+  <p><span id="delete-item-path">.</span> (<span id="delete-item-type">.</span>)</p>
+  <button data-warning-delete-continue
+      hx-get="{{ url_for('admin_tekir_api.delete_item', lang=g.lang_code) }}">{{ _("Delete") }}</button>
+  <button data-warning-delete-cancel>{{ _("Cancel") }}</button>
+</dialog>
+
+<script>
+  const deleteWarning = document.querySelector("[data-warning-delete]");
+
+  document.querySelectorAll("[data-warning-delete-open]").forEach((el) => {
+      el.addEventListener("click", () => {
+          document.getElementById("delete-item-type").innerHTML = el.dataset.type;
+          document.getElementById("delete-item-path").innerHTML = el.dataset.path;
+          document.querySelector("[data-warning-delete-continue]").setAttribute(
+            "hx-vals",
+            "js:{'path': document.getElementById('delete-item-path').innerHTML}"
+          );
+          deleteWarning.showModal();
+      });
+  });
+
+  document.querySelector("[data-warning-delete-continue]").addEventListener("click", () => {
+      deleteWarning.close();
+      window.location.reload();
+  });
+
+  document.querySelector("[data-warning-delete-cancel]").addEventListener("click", () => {
+      deleteWarning.close();
+      window.location.href = "{{ url_for('admin_tekir.contents', path=record.path) }}";
+  });
+</script>
 {% endblock %}

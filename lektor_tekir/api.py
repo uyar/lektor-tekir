@@ -4,8 +4,9 @@
 # Read the included LICENSE.txt file for details.
 
 from pathlib import Path
+from shutil import rmtree
 
-from flask import Blueprint, g, render_template, request
+from flask import Blueprint, g, request
 from flask_babel import gettext as _
 
 
@@ -20,39 +21,6 @@ def page_count():
     root_path = Path(g.admin_context.pad.env.root_path)
     pages = {c.parent for c in root_path.glob("**/contents*.lr")}
     return str(len(pages))
-
-
-@bp.route("/breadcrumbs")
-def breadcrumbs():
-    g.lang_code = request.args.get("lang", "en")
-    path = request.args.get("path")
-    node = g.admin_context.tree.get(path)
-    record = node._primary_record
-    parents = []
-    while record.parent:
-        record = record.parent
-        parents.append(record)
-    parents.reverse()
-    return render_template("tekir_breadcrumbs.html", records=parents)
-
-
-@bp.route("/subpages")
-def subpages():
-    g.lang_code = request.args.get("lang", "en")
-    path = request.args.get("path")
-    node = g.admin_context.tree.get(path)
-    children = [c._primary_record for c in node.iter_subpages()]
-    return render_template("tekir_subpages.html", records=children)
-
-
-@bp.route("/attachments")
-def attachments():
-    g.lang_code = request.args.get("lang", "en")
-    path = request.args.get("path")
-    node = g.admin_context.tree.get(path)
-    children = [c._primary_record for c in node.iter_attachments()]
-    return render_template("tekir_attachments.html", records=children,
-                           current=node._primary_record)
 
 
 def field_entry(field, field_name=None):
@@ -157,3 +125,17 @@ def check_changes():
     if content != old_content:
         return _("There are unsaved changes. Do you want to continue?")
     return _("Are you sure?")
+
+
+@bp.route("/delete-item")
+def delete_item():
+    g.lang_code = request.args.get("lang", "en")
+    path = request.args.get("path")
+    record = g.admin_context.tree.get(path)._primary_record
+    if record.is_attachment:
+        filename = record.source_filename.rstrip(".lr")
+        Path(filename).unlink()
+    else:
+        dirname = Path(record.source_filename).parent
+        rmtree(dirname)
+    return _("Deleted.")

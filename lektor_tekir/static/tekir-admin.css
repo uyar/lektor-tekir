@@ -53,6 +53,10 @@ svg {
   height: auto;
 }
 
+table {
+  border-collapse: collapse;
+}
+
 input,
 button,
 textarea,
@@ -160,6 +164,10 @@ section h2 {
 
 h2 + p {
   margin-block-start: 0;
+}
+
+td {
+  padding: 0.25rem 0.5em;
 }
 
 /* CUSTOM */

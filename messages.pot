@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-03 15:57+0300\n"
+"POT-Creation-Date: 2023-07-03 18:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:144
+#: lektor_tekir/api.py:112
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:146
+#: lektor_tekir/api.py:114
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:158
+#: lektor_tekir/api.py:126
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:159
+#: lektor_tekir/api.py:127
 msgid "Are you sure?"
+msgstr ""
+
+#: lektor_tekir/api.py:141
+msgid "Deleted."
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:7
@@ -44,10 +48,6 @@ msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:23
 msgid "Content"
-msgstr ""
-
-#: lektor_tekir/templates/tekir_breadcrumbs.html:3
-msgid "home"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:55
@@ -67,19 +67,38 @@ msgid "Continue"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:68
+#: lektor_tekir/templates/tekir_contents.html:55
 msgid "Cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:11
+#: lektor_tekir/templates/tekir_contents.html:7
+msgid "home"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:18
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:15
+#: lektor_tekir/templates/tekir_contents.html:22
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:21
+#: lektor_tekir/templates/tekir_contents.html:28
+#: lektor_tekir/templates/tekir_contents.html:42
+#: lektor_tekir/templates/tekir_contents.html:54
+msgid "Delete"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:36
 msgid "Attachments"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:42
+msgid "attachment"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:51
+msgid "Do you really want to delete this item?"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_summary.html:4
