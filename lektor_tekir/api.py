@@ -48,6 +48,12 @@ def field_entry(field, field_name=None):
     value = request.form.get(field_name)
     if field.type.name == "boolean":
         value = "yes" if value == "on" else "no"
+        if field.default in {"true", "yes", "1"}:
+            default = "yes"
+        elif field.default in {"false", "no", "0"}:
+            default = "no"
+        if value == default:
+            value = None
     if value is not None:
         value = value.strip()
     if not value:
@@ -90,8 +96,22 @@ def save_content():
     g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
     node = g.admin_context.tree.get(path)
+    record = node._primary_record
     entries = []
-    for field in node._primary_record.datamodel.fields:
+
+    try:
+        default_model = record.parent.datamodel.child_config.model
+    except AttributeError:
+        default_model = None
+    if default_model is None:
+        default_model = "page"
+    if record["_model"] != default_model:
+        entries.append(f"_model: {record['_model']}")
+
+    if record["_template"] != record.datamodel.get_default_template_name():
+        entries.append(f"_template: {record['_template']}")
+
+    for field in record.datamodel.fields:
         if field.type.name == "flow":
             entry = flowblock_entry(node, field)
         else:
@@ -99,8 +119,9 @@ def save_content():
         if not entry:
             continue
         entries.append(entry)
-    content = "\n---\n".join(entries)
-    source = Path(node._primary_record.source_filename)
+
+    content = "\n---\n".join(entries) + "\n"
+    source = Path(record.source_filename)
     old_content = source.read_text()
     if content != old_content:
         source.write_text(content)
