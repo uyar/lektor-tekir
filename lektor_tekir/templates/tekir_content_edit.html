@@ -51,6 +51,21 @@
       {{ render_field(record, field, prefix="") }}
     {% endfor %}
 
-    <button hx-post="{{ url_for('admin_tekir_api.save_content', path=record.path) }}" hx-swap="none">{{ _('Save') }}</button>
+    <button data-modal-open hx-post="{{ url_for('admin_tekir_api.save_content', path=record.path, lang=g.lang_code) }}"
+        hx-target="#save-result">{{ _('Save') }}</button>
   </form>
+
+  <dialog data-modal>
+    <p id="save-result"></p>
+    <button data-modal-close>{{ _("Close") }}</button>
+  </dialog>
+
+  <script>
+    const openModal = document.querySelector("[data-modal-open]")
+    const closeModal = document.querySelector("[data-modal-close]")
+    const modal = document.querySelector("[data-modal]")
+
+    openModal.addEventListener("click", () => { modal.showModal(); })
+    closeModal.addEventListener("click", () => { modal.close(); })
+  </script>
 {% endblock %}

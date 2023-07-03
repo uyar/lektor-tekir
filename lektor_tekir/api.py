@@ -123,6 +123,7 @@ def save_content():
     content = "\n---\n".join(entries) + "\n"
     source = Path(record.source_filename)
     old_content = source.read_text()
-    if content != old_content:
-        source.write_text(content)
+    if content == old_content:
+        return _("No changes.")
+    source.write_text(content)
     return _("Content saved.")
