@@ -32,11 +32,14 @@
       {% if field_value %}
         {% for block in field_value.blocks %}
           {% set block_index = loop.index %}
-    <details>
+    <details id="{{ "%s-%d" % (field_name, block_index) }}">
       <summary>{{ block.flowblockmodel.name }}</summary>
-      {% for block_field in block.flowblockmodel.fields %}
-        {{ render_field(block, block_field, prefix="%s-%d-%s-" % (field_name, block_index, block.flowblockmodel.id)) }}
-      {% endfor %}
+      <fieldset>
+        <button class="delete-flowblock"">Delete</button>
+        {% for block_field in block.flowblockmodel.fields %}
+          {{ render_field(block, block_field, prefix="%s-%d-%s-" % (field_name, block_index, block.flowblockmodel.id)) }}
+        {% endfor %}
+      </fieldset>
     </details>
         {% endfor %}
       {% endif %}
@@ -93,6 +96,12 @@
 
     document.getElementById("warning-cancel").addEventListener("click", () => {
         warningDialog.close();
+    });
+
+    document.querySelectorAll(".delete-flowblock").forEach((el) => {
+        el.addEventListener("click", () => {
+            el.closest("details").remove();
+        });
     });
   </script>
 {% endblock %}

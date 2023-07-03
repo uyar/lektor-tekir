@@ -170,6 +170,10 @@ td {
   padding: 0.25rem 0.5em;
 }
 
+details {
+  padding: 0.5rem 1rem;
+}
+
 /* CUSTOM */
 
 .tekir-page-count p {

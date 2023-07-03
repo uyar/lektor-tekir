@@ -50,9 +50,12 @@ def flowblock_entry(node, field):
     block_data = [k for k in request.form if k.startswith(f"{field.name}-")]
     if len(block_data) == 0:
         return None
-    n_blocks = max(int(k.split("-")[1]) for k in block_data)
+    block_indexes = []
+    for i in [int(k.split("-")[1]) for k in block_data]:
+        if i not in block_indexes:
+            block_indexes.append(i)
     entries = []
-    for i in range(1, n_blocks + 1):
+    for i in block_indexes:
         prefix = f"{field.name}-{i}-"
         block_fields = [k for k in request.form if k.startswith(prefix)]
         block_types = {f.split("-")[2] for f in block_fields}
