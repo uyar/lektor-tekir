@@ -35,7 +35,10 @@
     <details id="{{ "%s-%d" % (field_name, block_index) }}">
       <summary>{{ block.flowblockmodel.name }}</summary>
       <fieldset>
-        <button class="delete-flowblock"">Delete</button>
+        <button class="delete-flowblock">Delete</button>
+        {% if block_index != 1 %}
+        <button class="up-flowblock">Move up</button>
+        {% endif %}
         {% for block_field in block.flowblockmodel.fields %}
           {{ render_field(block, block_field, prefix="%s-%d-%s-" % (field_name, block_index, block.flowblockmodel.id)) }}
         {% endfor %}
@@ -101,6 +104,16 @@
     document.querySelectorAll(".delete-flowblock").forEach((el) => {
         el.addEventListener("click", () => {
             el.closest("details").remove();
+        });
+    });
+
+    document.querySelectorAll(".up-flowblock").forEach((el) => {
+        el.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            details = el.closest("details");
+            clone = details.cloneNode(true);
+            details.previousElementSibling.before(clone);
+            details.remove();
         });
     });
   </script>
