@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-03 15:22+0300\n"
+"POT-Creation-Date: 2023-07-03 15:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:131
+#: lektor_tekir/api.py:144
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:133
+#: lektor_tekir/api.py:146
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:145
+#: lektor_tekir/api.py:158
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:146
+#: lektor_tekir/api.py:159
 msgid "Are you sure?"
 msgstr ""
 
@@ -44,6 +44,10 @@ msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:23
 msgid "Content"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_breadcrumbs.html:3
+msgid "home"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:55
@@ -66,15 +70,15 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:7
+#: lektor_tekir/templates/tekir_contents.html:11
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:11
+#: lektor_tekir/templates/tekir_contents.html:15
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:17
+#: lektor_tekir/templates/tekir_contents.html:21
 msgid "Attachments"
 msgstr ""
 

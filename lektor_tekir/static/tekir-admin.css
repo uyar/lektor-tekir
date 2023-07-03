@@ -181,6 +181,19 @@ h2 + p {
   grid-area: summary;
 }
 
+.tekir-breadcrumbs ul {
+  display: inline-flex;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  font-size: 90%;
+  list-style: none;
+}
+
+.tekir-breadcrumbs li::before {
+  content: "» ";
+}
+
 .tekir-subpages {
   grid-area: subpages;
 }

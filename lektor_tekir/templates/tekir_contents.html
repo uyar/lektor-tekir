@@ -1,6 +1,10 @@
 {% extends "tekir_base.html" %}
 
 {% block body %}
+<div class="tekir-breadcrumbs" hx-get="{{ url_for('admin_tekir_api.breadcrumbs', path=record.path, lang=g.lang_code) }}"
+    hx-trigger="load">
+</div>
+
 <div class="tekir-contents">
   <div class="tekir-summary">
     <h2>{{ record.title }}</h2>

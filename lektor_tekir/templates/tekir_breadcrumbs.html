@@ -1,0 +1,8 @@
+{% if records %}
+<ul>
+  <li><a href="{{ url_for('admin_tekir.contents', path='/') }}">{{ _("home") }}</a></li>
+  {% for item in records[1:] %}
+  <li><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item._slug }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}

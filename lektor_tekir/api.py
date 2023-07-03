@@ -22,14 +22,27 @@ def page_count():
     return str(len(pages))
 
 
+@bp.route("/breadcrumbs")
+def breadcrumbs():
+    g.lang_code = request.args.get("lang", "en")
+    path = request.args.get("path")
+    node = g.admin_context.tree.get(path)
+    record = node._primary_record
+    parents = []
+    while record.parent:
+        record = record.parent
+        parents.append(record)
+    parents.reverse()
+    return render_template("tekir_breadcrumbs.html", records=parents)
+
+
 @bp.route("/subpages")
 def subpages():
     g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
     node = g.admin_context.tree.get(path)
     children = [c._primary_record for c in node.iter_subpages()]
-    return render_template("tekir_subpages.html",
-                           current=node._primary_record, records=children)
+    return render_template("tekir_subpages.html", records=children)
 
 
 @bp.route("/attachments")
@@ -38,8 +51,8 @@ def attachments():
     path = request.args.get("path")
     node = g.admin_context.tree.get(path)
     children = [c._primary_record for c in node.iter_attachments()]
-    return render_template("tekir_attachments.html",
-                           current=node._primary_record, records=children)
+    return render_template("tekir_attachments.html", records=children,
+                           current=node._primary_record)
 
 
 def field_entry(field, field_name=None):
