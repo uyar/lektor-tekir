@@ -31,6 +31,10 @@ What's planned in the longer term:
 - Markdown editor integration.
 - Managing everything (templates, static assets, models, flow blocks, etc).
 
+It can be installed using pip::
+
+  pip install lektor-tekir
+
 To use it, run::
 
   lektor-tekir serve
