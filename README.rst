@@ -18,8 +18,12 @@ What's planned in the short term:
 
 - Adding new content.
 - Adding attachments.
+- Editing system fields.
+- Dividing edit form fields into tabs.
+- Deploying the site.
+- Supporting Git.
 - Managing content translations.
-- TinyMCE and/or Quill integration.
+- TinyMCE, Quill or some other editor integration.
 
 What's planned in the longer term:
 
