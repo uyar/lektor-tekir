@@ -91,11 +91,7 @@ def flowblock_entry(node, field):
     return f"{field.name}:\n\n" + "\n".join(entries)
 
 
-@bp.route("/save_content", methods=["POST"])
-def save_content():
-    g.lang_code = request.args.get("lang", "en")
-    path = request.args.get("path")
-    node = g.admin_context.tree.get(path)
+def get_content(node):
     record = node._primary_record
     entries = []
 
@@ -120,10 +116,31 @@ def save_content():
             continue
         entries.append(entry)
 
-    content = "\n---\n".join(entries) + "\n"
-    source = Path(record.source_filename)
+    return "\n---\n".join(entries) + "\n"
+
+
+@bp.route("/save-content", methods=["POST"])
+def save_content():
+    g.lang_code = request.args.get("lang", "en")
+    path = request.args.get("path")
+    node = g.admin_context.tree.get(path)
+    content = get_content(node)
+    source = Path(node._primary_record.source_filename)
     old_content = source.read_text()
     if content == old_content:
         return _("No changes.")
     source.write_text(content)
     return _("Content saved.")
+
+
+@bp.route("/check-changes", methods=["POST"])
+def check_changes():
+    g.lang_code = request.args.get("lang", "en")
+    path = request.args.get("path")
+    node = g.admin_context.tree.get(path)
+    content = get_content(node)
+    source = Path(node._primary_record.source_filename)
+    old_content = source.read_text()
+    if content != old_content:
+        return _("There are unsaved changes. Do you want to continue?")
+    return _("Are you sure?")

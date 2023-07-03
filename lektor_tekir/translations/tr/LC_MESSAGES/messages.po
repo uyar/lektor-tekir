@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-03 14:49+0300\n"
+"POT-Creation-Date: 2023-07-03 15:22+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -18,13 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:127
+#: lektor_tekir/api.py:131
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:129
+#: lektor_tekir/api.py:133
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
+
+#: lektor_tekir/api.py:145
+msgid "There are unsaved changes. Do you want to continue?"
+msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
+
+#: lektor_tekir/api.py:146
+msgid "Are you sure?"
+msgstr "Emin misiniz?"
 
 #: lektor_tekir/templates/tekir_base.html:7
 #: lektor_tekir/templates/tekir_base.html:13
@@ -43,9 +51,21 @@ msgstr "İçerik"
 msgid "Save"
 msgstr "Kaydet"
 
-#: lektor_tekir/templates/tekir_content_edit.html:60
+#: lektor_tekir/templates/tekir_content_edit.html:57
+msgid "Done"
+msgstr "Bitti"
+
+#: lektor_tekir/templates/tekir_content_edit.html:62
 msgid "Close"
 msgstr "Kapat"
+
+#: lektor_tekir/templates/tekir_content_edit.html:67
+msgid "Continue"
+msgstr "Devam et"
+
+#: lektor_tekir/templates/tekir_content_edit.html:68
+msgid "Cancel"
+msgstr "Vazgeç"
 
 #: lektor_tekir/templates/tekir_contents.html:7
 msgid "Edit"

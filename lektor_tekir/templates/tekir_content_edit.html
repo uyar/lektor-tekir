@@ -51,21 +51,39 @@
       {{ render_field(record, field, prefix="") }}
     {% endfor %}
 
-    <button data-modal-open hx-post="{{ url_for('admin_tekir_api.save_content', path=record.path, lang=g.lang_code) }}"
+    <button data-report-open hx-post="{{ url_for('admin_tekir_api.save_content', path=record.path, lang=g.lang_code) }}"
         hx-target="#save-result">{{ _('Save') }}</button>
+    <button data-warning-open hx-post="{{ url_for('admin_tekir_api.check_changes', path=record.path, lang=g.lang_code) }}"
+        hx-target="#check-result">{{ _('Done') }}</button>
   </form>
 
-  <dialog data-modal>
+  <dialog data-report>
     <p id="save-result"></p>
-    <button data-modal-close>{{ _("Close") }}</button>
+    <button data-report-close>{{ _("Close") }}</button>
+  </dialog>
+
+  <dialog data-warning>
+    <p id="check-result"></p>
+    <button data-warning-continue>{{ _("Continue") }}</button>
+    <button data-warning-cancel>{{ _("Cancel") }}</button>
   </dialog>
 
   <script>
-    const openModal = document.querySelector("[data-modal-open]")
-    const closeModal = document.querySelector("[data-modal-close]")
-    const modal = document.querySelector("[data-modal]")
+    const openReport = document.querySelector("[data-report-open]")
+    const closeReport = document.querySelector("[data-report-close]")
+    const report = document.querySelector("[data-report]")
+    openReport.addEventListener("click", () => { report.showModal(); })
+    closeReport.addEventListener("click", () => { report.close(); })
 
-    openModal.addEventListener("click", () => { modal.showModal(); })
-    closeModal.addEventListener("click", () => { modal.close(); })
+    const openWarning = document.querySelector("[data-warning-open]")
+    const continueWarning = document.querySelector("[data-warning-continue]")
+    const cancelWarning = document.querySelector("[data-warning-cancel]")
+    const warning = document.querySelector("[data-warning]")
+    openWarning.addEventListener("click", () => { warning.showModal(); })
+    continueWarning.addEventListener("click", () => {
+        warning.close();
+        window.location.href = "{{ url_for('admin_tekir.contents', path=record.path) }}";
+    })
+    cancelWarning.addEventListener("click", () => { warning.close(); })
   </script>
 {% endblock %}
