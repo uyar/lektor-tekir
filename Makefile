@@ -1,8 +1,15 @@
-pot:
-	pybabel extract -F babel.cfg -o messages.pot lektor_tekir
+SRC = lektor_tekir
+POTFILE = messages.pot
+TRANSLATIONS = $(SRC)/translations
 
-po:
-	pybabel update -i messages.pot -d lektor_tekir/translations/
+i18n-extract:
+	pybabel extract -F babel.cfg -o $(POTFILE) $(SRC)
 
-mo:
-	pybabel compile -d lektor_tekir/translations/
+i18n-update:
+	pybabel update -i $(POTFILE) -d $(TRANSLATIONS)
+
+i18n-compile:
+	pybabel compile -d $(TRANSLATIONS)
+
+i18n-init:
+	pybabel init -i $(POTFILE) -d $(TRANSLATIONS) -l $(lang)

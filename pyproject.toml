@@ -47,7 +47,7 @@ lektor-tekir = "lektor_tekir.cli:main"
 repository = "https://github.com/uyar/lektor-tekir"
 
 [tool.setuptools.package-data]
-lektor_tekir = ["**/*.mo"]
+lektor_tekir = ["translations/**"]
 
 [tool.ruff]
 select = ["E", "F", "I"]
@@ -78,7 +78,7 @@ deps =
     twine
 commands =
     pybabel compile -d lektor_tekir/translations/
-    python -c "import shutil; shutil.rmtree('dist')"
+    python -c "import shutil; shutil.rmtree('dist', ignore_errors=True)"
     python -m build
     twine check dist/*
 """
