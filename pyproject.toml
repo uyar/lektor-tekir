@@ -70,6 +70,14 @@ deps =
 commands =
     ruff lektor_tekir
 
+[testenv:flake8]
+skip_install = true
+deps =
+    flake8
+    flake8-isort
+commands =
+    flake8 lektor_tekir
+
 [testenv:package]
 skip_install = true
 deps =
