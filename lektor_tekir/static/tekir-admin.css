@@ -187,13 +187,14 @@ main {
 
 section {
   padding: 1em;
-  border-bottom: 1px solid;
+  border: 1px solid;
+  border-radius: 1rem;
 }
 
 section > h2 {
   margin-block-start: 0;
   color: var(--color);
-  font-size: 1.4em;
+  font-size: 2em;
   font-weight: normal;
 }
 
@@ -217,26 +218,32 @@ details {
 
 #tekir-page-count {
   max-width: min(20em, 50%);
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+}
+
+#tekir-page-count p {
+  font-size: 1.4em;
 }
 
 #tekir-page-count p {
   font-size: 2.5em;
 }
 
-.tekir-contents {
-  display: grid;
-  grid-gap: 2em 1em;
-  grid-template-areas:
-    "summary  summary"
-    "subpages attachments";
-  grid-template-columns: 1fr 1fr;
+#tekir-breadcrumbs {
+  margin-block-end: 2rem;
+  font-size: 90%;
 }
 
-.tekir-summary {
-  grid-area: summary;
+#tekir-breadcrumbs p {
+  margin-block-end: 0;
+  color: var(--color);
+  font-style: italic;
+  text-transform: lowercase;
 }
 
-.tekir-breadcrumbs ul {
+#tekir-breadcrumbs ul {
   display: inline-flex;
   gap: 0.5em;
   margin: 0;
@@ -245,16 +252,35 @@ details {
   list-style: none;
 }
 
-.tekir-breadcrumbs li::before {
+#tekir-breadcrumbs li::before {
   content: "» ";
 }
 
-.tekir-subpages {
-  grid-area: subpages;
+#tekir-contents {
+  display: grid;
+  gap: 2em 1em;
+  grid-template-areas:
+    "contents-summary  contents-summary"
+    "contents-subpages contents-attachments";
+  grid-template-columns: 1fr 1fr;
 }
 
-.tekir-attachments {
-  grid-area: attachments;
+#tekir-summary {
+  grid-area: contents-summary;
+}
+
+#tekir-subpages {
+  grid-area: contents-subpages;
+}
+
+#tekir-attachments {
+  grid-area: contents-attachments;
+}
+
+#tekir-summary,
+#tekir-subpages,
+#tekir-attachments {
+  padding: 2em;
 }
 
 /* FORMS */

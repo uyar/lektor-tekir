@@ -1,85 +1,55 @@
-{% extends "tekir_base.html" %}
+{% extends 'tekir_base.html' %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('admin_tekir.static', filename='delete-modal.js') }}"></script>
+{% endblock %}
 
 {% block body %}
-<div class="tekir-breadcrumbs">
-  {% if parents %}
+<div id="tekir-breadcrumbs">
+  <p>{{ _('You are here:') }}</p>
   <ul>
-    <li><a href="{{ url_for('admin_tekir.contents', path='/') }}">{{ _("home") }}</a></li>
-    {% for item in parents[1:] %}
-    <li><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item._slug }}</a></li>
+    {% for item in parents %}
+    <li><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item.title }}</a></li>
     {% endfor %}
+    <li>{{ record.title }}</li>
   </ul>
-  {% endif %}
 </div>
 
-<div class="tekir-contents">
-  <div class="tekir-summary">
+<div id="tekir-contents">
+  <section id="tekir-summary">
     <h2>{{ record.title }}</h2>
     <a href="{{ url_for('admin_tekir.edit_content', path=record.path) }}">{{ _("Edit") }}</a>
-  </div>
+  </section>
 
-  <section class="tekir-subpages">
+  <section id="tekir-subpages">
     <h2>{{ _("Subpages") }}</h2>
     <table>
       {% for item in record.children %}
       <tr>
         <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item["title"] }}</a></td>
-        <td>
-          <button class="delete-content" data-type={{ item['_model'] }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
-        </td>
+        <td><button class="delete-content" data-type={{ item['_model'] }} data-path="{{ item.path }}">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}
     </table>
   </section>
 
-  <section class="tekir-attachments">
+  <section id="tekir-attachments">
     <h2>{{ _("Attachments") }}</h2>
     <table>
       {% for item in record.attachments %}
       <tr>
         <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
-        <td>
-          <button class="delete-content" data-type={{ _('attachment') }} data-path="{{ item.path }}">{{ _("Delete") }}</button>
-        </td>
+        <td><button class="delete-content" data-type={{ _('attachment') }} data-path="{{ item.path }}">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}
     </table>
   </section>
 </div>
 
-<dialog id="warning-delete">
+<dialog id="delete-confirm">
   <p>{{ _("Do you really want to delete this content?") }}</p>
   <p><span id="delete-item-path">.</span> (<span id="delete-item-type">.</span>)</p>
-  <button id="delete-continue"
-      hx-get="{{ url_for('admin_tekir_api.delete_item', lang=g.lang_code) }}">{{ _("Delete") }}</button>
+  <button id="delete-continue" hx-get="{{ url_for('admin_tekir_api.delete_item', lang=g.lang_code) }}">{{ _("Delete") }}</button>
   <button id="delete-cancel">{{ _("Cancel") }}</button>
 </dialog>
-
-<script>
-  const deleteDialog = document.getElementById("warning-delete");
-
-  document.querySelectorAll(".delete-content").forEach((el) => {
-      el.addEventListener("click", () => {
-          document.getElementById("delete-item-type").innerHTML = el.dataset.type;
-          document.getElementById("delete-item-path").innerHTML = el.dataset.path;
-          document.getElementById("delete-continue").setAttribute(
-            "hx-vals",
-            "js:{'path': document.getElementById('delete-item-path').innerHTML}"
-          );
-          deleteDialog.showModal();
-      });
-  });
-
-  document.getElementById("delete-continue").addEventListener("click", () => {
-      const deletedItemPath = document.getElementById('delete-item-path').innerHTML;
-      const deletedButton = document.querySelector("button[data-path='" + deletedItemPath + "']");
-      const deletedRow = deletedButton.closest("tr");
-      deletedRow.remove();
-      deleteDialog.close();
-  });
-
-  document.getElementById("delete-cancel").addEventListener("click", () => {
-      deleteDialog.close();
-  });
-</script>
 {% endblock %}

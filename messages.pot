@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-08 21:31+0300\n"
+"POT-Creation-Date: 2023-07-09 02:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Generated-By: Babel 2.12.1\n"
 
 #: lektor_tekir/api.py:115
 msgid "No changes."
@@ -37,31 +37,35 @@ msgstr ""
 msgid "Deleted."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:7
-#: lektor_tekir/templates/tekir_base.html:26
+#: lektor_tekir/templates/tekir_base.html:6
+#: lektor_tekir/templates/tekir_base.html:14
 msgid "Admin Panel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:37
+#: lektor_tekir/templates/tekir_base.html:26
 msgid "Toggle light mode"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:40
+#: lektor_tekir/templates/tekir_base.html:29
 msgid "Toggle dark mode"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:49
+#: lektor_tekir/templates/tekir_base.html:36
+msgid "main navigation"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_base.html:38
 msgid "Summary"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:50
+#: lektor_tekir/templates/tekir_base.html:39
 msgid "Content"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:38
-#: lektor_tekir/templates/tekir_contents.html:28
+#: lektor_tekir/templates/tekir_contents.html:30
 #: lektor_tekir/templates/tekir_contents.html:42
-#: lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/templates/tekir_contents.html:52
 msgid "Delete"
 msgstr ""
 
@@ -86,23 +90,23 @@ msgid "Continue"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:77
-#: lektor_tekir/templates/tekir_contents.html:55
+#: lektor_tekir/templates/tekir_contents.html:53
 msgid "Cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:7
-msgid "home"
+#: lektor_tekir/templates/tekir_contents.html:9
+msgid "You are here:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:18
+#: lektor_tekir/templates/tekir_contents.html:21
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:22
+#: lektor_tekir/templates/tekir_contents.html:25
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:36
+#: lektor_tekir/templates/tekir_contents.html:37
 msgid "Attachments"
 msgstr ""
 
@@ -110,7 +114,7 @@ msgstr ""
 msgid "attachment"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:51
+#: lektor_tekir/templates/tekir_contents.html:50
 msgid "Do you really want to delete this content?"
 msgstr ""
 

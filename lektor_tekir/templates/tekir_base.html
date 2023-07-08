@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="{{ url_for('admin_tekir.static', filename='tekir-admin.css') }}">
   <script src="{{ url_for('admin_tekir.static', filename='color-mode.js') }}"></script>
   <script src="{{ url_for('admin_tekir.static', filename='htmx.min.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
 </head>
 <body>
   <header id="main-header">
