@@ -1,5 +1,6 @@
 :root {
   --color: hsl(232, 58%, 59%);
+  --color-contrast: white;
 
   --color-bg-light: hsl(0, 0%, 95%);
   --color-text-light: hsl(0, 0%, 0%);
@@ -89,37 +90,38 @@ select {
 body {
   display: grid;
   grid-template-areas:
-    ".   header"
-    "nav content";
+    ".         main-header"
+    "main-tabs main-content";
   grid-template-columns: 10em 1fr;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
 
-body > header {
-  grid-area: header;
+#main-header {
+  grid-area: main-header;
 }
 
-nav {
-  grid-area: nav;
+#main-tabs {
+  grid-area: main-tabs;
 }
 
 main {
-  grid-area: content;
+  grid-area: main-content;
 }
 
-/* HEADING */
+/* MAIN HEADER */
 
-header {
+#main-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1em 4em;
   padding: 1rem;
   background-color: var(--color);
-  color: white;
+  color: var(--color-contrast);
 }
 
-header a {
+#main-header a {
   color: inherit;
 }
 
@@ -128,29 +130,56 @@ h1 {
   font-size: 1.5em;
 }
 
-/* NAV */
+#tekir-settings {
+  display: inline-flex;
+  gap: 2em;
+}
 
-nav {
+ul#tekir-langs {
+  display: inline-flex;
+  gap: 1em;
+  padding: 0;
+  font-size: 90%;
+  list-style: none;
+}
+
+#tekir-color-modes {
+  display: flex;
+  gap: 0.75em;
+}
+
+.color-mode {
+  padding: 0;
+  border: none;
+}
+
+.color-mode svg {
+  width: 1.2em;
+  fill: currentColor;
+}
+
+.color-mode svg:hover {
+  transform: scale(1.5);
+}
+
+/* MAIN TABS */
+
+#main-tabs {
   padding: 1rem;
   font-size: 90%;
 }
 
-nav ul {
+#main-tabs ul {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
 }
 
-nav li {
-  display: contents;
-}
-
-nav a {
-  padding: 0.5rem;
+#main-tabs a {
   color: inherit;
 }
 
-/* MAIN */
+/* MAIN CONTENT */
 
 main {
   padding: 3rem;
@@ -161,22 +190,19 @@ section {
   border-bottom: 1px solid;
 }
 
-section > *:first-child {
+section > h2 {
+  margin-block-start: 0;
+  color: var(--color);
+  font-size: 1.4em;
+  font-weight: normal;
+}
+
+section > h2 + p {
   margin-block-start: 0;
 }
 
 section > *:last-child {
   margin-block-end: 0;
-}
-
-section h2 {
-  color: var(--color);
-  font-size: 1.4em;
-  font-weight: 500;
-}
-
-h2 + p {
-  margin-block-start: 0;
 }
 
 td {
@@ -189,41 +215,12 @@ details {
 
 /* CUSTOM */
 
-ul.tekir-langs {
-  display: flex;
-  justify-content: end;
-  gap: 1em;
-  margin: 0 0 0.5em 0;
-  padding: 0;
-  font-size: 90%;
-  list-style: none;
+#tekir-page-count {
+  max-width: min(20em, 50%);
 }
 
-.tekir-color-modes {
-  display: flex;
-  gap: 0.75em;
-}
-
-button.color-mode {
-  padding: 0;
-  border: none;
-}
-
-button.color-mode svg {
-  width: 1.2em;
-  fill: currentColor;
-}
-
-button.color-mode svg:hover {
-  transform: scale(1.5);
-}
-
-.tekir-page-count {
-  max-width: 30%;
-}
-
-.tekir-page-count p {
-  font-size: 3em;
+#tekir-page-count p {
+  font-size: 2.5em;
 }
 
 .tekir-contents {
