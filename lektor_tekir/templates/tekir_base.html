@@ -4,25 +4,53 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>{{ g.admin_context.pad.env.project.name }} - {{ _("Admin Panel") }}</title>
+  <title>{{ g.admin_context.pad.env.project.name }} - {{ _('Admin Panel') }}</title>
   <link rel="stylesheet" href="{{ url_for('admin_tekir.static', filename='tekir-admin.css') }}">
   <script src="{{ url_for('admin_tekir.static', filename='htmx.min.js') }}"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("button.color-mode").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          if (e.currentTarget.classList.contains("light")) {
+            document.documentElement.setAttribute("color-mode", "light");
+          } else {
+            document.documentElement.setAttribute("color-mode", "dark");
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body>
   <header>
-    <h1>{{ _("Admin Panel") }}</h1>
-    <ul>
-      {% for locale in translations() %}
-      <li><a href="/admin-tekir/{{ locale }}/{{ '/'.join(request.full_path.split('/')[3:]) }}">{{ locale }}</a></li>
-      {% endfor %}
-    </ul>
+    <h1>{{ _('Admin Panel') }}</h1>
+
+    <div class="tekir-settings">
+      <ul class="tekir-langs">
+        {% for locale in translations() %}
+          {% set route = '/'.join(request.full_path.split('/')[3:]) %}
+        <li><a href="/admin-tekir/{{ locale }}/{{ route }}">{{ locale }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <div class="tekir-color-modes">
+        <button class="color-mode light" aria-label="{{ _('Toggle light mode') }}">
+          {% include 'sun.svg' %}
+        </button>
+        <button class="color-mode dark" aria-label="{{ _('Toggle dark mode') }}">
+          {% include 'moon.svg' %}
+        </button>
+      </div>
+    </div>
   </header>
+
   <nav>
     <ul>
-      <li><a href="/admin-tekir/{{ g.lang_code }}/">{{ _("Summary") }}</a></li>
-      <li><a href="/admin-tekir/{{ g.lang_code }}/contents/?path=/">{{ _("Content") }}</a></li>
+      <li><a href="/admin-tekir/{{ g.lang_code }}/">{{ _('Summary') }}</a></li>
+      <li><a href="/admin-tekir/{{ g.lang_code }}/contents/?path=/">{{ _('Content') }}</a></li>
     </ul>
   </nav>
+
   <main>
     {% block body %}{% endblock %}
   </main>
