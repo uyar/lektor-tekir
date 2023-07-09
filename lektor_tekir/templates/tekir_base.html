@@ -35,8 +35,8 @@
 
   <nav id="main-tabs" aria-label="{{ _('main navigation') }}">
     <ul>
-      <li><a href="{{ url_for('admin_tekir.summary') }}">{{ _('Summary') }}</a></li>
-      <li><a href="{{ url_for('admin_tekir.contents', path='/') }}">{{ _('Content') }}</a></li>
+      <li><a href="{{ url_for('admin_tekir.summary') }}">{% include 'home.svg' %} {{ _('Summary') }}</a></li>
+      <li><a href="{{ url_for('admin_tekir.contents', path='/') }}">{% include 'contents.svg' %} {{ _('Content') }}</a></li>
     </ul>
   </nav>
 

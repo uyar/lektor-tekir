@@ -165,18 +165,27 @@ ul#tekir-langs {
 /* MAIN TABS */
 
 #main-tabs {
-  padding: 1rem;
+  padding: 2rem;
   font-size: 90%;
 }
 
 #main-tabs ul {
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 3em;
 }
 
 #main-tabs a {
+  display: flex;
+  align-items: flex-start;
   color: inherit;
+}
+
+#main-tabs svg {
+  display: inline;
+  width: 1.2em;
+  margin-inline-end: 1em;
+  fill: currentColor;
 }
 
 /* MAIN CONTENT */
