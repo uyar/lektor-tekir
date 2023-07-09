@@ -39,7 +39,7 @@ To use it, run::
 
   lektor-tekir serve
 
-And then visit the URL "http://localhost:5000/admin-tekir/en/".
+And then visit the URL "http://localhost:5000/tekir-admin/en/".
 
 The ``lektor-tekir`` CLI is identical to the Lektor CLI
 except that it patches the ``serve`` command to enable its own panel.

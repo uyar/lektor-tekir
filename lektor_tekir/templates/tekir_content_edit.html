@@ -60,9 +60,9 @@
       {{ render_field(record, field, prefix="") }}
     {% endfor %}
 
-    <button id="report-open" hx-post="{{ url_for('admin_tekir_api.save_content', path=record.path, lang=g.lang_code) }}"
+    <button id="report-open" hx-post="{{ url_for('tekir_admin_api.save_content', path=record.path, lang=g.lang_code) }}"
         hx-target="#save-result">{{ _('Save') }}</button>
-    <button id="warning-open" hx-post="{{ url_for('admin_tekir_api.check_changes', path=record.path, lang=g.lang_code) }}"
+    <button id="warning-open" hx-post="{{ url_for('tekir_admin_api.check_changes', path=record.path, lang=g.lang_code) }}"
         hx-target="#check-changes">{{ _('Done') }}</button>
   </form>
 
@@ -96,7 +96,7 @@
 
     document.getElementById("warning-continue").addEventListener("click", () => {
         warningDialog.close();
-        window.location.href = "{{ url_for('admin_tekir.contents', path=record.path) }}";
+        window.location.href = "{{ url_for('tekir_admin_api.contents', path=record.path) }}";
     })
 
     document.getElementById("warning-cancel").addEventListener("click", () => {

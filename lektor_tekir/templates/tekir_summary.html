@@ -2,6 +2,6 @@
 {% block body %}
 <section id="tekir-page-count">
   <h2>{{ _('Number of Pages') }}</h2>
-  <p hx-get="{{ url_for('admin_tekir_api.page_count') }}" hx-trigger="load">&nbsp;</p>
+  <p hx-get="{{ url_for('tekir_admin_api.page_count') }}" hx-trigger="load">&nbsp;</p>
 </section>
 {% endblock %}

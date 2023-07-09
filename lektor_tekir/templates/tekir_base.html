@@ -4,9 +4,9 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>{{ g.admin_context.pad.env.project.name }} - {{ _('Admin Panel') }}</title>
-  <link rel="stylesheet" href="{{ url_for('admin_tekir.static', filename='tekir-admin.css') }}">
-  <script src="{{ url_for('admin_tekir.static', filename='color-mode.js') }}"></script>
-  <script src="{{ url_for('admin_tekir.static', filename='htmx.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('tekir_admin.static', filename='tekir-admin.css') }}">
+  <script src="{{ url_for('tekir_admin.static', filename='color-mode.js') }}"></script>
+  <script src="{{ url_for('tekir_admin.static', filename='htmx.min.js') }}"></script>
   {% block extra_scripts %}{% endblock %}
 </head>
 <body>
@@ -16,7 +16,7 @@
     <div id="tekir-settings">
       <ul id="tekir-langs">
         {% for locale in translations() %}
-          {% set base_path = url_for('admin_tekir.summary').split('/')[:-2] %}
+          {% set base_path = url_for('tekir_admin.summary').split('/')[:-2] %}
           {% set route = request.full_path.split('/')[(base_path | length) + 1:] %}
         <li><a href="{{ '%s/%s/%s' % ('/'.join(base_path), locale, '/'.join(route)) }}">{{ locale }}</a></li>
         {% endfor %}
@@ -35,8 +35,8 @@
 
   <nav id="main-tabs" aria-label="{{ _('main navigation') }}">
     <ul>
-      <li><a href="{{ url_for('admin_tekir.summary') }}">{% include 'home.svg' %} {{ _('Summary') }}</a></li>
-      <li><a href="{{ url_for('admin_tekir.contents', path='/') }}">{% include 'contents.svg' %} {{ _('Content') }}</a></li>
+      <li><a href="{{ url_for('tekir_admin.summary') }}">{% include 'home.svg' %} {{ _('Summary') }}</a></li>
+      <li><a href="{{ url_for('tekir_admin.contents', path='/') }}">{% include 'contents.svg' %} {{ _('Content') }}</a></li>
     </ul>
   </nav>
 

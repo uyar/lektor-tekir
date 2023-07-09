@@ -1,7 +1,7 @@
 {% extends 'tekir_base.html' %}
 
 {% block extra_scripts %}
-<script src="{{ url_for('admin_tekir.static', filename='delete-confirm.js') }}"></script>
+<script src="{{ url_for('tekir_admin.static', filename='delete-confirm.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
   <p>{{ _('You are here:') }}</p>
   <ul>
     {% for item in parents %}
-    <li><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item.title }}</a></li>
+    <li><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item.title }}</a></li>
     {% endfor %}
     <li>{{ record.title }}</li>
   </ul>
@@ -18,7 +18,7 @@
 <div id="tekir-contents">
   <section id="tekir-summary">
     <h2>{{ record.title }}</h2>
-    <a href="{{ url_for('admin_tekir.edit_content', path=record.path) }}">{{ _("Edit") }}</a>
+    <a href="{{ url_for('tekir_admin.edit_content', path=record.path) }}">{{ _("Edit") }}</a>
   </section>
 
   <section id="tekir-subpages">
@@ -26,8 +26,8 @@
     <table>
       {% for item in record.children %}
       <tr>
-        <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item["title"] }}</a></td>
-        <td><button class="delete-content" hx-get="{{ url_for('admin_tekir_api.delete_content_check', path=item.path) }}"
+        <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item["title"] }}</a></td>
+        <td><button class="delete-content" hx-get="{{ url_for('tekir_admin_api.delete_content_check', path=item.path) }}"
             hx-target="#delete-items">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}
@@ -39,8 +39,8 @@
     <table>
       {% for item in record.attachments %}
       <tr>
-        <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
-        <td><button class="delete-content" hx-get="{{ url_for('admin_tekir_api.delete_content_check', path=item.path) }}"
+        <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
+        <td><button class="delete-content" hx-get="{{ url_for('tekir_admin_api.delete_content_check', path=item.path) }}"
             hx-target="#delete-items">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}
@@ -52,7 +52,7 @@
   <p>{{ _('This operation will delete the following content items:') }}</p>
   <p id="delete-items"></p>
   <p>{{ _('Do you want to continue?') }}</p>
-  <button id="delete-continue" hx-get="{{ url_for('admin_tekir_api.delete_content', lang=g.lang_code) }}">{{ _("Yes, delete") }}</button>
+  <button id="delete-continue" hx-get="{{ url_for('tekir_admin_api.delete_content', lang=g.lang_code) }}">{{ _("Yes, delete") }}</button>
   <button id="delete-cancel">{{ _("No, cancel") }}</button>
 </dialog>
 {% endblock %}

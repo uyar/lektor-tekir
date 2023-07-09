@@ -13,7 +13,7 @@ from flask_babel import gettext as _
 MULTILINE = {"text", "strings", "markdown", "html", "rst", "flow"}
 
 
-bp = Blueprint("admin_tekir_api", __name__, url_prefix="/admin-tekir/api")
+bp = Blueprint("tekir_admin_api", __name__, url_prefix="/tekir-admin/api")
 
 
 @bp.route("/page-count")
