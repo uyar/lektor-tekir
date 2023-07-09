@@ -261,7 +261,7 @@ details {
   list-style: none;
 }
 
-#tekir-breadcrumbs li::before {
+#tekir-breadcrumbs li:not(:first-child)::before {
   content: "» ";
 }
 

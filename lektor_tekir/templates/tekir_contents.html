@@ -9,9 +9,9 @@
   <p>{{ _('You are here:') }}</p>
   <ul>
     {% for item in parents %}
-    <li><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item.title }}</a></li>
+    <li><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item._slug or _('home') }}</a></li>
     {% endfor %}
-    <li>{{ record.title }}</li>
+    <li>{{ record._slug or _('home') }}</li>
   </ul>
 </div>
 

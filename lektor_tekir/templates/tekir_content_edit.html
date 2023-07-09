@@ -96,7 +96,7 @@
 
     document.getElementById("warning-continue").addEventListener("click", () => {
         warningDialog.close();
-        window.location.href = "{{ url_for('tekir_admin_api.contents', path=record.path) }}";
+        window.location.href = "{{ url_for('tekir_admin.contents', path=record.path) }}";
     })
 
     document.getElementById("warning-cancel").addEventListener("click", () => {

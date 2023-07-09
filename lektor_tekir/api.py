@@ -134,15 +134,17 @@ def check_changes():
 def check_delete():
     g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
+    root_path = Path(g.admin_context.pad.env.root_path)
     record = g.admin_context.tree.get(path)._primary_record
-    root = Path(g.admin_context.tree.get("/")._primary_record.source_filename).parent
     if record.is_attachment:
-        return f"<li>{Path(record.source_filename).relative_to(root)}</li>"
+        return f"<li>{record.path[1:]}</li>"
     else:
-        dirname = Path(record.source_filename).parent
+        item_dir = Path(record.source_filename).parent
         result = []
-        for item in dirname.glob("**/*"):
-            result.append(f"<li>{item.relative_to(root)}</li>")
+        for item in sorted(item_dir.glob("**/*")):
+            if item.is_file():
+                item_path = item.relative_to(root_path)
+                result.append(f"<li>{item_path}</li>")
         return "\n".join(result)
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-09 04:31+0300\n"
+"POT-Creation-Date: 2023-07-09 21:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: lektor_tekir/api.py:160
+#: lektor_tekir/api.py:162
 msgid "Deleted."
 msgstr ""
 
@@ -94,6 +94,11 @@ msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:9
 msgid "You are here:"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:12
+#: lektor_tekir/templates/tekir_contents.html:14
+msgid "home"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:21
