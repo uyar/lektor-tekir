@@ -27,7 +27,7 @@
       {% for item in record.children %}
       <tr>
         <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item["title"] }}</a></td>
-        <td><button class="delete-content" hx-get="{{ url_for('tekir_admin_api.delete_content_check', path=item.path) }}"
+        <td><button class="delete-content" hx-get="{{ url_for('tekir_admin_api.check_delete', path=item.path) }}"
             hx-target="#delete-items">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}
@@ -40,7 +40,7 @@
       {% for item in record.attachments %}
       <tr>
         <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
-        <td><button class="delete-content" hx-get="{{ url_for('tekir_admin_api.delete_content_check', path=item.path) }}"
+        <td><button class="delete-content" hx-get="{{ url_for('tekir_admin_api.check_delete', path=item.path) }}"
             hx-target="#delete-items">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}

@@ -130,8 +130,8 @@ def check_changes():
     return _("Are you sure?")
 
 
-@bp.route("/delete-content-check")
-def delete_content_check():
+@bp.route("/check-delete")
+def check_delete():
     g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record

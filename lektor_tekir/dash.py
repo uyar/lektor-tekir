@@ -28,7 +28,7 @@ def summary():
     return render_template("tekir_summary.html")
 
 
-@bp.route("/contents/")
+@bp.route("/contents")
 def contents():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
