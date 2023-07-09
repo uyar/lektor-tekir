@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-09 02:47+0300\n"
+"POT-Creation-Date: 2023-07-09 04:31+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -34,7 +34,7 @@ msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 msgid "Are you sure?"
 msgstr "Emin misiniz?"
 
-#: lektor_tekir/api.py:144
+#: lektor_tekir/api.py:160
 msgid "Deleted."
 msgstr "Silindi."
 
@@ -64,9 +64,8 @@ msgid "Content"
 msgstr "İçerik"
 
 #: lektor_tekir/templates/tekir_content_edit.html:38
-#: lektor_tekir/templates/tekir_contents.html:30
-#: lektor_tekir/templates/tekir_contents.html:42
-#: lektor_tekir/templates/tekir_contents.html:52
+#: lektor_tekir/templates/tekir_contents.html:31
+#: lektor_tekir/templates/tekir_contents.html:44
 msgid "Delete"
 msgstr "Sil"
 
@@ -91,7 +90,6 @@ msgid "Continue"
 msgstr "Devam et"
 
 #: lektor_tekir/templates/tekir_content_edit.html:77
-#: lektor_tekir/templates/tekir_contents.html:53
 msgid "Cancel"
 msgstr "Vazgeç"
 
@@ -107,17 +105,25 @@ msgstr "Düzenle"
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir/templates/tekir_contents.html:37
+#: lektor_tekir/templates/tekir_contents.html:38
 msgid "Attachments"
 msgstr "Ekler"
 
-#: lektor_tekir/templates/tekir_contents.html:42
-msgid "attachment"
-msgstr "ek"
+#: lektor_tekir/templates/tekir_contents.html:52
+msgid "This operation will delete the following content items:"
+msgstr "Bu işlem aşağıdaki içerik elemanlarını silecek:"
 
-#: lektor_tekir/templates/tekir_contents.html:50
-msgid "Do you really want to delete this content?"
-msgstr "Bu içeriği silmek istediğinizden emin misiniz?"
+#: lektor_tekir/templates/tekir_contents.html:54
+msgid "Do you want to continue?"
+msgstr "Devam etmek istiyor musunuz?"
+
+#: lektor_tekir/templates/tekir_contents.html:55
+msgid "Yes, delete"
+msgstr "Evet, sil"
+
+#: lektor_tekir/templates/tekir_contents.html:56
+msgid "No, cancel"
+msgstr "Hayır, vazgeç"
 
 #: lektor_tekir/templates/tekir_summary.html:4
 msgid "Number of Pages"

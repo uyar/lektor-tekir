@@ -292,6 +292,13 @@ details {
   padding: 2em;
 }
 
+#delete-items {
+  max-height: 8.5em;
+  padding: 0.5em 1em;
+  overflow-y: auto;
+  background-color: hsl(0, 0%, 60%);
+}
+
 /* FORMS */
 
 .field {

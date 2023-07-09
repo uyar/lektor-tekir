@@ -1,7 +1,7 @@
 {% extends 'tekir_base.html' %}
 
 {% block extra_scripts %}
-<script src="{{ url_for('admin_tekir.static', filename='delete-modal.js') }}"></script>
+<script src="{{ url_for('admin_tekir.static', filename='delete-confirm.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -27,7 +27,8 @@
       {% for item in record.children %}
       <tr>
         <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ item["title"] }}</a></td>
-        <td><button class="delete-content" data-type={{ item['_model'] }} data-path="{{ item.path }}">{{ _("Delete") }}</button></td>
+        <td><button class="delete-content" hx-get="{{ url_for('admin_tekir_api.delete_content_check', path=item.path) }}"
+            hx-target="#delete-items">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}
     </table>
@@ -39,7 +40,8 @@
       {% for item in record.attachments %}
       <tr>
         <td><a href="{{ url_for('admin_tekir.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
-        <td><button class="delete-content" data-type={{ _('attachment') }} data-path="{{ item.path }}">{{ _("Delete") }}</button></td>
+        <td><button class="delete-content" hx-get="{{ url_for('admin_tekir_api.delete_content_check', path=item.path) }}"
+            hx-target="#delete-items">{{ _("Delete") }}</button></td>
       </tr>
       {% endfor %}
     </table>
@@ -47,9 +49,10 @@
 </div>
 
 <dialog id="delete-confirm">
-  <p>{{ _("Do you really want to delete this content?") }}</p>
-  <p><span id="delete-item-path">.</span> (<span id="delete-item-type">.</span>)</p>
-  <button id="delete-continue" hx-get="{{ url_for('admin_tekir_api.delete_item', lang=g.lang_code) }}">{{ _("Delete") }}</button>
-  <button id="delete-cancel">{{ _("Cancel") }}</button>
+  <p>{{ _('This operation will delete the following content items:') }}</p>
+  <p id="delete-items"></p>
+  <p>{{ _('Do you want to continue?') }}</p>
+  <button id="delete-continue" hx-get="{{ url_for('admin_tekir_api.delete_content', lang=g.lang_code) }}">{{ _("Yes, delete") }}</button>
+  <button id="delete-cancel">{{ _("No, cancel") }}</button>
 </dialog>
 {% endblock %}

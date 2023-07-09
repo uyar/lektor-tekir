@@ -3,8 +3,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
     document.querySelectorAll(".delete-content").forEach((el) => {
         el.addEventListener("click", () => {
-            document.getElementById("delete-item-type").innerHTML = el.dataset.type;
-            document.getElementById("delete-item-path").innerHTML = el.dataset.path;
             document.getElementById("delete-continue").setAttribute(
               "hx-vals",
               "js:{'path': document.getElementById('delete-item-path').innerHTML}"

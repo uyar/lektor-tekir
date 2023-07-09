@@ -130,8 +130,24 @@ def check_changes():
     return _("Are you sure?")
 
 
-@bp.route("/delete-item")
-def delete_item():
+@bp.route("/delete-content-check")
+def delete_content_check():
+    g.lang_code = request.args.get("lang", "en")
+    path = request.args.get("path")
+    record = g.admin_context.tree.get(path)._primary_record
+    root = Path(g.admin_context.tree.get("/")._primary_record.source_filename).parent
+    if record.is_attachment:
+        return f"<li>{Path(record.source_filename).relative_to(root)}</li>"
+    else:
+        dirname = Path(record.source_filename).parent
+        result = []
+        for item in dirname.glob("**/*"):
+            result.append(f"<li>{item.relative_to(root)}</li>")
+        return "\n".join(result)
+
+
+@bp.route("/delete-content")
+def delete_content():
     g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
