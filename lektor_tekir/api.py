@@ -3,6 +3,7 @@
 # lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
+import re
 from pathlib import Path
 from shutil import rmtree
 
@@ -11,6 +12,9 @@ from flask_babel import gettext as _
 
 
 MULTILINE = {"text", "strings", "markdown", "html", "rst", "flow"}
+
+
+_re_contents = re.compile(r"contents(\+(\w+))?\.lr")
 
 
 bp = Blueprint("tekir_admin_api", __name__, url_prefix="/tekir-admin/api")
@@ -40,7 +44,7 @@ def field_entry(field, field_name=None):
     if not value:
         return None
     if field.type.name in MULTILINE:
-        stripped = "\n".join(line.strip() for line in value.splitlines())
+        stripped = "\n".join(line.rstrip() for line in value.splitlines())
         return f"{field.name}:\n\n{stripped}"
     else:
         return f"{field.name}: {value}"
@@ -141,11 +145,20 @@ def check_delete():
     else:
         item_dir = Path(record.source_filename).parent
         result = []
-        for item in sorted(item_dir.glob("**/*")):
+        for item in item_dir.glob("**/*"):
             if item.is_file():
-                item_path = item.relative_to(root_path)
-                result.append(f"<li>{item_path}</li>")
-        return "\n".join(result)
+                contents_file = _re_contents.match(item.name)
+                if contents_file:
+                    parent_path = item.parent.relative_to(root_path)
+                    lang = contents_file.group(2)
+                    if lang is None:
+                        item_path = f"{parent_path}"
+                    else:
+                        item_path = f"{parent_path} ({lang})"
+                else:
+                    item_path = str(item.relative_to(root_path))
+                result.append(item_path)
+        return "\n".join(f"<li>{p}</li>" for p in sorted(result))
 
 
 @bp.route("/delete-content")
