@@ -10,14 +10,12 @@
     {% elif field.type.name == 'date' %}
     <input type="date" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
     {% elif field.type.name == 'boolean' %}
-    <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}"
-        {{ 'checked' if field_value else '' }} />
+    <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}" {{ 'checked' if field_value else '' }} />
     {% elif field.type.name == 'select' %}
     <select id="{{ field_id }}" name="{{ field_name }}">
       <option value="">----</option>
       {% for choice, label in field.type.source.iter_choices(pad, record) %}
-      <option value="{{ choice }}"
-          {{ 'selected' if choice == field_value else '' }}>{{ label['en'] }}</option>
+      <option value="{{ choice }}" {{ 'selected' if choice == field_value else '' }}>{{ label['en'] }}</option>
       {% endfor %}
     </select>
     {% elif field.type.name in ('string', 'integer', 'float', 'url', 'sort_key') %}
@@ -33,24 +31,27 @@
     {% elif field.type.name == 'flow' %}
       {% if field_value %}
         {% for block in field_value.blocks %}
-          {% set block_index = loop.index %}
-    <details id="{{ '%s-%d' % (field_name, block_index) }}">
-      <summary>
-        {{ block.flowblockmodel.name }}
-        <button class="delete-block">{{ _('Delete') }}</button>
-        <button class="up-block">{{ _('Move up') }}</button>
-        <button class="down-block">{{ _('Move down') }}</button>
-      </summary>
-      <fieldset>
-        {% for block_field in block.flowblockmodel.fields %}
-          {{ render_field(block, block_field, prefix='%s-%d-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
-        {% endfor %}
-      </fieldset>
-    </details>
+          {{ render_flowblock(block, field_name, loop.index) }}
         {% endfor %}
       {% endif %}
     {% endif %}
   </div>
+{% endmacro %}
+
+{% macro render_flowblock(block, field_name, block_index) %}
+<details id="{{ '%s-%d' % (field_name, block_index) }}">
+  <summary>
+    {{ block.flowblockmodel.name }}
+    <button class="delete-block">{{ _('Delete') }}</button>
+    <button class="up-block">{{ _('Move up') }}</button>
+    <button class="down-block">{{ _('Move down') }}</button>
+  </summary>
+  <fieldset>
+    {% for block_field in block.flowblockmodel.fields %}
+      {{ render_field(block, block_field, prefix='%s-%d-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
+    {% endfor %}
+  </fieldset>
+</details>
 {% endmacro %}
 
 {% extends 'tekir_base.html' %}

@@ -280,6 +280,10 @@ details {
   background-color: hsl(0, 0%, 60%);
 }
 
+summary button:first-child {
+  margin-inline-start: 4em;
+}
+
 details:first-of-type .up-block,
 details:last-of-type .down-block {
   visibility: hidden;
