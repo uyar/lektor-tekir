@@ -70,26 +70,23 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
     document.querySelectorAll(".delete-block").forEach((el) => {
         el.addEventListener("click", (ev) => {
             ev.preventDefault();
-            details = el.closest("details");
-            if (details.querySelectorAll(".up-block").length == 0) {
-                summary = el.closest("summary");
-                downSummary = details.nextElementSibling.querySelector("summary");
-                downSummary.after(summary);
-                downSummary.remove();
-            }
-            details.remove();
+            el.closest("details").remove();
         });
     });
 
     document.querySelectorAll(".up-block").forEach((el) => {
         el.addEventListener("click", (ev) => {
             ev.preventDefault();
-            details = el.closest("details");
-            fieldset = details.querySelector("fieldset");
-            upDetails = details.previousElementSibling;
-            upFieldset = upDetails.querySelector("fieldset");
-            details.append(upFieldset);
-            upDetails.append(fieldset);
+            const details = el.closest("details");
+            details.previousElementSibling.before(details);
+        });
+    });
+
+    document.querySelectorAll(".down-block").forEach((el) => {
+        el.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            const details = el.closest("details");
+            details.nextElementSibling.after(details);
         });
     });
 });

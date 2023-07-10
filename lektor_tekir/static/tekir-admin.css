@@ -280,6 +280,11 @@ details {
   background-color: hsl(0, 0%, 60%);
 }
 
+details:first-of-type .up-block,
+details:last-of-type .down-block {
+  visibility: hidden;
+}
+
 /* FORMS */
 
 fieldset {

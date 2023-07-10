@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-10 21:35+0300\n"
+"POT-Creation-Date: 2023-07-10 21:53+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -63,27 +63,31 @@ msgstr "İçerik"
 msgid "Delete"
 msgstr "Sil"
 
-#: lektor_tekir/templates/tekir_content_edit.html:42
+#: lektor_tekir/templates/tekir_content_edit.html:41
 msgid "Move up"
 msgstr "Yukarı"
 
-#: lektor_tekir/templates/tekir_content_edit.html:68
+#: lektor_tekir/templates/tekir_content_edit.html:42
+msgid "Move down"
+msgstr "Aşağı"
+
+#: lektor_tekir/templates/tekir_content_edit.html:67
 msgid "Save"
 msgstr "Kaydet"
 
-#: lektor_tekir/templates/tekir_content_edit.html:70
+#: lektor_tekir/templates/tekir_content_edit.html:69
 msgid "Done"
 msgstr "Bitti"
 
-#: lektor_tekir/templates/tekir_content_edit.html:75
+#: lektor_tekir/templates/tekir_content_edit.html:74
 msgid "Close"
 msgstr "Kapat"
 
-#: lektor_tekir/templates/tekir_content_edit.html:80
+#: lektor_tekir/templates/tekir_content_edit.html:79
 msgid "Continue"
 msgstr "Devam et"
 
-#: lektor_tekir/templates/tekir_content_edit.html:81
+#: lektor_tekir/templates/tekir_content_edit.html:80
 msgid "Cancel"
 msgstr "Vazgeç"
 

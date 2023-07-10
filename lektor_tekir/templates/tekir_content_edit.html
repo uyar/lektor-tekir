@@ -38,9 +38,8 @@
       <summary>
         {{ block.flowblockmodel.name }}
         <button class="delete-block">{{ _('Delete') }}</button>
-        {% if block_index != 1 %}
         <button class="up-block">{{ _('Move up') }}</button>
-        {% endif %}
+        <button class="down-block">{{ _('Move down') }}</button>
       </summary>
       <fieldset>
         {% for block_field in block.flowblockmodel.fields %}
