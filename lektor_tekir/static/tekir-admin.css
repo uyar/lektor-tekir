@@ -203,7 +203,6 @@ section {
 section > h2 {
   margin-block-start: 0;
   color: var(--color);
-  font-size: 2em;
   font-weight: normal;
 }
 
@@ -230,10 +229,6 @@ details {
   border: none;
   border-bottom: 1px solid;
   border-radius: 0;
-}
-
-#tekir-page-count p {
-  font-size: 1.4em;
 }
 
 #tekir-page-count p {

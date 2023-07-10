@@ -1,48 +1,48 @@
 {% macro render_field(item, field, prefix) %}
   {% set field_name = prefix + field.name %}
-  {% set field_id = "field-" + field_name %}
+  {% set field_id = 'field-' + field_name %}
   {% set field_value = item[field.name] %}
   <div class="field">
     <label for="{{ field_id }}">{{ field.label }}</label>
-    {% if field.type.name == "datetime" %}
+    {% if field.type.name == 'datetime' %}
     <input type="datetime-local" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
-    {% elif field.type.name == "date" %}
+    {% elif field.type.name == 'date' %}
     <input type="date" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
-    {% elif field.type.name == "boolean" %}
+    {% elif field.type.name == 'boolean' %}
     <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}"
         {{ 'checked' if field_value else '' }} />
-    {% elif field.type.name == "select" %}
+    {% elif field.type.name == 'select' %}
     <select id="{{ field_id }}" name="{{ field_name }}">
       <option value="">----</option>
       {% for choice, label in field.type.source.iter_choices(pad, record) %}
       <option value="{{ choice }}"
-          {{ 'selected' if choice == field_value else '' }}>{{ label["en"] }}</option>
+          {{ 'selected' if choice == field_value else '' }}>{{ label['en'] }}</option>
       {% endfor %}
     </select>
-    {% elif field.type.name in ("string", "integer", "float", "url", "sort_key") %}
+    {% elif field.type.name in ('string', 'integer', 'float', 'url', 'sort_key') %}
     <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
-    {% elif field.type.name in ("text", "strings") %}
+    {% elif field.type.name in ('text', 'strings') %}
     <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10">{{ field_value }}</textarea>
-    {% elif field.type.name in ("markdown", "html") %}
+    {% elif field.type.name in ('markdown', 'html') %}
     <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code"
         data-content-type="{{ field.type.name }}">{{ field_value }}</textarea>
-    {% elif field.type.name == "rst" %}
+    {% elif field.type.name == 'rst' %}
     <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code">{{ field_value.source }}</textarea>
-    {% elif field.type.name == "flow" %}
+    {% elif field.type.name == 'flow' %}
       {% if field_value %}
         {% for block in field_value.blocks %}
           {% set block_index = loop.index %}
-    <details id="{{ "%s-%d" % (field_name, block_index) }}">
+    <details id="{{ '%s-%d' % (field_name, block_index) }}">
       <summary>
         {{ block.flowblockmodel.name }}
-        <button class="delete-block">{{ _("Delete") }}</button>
+        <button class="delete-block">{{ _('Delete') }}</button>
         {% if block_index != 1 %}
-        <button class="up-block">{{ _("Move up") }}</button>
+        <button class="up-block">{{ _('Move up') }}</button>
         {% endif %}
       </summary>
       <fieldset>
         {% for block_field in block.flowblockmodel.fields %}
-          {{ render_field(block, block_field, prefix="%s-%d-%s-" % (field_name, block_index, block.flowblockmodel.id)) }}
+          {{ render_field(block, block_field, prefix='%s-%d-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
         {% endfor %}
       </fieldset>
     </details>
@@ -52,81 +52,28 @@
   </div>
 {% endmacro %}
 
-{% extends "tekir_base.html" %}
+{% extends 'tekir_base.html' %}
 
 {% block body %}
-  <form class="tekir-content-edit" method="POST" action=".">
+  <form id="tekir-content-edit" action="." method="POST">
     {% for field in record.datamodel.fields %}
-      {{ render_field(record, field, prefix="") }}
+      {{ render_field(record, field, prefix='') }}
     {% endfor %}
 
-    <button id="report-open" hx-post="{{ url_for('tekir_admin_api.save_content', path=record.path, lang=g.lang_code) }}"
+    <button id="save-content" hx-post="{{ url_for('tekir_admin_api.save_content', path=record.path, lang=g.lang_code) }}"
         hx-target="#save-result">{{ _('Save') }}</button>
-    <button id="warning-open" hx-post="{{ url_for('tekir_admin_api.check_changes', path=record.path, lang=g.lang_code) }}"
-        hx-target="#check-changes">{{ _('Done') }}</button>
+    <button id="check-changes" hx-post="{{ url_for('tekir_admin_api.check_changes', path=record.path, lang=g.lang_code) }}"
+        hx-target="#changes-result">{{ _('Done') }}</button>
   </form>
 
-  <dialog id="report-dialog">
+  <dialog id="save-dialog">
     <p id="save-result"></p>
-    <button id="report-close">{{ _("Close") }}</button>
+    <button id="save-close">{{ _('Close') }}</button>
   </dialog>
 
-  <dialog id="warning-dialog">
-    <p id="check-changes"></p>
-    <button id="warning-continue">{{ _("Continue") }}</button>
-    <button id="warning-cancel">{{ _("Cancel") }}</button>
+  <dialog id="changes-dialog">
+    <p id="changes-result"></p>
+    <button id="changes-continue">{{ _('Continue') }}</button>
+    <button id="changes-cancel">{{ _('Cancel') }}</button>
   </dialog>
-
-  <script>
-    const reportDialog = document.getElementById("report-dialog");
-
-    document.getElementById("report-open").addEventListener("click", () => {
-        reportDialog.showModal();
-    });
-
-    document.getElementById("report-close").addEventListener("click", () => {
-        reportDialog.close();
-    });
-
-    const warningDialog = document.getElementById("warning-dialog");
-
-    document.getElementById("warning-open").addEventListener("click", () => {
-        warningDialog.showModal();
-    });
-
-    document.getElementById("warning-continue").addEventListener("click", () => {
-        warningDialog.close();
-        window.location.href = "{{ url_for('tekir_admin.contents', path=record.path) }}";
-    })
-
-    document.getElementById("warning-cancel").addEventListener("click", () => {
-        warningDialog.close();
-    });
-
-    document.querySelectorAll(".delete-block").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            details = el.closest("details");
-            if (details.querySelectorAll(".up-block").length == 0) {
-                summary = el.closest("summary");
-                downSummary = details.nextElementSibling.querySelector("summary");
-                downSummary.after(summary);
-                downSummary.remove();
-            }
-            details.remove();
-        });
-    });
-
-    document.querySelectorAll(".up-block").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            details = el.closest("details");
-            fieldset = details.querySelector("fieldset");
-            upDetails = details.previousElementSibling;
-            upFieldset = upDetails.querySelector("fieldset");
-            details.append(upFieldset);
-            upDetails.append(fieldset);
-        });
-    });
-  </script>
 {% endblock %}
