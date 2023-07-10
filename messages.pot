@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-10 03:25+0300\n"
+"POT-Creation-Date: 2023-07-10 21:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,19 +21,15 @@ msgstr ""
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:117
+#: lektor_tekir/api.py:118
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:129
+#: lektor_tekir/api.py:135
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:130
-msgid "Are you sure?"
-msgstr ""
-
-#: lektor_tekir/api.py:164
+#: lektor_tekir/api.py:173
 msgid "Deleted."
 msgstr ""
 
@@ -62,57 +58,57 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:38
+#: lektor_tekir/templates/tekir_content_edit.html:40
 msgid "Delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:40
+#: lektor_tekir/templates/tekir_content_edit.html:42
 msgid "Move up"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:64
+#: lektor_tekir/templates/tekir_content_edit.html:68
 msgid "Save"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:66
+#: lektor_tekir/templates/tekir_content_edit.html:70
 msgid "Done"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:71
+#: lektor_tekir/templates/tekir_content_edit.html:75
 msgid "Close"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:76
+#: lektor_tekir/templates/tekir_content_edit.html:80
 msgid "Continue"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:77
+#: lektor_tekir/templates/tekir_content_edit.html:81
 msgid "Cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:9
+#: lektor_tekir/templates/tekir_contents.html:5
 msgid "You are here:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:12
-#: lektor_tekir/templates/tekir_contents.html:14
+#: lektor_tekir/templates/tekir_contents.html:8
+#: lektor_tekir/templates/tekir_contents.html:10
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:21
+#: lektor_tekir/templates/tekir_contents.html:17
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:25
+#: lektor_tekir/templates/tekir_contents.html:21
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:36
+#: lektor_tekir/templates/tekir_contents.html:34
 #: lektor_tekir/templates/tekir_contents.html:52
 msgid "Delete selected items"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:41
+#: lektor_tekir/templates/tekir_contents.html:39
 msgid "Attachments"
 msgstr ""
 

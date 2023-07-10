@@ -194,14 +194,8 @@ main {
   padding: 3rem;
 }
 
-section {
-  padding: 1em;
-  border: 1px solid;
-  border-radius: 1rem;
-}
-
 section > h2 {
-  margin-block-start: 0;
+  margin-block: 0;
   color: var(--color);
   font-weight: normal;
 }
@@ -226,9 +220,7 @@ details {
 
 #tekir-page-count {
   max-width: min(20em, 50%);
-  border: none;
   border-bottom: 1px solid;
-  border-radius: 0;
 }
 
 #tekir-page-count p {
@@ -262,7 +254,7 @@ details {
 
 #tekir-contents {
   display: grid;
-  gap: 2em 1em;
+  gap: 3rem 2rem;
   grid-template-areas:
     "contents-summary  contents-summary"
     "contents-subpages contents-attachments";
@@ -281,12 +273,6 @@ details {
   grid-area: contents-attachments;
 }
 
-#tekir-summary,
-#tekir-subpages,
-#tekir-attachments {
-  padding: 2em;
-}
-
 #delete-items {
   max-height: 8.5em;
   padding: 1em 3em;
@@ -296,7 +282,11 @@ details {
 
 /* FORMS */
 
-button,
+fieldset {
+  margin-block: 0;
+  border: 0;
+}
+
 .field {
   margin-block: 1em;
 }

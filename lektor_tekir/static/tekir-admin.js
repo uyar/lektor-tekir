@@ -47,16 +47,15 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
 
     const changesDialog = document.getElementById("changes-dialog");
 
-    document.querySelectorAll("#check-changes").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            changesDialog.showModal();
-        });
+    document.body.addEventListener("showChanges", (ev) => {
+        changesDialog.showModal();
+        document.getElementById("changes-continue").setAttribute("data-href", ev.detail.href);
     });
 
     document.querySelectorAll("#changes-continue").forEach((el) => {
         el.addEventListener("click", (ev) => {
             changesDialog.close();
-            // window.location.href = "{{ url_for('tekir_admin.contents', path=record.path) }}";
+            window.location.href = el.dataset.href;
         })
     });
 

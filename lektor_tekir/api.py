@@ -6,7 +6,7 @@
 from pathlib import Path
 from shutil import rmtree
 
-from flask import Blueprint, g, request
+from flask import Blueprint, Response, g, request, url_for
 from flask_babel import gettext as _
 
 
@@ -113,8 +113,9 @@ def save_content():
     old_content = source.read_text()
     if content == old_content:
         return _("No changes.")
-    source.write_text(content)
-    return _("Content saved.")
+    else:
+        source.write_text(content)
+        return _("Content saved.")
 
 
 @bp.route("/check-changes", methods=["POST"])
@@ -123,11 +124,19 @@ def check_changes():
     path = request.args.get("path")
     node = g.admin_context.tree.get(path)
     content = get_content(node)
-    source = Path(node._primary_record.source_filename)
+    record = node._primary_record
+    source = Path(record.source_filename)
+    record_url = url_for("tekir_admin.contents", path=record.path)
     old_content = source.read_text()
-    if content != old_content:
-        return _("There are unsaved changes. Do you want to continue?")
-    return _("Are you sure?")
+    if content == old_content:
+        response = Response("")
+        response.headers["HX-Redirect"] = record_url
+    else:
+        message = _("There are unsaved changes. Do you want to continue?")
+        trigger = '{"showChanges": {"href": "%s"}}' % record_url
+        response = Response(message)
+        response.headers["HX-Trigger"] = trigger
+    return response
 
 
 @bp.route("/check-delete", methods=["POST"])

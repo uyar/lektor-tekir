@@ -4,6 +4,7 @@
   {% set field_value = item[field.name] %}
   <div class="field">
     <label for="{{ field_id }}">{{ field.label }}</label>
+
     {% if field.type.name == 'datetime' %}
     <input type="datetime-local" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
     {% elif field.type.name == 'date' %}
@@ -28,6 +29,7 @@
         data-content-type="{{ field.type.name }}">{{ field_value }}</textarea>
     {% elif field.type.name == 'rst' %}
     <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code">{{ field_value.source }}</textarea>
+
     {% elif field.type.name == 'flow' %}
       {% if field_value %}
         {% for block in field_value.blocks %}
@@ -56,9 +58,11 @@
 
 {% block body %}
   <form id="tekir-content-edit" action="." method="POST">
-    {% for field in record.datamodel.fields %}
-      {{ render_field(record, field, prefix='') }}
-    {% endfor %}
+    <fieldset>
+      {% for field in record.datamodel.fields %}
+        {{ render_field(record, field, prefix='') }}
+      {% endfor %}
+    </fieldset>
 
     <button id="save-content" hx-post="{{ url_for('tekir_admin_api.save_content', path=record.path, lang=g.lang_code) }}"
         hx-target="#save-result">{{ _('Save') }}</button>
