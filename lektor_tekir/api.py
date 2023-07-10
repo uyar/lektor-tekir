@@ -3,7 +3,6 @@
 # lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
-import re
 from pathlib import Path
 from shutil import rmtree
 
@@ -14,15 +13,12 @@ from flask_babel import gettext as _
 MULTILINE = {"text", "strings", "markdown", "html", "rst", "flow"}
 
 
-_re_contents = re.compile(r"contents(\+(\w+))?\.lr")
-
-
 bp = Blueprint("tekir_admin_api", __name__, url_prefix="/tekir-admin/api")
 
 
 @bp.route("/page-count")
 def page_count():
-    root_path = Path(g.admin_context.pad.env.root_path)
+    root_path = Path(g.admin_context.pad.root.source_filename).parent
     pages = {c.parent for c in root_path.glob("**/contents*.lr")}
     return str(len(pages))
 
@@ -134,42 +130,35 @@ def check_changes():
     return _("Are you sure?")
 
 
-@bp.route("/check-delete")
+@bp.route("/check-delete", methods=["POST"])
 def check_delete():
     g.lang_code = request.args.get("lang", "en")
-    path = request.args.get("path")
-    root_path = Path(g.admin_context.pad.env.root_path)
-    record = g.admin_context.tree.get(path)._primary_record
-    if record.is_attachment:
-        return f"<li>{record.path[1:]}</li>"
-    else:
-        item_dir = Path(record.source_filename).parent
-        result = []
-        for item in item_dir.glob("**/*"):
-            if item.is_file():
-                contents_file = _re_contents.match(item.name)
-                if contents_file:
-                    parent_path = item.parent.relative_to(root_path)
-                    lang = contents_file.group(2)
-                    if lang is None:
-                        item_path = f"{parent_path}"
-                    else:
-                        item_path = f"{parent_path} ({lang})"
-                else:
+    items = request.form.getlist("selected-items")
+    root_path = Path(g.admin_context.pad.root.source_filename).parent
+    result = []
+    for path in items:
+        record = g.admin_context.tree.get(path)._primary_record
+        if record.is_attachment:
+            result.append(record.path[1:])
+        else:
+            item_dir = Path(record.source_filename).parent
+            for item in item_dir.glob("**/*"):
+                if item.is_file():
                     item_path = str(item.relative_to(root_path))
-                result.append(item_path)
-        return "\n".join(f"<li>{p}</li>" for p in sorted(result))
+                    result.append(item_path)
+    return "\n".join(f'<li>{p}</li>' for p in sorted(result))
 
 
-@bp.route("/delete-content")
+@bp.route("/delete-content", methods=["POST"])
 def delete_content():
     g.lang_code = request.args.get("lang", "en")
-    path = request.args.get("path")
-    record = g.admin_context.tree.get(path)._primary_record
-    if record.is_attachment:
-        filename = record.source_filename.rstrip(".lr")
-        Path(filename).unlink()
-    else:
-        dirname = Path(record.source_filename).parent
-        rmtree(dirname)
+    items = request.form.getlist("selected-items")
+    for path in items:
+        record = g.admin_context.tree.get(path)._primary_record
+        if record.is_attachment:
+            filename = record.source_filename.rstrip(".lr")
+            Path(filename).unlink()
+        else:
+            item_dir = Path(record.source_filename).parent
+            rmtree(item_dir)
     return _("Deleted.")

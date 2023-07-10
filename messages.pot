@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-09 21:39+0300\n"
+"POT-Creation-Date: 2023-07-10 03:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: lektor_tekir/api.py:162
+#: lektor_tekir/api.py:164
 msgid "Deleted."
 msgstr ""
 
@@ -63,8 +63,6 @@ msgid "Content"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:38
-#: lektor_tekir/templates/tekir_contents.html:31
-#: lektor_tekir/templates/tekir_contents.html:44
 msgid "Delete"
 msgstr ""
 
@@ -109,23 +107,28 @@ msgstr ""
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:38
+#: lektor_tekir/templates/tekir_contents.html:36
+#: lektor_tekir/templates/tekir_contents.html:52
+msgid "Delete selected items"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:41
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:52
+#: lektor_tekir/templates/tekir_contents.html:59
 msgid "This operation will delete the following content items:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/templates/tekir_contents.html:61
 msgid "Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:55
+#: lektor_tekir/templates/tekir_contents.html:62
 msgid "Yes, delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:56
+#: lektor_tekir/templates/tekir_contents.html:63
 msgid "No, cancel"
 msgstr ""
 
