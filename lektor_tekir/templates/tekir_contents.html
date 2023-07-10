@@ -14,22 +14,20 @@
 <div id="tekir-contents">
   <section id="tekir-summary">
     <h2>{{ record.title }}</h2>
-    <a href="{{ url_for('tekir_admin.edit_content', path=record.path) }}">{{ _("Edit") }}</a>
+    <a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path) }}">{{ _("Edit") }}</a>
   </section>
 
   <section id="tekir-subpages">
     <h2>{{ _("Subpages") }}</h2>
     <form id="delete-subpages" action="." method="POST">
-      <fieldset>
-        <table>
-          {% for item in record.children %}
-          <tr>
-            <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
-            <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item["title"] }}</a></td>
-          </tr>
-          {% endfor %}
-        </table>
-      </fieldset>
+      <table class="field">
+        {% for item in record.children %}
+        <tr>
+          <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
+          <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item["title"] }}</a></td>
+        </tr>
+        {% endfor %}
+      </table>
       <button class="delete-content" hx-post="{{ url_for('tekir_admin_api.check_delete') }}"
           hx-target="#delete-items">{{ _('Delete selected items') }}</button>
     </form>
@@ -38,16 +36,14 @@
   <section id="tekir-attachments">
     <h2>{{ _("Attachments") }}</h2>
     <form id="delete-attachments" action="." method="POST">
-      <fieldset>
-        <table>
-          {% for item in record.attachments %}
-          <tr>
-            <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
-            <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
-          </tr>
-          {% endfor %}
-        </table>
-      </fieldset>
+      <table class="field">
+        {% for item in record.attachments %}
+        <tr>
+          <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
+          <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
+        </tr>
+        {% endfor %}
+      </table>
       <button class="delete-content" hx-post="{{ url_for('tekir_admin_api.check_delete') }}"
           hx-target="#delete-items">{{ _('Delete selected items') }}</button>
     </form>
