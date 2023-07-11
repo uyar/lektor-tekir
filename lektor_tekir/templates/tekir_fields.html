@@ -1,0 +1,55 @@
+{% macro render_field(record, item, field, prefix) %}
+  {% set field_name = prefix + field.name %}
+  {% set field_id = 'field-' + field_name %}
+  {% set field_value = item[field.name] %}
+  <div class="field">
+    <label for="{{ field_id }}">{{ field.label }}</label>
+
+    {% if field.type.name == 'datetime' %}
+    <input type="datetime-local" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
+    {% elif field.type.name == 'date' %}
+    <input type="date" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
+    {% elif field.type.name == 'boolean' %}
+    <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}" {{ 'checked' if field_value else '' }} />
+    {% elif field.type.name == 'select' %}
+    <select id="{{ field_id }}" name="{{ field_name }}">
+      <option value="">----</option>
+      {% for choice, label in field.type.source.iter_choices(pad, record) %}
+      <option value="{{ choice }}" {{ 'selected' if choice == field_value else '' }}>{{ label['en'] }}</option>
+      {% endfor %}
+    </select>
+    {% elif field.type.name in ('string', 'integer', 'float', 'url', 'sort_key') %}
+    <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
+    {% elif field.type.name in ('text', 'strings') %}
+    <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10">{{ field_value }}</textarea>
+    {% elif field.type.name in ('markdown', 'html') %}
+    <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code"
+        data-content-type="{{ field.type.name }}">{{ field_value }}</textarea>
+    {% elif field.type.name == 'rst' %}
+    <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code">{{ field_value.source }}</textarea>
+
+    {% elif field.type.name == 'flow' %}
+      {% if field_value %}
+        {% for block in field_value.blocks %}
+          {{ render_flowblock(record, block, field_name, loop.index) }}
+        {% endfor %}
+      {% endif %}
+    <button hx-get="{{ url_for('tekir_admin_api.new_flowblock', lang=g.lang_code, flow_type='slide', path=record.path) }}"
+        hx-swap="beforebegin">{{ _('Add') }}</button>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro render_flowblock(record, block, field_name, block_index, open=False) %}
+<details id="{{ '%s-%d' % (field_name, block_index)}}" {{ 'open' if open else '' }}>
+  <summary>
+    {{ block.flowblockmodel.name }}
+    <button class="delete-block">{{ _('Delete') }}</button>
+    <button class="up-block">{{ _('Move up') }}</button>
+    <button class="down-block">{{ _('Move down') }}</button>
+  </summary>
+  {% for block_field in block.flowblockmodel.fields %}
+    {{ render_field(record, block, block_field, prefix='%s-%d-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
+  {% endfor %}
+</details>
+{% endmacro %}

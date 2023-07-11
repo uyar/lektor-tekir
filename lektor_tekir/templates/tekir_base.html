@@ -40,7 +40,7 @@
     </ul>
   </nav>
 
-  <main>
+  <main class="{{ self._TemplateReference__context.name.split('.')[0] }}">
     {% block body %}{% endblock %}
   </main>
 </body>

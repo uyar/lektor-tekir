@@ -1,92 +1,52 @@
 window.addEventListener("DOMContentLoaded", (loadEvent) => {
+    document.querySelector("main").addEventListener("click", (ev) => {
+        const el = ev.target;
+        const main = el.closest("main");
 
-    /* confirming deletes */
+        if (main.classList.contains("tekir_contents")) {
+            const deleteDialog = document.getElementById("delete-confirm");
+            if (el.classList.contains("delete-content")) {
+                document.getElementById("delete-continue").setAttribute("hx-include", "#" + el.closest("form").id);
+                deleteDialog.showModal();
+            } else if (el.id == "delete-continue") {
+                const formId = el.getAttribute("hx-include");
+                document.querySelector(formId).querySelectorAll("input:checked").forEach((checkbox) => {
+                    checkbox.closest("tr").remove();
+                });
+                deleteDialog.close();
+            } else if (el.id == "delete-cancel") {
+                deleteDialog.close();
+            }
+        }
 
-    const deleteDialog = document.getElementById("delete-confirm");
-
-    document.querySelectorAll(".delete-content").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            document.getElementById("delete-continue").setAttribute("hx-include", "#" + el.closest("form").id);
-            deleteDialog.showModal();
-        });
+        if (main.classList.contains("tekir_content_edit")) {
+            const details = el.closest("details");
+            if (details) {  // flowblock-related event
+                ev.preventDefault();
+            }
+            const saveDialog = document.getElementById("save-dialog");
+            const changesDialog = document.getElementById("changes-dialog");
+            if (el.id == "save-content") {
+                saveDialog.showModal();
+            } else if (el.id == "save-close") {
+                saveDialog.close();
+            } else if (el.id == "changes-continue") {
+                changesDialog.close();
+                window.location.href = el.dataset.href;
+            } else if (el.id == "changes-cancel") {
+                changesDialog.close();
+            } else if (el.classList.contains("delete-block")) {
+                details.remove();
+            } else if (el.classList.contains("up-block")) {
+                details.previousElementSibling.before(details);
+            } else if (el.classList.contains("down-block")) {
+                details.nextElementSibling.after(details);
+            }
+            }
     });
-
-    document.querySelectorAll("#delete-continue").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            const formId = el.getAttribute("hx-include");
-            document.querySelector(formId).querySelectorAll("input:checked").forEach((checkbox) => {
-                checkbox.closest("tr").remove();
-            });
-            deleteDialog.close();
-        });
-    });
-
-    document.querySelectorAll("#delete-cancel").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            deleteDialog.close();
-        });
-    });
-
-    /* saving content and checking for unsaved changes */
-
-    const saveDialog = document.getElementById("save-dialog");
-
-    document.querySelectorAll("#save-content").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            saveDialog.showModal();
-        });
-    });
-
-    document.querySelectorAll("#save-close").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            saveDialog.close();
-        });
-    });
-
-    const changesDialog = document.getElementById("changes-dialog");
 
     document.body.addEventListener("showChanges", (ev) => {
-        changesDialog.showModal();
+        document.getElementById("changes-dialog").showModal();
         document.getElementById("changes-continue").setAttribute("data-href", ev.detail.href);
-    });
-
-    document.querySelectorAll("#changes-continue").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            changesDialog.close();
-            window.location.href = el.dataset.href;
-        })
-    });
-
-    document.querySelectorAll("#changes-cancel").forEach((el) => {
-        el.addEventListener("click", () => {
-            changesDialog.close();
-        });
-    });
-
-    /* deleting and ordering flow blocks */
-
-    document.querySelectorAll(".delete-block").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            el.closest("details").remove();
-        });
-    });
-
-    document.querySelectorAll(".up-block").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            const details = el.closest("details");
-            details.previousElementSibling.before(details);
-        });
-    });
-
-    document.querySelectorAll(".down-block").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            const details = el.closest("details");
-            details.nextElementSibling.after(details);
-        });
     });
 });

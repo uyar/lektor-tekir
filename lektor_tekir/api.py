@@ -6,8 +6,9 @@
 from pathlib import Path
 from shutil import rmtree
 
-from flask import Blueprint, Response, g, request, url_for
+from flask import Blueprint, Response, g, render_template, request, url_for
 from flask_babel import gettext as _
+from lektor.types.flow import FlowBlock
 
 
 MULTILINE = {"text", "strings", "markdown", "html", "rst", "flow"}
@@ -171,3 +172,15 @@ def delete_content():
             item_dir = Path(record.source_filename).parent
             rmtree(item_dir)
     return _("Deleted.")
+
+
+@bp.route("/new-flowblock")
+def new_flowblock():
+    g.lang_code = request.args.get("lang", "en")
+    flow_type = request.args.get("flow_type")
+    path = request.args.get("path")
+    record = g.admin_context.tree.get(path)._primary_record
+    block = FlowBlock(data={"_flowblock": flow_type}, pad=g.admin_context.pad,
+                      record=record)
+    return render_template("tekir_flowblock.html", record=record, block=block,
+                           field_name="slides", block_index=666, open=True)

@@ -51,12 +51,10 @@
 </div>
 
 <dialog id="delete-confirm">
-  <form action="." method="POST">
-    <p>{{ _('This operation will delete the following content items:') }}</p>
-    <ol id="delete-items"></ol>
-    <p>{{ _('Do you want to continue?') }}</p>
-    <button id="delete-continue" hx-swap="none" hx-post="{{ url_for('tekir_admin_api.delete_content', lang=g.lang_code) }}">{{ _('Yes, delete') }}</button>
-    <button id="delete-cancel">{{ _('No, cancel') }}</button>
-  </form>
+  <p>{{ _('This operation will delete the following content items:') }}</p>
+  <ol id="delete-items"></ol>
+  <p>{{ _('Do you want to continue?') }}</p>
+  <button id="delete-continue" hx-swap="none" hx-post="{{ url_for('tekir_admin_api.delete_content', lang=g.lang_code) }}">{{ _('Yes, delete') }}</button>
+  <button id="delete-cancel">{{ _('No, cancel') }}</button>
 </dialog>
 {% endblock %}
