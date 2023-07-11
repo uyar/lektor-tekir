@@ -21,9 +21,6 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
 
         if (main.classList.contains("tekir_content_edit")) {
             const details = el.closest("details");
-            if (details) {  // flowblock-related event
-                ev.preventDefault();
-            }
             const saveDialog = document.getElementById("save-dialog");
             const changesDialog = document.getElementById("changes-dialog");
             if (el.id == "save-content") {
@@ -36,13 +33,16 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             } else if (el.id == "changes-cancel") {
                 changesDialog.close();
             } else if (el.classList.contains("delete-block")) {
+                ev.preventDefault();
                 details.remove();
             } else if (el.classList.contains("up-block")) {
+                ev.preventDefault();
                 details.previousElementSibling.before(details);
             } else if (el.classList.contains("down-block")) {
+                ev.preventDefault();
                 details.nextElementSibling.after(details);
             }
-            }
+        }
     });
 
     document.body.addEventListener("showChanges", (ev) => {
