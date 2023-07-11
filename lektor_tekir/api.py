@@ -53,7 +53,7 @@ def flowblock_entry(node, field):
     if len(block_data) == 0:
         return None
     block_indexes = []
-    for i in [int(k.split("-")[1]) for k in block_data]:
+    for i in [k.split("-")[1] for k in block_data]:
         if i not in block_indexes:
             block_indexes.append(i)
     entries = []
@@ -184,6 +184,6 @@ def new_flowblock():
     record = g.admin_context.tree.get(path)._primary_record
     block = FlowBlock(data={"_flowblock": flow_type}, pad=g.admin_context.pad,
                       record=record)
-    return render_template("tekir_flowblock.html", record=record, block=block,
+    return render_template("tekir_flowblock.html", block=block,
                            field_name=field_name, block_index=uuid4().hex,
                            open=True)

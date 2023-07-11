@@ -1,4 +1,5 @@
-{% macro render_field(record, item, field, prefix) %}
+{% macro render_field(item, field, prefix) %}
+  {% set record = item.record or item %}
   {% set field_name = prefix + field.name %}
   {% set field_id = 'field-' + field_name %}
   {% set field_value = item[field.name] %}
@@ -31,7 +32,7 @@
     {% elif field.type.name == 'flow' %}
       {% if field_value %}
         {% for block in field_value.blocks %}
-          {{ render_flowblock(record, block, field_name, loop.index) }}
+          {{ render_flowblock(block, field_name, loop.index) }}
         {% endfor %}
       {% endif %}
 
@@ -44,7 +45,7 @@
   </div>
 {% endmacro %}
 
-{% macro render_flowblock(record, block, field_name, block_index, open=False) %}
+{% macro render_flowblock(block, field_name, block_index, open=False) %}
 <details id="{{ '%s-%s' % (field_name, block_index)}}" {{ 'open' if open else '' }}>
   <summary>
     {{ block.flowblockmodel.name }}
@@ -53,7 +54,7 @@
     <button class="down-block">{{ _('Move down') }}</button>
   </summary>
   {% for block_field in block.flowblockmodel.fields %}
-    {{ render_field(record, block, block_field, prefix='%s-%s-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
+    {{ render_field(block, block_field, prefix='%s-%s-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
   {% endfor %}
 </details>
 {% endmacro %}
