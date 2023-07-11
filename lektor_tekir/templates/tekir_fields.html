@@ -34,14 +34,18 @@
           {{ render_flowblock(record, block, field_name, loop.index) }}
         {% endfor %}
       {% endif %}
-    <button hx-get="{{ url_for('tekir_admin_api.new_flowblock', lang=g.lang_code, flow_type='slide', path=record.path) }}"
-        hx-swap="beforebegin">{{ _('Add') }}</button>
+
+      <span id="add-block">{{ _('Add') }}</span>
+      {% for flow_type in field.type.flow_blocks %}
+      <button hx-get="{{ url_for('tekir_admin_api.new_flowblock', lang=g.lang_code, flow_type=flow_type, field_name=field_name, path=record.path) }}"
+          hx-target="#add-block" hx-swap="beforebegin">{{ record.pad.db.flowblocks[flow_type].button_label }}</button>
+      {% endfor %}
     {% endif %}
   </div>
 {% endmacro %}
 
 {% macro render_flowblock(record, block, field_name, block_index, open=False) %}
-<details id="{{ '%s-%d' % (field_name, block_index)}}" {{ 'open' if open else '' }}>
+<details id="{{ '%s-%s' % (field_name, block_index)}}" {{ 'open' if open else '' }}>
   <summary>
     {{ block.flowblockmodel.name }}
     <button class="delete-block">{{ _('Delete') }}</button>
@@ -49,7 +53,7 @@
     <button class="down-block">{{ _('Move down') }}</button>
   </summary>
   {% for block_field in block.flowblockmodel.fields %}
-    {{ render_field(record, block, block_field, prefix='%s-%d-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
+    {{ render_field(record, block, block_field, prefix='%s-%s-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
   {% endfor %}
 </details>
 {% endmacro %}
