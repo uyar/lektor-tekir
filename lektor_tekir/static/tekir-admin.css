@@ -333,6 +333,11 @@ a.button {
   text-decoration: none;
 }
 
+.new-block {
+  padding: 0.5rem 1rem;
+  outline: 0.125rem dashed red;
+}
+
 .add-block {
   margin-block-start: 2em;
 }

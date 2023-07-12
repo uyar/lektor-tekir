@@ -182,8 +182,7 @@ def new_flowblock():
     field_name = request.args.get("field_name")
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
-    block = FlowBlock(data={"_flowblock": flow_type}, pad=g.admin_context.pad,
+    block = FlowBlock(data={"_flowblock": flow_type}, pad=record.pad,
                       record=record)
     return render_template("tekir_flowblock.html", block=block,
-                           field_name=field_name, block_index=uuid4().hex,
-                           open=True)
+                           field_name=field_name, block_index=uuid4().hex)
