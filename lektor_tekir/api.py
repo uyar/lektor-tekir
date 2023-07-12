@@ -185,4 +185,5 @@ def new_flowblock():
     block = FlowBlock(data={"_flowblock": flow_type}, pad=record.pad,
                       record=record)
     return render_template("tekir_flowblock.html", block=block,
-                           field_name=field_name, block_index=uuid4().hex)
+                           field_name=field_name,
+                           block_index=f"uuid_{uuid4().hex}")

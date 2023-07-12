@@ -50,7 +50,7 @@
 {% endmacro %}
 
 {% macro render_flowblock(block, field_name, block_index) %}
-{% set new_block = not(block_index.isdigit()) %}
+{% set new_block = block_index.startswith('uuid_') %}
 <details id="{{ '%s-%s' % (field_name, block_index)}}" {{ 'class=new-block' if new_block else '' }} {{ 'open' if new_block else '' }}>
   <summary>
     {{ block.flowblockmodel.name }}

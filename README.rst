@@ -12,7 +12,7 @@ What -sort of- works, hopefully:
 - Deleting content.
 - Deleting attachments.
 - Multiple language support in the UI (English and Turkish at the moment).
-- Basic dark mode.
+- Light/dark mode toggle.
 
 What's planned in the short term:
 
