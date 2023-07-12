@@ -360,6 +360,7 @@ a.button {
     --color-link: var(--color-link-dark);
   }
 
+  dialog,
   input {
     color-scheme: dark;
   }
