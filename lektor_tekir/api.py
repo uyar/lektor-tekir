@@ -9,7 +9,9 @@ from uuid import uuid4
 
 from flask import Blueprint, Response, g, render_template, request, url_for
 from flask_babel import gettext as _
+from lektor.db import Page
 from lektor.types.flow import FlowBlock
+from slugify import slugify
 
 
 MULTILINE = {"text", "strings", "markdown", "html", "rst", "flow"}
@@ -182,8 +184,27 @@ def new_flowblock():
     field_name = request.args.get("field_name")
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
-    block = FlowBlock(data={"_flowblock": flow_type}, pad=record.pad,
-                      record=record)
+    data = {"_flowblock": flow_type}
+    block = FlowBlock(data=data, pad=record.pad, record=record)
+    uuid_index = uuid4().hex
     return render_template("tekir_flowblock.html", block=block,
                            field_name=field_name,
-                           block_index=f"uuid_{uuid4().hex}")
+                           block_index=f"uuid_{uuid_index}")
+
+
+@bp.route("/new-content")
+def new_content():
+    g.lang_code = request.args.get("lang", "en")
+    pad = g.admin_context.pad
+    model = request.args.get("model")
+    parent = request.args.get("parent")
+    title = request.args.get("title", uuid4().hex)
+    slug = request.args.get("slug", slugify(title))
+    data = {
+        "_model": model,
+        "_slug": slug,
+        "_path": f"{parent}/{slug}",
+        "_alt": pad.root.alt,
+    }
+    record = Page(data=data, pad=pad)
+    return render_template("tekir_content_edit.html", record=record)
