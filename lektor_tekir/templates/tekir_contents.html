@@ -42,6 +42,8 @@
       <button class="delete-content" hx-post="{{ url_for('tekir_admin_api.check_delete') }}"
           hx-target="#delete-items">{{ _('Delete selected items') }}</button>
     </form>
+    {% else %}
+    <p>{{ _('No subpages.') }}</p>
     {% endif %}
 
     <button id="add-subpage">{{ _('Add') }}</button>
@@ -70,6 +72,8 @@
       <button class="delete-content" hx-post="{{ url_for('tekir_admin_api.check_delete') }}"
           hx-target="#delete-items">{{ _('Delete selected items') }}</button>
     </form>
+    {% else %}
+    <p>{{ _('No attachments.') }}</p>
     {% endif %}
   </section>
 </div>
