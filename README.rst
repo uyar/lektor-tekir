@@ -9,6 +9,7 @@ What -sort of- works, hopefully:
 
 - Navigating existing content.
 - Editing existing content.
+- Adding new content.
 - Deleting content.
 - Deleting attachments.
 - Multiple language support in the UI (English and Turkish at the moment).
@@ -16,7 +17,6 @@ What -sort of- works, hopefully:
 
 What's planned in the short term:
 
-- Adding new content.
 - Adding attachments.
 - Editing system fields.
 - Dividing edit form fields into tabs.

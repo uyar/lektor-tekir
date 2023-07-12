@@ -46,7 +46,7 @@
       <div class="add-block" id="{{ field_name }}-add-block">
         <span class="add-button">{{ _('Add') }}</span>
         {% set block_models = record.pad.db.flowblocks %}
-        {% for flow_type in (field.type.flow_blocks or block_models ) %}
+        {% for flow_type in (field.type.flow_blocks or block_models) %}
         <button hx-get="{{ url_for('tekir_admin_api.new_flowblock', lang=g.lang_code, flow_type=flow_type, field_name=field_name, path=record.path) }}"
             hx-target="#{{ field_name }}-add-block" hx-swap="beforebegin">{{ block_models[flow_type].name_i18n.get(g.lang_code) or block_models[flow_type].name }}</button>
         {% endfor %}
@@ -58,7 +58,7 @@
 
 {% macro render_flowblock(block, field_name, block_index) %}
 {% set new_block = block_index.startswith('uuid_') %}
-<details id="{{ '%s-%s' % (field_name, block_index)}}" {{ 'class=new-block' if new_block else '' }} {{ 'open' if new_block else '' }}>
+<details id="{{ '%s-%s' % (field_name, block_index) }}" {{ 'class=new-block' if new_block else '' }} {{ 'open' if new_block else '' }}>
   <summary>
     {{ block.flowblockmodel.name_i18n.get(g.lang_code) or block.flowblockmodel.name }}
     <button class="delete-block">{{ _('Delete') }}</button>

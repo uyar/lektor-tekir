@@ -9,7 +9,7 @@ from uuid import uuid4
 
 from flask import Blueprint, Response, g, render_template, request, url_for
 from flask_babel import gettext as _
-from lektor.db import Page
+from lektor.db import Record
 from lektor.types.flow import FlowBlock
 from slugify import slugify
 
@@ -192,19 +192,27 @@ def new_flowblock():
                            block_index=f"uuid_{uuid_index}")
 
 
-@bp.route("/new-content")
+@bp.route("/new-content", methods=["POST"])
 def new_content():
     g.lang_code = request.args.get("lang", "en")
-    pad = g.admin_context.pad
-    model = request.args.get("model")
     parent = request.args.get("parent")
-    title = request.args.get("title", uuid4().hex)
-    slug = request.args.get("slug", slugify(title))
+    model = request.form.get("model")
+    title = request.form.get("title", uuid4().hex)
+    slug = request.form.get("slug") or slugify(title)
+    path = f"{parent}/{slug}"
+    pad = g.admin_context.pad
     data = {
         "_model": model,
         "_slug": slug,
-        "_path": f"{parent}/{slug}",
+        "_path": path,
         "_alt": pad.root.alt,
     }
-    record = Page(data=data, pad=pad)
-    return render_template("tekir_content_edit.html", record=record)
+    record = Record(data=data, pad=pad)
+    source_path = Path(pad.db.to_fs_path(record.path))
+    source_path.mkdir()
+    contents_file = source_path / "contents.lr"
+    contents_file.write_text(f"title: {title}\n")
+    response = Response("")
+    record_url = url_for("tekir_admin.edit_content", path=path)
+    response.headers["HX-Redirect"] = record_url
+    return response

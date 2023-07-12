@@ -43,6 +43,30 @@
           hx-target="#delete-items">{{ _('Delete selected items') }}</button>
     </form>
     {% endif %}
+
+    <form id="add-subpage" action="." method="POST">
+      <div class="field">
+        <label for="field-model">{{ _('Content Type') }}</label>
+        <select id="field-model" name="model">
+          {% set content_models = record.pad.db.datamodels %}
+          {% for model in content_models %}
+          <option value="{{ model }}">{{ content_models[model].name_i18n.get(g.lang_code) or content_models[model].name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="field-title">{{ _('Title') }}</label>
+        <input type="text" id="field-title" name="title"/>
+      </div>
+
+      <div class="field">
+        <label for="field-slug">{{ _('ID') }}</label>
+        <input type="text" id="field-slug" name="slug"/>
+      </div>
+
+      <button hx-post="{{ url_for('tekir_admin_api.new_content', lang=g.lang_code, parent=record.path) }}">{{ _('Add') }}</button>
+    </form>
   </section>
 
   <section id="tekir-attachments">

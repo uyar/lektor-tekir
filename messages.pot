@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-12 23:06+0300\n"
+"POT-Creation-Date: 2023-07-13 01:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:117
+#: lektor_tekir/api.py:119
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:120
+#: lektor_tekir/api.py:122
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:137
+#: lektor_tekir/api.py:139
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:175
+#: lektor_tekir/api.py:177
 msgid "Deleted."
 msgstr ""
 
@@ -96,11 +96,12 @@ msgid "Subpages"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:27
-#: lektor_tekir/templates/tekir_contents.html:55
+#: lektor_tekir/templates/tekir_contents.html:79
 msgid "Select"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:28
+#: lektor_tekir/templates/tekir_contents.html:59
 msgid "Title"
 msgstr ""
 
@@ -109,36 +110,45 @@ msgid "Type"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:43
-#: lektor_tekir/templates/tekir_contents.html:69
+#: lektor_tekir/templates/tekir_contents.html:93
 msgid "Delete selected items"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:49
+msgid "Content Type"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:64
+msgid "ID"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:68
+#: lektor_tekir/templates/tekir_fields.html:47
+msgid "Add"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:73
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:56
+#: lektor_tekir/templates/tekir_contents.html:80
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:76
+#: lektor_tekir/templates/tekir_contents.html:100
 msgid "This operation will delete the following content items:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:78
+#: lektor_tekir/templates/tekir_contents.html:102
 msgid "Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:79
+#: lektor_tekir/templates/tekir_contents.html:103
 msgid "Yes, delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:80
+#: lektor_tekir/templates/tekir_contents.html:104
 msgid "No, cancel"
-msgstr ""
-
-#: lektor_tekir/templates/tekir_fields.html:47
-msgid "Add"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_fields.html:64
