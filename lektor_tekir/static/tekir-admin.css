@@ -217,7 +217,7 @@ td {
 }
 
 details {
-  padding: 0.5rem 1rem;
+  margin: 1em 0;
 }
 
 /* CUSTOM */
@@ -331,6 +331,14 @@ a.button {
 
 a.button {
   text-decoration: none;
+}
+
+.add-block {
+  margin-block-start: 2em;
+}
+
+.add-button {
+  margin-inline-end: 1em;
 }
 
 /* MEDIA QUERIES */
