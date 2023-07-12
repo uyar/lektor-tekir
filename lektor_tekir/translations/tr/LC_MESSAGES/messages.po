@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-12 16:06+0300\n"
+"POT-Creation-Date: 2023-07-12 23:06+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -96,44 +96,61 @@ msgstr "Düzenle"
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir/templates/tekir_contents.html:32
-#: lektor_tekir/templates/tekir_contents.html:48
+#: lektor_tekir/templates/tekir_contents.html:27
+#: lektor_tekir/templates/tekir_contents.html:55
+msgid "Select"
+msgstr "Seç"
+
+#: lektor_tekir/templates/tekir_contents.html:28
+msgid "Title"
+msgstr "Başlık"
+
+#: lektor_tekir/templates/tekir_contents.html:29
+msgid "Type"
+msgstr "Tip"
+
+#: lektor_tekir/templates/tekir_contents.html:43
+#: lektor_tekir/templates/tekir_contents.html:69
 msgid "Delete selected items"
 msgstr "Seçilenleri sil"
 
-#: lektor_tekir/templates/tekir_contents.html:37
+#: lektor_tekir/templates/tekir_contents.html:49
 msgid "Attachments"
 msgstr "Ekler"
 
-#: lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/templates/tekir_contents.html:56
+msgid "File name"
+msgstr "Dosya adı"
+
+#: lektor_tekir/templates/tekir_contents.html:76
 msgid "This operation will delete the following content items:"
 msgstr "Bu işlem aşağıdaki içerik unsurlarını silecek:"
 
-#: lektor_tekir/templates/tekir_contents.html:56
+#: lektor_tekir/templates/tekir_contents.html:78
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: lektor_tekir/templates/tekir_contents.html:57
+#: lektor_tekir/templates/tekir_contents.html:79
 msgid "Yes, delete"
 msgstr "Evet, sil"
 
-#: lektor_tekir/templates/tekir_contents.html:58
+#: lektor_tekir/templates/tekir_contents.html:80
 msgid "No, cancel"
 msgstr "Hayır, vazgeç"
 
-#: lektor_tekir/templates/tekir_fields.html:41
+#: lektor_tekir/templates/tekir_fields.html:47
 msgid "Add"
 msgstr "Ekle"
 
-#: lektor_tekir/templates/tekir_fields.html:57
+#: lektor_tekir/templates/tekir_fields.html:64
 msgid "Delete"
 msgstr "Sil"
 
-#: lektor_tekir/templates/tekir_fields.html:58
+#: lektor_tekir/templates/tekir_fields.html:65
 msgid "Move up"
 msgstr "Yukarı"
 
-#: lektor_tekir/templates/tekir_fields.html:59
+#: lektor_tekir/templates/tekir_fields.html:66
 msgid "Move down"
 msgstr "Aşağı"
 

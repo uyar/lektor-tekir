@@ -76,6 +76,10 @@ table {
   border-collapse: collapse;
 }
 
+th {
+  text-align: start;
+}
+
 input,
 button,
 textarea,
@@ -212,6 +216,7 @@ section > *:last-child {
   margin-block-end: 0;
 }
 
+th,
 td {
   padding: 0.25rem 0.5em;
 }

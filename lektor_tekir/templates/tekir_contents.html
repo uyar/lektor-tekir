@@ -19,34 +19,56 @@
 
   <section id="tekir-subpages">
     <h2>{{ _('Subpages') }}</h2>
+    {% if record.children %}
     <form id="delete-subpages" action="." method="POST">
       <table class="field">
-        {% for item in record.children %}
-        <tr>
-          <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
-          <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item['title'] }}</a></td>
-        </tr>
-        {% endfor %}
+        <thead>
+          <tr>
+            <th>{{ _('Select') }}</th>
+            <th>{{ _('Title') }}</th>
+            <th>{{ _('Type') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in record.children %}
+          <tr>
+            <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
+            <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item['title'] or item._slug }}</a></td>
+            <td>{{ item.datamodel.name_i18n.get(g.lang_code, item.datamodel.name) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
       <button class="delete-content" hx-post="{{ url_for('tekir_admin_api.check_delete') }}"
           hx-target="#delete-items">{{ _('Delete selected items') }}</button>
     </form>
+    {% endif %}
   </section>
 
   <section id="tekir-attachments">
     <h2>{{ _('Attachments') }}</h2>
+    {% if record.attachments %}
     <form id="delete-attachments" action="." method="POST">
       <table class="field">
-        {% for item in record.attachments %}
-        <tr>
-          <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
-          <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
-        </tr>
-        {% endfor %}
+        <thead>
+          <tr>
+            <th>{{ _('Select') }}</th>
+            <th>{{ _('File name') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in record.attachments %}
+          <tr>
+            <td><input type="checkbox" name="selected-items" value="{{ item.path }}"/></td>
+            <td><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ record.url_to(item) }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
       <button class="delete-content" hx-post="{{ url_for('tekir_admin_api.check_delete') }}"
           hx-target="#delete-items">{{ _('Delete selected items') }}</button>
     </form>
+    {% endif %}
   </section>
 </div>
 

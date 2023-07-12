@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-12 16:06+0300\n"
+"POT-Creation-Date: 2023-07-12 23:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,44 +95,61 @@ msgstr ""
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:32
-#: lektor_tekir/templates/tekir_contents.html:48
+#: lektor_tekir/templates/tekir_contents.html:27
+#: lektor_tekir/templates/tekir_contents.html:55
+msgid "Select"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:28
+msgid "Title"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:29
+msgid "Type"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:43
+#: lektor_tekir/templates/tekir_contents.html:69
 msgid "Delete selected items"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:37
+#: lektor_tekir/templates/tekir_contents.html:49
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/templates/tekir_contents.html:56
+msgid "File name"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:76
 msgid "This operation will delete the following content items:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:56
+#: lektor_tekir/templates/tekir_contents.html:78
 msgid "Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:57
+#: lektor_tekir/templates/tekir_contents.html:79
 msgid "Yes, delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:58
+#: lektor_tekir/templates/tekir_contents.html:80
 msgid "No, cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:41
+#: lektor_tekir/templates/tekir_fields.html:47
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:57
+#: lektor_tekir/templates/tekir_fields.html:64
 msgid "Delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:58
+#: lektor_tekir/templates/tekir_fields.html:65
 msgid "Move up"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:59
+#: lektor_tekir/templates/tekir_fields.html:66
 msgid "Move down"
 msgstr ""
 
