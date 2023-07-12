@@ -192,6 +192,15 @@ def new_flowblock():
                            block_index=f"uuid_{uuid_index}")
 
 
+@bp.route("/slugify")
+def slug_from_title():
+    title = request.args.get("title")
+    slug = slugify(title)
+    response = Response(slug)
+    response.headers["HX-Trigger"] = '{"updateSlug": {"slug": "%s"}}' % slug
+    return response
+
+
 @bp.route("/new-content", methods=["POST"])
 def new_content():
     g.lang_code = request.args.get("lang", "en")

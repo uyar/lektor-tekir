@@ -96,7 +96,10 @@
 
     <div class="field">
       <label for="field-title">{{ _('Title') }}</label>
-      <input type="text" id="field-title" name="title"/>
+      <input type="text" id="field-title" name="title"
+          hx-get="{{ url_for('tekir_admin_api.slug_from_title') }}"
+          hx-trigger="keyup delay:500ms changed"
+          hx-swap="none"/>
     </div>
 
     <div class="field">

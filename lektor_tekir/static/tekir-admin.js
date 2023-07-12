@@ -57,4 +57,8 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         document.getElementById("changes-dialog").showModal();
         document.getElementById("changes-continue").setAttribute("data-href", ev.detail.href);
     });
+
+    document.body.addEventListener("updateSlug", (ev) => {
+        document.getElementById("field-slug").setAttribute("placeholder", ev.detail.slug);
+    });
 });
