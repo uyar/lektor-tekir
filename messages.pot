@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-13 01:09+0300\n"
+"POT-Creation-Date: 2023-07-13 01:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,6 +75,7 @@ msgid "Continue"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:25
+#: lektor_tekir/templates/tekir_contents.html:108
 msgid "Cancel"
 msgstr ""
 
@@ -96,12 +97,12 @@ msgid "Subpages"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:27
-#: lektor_tekir/templates/tekir_contents.html:79
+#: lektor_tekir/templates/tekir_contents.html:57
 msgid "Select"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:28
-#: lektor_tekir/templates/tekir_contents.html:59
+#: lektor_tekir/templates/tekir_contents.html:98
 msgid "Title"
 msgstr ""
 
@@ -110,45 +111,46 @@ msgid "Type"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:43
-#: lektor_tekir/templates/tekir_contents.html:93
+#: lektor_tekir/templates/tekir_contents.html:71
 msgid "Delete selected items"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:49
-msgid "Content Type"
-msgstr ""
-
-#: lektor_tekir/templates/tekir_contents.html:64
-msgid "ID"
-msgstr ""
-
-#: lektor_tekir/templates/tekir_contents.html:68
+#: lektor_tekir/templates/tekir_contents.html:47
+#: lektor_tekir/templates/tekir_contents.html:107
 #: lektor_tekir/templates/tekir_fields.html:47
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:73
+#: lektor_tekir/templates/tekir_contents.html:51
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:80
+#: lektor_tekir/templates/tekir_contents.html:58
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:100
+#: lektor_tekir/templates/tekir_contents.html:78
 msgid "This operation will delete the following content items:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:102
+#: lektor_tekir/templates/tekir_contents.html:80
 msgid "Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:103
+#: lektor_tekir/templates/tekir_contents.html:81
 msgid "Yes, delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:104
+#: lektor_tekir/templates/tekir_contents.html:82
 msgid "No, cancel"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:88
+msgid "Content Type"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:103
+msgid "ID"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_fields.html:64

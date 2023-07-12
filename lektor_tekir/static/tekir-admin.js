@@ -5,6 +5,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
 
         if (main.classList.contains("tekir_contents")) {
             const deleteDialog = document.getElementById("delete-confirm");
+            const addSubpageDialog = document.getElementById("add-form");
             if (el.classList.contains("delete-content")) {
                 document.getElementById("delete-continue").setAttribute("hx-include", "#" + el.closest("form").id);
                 deleteDialog.showModal();
@@ -16,6 +17,13 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 deleteDialog.close();
             } else if (el.id == "delete-cancel") {
                 deleteDialog.close();
+            } else if (el.id == "add-subpage") {
+                addSubpageDialog.showModal();
+            } else if (el.id == "add-confirm") {
+                addSubpageDialog.close();
+            } else if (el.id == "add-cancel") {
+                ev.preventDefault();
+                addSubpageDialog.close();
             }
         }
 
