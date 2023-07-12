@@ -39,7 +39,7 @@
 
       <div class="add-block" id="{{ field_name }}-add-block">
         <span class="add-button">{{ _('Add') }}</span>
-        {% for flow_type in field.type.flow_blocks %}
+        {% for flow_type in (field.type.flow_blocks or record.pad.db.flowblocks) %}
         <button hx-get="{{ url_for('tekir_admin_api.new_flowblock', lang=g.lang_code, flow_type=flow_type, field_name=field_name, path=record.path) }}"
             hx-target="#{{ field_name }}-add-block" hx-swap="beforebegin">{{ record.pad.db.flowblocks[flow_type].button_label }}</button>
         {% endfor %}
