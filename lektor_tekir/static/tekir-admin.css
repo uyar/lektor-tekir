@@ -98,7 +98,7 @@ body {
     "main-tabs main-content";
   grid-template-columns: 10em 1fr;
   grid-template-rows: auto 1fr;
-  min-height: 100vh;
+  height: 100dvh;
 }
 
 #main-header {
@@ -268,15 +268,20 @@ details {
 
 #tekir-contents {
   display: grid;
-  gap: 3rem 2rem;
+  gap: 1rem 3rem;
   grid-template-areas:
     "contents-summary  contents-summary"
     "contents-subpages contents-attachments";
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
 }
 
 #tekir-summary {
   grid-area: contents-summary;
+}
+
+.content-listing {
+  height: 15em;
+  overflow-y: auto;
 }
 
 #tekir-subpages {
