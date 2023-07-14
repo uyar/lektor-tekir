@@ -27,6 +27,21 @@ def page_count():
     return str(len(pages))
 
 
+@bp.route("/navigables")
+def navigables():
+    g.lang_code = request.args.get("lang", "en")
+    path = request.args.get("path")
+    record = g.admin_context.tree.get(path)._primary_record
+    options = [("", "----", "selected" if not path else "")]
+    options.append(("/", _("home"), "selected" if path == "/" else ""))
+    if path and (path != "/"):
+        options.append((record.path, record["_slug"], "selected"))
+    for child in record.children:
+        options.append((child.path, child["_slug"], ""))
+    return "\n".join(f'<option value="{value}" {selected}>{label}</option>'
+                     for value, label, selected in options)
+
+
 def field_entry(field, field_name=None):
     if field_name is None:
         field_name = field.name

@@ -24,4 +24,12 @@
     <button id="changes-continue">{{ _('Continue') }}</button>
     <button id="changes-cancel">{{ _('Cancel') }}</button>
   </dialog>
+
+  <dialog id="navigate-dialog">
+    <div class="field">
+      <select id="navigables" name="path" hx-get="{{ url_for('tekir_admin_api.navigables', lang=g.lang_code) }}"></select>
+    </div>
+    <button id="navigate-select">{{ _('Select') }}</button>
+    <button id="navigate-cancel">{{ _('Cancel') }}</button>
+  </dialog>
 {% endblock %}

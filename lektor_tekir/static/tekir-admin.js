@@ -31,6 +31,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             const details = el.closest("details");
             const saveDialog = document.getElementById("save-dialog");
             const changesDialog = document.getElementById("changes-dialog");
+            const navigateDialog = document.getElementById("navigate-dialog");
             if (el.id == "save-content") {
                 saveDialog.showModal();
             } else if (el.id == "save-close") {
@@ -49,6 +50,14 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             } else if (el.classList.contains("down-block")) {
                 ev.preventDefault();
                 details.nextElementSibling.after(details);
+            } else if (el.classList.contains("tekir-navigate")) {
+                document.getElementById("navigate-select").setAttribute("data-src", el.id);
+                navigateDialog. showModal();
+            } else if (el.id == "navigate-select") {
+                document.getElementById(el.dataset.src).value = document.getElementById("navigables").value;
+                navigateDialog.close();
+            } else if (el.id == "navigate-cancel") {
+                navigateDialog.close();
             }
         }
     });

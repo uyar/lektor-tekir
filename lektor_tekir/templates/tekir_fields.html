@@ -9,13 +9,11 @@
     {% set widget = field.label_i18n.get('widget') %}
 
     {% if field.type.name == 'datetime' %}
-    <input type="datetime-local" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
-    {% elif widget == 'time' %}
-    <input type="time" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
+    <input type="datetime-local" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
     {% elif field.type.name == 'date' %}
-    <input type="date" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
+    <input type="date" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
     {% elif field.type.name == 'boolean' %}
-    <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}" {{ 'checked' if field_value else '' }} />
+    <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}" {{ 'checked' if field_value else '' }}/>
     {% elif field.type.name == 'select' %}
     <select id="{{ field_id }}" name="{{ field_name }}">
       <option value="">----</option>
@@ -24,9 +22,20 @@
       {% endfor %}
     </select>
     {% elif field.type.name == 'url' %}
-    <input type="url" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
-    {% elif field.type.name in ('string', 'integer', 'float', 'url', 'sort_key') %}
-    <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}" />
+    <input type="url" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
+    {% elif field.type.name  == 'string' %}
+      {% if widget == 'time' %}
+    <input type="time" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
+      {% elif widget == 'navigate' %}
+    <input type="text" class="tekir-navigate" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"
+        hx-get="{{ url_for('tekir_admin_api.navigables', lang=g.lang_code) }}"
+        hx-vals='js:{path: event.target.value ? event.target.value : "{{ record.path }}"}'
+        hx-trigger="click" hx-target="#navigables"/>
+      {% else %}
+    <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
+      {% endif %}
+    {% elif field.type.name in ('integer', 'float', 'sort_key') %}
+    <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
     {% elif field.type.name in ('text', 'strings') %}
     <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10">{{ field_value }}</textarea>
     {% elif field.type.name in ('markdown', 'html') %}
