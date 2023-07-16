@@ -42,7 +42,7 @@
     <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code"
         data-content-type="{{ field.type.name }}">{{ field_value }}</textarea>
     {% elif field.type.name == 'rst' %}
-    <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code">{{ field_value.source }}</textarea>
+    <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10" class="code">{{ field_value.source if field_value else '' }}</textarea>
 
     {% elif field.type.name == 'flow' %}
     <fieldset>
