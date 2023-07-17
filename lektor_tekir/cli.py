@@ -33,7 +33,7 @@ rewrite_html_original = serve.rewrite_html_for_editing
 
 
 def rewrite_html_tekir(fp, edit_url):
-    tekir_url = edit_url.replace("/admin/edit", "/tekir-admin/en/content/edit")
+    tekir_url = edit_url.replace("/admin/edit", "/tekir-admin/en/contents")
     return rewrite_html_original(fp, tekir_url)
 
 

@@ -4,8 +4,9 @@ Changes
 0.4 (unreleased)
 ----------------
 
-- Rewrite edit link on server to navigate to tekir admin page.
+- Rewrite edit link on server to navigate to Tekir admin page.
 - Make UI language preference persistent.
+- Add preview button to contents page.
 
 0.3 (2023-07-17)
 ----------------

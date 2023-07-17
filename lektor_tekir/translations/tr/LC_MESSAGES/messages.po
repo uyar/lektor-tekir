@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-17 14:47+0300\n"
+"POT-Creation-Date: 2023-07-17 22:59+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -44,27 +44,27 @@ msgid "Deleted."
 msgstr "Silindi."
 
 #: lektor_tekir/templates/tekir_base.html:6
-#: lektor_tekir/templates/tekir_base.html:14
+#: lektor_tekir/templates/tekir_base.html:13
 msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
-#: lektor_tekir/templates/tekir_base.html:26
+#: lektor_tekir/templates/tekir_base.html:25
 msgid "Toggle light mode"
 msgstr "Aydınlık moda geç"
 
-#: lektor_tekir/templates/tekir_base.html:29
+#: lektor_tekir/templates/tekir_base.html:28
 msgid "Toggle dark mode"
 msgstr "Karanlık moda geç"
 
-#: lektor_tekir/templates/tekir_base.html:36
+#: lektor_tekir/templates/tekir_base.html:35
 msgid "main navigation"
 msgstr "ana navigasyon"
 
-#: lektor_tekir/templates/tekir_base.html:38
+#: lektor_tekir/templates/tekir_base.html:37
 msgid "Summary"
 msgstr "Özet"
 
-#: lektor_tekir/templates/tekir_base.html:39
+#: lektor_tekir/templates/tekir_base.html:38
 msgid "Content"
 msgstr "İçerik"
 
@@ -86,13 +86,13 @@ msgstr "Devam et"
 
 #: lektor_tekir/templates/tekir_content_edit.html:25
 #: lektor_tekir/templates/tekir_content_edit.html:33
-#: lektor_tekir/templates/tekir_contents.html:133
+#: lektor_tekir/templates/tekir_contents.html:134
 msgid "Cancel"
 msgstr "Vazgeç"
 
 #: lektor_tekir/templates/tekir_content_edit.html:32
-#: lektor_tekir/templates/tekir_contents.html:28
-#: lektor_tekir/templates/tekir_contents.html:65
+#: lektor_tekir/templates/tekir_contents.html:29
+#: lektor_tekir/templates/tekir_contents.html:66
 msgid "Select"
 msgstr "Seç"
 
@@ -104,67 +104,71 @@ msgstr "Buradasınız:"
 msgid "Edit"
 msgstr "Düzenle"
 
-#: lektor_tekir/templates/tekir_contents.html:21
+#: lektor_tekir/templates/tekir_contents.html:18
+msgid "Preview"
+msgstr "Görüntüle"
+
+#: lektor_tekir/templates/tekir_contents.html:22
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir/templates/tekir_contents.html:29
-#: lektor_tekir/templates/tekir_contents.html:128
+#: lektor_tekir/templates/tekir_contents.html:30
+#: lektor_tekir/templates/tekir_contents.html:129
 msgid "ID"
 msgstr "Kimlik"
 
-#: lektor_tekir/templates/tekir_contents.html:30
+#: lektor_tekir/templates/tekir_contents.html:31
 msgid "Type"
 msgstr "Tip"
 
-#: lektor_tekir/templates/tekir_contents.html:46
-#: lektor_tekir/templates/tekir_contents.html:80
+#: lektor_tekir/templates/tekir_contents.html:47
+#: lektor_tekir/templates/tekir_contents.html:81
 msgid "Delete selected items"
 msgstr "Seçilenleri sil"
 
-#: lektor_tekir/templates/tekir_contents.html:49
+#: lektor_tekir/templates/tekir_contents.html:50
 msgid "No subpages."
 msgstr "Altsayfa yok."
 
-#: lektor_tekir/templates/tekir_contents.html:53
-#: lektor_tekir/templates/tekir_contents.html:132
+#: lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/templates/tekir_contents.html:133
 #: lektor_tekir/templates/tekir_fields.html:56
 msgid "Add"
 msgstr "Ekle"
 
-#: lektor_tekir/templates/tekir_contents.html:58
+#: lektor_tekir/templates/tekir_contents.html:59
 msgid "Attachments"
 msgstr "Ekler"
 
-#: lektor_tekir/templates/tekir_contents.html:66
+#: lektor_tekir/templates/tekir_contents.html:67
 msgid "File name"
 msgstr "Dosya adı"
 
-#: lektor_tekir/templates/tekir_contents.html:83
+#: lektor_tekir/templates/tekir_contents.html:84
 msgid "No attachments."
 msgstr "Ek yok."
 
-#: lektor_tekir/templates/tekir_contents.html:91
+#: lektor_tekir/templates/tekir_contents.html:92
 msgid "This operation will delete the following content items:"
 msgstr "Bu işlem aşağıdaki içerik unsurlarını silecek:"
 
-#: lektor_tekir/templates/tekir_contents.html:93
+#: lektor_tekir/templates/tekir_contents.html:94
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: lektor_tekir/templates/tekir_contents.html:94
+#: lektor_tekir/templates/tekir_contents.html:95
 msgid "Yes, delete"
 msgstr "Evet, sil"
 
-#: lektor_tekir/templates/tekir_contents.html:95
+#: lektor_tekir/templates/tekir_contents.html:96
 msgid "No, cancel"
 msgstr "Hayır, vazgeç"
 
-#: lektor_tekir/templates/tekir_contents.html:101
+#: lektor_tekir/templates/tekir_contents.html:102
 msgid "Content Type"
 msgstr "İçerik Tipi"
 
-#: lektor_tekir/templates/tekir_contents.html:120
+#: lektor_tekir/templates/tekir_contents.html:121
 msgid "Title"
 msgstr "Başlık"
 
