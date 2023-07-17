@@ -5,6 +5,7 @@ Changes
 ----------------
 
 - Rewrite edit link on server to navigate to tekir admin page.
+- Make UI language preference persistent.
 
 0.3 (2023-07-17)
 ----------------

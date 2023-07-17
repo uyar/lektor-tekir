@@ -1,4 +1,33 @@
 window.addEventListener("DOMContentLoaded", (loadEvent) => {
+    const uiLang = localStorage.getItem("ui-language");
+    const pageLang = document.documentElement.getAttribute("lang");
+    if (uiLang && (uiLang != pageLang)) {
+        window.location.href = window.location.href.replace("/" + pageLang + "/", "/" + uiLang + "/");
+    }
+
+    document.querySelectorAll("#tekir-langs a").forEach((el) => {
+        el.addEventListener("click", (ev) => {
+            localStorage.setItem("ui-language", ev.currentTarget.innerHTML);
+        });
+    });
+
+    const colorMode = localStorage.getItem("color-mode");
+    if (colorMode) {
+        document.documentElement.setAttribute("color-mode", colorMode);
+    }
+
+    document.querySelectorAll("button.color-mode").forEach((el) => {
+        el.addEventListener("click", (ev) => {
+            if (ev.currentTarget.classList.contains("light")) {
+                document.documentElement.setAttribute("color-mode", "light");
+                localStorage.setItem("color-mode", "light");
+            } else {
+                document.documentElement.setAttribute("color-mode", "dark");
+                localStorage.setItem("color-mode", "dark");
+            }
+        });
+    });
+
     document.querySelector("main").addEventListener("click", (ev) => {
         const el = ev.target;
         const main = el.closest("main");
