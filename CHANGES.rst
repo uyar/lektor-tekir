@@ -5,6 +5,7 @@ Changes
 ----------------
 
 - Rewrite edit link on server to navigate to Tekir admin page.
+- Add support for adding attachments.
 - Make UI language preference persistent.
 - Add preview button to contents page.
 

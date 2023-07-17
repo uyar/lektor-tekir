@@ -84,6 +84,8 @@
         <p>{{ _('No attachments.') }}</p>
       </div>
     {% endif %}
+
+      <button id="add-attachment">{{ _('Add') }}</button>
     </form>
   </section>
 </div>
@@ -96,7 +98,7 @@
   <button id="delete-cancel">{{ _('No, cancel') }}</button>
 </dialog>
 
-<dialog id="add-form">
+<dialog id="add-subpage-form">
   <form action="." method="POST">
     <div class="field">
       <label for="field-model">{{ _('Content Type') }}</label>
@@ -130,8 +132,20 @@
       <input type="text" id="field-slug" name="slug"/>
     </div>
 
-    <button id="add-confirm" hx-post="{{ url_for('tekir_admin_api.new_content', lang=g.lang_code, parent=record.path) }}">{{ _('Add') }}</button>
-    <button id="add-cancel">{{ _('Cancel') }}</button>
+    <button id="add-subpage-confirm" hx-post="{{ url_for('tekir_admin_api.new_content', lang=g.lang_code, parent=record.path) }}">{{ _('Add') }}</button>
+    <button id="add-subpage-cancel">{{ _('Cancel') }}</button>
+  </form>
+</dialog>
+
+<dialog id="add-attachment-form">
+  <form action="." method="POST" enctype="multipart/form-data">
+    <div class="field">
+      <label for="field-file">{{ _('File') }}</label>
+      <input type="file" id="field-file" name="file"/>
+    </div>
+
+    <button id="add-attachment-confirm" hx-encoding="multipart/form-data" hx-post="{{ url_for('tekir_admin_api.new_attachment', lang=g.lang_code, parent=record.path) }}">{{ _('Add') }}</button>
+    <button id="add-attachment-cancel">{{ _('Cancel') }}</button>
   </form>
 </dialog>
 {% endblock %}

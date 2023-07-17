@@ -247,7 +247,7 @@ def new_content():
     model = request.form.get("model")
     title = request.form.get("title", uuid4().hex)
     slug = request.form.get("slug") or slugify(title)
-    path = f"{parent}/{slug}"
+    path = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
     pad = g.admin_context.pad
     data = {
         "_model": model,
@@ -263,5 +263,24 @@ def new_content():
     contents_file.write_text(get_content(record))
     response = Response("")
     record_url = url_for("tekir_admin.edit_content", path=path)
+    response.headers["HX-Redirect"] = record_url
+    return response
+
+
+@bp.route("/new-attachment", methods=["POST"])
+def new_attachment():
+    g.lang_code = request.args.get("lang", "en")
+    uploaded = request.files.get("file")
+    if not uploaded:
+        return _("Add")
+    parent = request.args.get("parent")
+    slug = uploaded.filename
+    path = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
+    pad = g.admin_context.pad
+    record = g.admin_context.tree.get(parent)._primary_record
+    source_path = Path(pad.db.to_fs_path(record.path))
+    uploaded.save(source_path / uploaded.filename)
+    response = Response("")
+    record_url = url_for("tekir_admin.contents", path=path)
     response.headers["HX-Redirect"] = record_url
     return response

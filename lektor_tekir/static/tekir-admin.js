@@ -34,7 +34,8 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
 
         if (main.classList.contains("tekir_contents")) {
             const deleteDialog = document.getElementById("delete-confirm");
-            const addSubpageDialog = document.getElementById("add-form");
+            const addSubpageDialog = document.getElementById("add-subpage-form");
+            const addAttachmentDialog = document.getElementById("add-attachment-form");
             if (el.classList.contains("delete-content")) {
                 document.getElementById("delete-continue").setAttribute("hx-include", "#" + el.closest("form").id);
                 deleteDialog.showModal();
@@ -49,11 +50,19 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             } else if (el.id == "add-subpage") {
                 ev.preventDefault();
                 addSubpageDialog.showModal();
-            } else if (el.id == "add-confirm") {
+            } else if (el.id == "add-subpage-confirm") {
                 addSubpageDialog.close();
-            } else if (el.id == "add-cancel") {
+            } else if (el.id == "add-subpage-cancel") {
                 ev.preventDefault();
                 addSubpageDialog.close();
+            } else if (el.id == "add-attachment") {
+                ev.preventDefault();
+                addAttachmentDialog.showModal();
+            } else if (el.id == "add-attachment-confirm") {
+                addAttachmentDialog.close();
+            } else if (el.id == "add-attachment-cancel") {
+                ev.preventDefault();
+                addAttachmentDialog.close();
             }
         }
 

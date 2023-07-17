@@ -5,17 +5,15 @@ lektor-tekir is an alternative admin panel for `Lektor`_.
 
 What works:
 
-- Navigating existing content.
-- Editing existing content.
-- Adding new content.
-- Deleting content.
-- Deleting attachments.
+- Navigating content.
+- Adding, editing and deleting content items.
+- Adding, deleting attachments.
 - Multiple language support in the UI (English and Turkish at the moment).
 - Light/dark mode toggle.
 
 What's planned in the short term:
 
-- Adding attachments.
+- Editing attachments.
 - Editing system fields.
 - Dividing edit form fields into tabs.
 - Deploying the site.
@@ -37,8 +35,7 @@ To use it, run::
 
   lektor-tekir serve
 
-And then visit the URL "http://localhost:5000/tekir-admin/en/",
-or click the edit button on a page.
+And use the edit buttons on pages.
 
 The ``lektor-tekir`` CLI is identical to the Lektor CLI
 except that it patches the ``serve`` command to enable its own panel.
