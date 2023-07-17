@@ -1,6 +1,6 @@
 [project]
 name = "lektor-tekir"
-version = "0.2"
+version = "0.3"
 description = "An alternative admin panel for Lektor."
 readme = "README.rst"
 

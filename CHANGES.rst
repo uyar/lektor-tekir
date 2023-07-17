@@ -1,7 +1,7 @@
 Changes
 =======
 
-0.3 (unreleased)
+0.3 (2023-07-17)
 ----------------
 
 - Add support for adding content items.
