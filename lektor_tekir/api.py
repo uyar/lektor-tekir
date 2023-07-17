@@ -3,6 +3,7 @@
 # lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
+from datetime import datetime
 from pathlib import Path
 from shutil import rmtree
 from uuid import uuid4
@@ -25,6 +26,31 @@ def page_count():
     root_path = Path(g.admin_context.pad.root.source_filename).parent
     pages = {c.parent for c in root_path.glob("**/contents*.lr")}
     return str(len(pages))
+
+
+@bp.route("/clean-build")
+def clean_build():
+    g.lang_code = request.args.get("lang", "en")
+    builder = g.admin_context.info.get_builder()
+    builder.prune(all=True)
+    builder.touch_site_config()
+    return _("No output")
+
+
+@bp.route("/build")
+def build():
+    g.lang_code = request.args.get("lang", "en")
+    builder = g.admin_context.info.get_builder()
+    builder.build_all()
+    builder.touch_site_config()
+    output_path = Path(builder.destination_path)
+    home_page = output_path / "index.html"
+    if home_page.exists():
+        mtime = int(home_page.stat().st_mtime)
+        output_time = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M')
+    else:
+        output_time = _("No output")
+    return output_time
 
 
 @bp.route("/navigables")

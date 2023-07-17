@@ -227,14 +227,14 @@ details {
 
 /* CUSTOM */
 
-#tekir-page-count {
-  max-width: min(20em, 50%);
-  border-bottom: 1px solid;
+button img {
+  display: inline;
+  height: 1em;
+  margin-inline-start: 1em;
 }
 
-#tekir-page-count h2 {
-  margin-block-end: 0.25rem;
-  font-size: 1.2em;
+#tekir-page-count {
+  max-width: min(20em, 50%);
 }
 
 #tekir-page-count p {

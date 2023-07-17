@@ -3,9 +3,11 @@
 # lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
+from datetime import datetime
 from pathlib import Path
 
 from flask import Blueprint, g, render_template, request
+from flask_babel import gettext as _
 
 
 bp = Blueprint("tekir_admin", __name__, url_prefix="/tekir-admin/<lang_code>",
@@ -25,7 +27,16 @@ def pull_language_code(endpoint, values):
 
 @bp.route("/")
 def summary():
-    return render_template("tekir_summary.html")
+    builder = g.admin_context.info.get_builder()
+    output_path = Path(builder.destination_path)
+    home_page = output_path / "index.html"
+    if home_page.exists():
+        mtime = int(home_page.stat().st_mtime)
+        output_time = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M')
+    else:
+        output_time = _("No output")
+    return render_template("tekir_summary.html", output_path=output_path,
+                           output_time=output_time)
 
 
 @bp.route("/contents")

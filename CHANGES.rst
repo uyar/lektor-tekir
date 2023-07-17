@@ -5,6 +5,7 @@ Changes
 ----------------
 
 - Add support for adding content items.
+- Add support for building and cleaning site.
 
 0.2 (2023-07-12)
 ----------------

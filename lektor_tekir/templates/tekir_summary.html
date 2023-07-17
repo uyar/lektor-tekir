@@ -1,7 +1,27 @@
 {% extends 'tekir_base.html' %}
+
 {% block body %}
 <section id="tekir-page-count">
   <h2>{{ _('Number of Pages') }}</h2>
   <p hx-get="{{ url_for('tekir_admin_api.page_count') }}" hx-trigger="load">&nbsp;</p>
 </section>
+
+<section id="tekir-build">
+  <h2>{{ _('Output') }}</h2>
+
+  <p>{{ _('Folder:') }} <span id="output-path">{{ output_path }}</span></p>
+  <p>{{ _('Time:') }} <span id="output-time">{{ output_time }}</span></p>
+
+  <button hx-get="{{ url_for('tekir_admin_api.clean_build', lang=g.lang_code) }}"
+      hx-target="#output-time">
+    {{ _('Clean') }}
+    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+  </button>
+  <button hx-get="{{ url_for('tekir_admin_api.build', lang=g.lang_code) }}"
+      hx-target="#output-time">
+    {{ _('Build') }}
+    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+  </button>
+</section>
+
 {% endblock %}
