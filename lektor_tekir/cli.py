@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from flask import g
 from flask_babel import Babel, get_locale
+from lektor.admin.modules import serve
 from lektor.admin.webui import WebUI
 from lektor.cli import cli
 
@@ -28,6 +29,15 @@ class TekirAdminUI(WebUI):
         self.jinja_env.globals["translations"] = babel.list_translations
 
 
+rewrite_html_original = serve.rewrite_html_for_editing
+
+
+def rewrite_html_tekir(fp, edit_url):
+    tekir_url = edit_url.replace("/admin/edit", "/tekir-admin/en/content/edit")
+    return rewrite_html_original(fp, tekir_url)
+
+
 def main():
+    serve.rewrite_html_for_editing = rewrite_html_tekir
     with patch("lektor.admin.WebAdmin", TekirAdminUI):
         cli()

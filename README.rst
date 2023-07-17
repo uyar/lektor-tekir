@@ -2,10 +2,8 @@ lektor-tekir
 ============
 
 lektor-tekir is an alternative admin panel for `Lektor`_.
-It doesn't modify existing behavior, but only adds new routes
-for the new panel.
 
-What -sort of- works, hopefully:
+What works:
 
 - Navigating existing content.
 - Editing existing content.
@@ -39,7 +37,8 @@ To use it, run::
 
   lektor-tekir serve
 
-And then visit the URL "http://localhost:5000/tekir-admin/en/".
+And then visit the URL "http://localhost:5000/tekir-admin/en/",
+or click the edit button on a page.
 
 The ``lektor-tekir`` CLI is identical to the Lektor CLI
 except that it patches the ``serve`` command to enable its own panel.

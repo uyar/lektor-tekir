@@ -1,6 +1,11 @@
 Changes
 =======
 
+0.4 (unreleased)
+----------------
+
+- Rewrite edit link on server to navigate to tekir admin page.
+
 0.3 (2023-07-17)
 ----------------
 
