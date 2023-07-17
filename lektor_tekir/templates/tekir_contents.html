@@ -99,12 +99,21 @@
   <form action="." method="POST">
     <div class="field">
       <label for="field-model">{{ _('Content Type') }}</label>
+
+      {% set content_models = record.pad.db.datamodels %}
+      {% set child_model = record.datamodel.child_config.model %}
+      {% if child_model %}
+      {{ content_models[child_model].name_i18n.get(g.lang_code) or content_models[child_model].name }}
+      <input type="hidden" id="field-model" name="model" value="{{ child_model }}" disabled/>
+      {% else %}
       <select id="field-model" name="model">
-        {% set content_models = record.pad.db.datamodels %}
         {% for model in content_models %}
+          {% if model != 'none' %}
         <option value="{{ model }}">{{ content_models[model].name_i18n.get(g.lang_code) or content_models[model].name }}</option>
+          {% endif %}
         {% endfor %}
       </select>
+      {% endif %}
     </div>
 
     <div class="field">

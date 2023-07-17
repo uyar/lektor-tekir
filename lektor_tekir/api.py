@@ -65,7 +65,7 @@ def field_entry(field, field_name=None):
         return f"{field.name}: {value}"
 
 
-def flowblock_entry(node, field):
+def flowblock_entry(record, field):
     block_data = [k for k in request.form if k.startswith(f"{field.name}-")]
     if len(block_data) == 0:
         return None
@@ -82,7 +82,7 @@ def flowblock_entry(node, field):
             raise RuntimeError("All fields must be of the same flowblock type")
         block_type_id = block_fields[0].split("-")[2]
         block_header = f"#### {block_type_id} ####"
-        block_type = node.tree.pad.db.flowblocks[block_type_id]
+        block_type = record.pad.db.flowblocks[block_type_id]
         block_entries = []
         for block_field in block_type.fields:
             field_name = f"{field.name}-{i}-{block_type_id}-{block_field.name}"
@@ -94,8 +94,7 @@ def flowblock_entry(node, field):
     return f"{field.name}:\n\n" + "\n".join(entries)
 
 
-def get_content(node):
-    record = node._primary_record
+def get_content(record):
     entries = []
 
     try:
@@ -112,7 +111,7 @@ def get_content(node):
 
     for field in record.datamodel.fields:
         if field.type.name == "flow":
-            entry = flowblock_entry(node, field)
+            entry = flowblock_entry(record, field)
         else:
             entry = field_entry(field)
         if not entry:
@@ -126,9 +125,9 @@ def get_content(node):
 def save_content():
     g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
-    node = g.admin_context.tree.get(path)
-    content = get_content(node)
-    source = Path(node._primary_record.source_filename)
+    record = g.admin_context.tree.get(path)._primary_record
+    content = get_content(record)
+    source = Path(record.source_filename)
     old_content = source.read_text()
     if content == old_content:
         return _("No changes.")
@@ -141,9 +140,8 @@ def save_content():
 def check_changes():
     g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
-    node = g.admin_context.tree.get(path)
-    content = get_content(node)
-    record = node._primary_record
+    record = g.admin_context.tree.get(path)._primary_record
+    content = get_content(record)
     source = Path(record.source_filename)
     record_url = url_for("tekir_admin.contents", path=record.path)
     old_content = source.read_text()
@@ -227,6 +225,7 @@ def new_content():
     pad = g.admin_context.pad
     data = {
         "_model": model,
+        "_template": pad.db.datamodels[model].get_default_template_name(),
         "_slug": slug,
         "_path": path,
         "_alt": pad.root.alt,
@@ -235,7 +234,7 @@ def new_content():
     source_path = Path(pad.db.to_fs_path(record.path))
     source_path.mkdir()
     contents_file = source_path / "contents.lr"
-    contents_file.write_text(f"title: {title}\n")
+    contents_file.write_text(get_content(record))
     response = Response("")
     record_url = url_for("tekir_admin.edit_content", path=path)
     response.headers["HX-Redirect"] = record_url

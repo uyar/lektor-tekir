@@ -18,6 +18,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             } else if (el.id == "delete-cancel") {
                 deleteDialog.close();
             } else if (el.id == "add-subpage") {
+                ev.preventDefault();
                 addSubpageDialog.showModal();
             } else if (el.id == "add-confirm") {
                 addSubpageDialog.close();
