@@ -34,7 +34,9 @@
       {% else %}
     <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
       {% endif %}
-    {% elif field.type.name in ('integer', 'float', 'sort_key') %}
+    {% elif field.type.name in ('integer', 'sort_key') %}
+    <input type="number" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
+    {% elif field.type.name == 'float' %}
     <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
     {% elif field.type.name in ('text', 'strings') %}
     <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10">{{ field_value }}</textarea>
