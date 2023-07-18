@@ -30,6 +30,12 @@
       {{ _('Build') }}
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
+
+    <button id="tekir-publish" hx-get="{{ url_for('tekir_admin_api.deploy', lang=g.lang_code) }}"
+        hx-swap="none">
+      {{ _('Publish') }}
+      <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+    </button>
   </div>
 </section>
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 00:26+0300\n"
+"POT-Creation-Date: 2023-07-19 01:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,40 +17,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:49 lektor_tekir/api.py:64 lektor_tekir/dash.py:38
+#: lektor_tekir/api.py:50 lektor_tekir/api.py:65 lektor_tekir/dash.py:38
 msgid "No output"
 msgstr ""
 
-#: lektor_tekir/api.py:74 lektor_tekir/templates/tekir_contents.html:8
+#: lektor_tekir/api.py:84 lektor_tekir/templates/tekir_contents.html:8
 #: lektor_tekir/templates/tekir_contents.html:10
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/api.py:171
+#: lektor_tekir/api.py:181
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:174
+#: lektor_tekir/api.py:184
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:190
+#: lektor_tekir/api.py:200
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:228
+#: lektor_tekir/api.py:238
 msgid "Deleted."
 msgstr ""
 
-#: lektor_tekir/api.py:262
+#: lektor_tekir/api.py:272
 msgid "Every content item must have a title."
 msgstr ""
 
-#: lektor_tekir/api.py:267
+#: lektor_tekir/api.py:277
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:292 lektor_tekir/templates/tekir_contents.html:56
+#: lektor_tekir/api.py:302 lektor_tekir/templates/tekir_contents.html:56
 #: lektor_tekir/templates/tekir_contents.html:90
 #: lektor_tekir/templates/tekir_contents.html:138
 #: lektor_tekir/templates/tekir_contents.html:155
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/api.py:301
+#: lektor_tekir/api.py:311
 msgid "An attachment with this name already exists for this item."
 msgstr ""
 
@@ -199,15 +199,15 @@ msgstr ""
 msgid "Use button to select file or drag and drop your file into this area."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:75
+#: lektor_tekir/templates/tekir_fields.html:76
 msgid "Delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:76
+#: lektor_tekir/templates/tekir_fields.html:77
 msgid "Move up"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:77
+#: lektor_tekir/templates/tekir_fields.html:78
 msgid "Move down"
 msgstr ""
 
@@ -233,5 +233,9 @@ msgstr ""
 
 #: lektor_tekir/templates/tekir_summary.html:30
 msgid "Build"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_summary.html:36
+msgid "Publish"
 msgstr ""
 

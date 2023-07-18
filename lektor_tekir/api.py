@@ -12,6 +12,7 @@ from uuid import uuid4
 from flask import Blueprint, Response, g, render_template, request, url_for
 from flask_babel import gettext as _
 from lektor.db import Record
+from lektor.publisher import publish
 from lektor.types.flow import FlowBlock
 from slugify import slugify
 
@@ -63,6 +64,15 @@ def build():
     else:
         output_time = _("No output")
     return output_time
+
+
+@bp.route("/publish")
+def deploy():
+    pad = g.admin_context.pad
+    output_path = g.admin_context.info.get_builder().destination_path
+    server_info = pad.config.get_default_server()
+    publish(pad.env, server_info.target, output_path, server_info=server_info)
+    return ""
 
 
 @bp.route("/navigables")

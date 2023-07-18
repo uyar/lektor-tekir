@@ -56,7 +56,7 @@ def contents():
     else:
         child_models = sorted(
             [m for m in record.pad.db.datamodels.values() if not m.hidden],
-            key=lambda m: strxfrm(m.name_i18n.get(g.lang_code))
+            key=lambda m: strxfrm(m.name_i18n.get(g.lang_code) or m.name)
         )
     return render_template("tekir_contents.html", record=record,
                            parents=parents, child_models=child_models)
