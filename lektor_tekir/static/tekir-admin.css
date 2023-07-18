@@ -199,7 +199,10 @@ main {
 }
 
 section {
-  padding: 1rem 0;
+  margin-block: 1rem;
+  padding: 1rem;
+  border: 1px solid;
+  border-radius: 0.125rem;
 }
 
 section > h2 {
@@ -238,6 +241,12 @@ button img {
   color: pink;
 }
 
+h2.title {
+  margin-block: 1rem 2rem;
+  font-size: 3em;
+  font-style: italic;
+}
+
 #tekir-page-count {
   max-width: min(20em, 50%);
 }
@@ -273,7 +282,7 @@ button img {
 
 #tekir-contents {
   display: grid;
-  gap: 1rem 3rem;
+  gap: 3rem;
   grid-template-areas:
     "contents-summary  contents-summary"
     "contents-subpages contents-attachments";
