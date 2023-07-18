@@ -3,6 +3,7 @@
 # lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from shutil import rmtree
@@ -26,6 +27,17 @@ def page_count():
     root_path = Path(g.admin_context.pad.root.source_filename).parent
     pages = {c.parent for c in root_path.glob("**/contents*.lr")}
     return str(len(pages))
+
+
+@bp.route("/open-folder")
+def open_folder():
+    fs_path = request.args.get("fs_path")
+    if fs_path is None:
+        path = request.args.get("path")
+        record = g.admin_context.tree.get(path)._primary_record
+        fs_path = Path(record.source_filename).parent
+    subprocess.run(["xdg-open", fs_path])
+    return ""
 
 
 @bp.route("/clean-build")
