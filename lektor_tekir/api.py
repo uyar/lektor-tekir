@@ -250,7 +250,7 @@ def new_content():
     path = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
     existing = g.admin_context.tree.get(path)._primary_record
     if existing is not None:
-        return _("A content item with this ID already exists.")
+        return _("A content item with this name already exists.")
     pad = g.admin_context.pad
     data = {
         "_model": model,
@@ -284,7 +284,7 @@ def new_attachment():
     source_path = Path(pad.db.to_fs_path(record.path))
     attachment_path = source_path / uploaded.filename
     if attachment_path.exists():
-        return _("An attachment with this ID already exists.")
+        return _("An attachment with this name already exists for this item.")
     uploaded.save(attachment_path)
     response = Response("OK")
     record_url = url_for("tekir_admin.contents", path=path)

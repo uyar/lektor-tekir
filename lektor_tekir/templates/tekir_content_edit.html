@@ -8,9 +8,11 @@
       {{ render_field(record, field, prefix='') }}
     {% endfor %}
 
-    <button id="save-content" hx-post="{{ url_for('tekir_admin_api.save_content', path=record.path, lang=g.lang_code) }}"
+    <button id="save-content"
+        hx-post="{{ url_for('tekir_admin_api.save_content', path=record.path, lang=g.lang_code) }}"
         hx-target="#save-result">{{ _('Save') }}</button>
-    <button id="check-changes" hx-post="{{ url_for('tekir_admin_api.check_changes', path=record.path, lang=g.lang_code) }}"
+    <button id="check-changes"
+        hx-post="{{ url_for('tekir_admin_api.check_changes', path=record.path, lang=g.lang_code) }}"
         hx-target="#changes-result">{{ _('Done') }}</button>
   </form>
 
@@ -27,7 +29,8 @@
 
   <dialog id="navigate-dialog">
     <div class="field">
-      <select id="navigables" name="path" hx-get="{{ url_for('tekir_admin_api.navigables', lang=g.lang_code) }}"></select>
+      <select id="navigables" name="path"
+          hx-get="{{ url_for('tekir_admin_api.navigables', lang=g.lang_code) }}"></select>
     </div>
     <button id="navigate-select">{{ _('Select') }}</button>
     <button id="navigate-cancel">{{ _('Cancel') }}</button>

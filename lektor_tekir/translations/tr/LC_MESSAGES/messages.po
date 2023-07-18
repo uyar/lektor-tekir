@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-18 14:39+0300\n"
+"POT-Creation-Date: 2023-07-18 14:47+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -44,8 +44,8 @@ msgid "Deleted."
 msgstr "Silindi."
 
 #: lektor_tekir/api.py:253
-msgid "A content item with this ID already exists."
-msgstr "Bu kimliğe sahip bir içerik unsuru zaten var."
+msgid "A content item with this name already exists."
+msgstr "Bu isimde bir içerik unsuru zaten var."
 
 #: lektor_tekir/api.py:278 lektor_tekir/templates/tekir_contents.html:54
 #: lektor_tekir/templates/tekir_contents.html:88
@@ -56,8 +56,8 @@ msgid "Add"
 msgstr "Ekle"
 
 #: lektor_tekir/api.py:287
-msgid "An attachment with this ID already exists."
-msgstr "Bu kimliğe sahip bir ek zaten var."
+msgid "An attachment with this name already exists for this item."
+msgstr "Bu içerik unsuru için bu isimde bir ek zaten var."
 
 #: lektor_tekir/templates/tekir_base.html:6
 #: lektor_tekir/templates/tekir_base.html:13
@@ -84,30 +84,30 @@ msgstr "Özet"
 msgid "Content"
 msgstr "İçerik"
 
-#: lektor_tekir/templates/tekir_content_edit.html:12
+#: lektor_tekir/templates/tekir_content_edit.html:13
 msgid "Save"
 msgstr "Kaydet"
 
-#: lektor_tekir/templates/tekir_content_edit.html:14
+#: lektor_tekir/templates/tekir_content_edit.html:16
 msgid "Done"
 msgstr "Bitti"
 
-#: lektor_tekir/templates/tekir_content_edit.html:19
+#: lektor_tekir/templates/tekir_content_edit.html:21
 msgid "Close"
 msgstr "Kapat"
 
-#: lektor_tekir/templates/tekir_content_edit.html:24
+#: lektor_tekir/templates/tekir_content_edit.html:26
 msgid "Continue"
 msgstr "Devam et"
 
-#: lektor_tekir/templates/tekir_content_edit.html:25
-#: lektor_tekir/templates/tekir_content_edit.html:33
+#: lektor_tekir/templates/tekir_content_edit.html:27
+#: lektor_tekir/templates/tekir_content_edit.html:36
 #: lektor_tekir/templates/tekir_contents.html:141
 #: lektor_tekir/templates/tekir_contents.html:157
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: lektor_tekir/templates/tekir_content_edit.html:32
+#: lektor_tekir/templates/tekir_content_edit.html:35
 #: lektor_tekir/templates/tekir_contents.html:29
 #: lektor_tekir/templates/tekir_contents.html:66
 msgid "Select"
@@ -131,8 +131,8 @@ msgstr "Altsayfalar"
 
 #: lektor_tekir/templates/tekir_contents.html:30
 #: lektor_tekir/templates/tekir_contents.html:133
-msgid "ID"
-msgstr "Kimlik"
+msgid "Name"
+msgstr "İsim"
 
 #: lektor_tekir/templates/tekir_contents.html:31
 msgid "Type"
@@ -153,7 +153,7 @@ msgstr "Ekler"
 
 #: lektor_tekir/templates/tekir_contents.html:67
 msgid "File name"
-msgstr "Dosya adı"
+msgstr "Dosya ismi"
 
 #: lektor_tekir/templates/tekir_contents.html:84
 msgid "No attachments."
@@ -222,10 +222,4 @@ msgstr "Temizle"
 #: lektor_tekir/templates/tekir_summary.html:22
 msgid "Build"
 msgstr "Üret"
-
-#~ msgid "Cleaned"
-#~ msgstr "Temizlendi"
-
-#~ msgid "Built"
-#~ msgstr "Üretildi"
 
