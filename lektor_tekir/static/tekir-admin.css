@@ -335,15 +335,21 @@ label {
   margin-block-end: 0.25rem;
 }
 
+input,
+select,
+textarea {
+  padding: 0.25rem 0.5rem;
+}
+
 input[type="text"],
 textarea {
   width: 100%;
 }
 
-input,
-select,
-textarea {
-  padding: 0.25rem 0.5rem;
+input[type="file"] {
+  width: 100%;
+  padding: 1rem;
+  outline: 1px dashed;
 }
 
 button,
