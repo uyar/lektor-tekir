@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-18 14:47+0300\n"
+"POT-Creation-Date: 2023-07-18 15:48+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -43,11 +43,15 @@ msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 msgid "Deleted."
 msgstr "Silindi."
 
-#: lektor_tekir/api.py:253
+#: lektor_tekir/api.py:250
+msgid "Every content item must have a title."
+msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
+
+#: lektor_tekir/api.py:255
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:278 lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/api.py:280 lektor_tekir/templates/tekir_contents.html:54
 #: lektor_tekir/templates/tekir_contents.html:88
 #: lektor_tekir/templates/tekir_contents.html:140
 #: lektor_tekir/templates/tekir_contents.html:156
@@ -55,7 +59,7 @@ msgstr "Bu isimde bir içerik unsuru zaten var."
 msgid "Add"
 msgstr "Ekle"
 
-#: lektor_tekir/api.py:287
+#: lektor_tekir/api.py:289
 msgid "An attachment with this name already exists for this item."
 msgstr "Bu içerik unsuru için bu isimde bir ek zaten var."
 

@@ -245,7 +245,9 @@ def new_content():
     g.lang_code = request.args.get("lang", "en")
     parent = request.args.get("parent")
     model = request.form.get("model")
-    title = request.form.get("title", uuid4().hex)
+    title = request.form.get("title").strip()
+    if not title:
+        return _("Every content item must have a title.")
     slug = request.form.get("slug") or slugify(title)
     path = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
     existing = g.admin_context.tree.get(path)._primary_record

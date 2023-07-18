@@ -109,9 +109,9 @@
       {% set child_model = record.datamodel.child_config.model %}
       {% if child_model %}
       {{ content_models[child_model].name_i18n.get(g.lang_code) or content_models[child_model].name }}
-      <input type="hidden" id="field-model" name="model" value="{{ child_model }}" disabled/>
+      <input type="hidden" id="field-model" name="model" value="{{ child_model }}"/>
       {% else %}
-      <select id="field-model" name="model">
+      <select id="field-model" name="model" required>
         {% for model in content_models %}
           {% if model != 'none' %}
         <option value="{{ model }}">{{ content_models[model].name_i18n.get(g.lang_code) or content_models[model].name }}</option>
@@ -123,7 +123,7 @@
 
     <div class="field">
       <label for="field-title">{{ _('Title') }}</label>
-      <input type="text" id="field-title" name="title"
+      <input type="text" id="field-title" name="title" required
           hx-get="{{ url_for('tekir_admin_api.slug_from_title') }}"
           hx-trigger="keyup delay:500ms changed"
           hx-swap="none"/>
@@ -146,7 +146,7 @@
   <form action="." method="POST" enctype="multipart/form-data">
     <div class="field">
       <label for="field-file">{{ _('File') }}</label>
-      <input type="file" id="field-file" name="file"/>
+      <input type="file" id="field-file" name="file" required/>
     </div>
 
     <div class="warning" id="add-attachment-result"></div>

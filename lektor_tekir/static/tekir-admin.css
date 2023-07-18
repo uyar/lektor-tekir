@@ -236,9 +236,11 @@ button img {
   margin-inline-start: 1em;
 }
 
-.warning {
+.warning:not(:empty) {
+  margin-block: 1em;
   padding: 1em;
-  color: pink;
+  background-color: hsl(350, 94%, 86%);
+  color: var(--color-text-light);
 }
 
 h2.title {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-18 14:47+0300\n"
+"POT-Creation-Date: 2023-07-18 15:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,11 +42,15 @@ msgstr ""
 msgid "Deleted."
 msgstr ""
 
-#: lektor_tekir/api.py:253
+#: lektor_tekir/api.py:250
+msgid "Every content item must have a title."
+msgstr ""
+
+#: lektor_tekir/api.py:255
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:278 lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/api.py:280 lektor_tekir/templates/tekir_contents.html:54
 #: lektor_tekir/templates/tekir_contents.html:88
 #: lektor_tekir/templates/tekir_contents.html:140
 #: lektor_tekir/templates/tekir_contents.html:156
@@ -54,7 +58,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/api.py:287
+#: lektor_tekir/api.py:289
 msgid "An attachment with this name already exists for this item."
 msgstr ""
 
