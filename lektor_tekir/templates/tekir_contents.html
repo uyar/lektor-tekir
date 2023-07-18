@@ -105,17 +105,13 @@
     <div class="field">
       <label for="field-model">{{ _('Content Type') }}</label>
 
-      {% set content_models = record.pad.db.datamodels %}
-      {% set child_model = record.datamodel.child_config.model %}
-      {% if child_model %}
-      {{ content_models[child_model].name_i18n.get(g.lang_code) or content_models[child_model].name }}
-      <input type="hidden" id="field-model" name="model" value="{{ child_model }}"/>
+      {% if (child_models | length) == 1 %}
+      {{ child_models[0].name_i18n.get(g.lang_code) }}
+      <input type="hidden" id="field-model" name="model" value="{{ child_models[0].id }}"/>
       {% else %}
       <select id="field-model" name="model" required>
-        {% for model in content_models %}
-          {% if model != 'none' %}
-        <option value="{{ model }}">{{ content_models[model].name_i18n.get(g.lang_code) or content_models[model].name }}</option>
-          {% endif %}
+        {% for model in child_models %}
+        <option value="{{ model.id }}">{{ model.name_i18n.get(g.lang_code) }}</option>
         {% endfor %}
       </select>
       {% endif %}

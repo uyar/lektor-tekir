@@ -4,6 +4,7 @@
 # Read the included LICENSE.txt file for details.
 
 from datetime import datetime
+from locale import strxfrm
 from pathlib import Path
 
 from flask import Blueprint, g, render_template, request
@@ -49,8 +50,16 @@ def contents():
         current = current.parent
         parents.append(current)
     parents.reverse()
+    child_model_name = record.datamodel.child_config.model
+    if child_model_name is not None:
+        child_models = [record.pad.db.datamodels[child_model_name]]
+    else:
+        child_models = sorted(
+            [m for m in record.pad.db.datamodels.values() if not m.hidden],
+            key=lambda m: strxfrm(m.name_i18n.get(g.lang_code))
+        )
     return render_template("tekir_contents.html", record=record,
-                           parents=parents)
+                           parents=parents, child_models=child_models)
 
 
 @bp.route("/content/edit")

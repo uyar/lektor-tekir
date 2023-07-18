@@ -4,7 +4,7 @@
   {% set field_id = 'field-' + field_name %}
   {% set field_value = item[field.name] %}
   <div class="field">
-    <label for="{{ field_id }}">{{ field.label_i18n.get(g.lang_code) or field.label }}</label>
+    <label for="{{ field_id }}">{{ field.label_i18n.get(g.lang_code) }}</label>
 
     {% set widget = field.label_i18n.get('widget') %}
 
@@ -18,7 +18,7 @@
     <select id="{{ field_id }}" name="{{ field_name }}">
       <option value="">----</option>
       {% for choice, label in field.type.source.iter_choices(pad, record) %}
-      <option value="{{ choice }}" {{ 'selected' if choice == field_value else '' }}>{{ label.get(g.lang_code) or label['en'] }}</option>
+      <option value="{{ choice }}" {{ 'selected' if choice == field_value else '' }}>{{ label.get(g.lang_code) }}</option>
       {% endfor %}
     </select>
     {% elif field.type.name == 'url' %}
@@ -59,7 +59,7 @@
         {% set block_models = record.pad.db.flowblocks %}
         {% for flow_type in (field.type.flow_blocks or block_models) %}
         <button hx-get="{{ url_for('tekir_admin_api.new_flowblock', lang=g.lang_code, flow_type=flow_type, field_name=field_name, path=record.path) }}"
-            hx-target="#{{ field_name }}-add-block" hx-swap="beforebegin">{{ block_models[flow_type].name_i18n.get(g.lang_code) or block_models[flow_type].name }}</button>
+            hx-target="#{{ field_name }}-add-block" hx-swap="beforebegin">{{ block_models[flow_type].name_i18n.get(g.lang_code) }}</button>
         {% endfor %}
       </div>
     </fieldset>
@@ -71,7 +71,7 @@
 {% set new_block = block_index.startswith('uuid_') %}
 <details id="{{ '%s-%s' % (field_name, block_index) }}" {{ 'class=new-block' if new_block else '' }} {{ 'open' if new_block else '' }}>
   <summary>
-    {{ block.flowblockmodel.name_i18n.get(g.lang_code) or block.flowblockmodel.name }}
+    {{ block.flowblockmodel.name_i18n.get(g.lang_code) }}
     <button class="delete-block">{{ _('Delete') }}</button>
     <button class="up-block">{{ _('Move up') }}</button>
     <button class="down-block">{{ _('Move down') }}</button>
