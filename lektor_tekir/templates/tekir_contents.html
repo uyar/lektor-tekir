@@ -94,7 +94,9 @@
   <p>{{ _('This operation will delete the following content items:') }}</p>
   <ol id="delete-items"></ol>
   <p>{{ _('Do you want to continue?') }}</p>
-  <button id="delete-continue" hx-swap="none" hx-post="{{ url_for('tekir_admin_api.delete_content', lang=g.lang_code) }}">{{ _('Yes, delete') }}</button>
+  <button id="delete-continue"
+      hx-post="{{ url_for('tekir_admin_api.delete_content', lang=g.lang_code) }}"
+      hx-swap="none">{{ _('Yes, delete') }}</button>
   <button id="delete-cancel">{{ _('No, cancel') }}</button>
 </dialog>
 
@@ -132,7 +134,10 @@
       <input type="text" id="field-slug" name="slug"/>
     </div>
 
-    <button id="add-subpage-confirm" hx-post="{{ url_for('tekir_admin_api.new_content', lang=g.lang_code, parent=record.path) }}">{{ _('Add') }}</button>
+    <div class="warning" id="add-subpage-result"></div>
+    <button id="add-subpage-confirm"
+        hx-post="{{ url_for('tekir_admin_api.new_content', lang=g.lang_code, parent=record.path) }}"
+        hx-target="#add-subpage-result">{{ _('Add') }}</button>
     <button id="add-subpage-cancel">{{ _('Cancel') }}</button>
   </form>
 </dialog>
@@ -144,7 +149,11 @@
       <input type="file" id="field-file" name="file"/>
     </div>
 
-    <button id="add-attachment-confirm" hx-encoding="multipart/form-data" hx-post="{{ url_for('tekir_admin_api.new_attachment', lang=g.lang_code, parent=record.path) }}">{{ _('Add') }}</button>
+    <div class="warning" id="add-attachment-result"></div>
+    <button id="add-attachment-confirm"
+        hx-encoding="multipart/form-data"
+        hx-post="{{ url_for('tekir_admin_api.new_attachment', lang=g.lang_code, parent=record.path) }}"
+        hx-target="#add-attachment-result">{{ _('Add') }}</button>
     <button id="add-attachment-cancel">{{ _('Cancel') }}</button>
   </form>
 </dialog>

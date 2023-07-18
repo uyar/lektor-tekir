@@ -248,6 +248,9 @@ def new_content():
     title = request.form.get("title", uuid4().hex)
     slug = request.form.get("slug") or slugify(title)
     path = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
+    existing = g.admin_context.tree.get(path)._primary_record
+    if existing is not None:
+        return _("A content item with this ID already exists.")
     pad = g.admin_context.pad
     data = {
         "_model": model,
@@ -261,7 +264,7 @@ def new_content():
     source_path.mkdir()
     contents_file = source_path / "contents.lr"
     contents_file.write_text(get_content(record))
-    response = Response("")
+    response = Response("OK")
     record_url = url_for("tekir_admin.edit_content", path=path)
     response.headers["HX-Redirect"] = record_url
     return response
@@ -279,8 +282,11 @@ def new_attachment():
     pad = g.admin_context.pad
     record = g.admin_context.tree.get(parent)._primary_record
     source_path = Path(pad.db.to_fs_path(record.path))
-    uploaded.save(source_path / uploaded.filename)
-    response = Response("")
+    attachment_path = source_path / uploaded.filename
+    if attachment_path.exists():
+        return _("An attachment with this ID already exists.")
+    uploaded.save(attachment_path)
+    response = Response("OK")
     record_url = url_for("tekir_admin.contents", path=path)
     response.headers["HX-Redirect"] = record_url
     return response

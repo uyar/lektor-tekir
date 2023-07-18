@@ -233,6 +233,11 @@ button img {
   margin-inline-start: 1em;
 }
 
+.warning {
+  padding: 1em;
+  color: pink;
+}
+
 #tekir-page-count {
   max-width: min(20em, 50%);
 }

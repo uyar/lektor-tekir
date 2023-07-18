@@ -49,17 +49,25 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 deleteDialog.close();
             } else if (el.id == "add-subpage") {
                 ev.preventDefault();
+                document.querySelector("#add-subpage-form form").reset();
+                document.getElementById("add-subpage-result").innerHTML = "";
                 addSubpageDialog.showModal();
             } else if (el.id == "add-subpage-confirm") {
-                addSubpageDialog.close();
+                if (document.getElementById("add-subpage-result").innerHTML == "OK") {
+                    addSubpageDialog.close();
+                }
             } else if (el.id == "add-subpage-cancel") {
                 ev.preventDefault();
                 addSubpageDialog.close();
             } else if (el.id == "add-attachment") {
                 ev.preventDefault();
+                document.querySelector("#add-attachment-form form").reset();
+                document.getElementById("add-attachment-result").innerHTML = "";
                 addAttachmentDialog.showModal();
             } else if (el.id == "add-attachment-confirm") {
-                addAttachmentDialog.close();
+                if (document.getElementById("add-attachment-result").innerHTML == "OK") {
+                    addAttachmentDialog.close();
+                }
             } else if (el.id == "add-attachment-cancel") {
                 ev.preventDefault();
                 addAttachmentDialog.close();

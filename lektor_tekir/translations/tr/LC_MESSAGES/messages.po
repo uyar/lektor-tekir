@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-17 22:59+0300\n"
+"POT-Creation-Date: 2023-07-18 14:39+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -42,6 +42,22 @@ msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 #: lektor_tekir/api.py:216
 msgid "Deleted."
 msgstr "Silindi."
+
+#: lektor_tekir/api.py:253
+msgid "A content item with this ID already exists."
+msgstr "Bu kimliğe sahip bir içerik unsuru zaten var."
+
+#: lektor_tekir/api.py:278 lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/templates/tekir_contents.html:88
+#: lektor_tekir/templates/tekir_contents.html:140
+#: lektor_tekir/templates/tekir_contents.html:156
+#: lektor_tekir/templates/tekir_fields.html:56
+msgid "Add"
+msgstr "Ekle"
+
+#: lektor_tekir/api.py:287
+msgid "An attachment with this ID already exists."
+msgstr "Bu kimliğe sahip bir ek zaten var."
 
 #: lektor_tekir/templates/tekir_base.html:6
 #: lektor_tekir/templates/tekir_base.html:13
@@ -86,7 +102,8 @@ msgstr "Devam et"
 
 #: lektor_tekir/templates/tekir_content_edit.html:25
 #: lektor_tekir/templates/tekir_content_edit.html:33
-#: lektor_tekir/templates/tekir_contents.html:134
+#: lektor_tekir/templates/tekir_contents.html:141
+#: lektor_tekir/templates/tekir_contents.html:157
 msgid "Cancel"
 msgstr "Vazgeç"
 
@@ -113,7 +130,7 @@ msgid "Subpages"
 msgstr "Altsayfalar"
 
 #: lektor_tekir/templates/tekir_contents.html:30
-#: lektor_tekir/templates/tekir_contents.html:129
+#: lektor_tekir/templates/tekir_contents.html:133
 msgid "ID"
 msgstr "Kimlik"
 
@@ -130,12 +147,6 @@ msgstr "Seçilenleri sil"
 msgid "No subpages."
 msgstr "Altsayfa yok."
 
-#: lektor_tekir/templates/tekir_contents.html:54
-#: lektor_tekir/templates/tekir_contents.html:133
-#: lektor_tekir/templates/tekir_fields.html:56
-msgid "Add"
-msgstr "Ekle"
-
 #: lektor_tekir/templates/tekir_contents.html:59
 msgid "Attachments"
 msgstr "Ekler"
@@ -148,29 +159,33 @@ msgstr "Dosya adı"
 msgid "No attachments."
 msgstr "Ek yok."
 
-#: lektor_tekir/templates/tekir_contents.html:92
+#: lektor_tekir/templates/tekir_contents.html:94
 msgid "This operation will delete the following content items:"
 msgstr "Bu işlem aşağıdaki içerik unsurlarını silecek:"
 
-#: lektor_tekir/templates/tekir_contents.html:94
+#: lektor_tekir/templates/tekir_contents.html:96
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: lektor_tekir/templates/tekir_contents.html:95
+#: lektor_tekir/templates/tekir_contents.html:99
 msgid "Yes, delete"
 msgstr "Evet, sil"
 
-#: lektor_tekir/templates/tekir_contents.html:96
+#: lektor_tekir/templates/tekir_contents.html:100
 msgid "No, cancel"
 msgstr "Hayır, vazgeç"
 
-#: lektor_tekir/templates/tekir_contents.html:102
+#: lektor_tekir/templates/tekir_contents.html:106
 msgid "Content Type"
 msgstr "İçerik Tipi"
 
-#: lektor_tekir/templates/tekir_contents.html:121
+#: lektor_tekir/templates/tekir_contents.html:125
 msgid "Title"
 msgstr "Başlık"
+
+#: lektor_tekir/templates/tekir_contents.html:148
+msgid "File"
+msgstr "Dosya"
 
 #: lektor_tekir/templates/tekir_fields.html:73
 msgid "Delete"

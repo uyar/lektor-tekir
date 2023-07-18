@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-17 22:59+0300\n"
+"POT-Creation-Date: 2023-07-18 14:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,6 +40,22 @@ msgstr ""
 
 #: lektor_tekir/api.py:216
 msgid "Deleted."
+msgstr ""
+
+#: lektor_tekir/api.py:253
+msgid "A content item with this ID already exists."
+msgstr ""
+
+#: lektor_tekir/api.py:278 lektor_tekir/templates/tekir_contents.html:54
+#: lektor_tekir/templates/tekir_contents.html:88
+#: lektor_tekir/templates/tekir_contents.html:140
+#: lektor_tekir/templates/tekir_contents.html:156
+#: lektor_tekir/templates/tekir_fields.html:56
+msgid "Add"
+msgstr ""
+
+#: lektor_tekir/api.py:287
+msgid "An attachment with this ID already exists."
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:6
@@ -85,7 +101,8 @@ msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:25
 #: lektor_tekir/templates/tekir_content_edit.html:33
-#: lektor_tekir/templates/tekir_contents.html:134
+#: lektor_tekir/templates/tekir_contents.html:141
+#: lektor_tekir/templates/tekir_contents.html:157
 msgid "Cancel"
 msgstr ""
 
@@ -112,7 +129,7 @@ msgid "Subpages"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:30
-#: lektor_tekir/templates/tekir_contents.html:129
+#: lektor_tekir/templates/tekir_contents.html:133
 msgid "ID"
 msgstr ""
 
@@ -129,12 +146,6 @@ msgstr ""
 msgid "No subpages."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:54
-#: lektor_tekir/templates/tekir_contents.html:133
-#: lektor_tekir/templates/tekir_fields.html:56
-msgid "Add"
-msgstr ""
-
 #: lektor_tekir/templates/tekir_contents.html:59
 msgid "Attachments"
 msgstr ""
@@ -147,28 +158,32 @@ msgstr ""
 msgid "No attachments."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:92
+#: lektor_tekir/templates/tekir_contents.html:94
 msgid "This operation will delete the following content items:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:94
+#: lektor_tekir/templates/tekir_contents.html:96
 msgid "Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:95
+#: lektor_tekir/templates/tekir_contents.html:99
 msgid "Yes, delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:96
+#: lektor_tekir/templates/tekir_contents.html:100
 msgid "No, cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:102
+#: lektor_tekir/templates/tekir_contents.html:106
 msgid "Content Type"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:121
+#: lektor_tekir/templates/tekir_contents.html:125
 msgid "Title"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_contents.html:148
+msgid "File"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_fields.html:73
