@@ -32,7 +32,15 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         const el = ev.target;
         const main = el.closest("main");
 
-        if (main.classList.contains("tekir_contents")) {
+        if (main.classList.contains("tekir_summary")) {
+            const publishDialog = document.getElementById("publish-select");
+            if (el.id == "tekir-publish") {
+                publishDialog.showModal();
+            } else if (el.id == "publish-cancel") {
+                ev.preventDefault();
+                publishDialog.close();
+            }
+        } else if (main.classList.contains("tekir_contents")) {
             const deleteDialog = document.getElementById("delete-confirm");
             const addSubpageDialog = document.getElementById("add-subpage-form");
             const addAttachmentDialog = document.getElementById("add-attachment-form");

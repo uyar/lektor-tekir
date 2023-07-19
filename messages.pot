@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 01:26+0300\n"
+"POT-Creation-Date: 2023-07-19 21:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,36 +21,36 @@ msgstr ""
 msgid "No output"
 msgstr ""
 
-#: lektor_tekir/api.py:84 lektor_tekir/templates/tekir_contents.html:8
+#: lektor_tekir/api.py:88 lektor_tekir/templates/tekir_contents.html:8
 #: lektor_tekir/templates/tekir_contents.html:10
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/api.py:181
+#: lektor_tekir/api.py:185
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:184
+#: lektor_tekir/api.py:188
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:200
+#: lektor_tekir/api.py:204
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:238
+#: lektor_tekir/api.py:242
 msgid "Deleted."
 msgstr ""
 
-#: lektor_tekir/api.py:272
+#: lektor_tekir/api.py:276
 msgid "Every content item must have a title."
 msgstr ""
 
-#: lektor_tekir/api.py:277
+#: lektor_tekir/api.py:281
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:302 lektor_tekir/templates/tekir_contents.html:56
+#: lektor_tekir/api.py:306 lektor_tekir/templates/tekir_contents.html:56
 #: lektor_tekir/templates/tekir_contents.html:90
 #: lektor_tekir/templates/tekir_contents.html:138
 #: lektor_tekir/templates/tekir_contents.html:155
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/api.py:311
+#: lektor_tekir/api.py:315
 msgid "An attachment with this name already exists for this item."
 msgstr ""
 
@@ -107,6 +107,7 @@ msgstr ""
 #: lektor_tekir/templates/tekir_content_edit.html:36
 #: lektor_tekir/templates/tekir_contents.html:139
 #: lektor_tekir/templates/tekir_contents.html:156
+#: lektor_tekir/templates/tekir_summary.html:54
 msgid "Cancel"
 msgstr ""
 
@@ -125,7 +126,7 @@ msgid "Edit"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:18
-msgid "Preview"
+msgid "View"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:20
@@ -235,7 +236,12 @@ msgstr ""
 msgid "Build"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:36
+#: lektor_tekir/templates/tekir_summary.html:34
+#: lektor_tekir/templates/tekir_summary.html:51
 msgid "Publish"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_summary.html:41
+msgid "Server"
 msgstr ""
 

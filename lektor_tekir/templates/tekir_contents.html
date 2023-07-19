@@ -15,7 +15,7 @@
   <div id="tekir-summary">
     <h2 class="title">{{ record.title }}</h2>
     <a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path) }}">{{ _('Edit') }}</a>
-    <a class="button" href="{{ record.path }}">{{ _('Preview') }}</a>
+    <a class="button" href="{{ record.path }}">{{ _('View') }}</a>
     <button hx-get="{{ url_for('tekir_admin_api.open_folder', path=record.path) }}"
         hx-swap="none">{{ _('Open in file manager') }}</button>
   </div>

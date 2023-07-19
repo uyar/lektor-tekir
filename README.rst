@@ -8,6 +8,7 @@ What works:
 - Navigating content.
 - Adding, editing and deleting content items.
 - Adding, deleting attachments.
+- Publishing (deploying) the site.
 - Multiple language support in the UI (English and Turkish at the moment).
 - Light/dark mode toggle.
 
@@ -16,7 +17,6 @@ What's planned in the short term:
 - Editing attachments.
 - Editing system fields.
 - Dividing edit form fields into tabs.
-- Deploying the site.
 - Supporting Git.
 - Managing content translations.
 - TinyMCE, Quill or some other editor integration.

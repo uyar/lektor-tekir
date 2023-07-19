@@ -36,8 +36,9 @@ def summary():
         output_time = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M')
     else:
         output_time = _("No output")
-    return render_template("tekir_summary.html", output_path=output_path,
-                           output_time=output_time)
+    servers = g.admin_context.pad.config.get_servers()
+    return render_template("tekir_summary.html", servers=servers,
+                           output_path=output_path, output_time=output_time)
 
 
 @bp.route("/contents")

@@ -31,11 +31,27 @@
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
 
-    <button id="tekir-publish" hx-get="{{ url_for('tekir_admin_api.deploy', lang=g.lang_code) }}"
+    <button id="tekir-publish">{{ _('Publish') }}</button>
+  </div>
+</section>
+
+<dialog id="publish-select">
+  <form action="." method="POST">
+    <div class="field">
+      <label for="field-server">{{ _('Server') }}</label>
+      <select id="field-server" name="server" required>
+        {% for server_id, server in servers.items() %}
+        <option value="{{ server_id }}" {{ 'selected' if server.default else '' }}>{{ server.name }}: {{ server.target }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button id="publish-confirm" hx-post="{{ url_for('tekir_admin_api.deploy', lang=g.lang_code) }}"
         hx-swap="none">
       {{ _('Publish') }}
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
-  </div>
-</section>
+    <button id="publish-cancel">{{ _('Cancel') }}</button>
+  </form>
+</dialog>
 {% endblock %}

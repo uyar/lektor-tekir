@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 01:26+0300\n"
+"POT-Creation-Date: 2023-07-19 21:09+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -22,36 +22,36 @@ msgstr ""
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:84 lektor_tekir/templates/tekir_contents.html:8
+#: lektor_tekir/api.py:88 lektor_tekir/templates/tekir_contents.html:8
 #: lektor_tekir/templates/tekir_contents.html:10
 msgid "home"
 msgstr "ana sayfa"
 
-#: lektor_tekir/api.py:181
+#: lektor_tekir/api.py:185
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:184
+#: lektor_tekir/api.py:188
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:200
+#: lektor_tekir/api.py:204
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
-#: lektor_tekir/api.py:238
+#: lektor_tekir/api.py:242
 msgid "Deleted."
 msgstr "Silindi."
 
-#: lektor_tekir/api.py:272
+#: lektor_tekir/api.py:276
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:277
+#: lektor_tekir/api.py:281
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:302 lektor_tekir/templates/tekir_contents.html:56
+#: lektor_tekir/api.py:306 lektor_tekir/templates/tekir_contents.html:56
 #: lektor_tekir/templates/tekir_contents.html:90
 #: lektor_tekir/templates/tekir_contents.html:138
 #: lektor_tekir/templates/tekir_contents.html:155
@@ -59,7 +59,7 @@ msgstr "Bu isimde bir içerik unsuru zaten var."
 msgid "Add"
 msgstr "Ekle"
 
-#: lektor_tekir/api.py:311
+#: lektor_tekir/api.py:315
 msgid "An attachment with this name already exists for this item."
 msgstr "Bu içerik unsuru için bu isimde bir ek zaten var."
 
@@ -108,6 +108,7 @@ msgstr "Devam et"
 #: lektor_tekir/templates/tekir_content_edit.html:36
 #: lektor_tekir/templates/tekir_contents.html:139
 #: lektor_tekir/templates/tekir_contents.html:156
+#: lektor_tekir/templates/tekir_summary.html:54
 msgid "Cancel"
 msgstr "Vazgeç"
 
@@ -126,7 +127,7 @@ msgid "Edit"
 msgstr "Düzenle"
 
 #: lektor_tekir/templates/tekir_contents.html:18
-msgid "Preview"
+msgid "View"
 msgstr "Görüntüle"
 
 #: lektor_tekir/templates/tekir_contents.html:20
@@ -238,7 +239,12 @@ msgstr "Temizle"
 msgid "Build"
 msgstr "Üret"
 
-#: lektor_tekir/templates/tekir_summary.html:36
+#: lektor_tekir/templates/tekir_summary.html:34
+#: lektor_tekir/templates/tekir_summary.html:51
 msgid "Publish"
 msgstr "Yayımla"
+
+#: lektor_tekir/templates/tekir_summary.html:41
+msgid "Server"
+msgstr "Sunucu"
 

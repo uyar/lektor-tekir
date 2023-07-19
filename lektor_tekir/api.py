@@ -66,12 +66,16 @@ def build():
     return output_time
 
 
-@bp.route("/publish")
+@bp.route("/publish", methods=["POST"])
 def deploy():
     pad = g.admin_context.pad
     output_path = g.admin_context.info.get_builder().destination_path
-    server_info = pad.config.get_default_server()
-    publish(pad.env, server_info.target, output_path, server_info=server_info)
+    server_id = request.form.get("server")
+    server_info = pad.config.get_server(server_id)
+    event_iter = publish(pad.env, server_info.target, output_path,
+                         server_info=server_info)
+    for line in event_iter:
+        print(line)
     return ""
 
 
