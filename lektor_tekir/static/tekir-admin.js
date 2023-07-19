@@ -80,9 +80,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 ev.preventDefault();
                 addAttachmentDialog.close();
             }
-        }
-
-        if (main.classList.contains("tekir_content_edit")) {
+        } else if (main.classList.contains("tekir_content_edit")) {
             const details = el.closest("details");
             const saveDialog = document.getElementById("save-dialog");
             const changesDialog = document.getElementById("changes-dialog");
@@ -113,6 +111,21 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 navigateDialog.close();
             } else if (el.id == "navigate-cancel") {
                 navigateDialog.close();
+            }
+        } else if (main.classList.contains("tekir_attachment_edit")) {
+            const replaceAttachmentDialog = document.getElementById("replace-attachment-form");
+            if (el.id == "replace-attachment") {
+                ev.preventDefault();
+                document.querySelector("#replace-attachment-form form").reset();
+                document.getElementById("replace-attachment-result").innerHTML = "";
+                replaceAttachmentDialog.showModal();
+            } else if (el.id == "replace-attachment-confirm") {
+                if (document.getElementById("replace-attachment-result").innerHTML == "OK") {
+                    replaceAttachmentDialog.close();
+                }
+            } else if (el.id == "replace-attachment-cancel") {
+                ev.preventDefault();
+                replaceAttachmentDialog.close();
             }
         }
     });

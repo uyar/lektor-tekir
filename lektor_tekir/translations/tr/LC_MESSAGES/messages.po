@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 22:16+0300\n"
+"POT-Creation-Date: 2023-07-19 23:11+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -54,7 +54,6 @@ msgstr "Bu isimde bir içerik unsuru zaten var."
 #: lektor_tekir/api.py:312 lektor_tekir/templates/tekir_contents.html:50
 #: lektor_tekir/templates/tekir_contents.html:84
 #: lektor_tekir/templates/tekir_contents.html:132
-#: lektor_tekir/templates/tekir_contents.html:149
 #: lektor_tekir/templates/tekir_macros.html:70
 msgid "Add"
 msgstr "Ekle"
@@ -63,32 +62,70 @@ msgstr "Ekle"
 msgid "An attachment with this name already exists for this item."
 msgstr "Bu içerik unsuru için bu isimde bir ek zaten var."
 
+#: lektor_tekir/api.py:334 lektor_tekir/templates/tekir_attachment_edit.html:28
+#: lektor_tekir/templates/tekir_contents.html:149
+msgid "Upload"
+msgstr "Yükle"
+
 #: lektor_tekir/templates/tekir_attachment_edit.html:9
 msgid "Size"
 msgstr "Boyutlar"
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:11
+msgid "Replace"
+msgstr "Değiştir"
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:19
+#: lektor_tekir/templates/tekir_contents.html:140
+msgid "File"
+msgstr "Dosya"
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:20
+#: lektor_tekir/templates/tekir_contents.html:141
+msgid "Use button to select file or drag and drop your file into this area."
+msgstr ""
+"Düğmeyi kullanarak dosyayı seçin ya da dosyayı sürükleyip bu alana "
+"bırakın."
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:29
+#: lektor_tekir/templates/tekir_content_edit.html:27
+#: lektor_tekir/templates/tekir_content_edit.html:36
+#: lektor_tekir/templates/tekir_contents.html:133
+#: lektor_tekir/templates/tekir_contents.html:150
+#: lektor_tekir/templates/tekir_summary.html:51
+msgid "Cancel"
+msgstr "Vazgeç"
 
 #: lektor_tekir/templates/tekir_base.html:6
 #: lektor_tekir/templates/tekir_base.html:13
 msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
-#: lektor_tekir/templates/tekir_base.html:25
-msgid "Toggle light mode"
+#: lektor_tekir/templates/tekir_base.html:16
+msgid "Language selection"
+msgstr "Dil seçimi"
+
+#: lektor_tekir/templates/tekir_base.html:26
+msgid "Color mode selection"
+msgstr "Renk modu seçimi"
+
+#: lektor_tekir/templates/tekir_base.html:27
+msgid "Switch to light mode"
 msgstr "Aydınlık moda geç"
 
-#: lektor_tekir/templates/tekir_base.html:28
-msgid "Toggle dark mode"
+#: lektor_tekir/templates/tekir_base.html:30
+msgid "Switch to dark mode"
 msgstr "Karanlık moda geç"
 
-#: lektor_tekir/templates/tekir_base.html:35
+#: lektor_tekir/templates/tekir_base.html:37
 msgid "main navigation"
 msgstr "ana navigasyon"
 
-#: lektor_tekir/templates/tekir_base.html:37
+#: lektor_tekir/templates/tekir_base.html:39
 msgid "Summary"
 msgstr "Özet"
 
-#: lektor_tekir/templates/tekir_base.html:38
+#: lektor_tekir/templates/tekir_base.html:40
 msgid "Content"
 msgstr "İçerik"
 
@@ -97,9 +134,6 @@ msgid "Save"
 msgstr "Kaydet"
 
 #: lektor_tekir/templates/tekir_content_edit.html:16
-msgid "Done"
-msgstr "Bitti"
-
 #: lektor_tekir/templates/tekir_content_edit.html:21
 msgid "Close"
 msgstr "Kapat"
@@ -107,14 +141,6 @@ msgstr "Kapat"
 #: lektor_tekir/templates/tekir_content_edit.html:26
 msgid "Continue"
 msgstr "Devam et"
-
-#: lektor_tekir/templates/tekir_content_edit.html:27
-#: lektor_tekir/templates/tekir_content_edit.html:36
-#: lektor_tekir/templates/tekir_contents.html:133
-#: lektor_tekir/templates/tekir_contents.html:150
-#: lektor_tekir/templates/tekir_summary.html:54
-msgid "Cancel"
-msgstr "Vazgeç"
 
 #: lektor_tekir/templates/tekir_content_edit.html:35
 #: lektor_tekir/templates/tekir_contents.html:25
@@ -131,7 +157,7 @@ msgid "View"
 msgstr "Görüntüle"
 
 #: lektor_tekir/templates/tekir_contents.html:14
-#: lektor_tekir/templates/tekir_summary.html:16
+#: lektor_tekir/templates/tekir_summary.html:15
 msgid "Open in file manager"
 msgstr "Dosya yöneticisinde aç"
 
@@ -193,16 +219,6 @@ msgstr "İçerik Tipi"
 msgid "Title"
 msgstr "Başlık"
 
-#: lektor_tekir/templates/tekir_contents.html:140
-msgid "File"
-msgstr "Dosya"
-
-#: lektor_tekir/templates/tekir_contents.html:141
-msgid "Use button to select file or drag and drop your file into this area."
-msgstr ""
-"Düğmeyi kullanarak dosyayı seçin ya da dosyayı sürükleyip bu alana "
-"bırakın."
-
 #: lektor_tekir/templates/tekir_macros.html:3
 msgid "You are here:"
 msgstr "Buradasınız:"
@@ -231,24 +247,24 @@ msgstr "Çıktı"
 msgid "Folder:"
 msgstr "Klasör:"
 
-#: lektor_tekir/templates/tekir_summary.html:20
+#: lektor_tekir/templates/tekir_summary.html:19
 msgid "Time:"
 msgstr "Zaman:"
 
-#: lektor_tekir/templates/tekir_summary.html:24
+#: lektor_tekir/templates/tekir_summary.html:22
 msgid "Clean"
 msgstr "Temizle"
 
-#: lektor_tekir/templates/tekir_summary.html:30
+#: lektor_tekir/templates/tekir_summary.html:27
 msgid "Build"
 msgstr "Üret"
 
-#: lektor_tekir/templates/tekir_summary.html:34
-#: lektor_tekir/templates/tekir_summary.html:51
+#: lektor_tekir/templates/tekir_summary.html:32
+#: lektor_tekir/templates/tekir_summary.html:48
 msgid "Publish"
 msgstr "Yayımla"
 
-#: lektor_tekir/templates/tekir_summary.html:41
+#: lektor_tekir/templates/tekir_summary.html:38
 msgid "Server"
 msgstr "Sunucu"
 

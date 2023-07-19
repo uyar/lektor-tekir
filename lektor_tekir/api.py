@@ -40,7 +40,7 @@ def page_count():
 def open_folder():
     fs_path = request.args.get("fs_path")
     if fs_path is None:
-        path = request.args.get("path")
+        path = request.args.get("path", "/")
         record = g.admin_context.tree.get(path)._primary_record
         fs_path = Path(record.source_filename).parent
     subprocess.run([FILE_MANAGERS[sys.platform], fs_path])
@@ -320,6 +320,22 @@ def new_attachment():
     if attachment_path.exists():
         return _("An attachment with this name already exists for this item.")
     uploaded.save(attachment_path)
+    response = Response("OK")
+    record_url = url_for("tekir_admin.edit_attachment", path=path)
+    response.headers["HX-Redirect"] = record_url
+    return response
+
+
+@bp.route("/replace-attachment", methods=["POST"])
+def replace_attachment():
+    g.lang_code = request.args.get("lang", "en")
+    uploaded = request.files.get("file")
+    if not uploaded:
+        return _("Upload")
+    path = request.args.get("path")
+    pad = g.admin_context.pad
+    source_path = Path(pad.db.to_fs_path(path))
+    uploaded.save(source_path)
     response = Response("OK")
     record_url = url_for("tekir_admin.edit_attachment", path=path)
     response.headers["HX-Redirect"] = record_url

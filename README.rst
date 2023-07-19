@@ -7,7 +7,7 @@ What works:
 
 - Navigating content.
 - Adding, editing and deleting content items.
-- Adding, deleting attachments.
+- Adding, deleting and replacing attachments.
 - Publishing (deploying) the site.
 - Multiple language support in the UI (English and Turkish at the moment).
 - Light/dark mode toggle.

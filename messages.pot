@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 22:16+0300\n"
+"POT-Creation-Date: 2023-07-19 23:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,6 @@ msgstr ""
 #: lektor_tekir/api.py:312 lektor_tekir/templates/tekir_contents.html:50
 #: lektor_tekir/templates/tekir_contents.html:84
 #: lektor_tekir/templates/tekir_contents.html:132
-#: lektor_tekir/templates/tekir_contents.html:149
 #: lektor_tekir/templates/tekir_macros.html:70
 msgid "Add"
 msgstr ""
@@ -62,8 +61,36 @@ msgstr ""
 msgid "An attachment with this name already exists for this item."
 msgstr ""
 
+#: lektor_tekir/api.py:334 lektor_tekir/templates/tekir_attachment_edit.html:28
+#: lektor_tekir/templates/tekir_contents.html:149
+msgid "Upload"
+msgstr ""
+
 #: lektor_tekir/templates/tekir_attachment_edit.html:9
 msgid "Size"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:11
+msgid "Replace"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:19
+#: lektor_tekir/templates/tekir_contents.html:140
+msgid "File"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:20
+#: lektor_tekir/templates/tekir_contents.html:141
+msgid "Use button to select file or drag and drop your file into this area."
+msgstr ""
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:29
+#: lektor_tekir/templates/tekir_content_edit.html:27
+#: lektor_tekir/templates/tekir_content_edit.html:36
+#: lektor_tekir/templates/tekir_contents.html:133
+#: lektor_tekir/templates/tekir_contents.html:150
+#: lektor_tekir/templates/tekir_summary.html:51
+msgid "Cancel"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:6
@@ -71,23 +98,31 @@ msgstr ""
 msgid "Admin Panel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:25
-msgid "Toggle light mode"
+#: lektor_tekir/templates/tekir_base.html:16
+msgid "Language selection"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:28
-msgid "Toggle dark mode"
+#: lektor_tekir/templates/tekir_base.html:26
+msgid "Color mode selection"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:35
-msgid "main navigation"
+#: lektor_tekir/templates/tekir_base.html:27
+msgid "Switch to light mode"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_base.html:30
+msgid "Switch to dark mode"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:37
+msgid "main navigation"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_base.html:39
 msgid "Summary"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:38
+#: lektor_tekir/templates/tekir_base.html:40
 msgid "Content"
 msgstr ""
 
@@ -96,23 +131,12 @@ msgid "Save"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:16
-msgid "Done"
-msgstr ""
-
 #: lektor_tekir/templates/tekir_content_edit.html:21
 msgid "Close"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:26
 msgid "Continue"
-msgstr ""
-
-#: lektor_tekir/templates/tekir_content_edit.html:27
-#: lektor_tekir/templates/tekir_content_edit.html:36
-#: lektor_tekir/templates/tekir_contents.html:133
-#: lektor_tekir/templates/tekir_contents.html:150
-#: lektor_tekir/templates/tekir_summary.html:54
-msgid "Cancel"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:35
@@ -130,7 +154,7 @@ msgid "View"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:14
-#: lektor_tekir/templates/tekir_summary.html:16
+#: lektor_tekir/templates/tekir_summary.html:15
 msgid "Open in file manager"
 msgstr ""
 
@@ -192,14 +216,6 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:140
-msgid "File"
-msgstr ""
-
-#: lektor_tekir/templates/tekir_contents.html:141
-msgid "Use button to select file or drag and drop your file into this area."
-msgstr ""
-
 #: lektor_tekir/templates/tekir_macros.html:3
 msgid "You are here:"
 msgstr ""
@@ -228,24 +244,24 @@ msgstr ""
 msgid "Folder:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:20
+#: lektor_tekir/templates/tekir_summary.html:19
 msgid "Time:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:24
+#: lektor_tekir/templates/tekir_summary.html:22
 msgid "Clean"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:30
+#: lektor_tekir/templates/tekir_summary.html:27
 msgid "Build"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:34
-#: lektor_tekir/templates/tekir_summary.html:51
+#: lektor_tekir/templates/tekir_summary.html:32
+#: lektor_tekir/templates/tekir_summary.html:48
 msgid "Publish"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:41
+#: lektor_tekir/templates/tekir_summary.html:38
 msgid "Server"
 msgstr ""
 

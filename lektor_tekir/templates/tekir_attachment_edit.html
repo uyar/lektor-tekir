@@ -7,6 +7,26 @@
 
   {% if record._attachment_type == "image" %}
 <p>{{ _('Size') }}: {{ record.width }}x{{record.height}}</p>
+
+<button id="replace-attachment">{{ _('Replace') }}</button>
+
 <img src="{{ record.path }}" alt="" widtn="{{ record.width }}" height="{{ record.height }}"/>
   {% endif %}
+
+<dialog id="replace-attachment-form">
+  <form action="." method="POST" enctype="multipart/form-data">
+    <div class="field">
+      <label for="field-file">{{ _('File') }}</label>
+      <small>{{ _('Use button to select file or drag and drop your file into this area.') }}</small>
+      <input type="file" id="field-file" name="file" required/>
+    </div>
+
+    <div class="warning" id="replace-attachment-result"></div>
+    <button id="replace-attachment-confirm"
+        hx-encoding="multipart/form-data"
+        hx-post="{{ url_for('tekir_admin_api.replace_attachment', lang=g.lang_code, path=record.path) }}"
+        hx-target="#replace-attachment-result">{{ _('Upload') }}</button>
+    <button id="replace-attachment-cancel">{{ _('Cancel') }}</button>
+  </form>
+</dialog>
 {% endblock %}

@@ -146,7 +146,7 @@
     <button id="add-attachment-confirm"
         hx-encoding="multipart/form-data"
         hx-post="{{ url_for('tekir_admin_api.new_attachment', lang=g.lang_code, parent=record.path) }}"
-        hx-target="#add-attachment-result">{{ _('Add') }}</button>
+        hx-target="#add-attachment-result">{{ _('Upload') }}</button>
     <button id="add-attachment-cancel">{{ _('Cancel') }}</button>
   </form>
 </dialog>

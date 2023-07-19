@@ -1,15 +1,20 @@
 Changes
 =======
 
+0.5 (unreleased)
+----------------
+
+- Add support for replacing attachments.
+
 0.4 (2023-07-19)
 ----------------
 
 - Rewrite edit link on server to navigate to Tekir admin page.
-- Add support for publishing site to servers.
-- Add support for adding attachments.
+- Add view button to contents page.
 - Add support for opening relevant folders in file manager.
+- Add support for adding attachments.
+- Add support for publishing site to servers.
 - Make UI language preference persistent.
-- Add preview button to contents page.
 
 0.3 (2023-07-17)
 ----------------

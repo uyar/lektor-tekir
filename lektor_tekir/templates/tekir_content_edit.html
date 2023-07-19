@@ -13,7 +13,7 @@
         hx-target="#save-result">{{ _('Save') }}</button>
     <button id="check-changes"
         hx-post="{{ url_for('tekir_admin_api.check_changes', path=record.path, lang=g.lang_code) }}"
-        hx-target="#changes-result">{{ _('Done') }}</button>
+        hx-target="#changes-result">{{ _('Close') }}</button>
   </form>
 
   <dialog id="save-dialog">
