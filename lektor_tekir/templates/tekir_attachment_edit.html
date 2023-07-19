@@ -1,0 +1,12 @@
+{% extends 'tekir_base.html' %}
+
+{% from 'tekir_fields.html' import render_breadcrumbs %}
+
+{% block body %}
+{{ render_breadcrumbs(record, ancestors) }}
+
+  {% if record._attachment_type == "image" %}
+<p>{{ _('Size') }}: {{ record.width }}x{{record.height}}</p>
+<img src="{{ record.path }}" alt="" widtn="{{ record.width }}" height="{{ record.height }}"/>
+  {% endif %}
+{% endblock %}

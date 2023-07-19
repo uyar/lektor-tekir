@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 21:09+0300\n"
+"POT-Creation-Date: 2023-07-19 22:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,49 +17,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:50 lektor_tekir/api.py:65 lektor_tekir/dash.py:38
+#: lektor_tekir/api.py:56 lektor_tekir/api.py:71 lektor_tekir/dash.py:39
 msgid "No output"
 msgstr ""
 
-#: lektor_tekir/api.py:88 lektor_tekir/templates/tekir_contents.html:8
-#: lektor_tekir/templates/tekir_contents.html:10
+#: lektor_tekir/api.py:94 lektor_tekir/templates/tekir_fields.html:6
+#: lektor_tekir/templates/tekir_fields.html:8
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/api.py:185
+#: lektor_tekir/api.py:191
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:188
+#: lektor_tekir/api.py:194
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:204
+#: lektor_tekir/api.py:210
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:242
+#: lektor_tekir/api.py:248
 msgid "Deleted."
 msgstr ""
 
-#: lektor_tekir/api.py:276
+#: lektor_tekir/api.py:282
 msgid "Every content item must have a title."
 msgstr ""
 
-#: lektor_tekir/api.py:281
+#: lektor_tekir/api.py:287
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:306 lektor_tekir/templates/tekir_contents.html:56
-#: lektor_tekir/templates/tekir_contents.html:90
-#: lektor_tekir/templates/tekir_contents.html:138
-#: lektor_tekir/templates/tekir_contents.html:155
-#: lektor_tekir/templates/tekir_fields.html:58
+#: lektor_tekir/api.py:312 lektor_tekir/templates/tekir_contents.html:50
+#: lektor_tekir/templates/tekir_contents.html:84
+#: lektor_tekir/templates/tekir_contents.html:132
+#: lektor_tekir/templates/tekir_contents.html:149
+#: lektor_tekir/templates/tekir_fields.html:70
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/api.py:315
+#: lektor_tekir/api.py:321
 msgid "An attachment with this name already exists for this item."
+msgstr ""
+
+#: lektor_tekir/templates/tekir_attachment_edit.html:9
+msgid "Size"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:6
@@ -105,110 +109,110 @@ msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:27
 #: lektor_tekir/templates/tekir_content_edit.html:36
-#: lektor_tekir/templates/tekir_contents.html:139
-#: lektor_tekir/templates/tekir_contents.html:156
+#: lektor_tekir/templates/tekir_contents.html:133
+#: lektor_tekir/templates/tekir_contents.html:150
 #: lektor_tekir/templates/tekir_summary.html:54
 msgid "Cancel"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_content_edit.html:35
-#: lektor_tekir/templates/tekir_contents.html:31
-#: lektor_tekir/templates/tekir_contents.html:68
+#: lektor_tekir/templates/tekir_contents.html:25
+#: lektor_tekir/templates/tekir_contents.html:62
 msgid "Select"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:5
-msgid "You are here:"
-msgstr ""
-
-#: lektor_tekir/templates/tekir_contents.html:17
+#: lektor_tekir/templates/tekir_contents.html:11
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:18
+#: lektor_tekir/templates/tekir_contents.html:12
 msgid "View"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:20
+#: lektor_tekir/templates/tekir_contents.html:14
 #: lektor_tekir/templates/tekir_summary.html:16
 msgid "Open in file manager"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:24
+#: lektor_tekir/templates/tekir_contents.html:18
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:32
-#: lektor_tekir/templates/tekir_contents.html:131
+#: lektor_tekir/templates/tekir_contents.html:26
+#: lektor_tekir/templates/tekir_contents.html:125
 msgid "Name"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:33
+#: lektor_tekir/templates/tekir_contents.html:27
 msgid "Type"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:49
-#: lektor_tekir/templates/tekir_contents.html:83
+#: lektor_tekir/templates/tekir_contents.html:43
+#: lektor_tekir/templates/tekir_contents.html:77
 msgid "Delete selected items"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:52
+#: lektor_tekir/templates/tekir_contents.html:46
 msgid "No subpages."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:61
+#: lektor_tekir/templates/tekir_contents.html:55
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:69
+#: lektor_tekir/templates/tekir_contents.html:63
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:86
+#: lektor_tekir/templates/tekir_contents.html:80
 msgid "No attachments."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:96
+#: lektor_tekir/templates/tekir_contents.html:90
 msgid "This operation will delete the following content items:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:98
+#: lektor_tekir/templates/tekir_contents.html:92
 msgid "Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:101
+#: lektor_tekir/templates/tekir_contents.html:95
 msgid "Yes, delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:102
+#: lektor_tekir/templates/tekir_contents.html:96
 msgid "No, cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:108
+#: lektor_tekir/templates/tekir_contents.html:102
 msgid "Content Type"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:123
+#: lektor_tekir/templates/tekir_contents.html:117
 msgid "Title"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:146
+#: lektor_tekir/templates/tekir_contents.html:140
 msgid "File"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:147
+#: lektor_tekir/templates/tekir_contents.html:141
 msgid "Use button to select file or drag and drop your file into this area."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:76
+#: lektor_tekir/templates/tekir_fields.html:3
+msgid "You are here:"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_fields.html:88
 msgid "Delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:77
+#: lektor_tekir/templates/tekir_fields.html:89
 msgid "Move up"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_fields.html:78
+#: lektor_tekir/templates/tekir_fields.html:90
 msgid "Move down"
 msgstr ""
 

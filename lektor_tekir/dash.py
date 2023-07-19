@@ -41,16 +41,21 @@ def summary():
                            output_path=output_path, output_time=output_time)
 
 
+def get_ancestors(record):
+    ancestors = []
+    current = record
+    while current.parent:
+        current = current.parent
+        ancestors.append(current)
+    ancestors.reverse()
+    return ancestors
+
+
 @bp.route("/contents")
 def contents():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
-    parents = []
-    current = record
-    while current.parent:
-        current = current.parent
-        parents.append(current)
-    parents.reverse()
+    ancestors = get_ancestors(record)
     child_model_name = record.datamodel.child_config.model
     if child_model_name is not None:
         child_models = [record.pad.db.datamodels[child_model_name]]
@@ -60,7 +65,7 @@ def contents():
             key=lambda m: strxfrm(m.name_i18n.get(g.lang_code) or m.name)
         )
     return render_template("tekir_contents.html", record=record,
-                           parents=parents, child_models=child_models)
+                           ancestors=ancestors, child_models=child_models)
 
 
 @bp.route("/content/edit")
@@ -68,3 +73,12 @@ def edit_content():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
     return render_template("tekir_content_edit.html", record=record)
+
+
+@bp.route("/attachment/edit")
+def edit_attachment():
+    path = request.args.get("path", "/")
+    record = g.admin_context.tree.get(path)._primary_record
+    ancestors = get_ancestors(record)
+    return render_template("tekir_attachment_edit.html", record=record,
+                           ancestors=ancestors)

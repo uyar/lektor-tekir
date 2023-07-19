@@ -321,6 +321,6 @@ def new_attachment():
         return _("An attachment with this name already exists for this item.")
     uploaded.save(attachment_path)
     response = Response("OK")
-    record_url = url_for("tekir_admin.contents", path=path)
+    record_url = url_for("tekir_admin.edit_attachment", path=path)
     response.headers["HX-Redirect"] = record_url
     return response
