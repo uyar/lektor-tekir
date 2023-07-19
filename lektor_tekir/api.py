@@ -4,6 +4,7 @@
 # Read the included LICENSE.txt file for details.
 
 import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 from shutil import rmtree
@@ -19,6 +20,11 @@ from slugify import slugify
 
 MULTILINE = {"text", "strings", "markdown", "html", "rst", "flow"}
 
+FILE_MANAGERS = {
+    "darwin": "open",
+    "linux": "xdg-open",
+    "win32": "explorer",
+}
 
 bp = Blueprint("tekir_admin_api", __name__, url_prefix="/tekir-admin/api")
 
@@ -37,7 +43,7 @@ def open_folder():
         path = request.args.get("path")
         record = g.admin_context.tree.get(path)._primary_record
         fs_path = Path(record.source_filename).parent
-    subprocess.run(["xdg-open", fs_path])
+    subprocess.run([FILE_MANAGERS[sys.platform], fs_path])
     return ""
 
 
