@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 22:05+0300\n"
+"POT-Creation-Date: 2023-07-19 22:16+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:56 lektor_tekir/api.py:71 lektor_tekir/dash.py:39
+#: lektor_tekir/api.py:56 lektor_tekir/api.py:71 lektor_tekir/dash.py:38
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:94 lektor_tekir/templates/tekir_fields.html:6
-#: lektor_tekir/templates/tekir_fields.html:8
+#: lektor_tekir/api.py:94 lektor_tekir/templates/tekir_macros.html:6
+#: lektor_tekir/templates/tekir_macros.html:8
 msgid "home"
 msgstr "ana sayfa"
 
@@ -55,7 +55,7 @@ msgstr "Bu isimde bir içerik unsuru zaten var."
 #: lektor_tekir/templates/tekir_contents.html:84
 #: lektor_tekir/templates/tekir_contents.html:132
 #: lektor_tekir/templates/tekir_contents.html:149
-#: lektor_tekir/templates/tekir_fields.html:70
+#: lektor_tekir/templates/tekir_macros.html:70
 msgid "Add"
 msgstr "Ekle"
 
@@ -203,19 +203,19 @@ msgstr ""
 "Düğmeyi kullanarak dosyayı seçin ya da dosyayı sürükleyip bu alana "
 "bırakın."
 
-#: lektor_tekir/templates/tekir_fields.html:3
+#: lektor_tekir/templates/tekir_macros.html:3
 msgid "You are here:"
 msgstr "Buradasınız:"
 
-#: lektor_tekir/templates/tekir_fields.html:88
+#: lektor_tekir/templates/tekir_macros.html:88
 msgid "Delete"
 msgstr "Sil"
 
-#: lektor_tekir/templates/tekir_fields.html:89
+#: lektor_tekir/templates/tekir_macros.html:89
 msgid "Move up"
 msgstr "Yukarı"
 
-#: lektor_tekir/templates/tekir_fields.html:90
+#: lektor_tekir/templates/tekir_macros.html:90
 msgid "Move down"
 msgstr "Aşağı"
 

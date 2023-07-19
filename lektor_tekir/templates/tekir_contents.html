@@ -1,6 +1,6 @@
 {% extends 'tekir_base.html' %}
 
-{% from 'tekir_fields.html' import render_breadcrumbs %}
+{% from 'tekir_macros.html' import render_breadcrumbs %}
 
 {% block body %}
 {{ render_breadcrumbs(record, ancestors) }}
