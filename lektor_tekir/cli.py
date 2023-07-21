@@ -6,7 +6,7 @@
 from pathlib import Path
 
 from flask import g
-from flask_babel import Babel, get_locale
+from flask_babel import Babel
 from lektor import admin
 from lektor.admin.modules import serve
 from lektor.admin.webui import WebUI
@@ -24,8 +24,8 @@ class TekirAdminUI(WebUI):
 
         locale_dir = Path(__file__).parent / "translations"
         babel = Babel(self, locale_selector=lambda: g.lang_code,
+                      default_domain="lektor_tekir",
                       default_translation_directories=str(locale_dir))
-        self.jinja_env.globals["get_locale"] = get_locale
         self.jinja_env.globals["translations"] = babel.list_translations
 
 
