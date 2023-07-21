@@ -17,13 +17,10 @@ classifiers = [
     "Natural Language :: English",
     "Natural Language :: Turkish",
     "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Topic :: Internet",
     "Topic :: Internet :: WWW/HTTP :: Site Management",
 ]
 
@@ -46,8 +43,12 @@ lektor-tekir = "lektor_tekir.cli:main"
 [project.urls]
 repository = "https://github.com/uyar/lektor-tekir"
 
+[tool.setuptools]
+packages = ["lektor_tekir"]
+include-package-data = false
+
 [tool.setuptools.package-data]
-lektor_tekir = ["translations/**"]
+lektor_tekir = ["templates/*", "static/**/*", "translations/**/*"]
 
 [tool.ruff]
 select = ["E", "F", "I"]
