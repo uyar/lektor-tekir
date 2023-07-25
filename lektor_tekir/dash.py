@@ -3,23 +3,34 @@
 # lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
+from __future__ import annotations
+
+from datetime import datetime
+from http import HTTPStatus
 from locale import strxfrm
 from pathlib import Path
 
-from flask import Blueprint, g, render_template, request
+from flask import Blueprint, Response, g, render_template, request
 from flask_babel import format_datetime
 from flask_babel import gettext as _
+from lektor.builder import Builder
+from lektor.datamodel import DataModel
+from lektor.db import Record
 
 from . import api, utils
 
 
-def overview():
-    root = g.admin_context.pad.root
-    page_count = utils.get_page_count(root)
+def i18n_name(item: DataModel) -> str:
+    return strxfrm(item.name_i18n.get(g.lang_code, item.name))
 
-    builder = g.admin_context.info.get_builder()
-    output = {"path": builder.destination_path}
-    output_time = utils.get_output_time(builder)
+
+def overview() -> str:
+    root: Record = g.admin_context.pad.root
+    page_count: int = utils.get_page_count(root)
+
+    builder: Builder = g.admin_context.info.get_builder()
+    output: dict[str, str] = {"path": builder.destination_path}
+    output_time: datetime | None = utils.get_output_time(builder)
     if output_time is None:
         output["time"] = _("No output")
     else:
@@ -29,37 +40,37 @@ def overview():
                            output=output)
 
 
-def contents():
-    path = request.args.get("path", "/")
-    record = g.admin_context.tree.get(path)._primary_record
-    ancestors = utils.get_ancestors(record)
-    child_model_name = record.datamodel.child_config.model
-    if child_model_name is not None:
-        child_models = [record.pad.db.datamodels[child_model_name]]
-    else:
-        child_models = sorted(
-            [m for m in record.pad.db.datamodels.values() if not m.hidden],
-            key=lambda m: strxfrm(m.name_i18n.get(g.lang_code) or m.name)
-        )
+def contents() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.tree.get(path)._primary_record
+    ancestors: list[Record] = utils.get_ancestors(record)
+    child_models: list[DataModel] = utils.get_child_models(record)
+    child_models.sort(key=i18n_name)
     return render_template("tekir_contents.html", record=record,
                            ancestors=ancestors, child_models=child_models)
 
 
-def edit_content():
-    path = request.args.get("path", "/")
-    record = g.admin_context.tree.get(path)._primary_record
+def edit_content() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.tree.get(path)._primary_record
     return render_template("tekir_content_edit.html", record=record)
 
 
-def edit_attachment():
-    path = request.args.get("path", "/")
-    record = g.admin_context.tree.get(path)._primary_record
-    ancestors = utils.get_ancestors(record)
+def edit_attachment() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.tree.get(path)._primary_record
+    ancestors: list[Record] = utils.get_ancestors(record)
     return render_template("tekir_attachment_edit.html", record=record,
                            ancestors=ancestors)
 
 
-def make_blueprint():
+def make_blueprint() -> Blueprint:
     bp = Blueprint("tekir_admin", __name__,
                    url_prefix="/tekir-admin/<lang_code>",
                    template_folder=Path(__file__).parent / "templates",
