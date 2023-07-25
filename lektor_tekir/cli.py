@@ -19,7 +19,7 @@ class TekirAdminUI(WebUI):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.register_blueprint(dash.bp)
+        self.register_blueprint(dash.make_blueprint())
 
         locale_dir = Path(__file__).parent / "translations"
         babel = Babel(self, locale_selector=lambda: g.lang_code,

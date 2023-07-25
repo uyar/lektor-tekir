@@ -26,17 +26,13 @@ FILE_MANAGERS = {
     "win32": "explorer",
 }
 
-bp = Blueprint("api", __name__, url_prefix="/api")
 
-
-@bp.route("/page-count")
 def page_count():
     root_path = Path(g.admin_context.pad.root.source_filename).parent
     pages = {c.parent for c in root_path.glob("**/contents*.lr")}
     return str(len(pages))
 
 
-@bp.route("/open-folder")
 def open_folder():
     fs_path = request.args.get("fs_path")
     if fs_path is None:
@@ -47,7 +43,6 @@ def open_folder():
     return ""
 
 
-@bp.route("/clean-build")
 def clean_build():
     builder = g.admin_context.info.get_builder()
     builder.prune(all=True)
@@ -55,7 +50,6 @@ def clean_build():
     return _("No output")
 
 
-@bp.route("/build")
 def build():
     builder = g.admin_context.info.get_builder()
     builder.build_all()
@@ -70,8 +64,7 @@ def build():
     return output_time
 
 
-@bp.route("/publish", methods=["POST"])
-def deploy():
+def publish_build():
     pad = g.admin_context.pad
     output_path = g.admin_context.info.get_builder().destination_path
     server_id = request.form.get("server")
@@ -83,7 +76,6 @@ def deploy():
     return ""
 
 
-@bp.route("/navigables")
 def navigables():
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
@@ -176,7 +168,6 @@ def get_content(record):
     return "\n---\n".join(entries) + "\n"
 
 
-@bp.route("/save-content", methods=["POST"])
 def save_content():
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
@@ -190,7 +181,6 @@ def save_content():
         return _("Content saved.")
 
 
-@bp.route("/check-changes", methods=["POST"])
 def check_changes():
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
@@ -209,7 +199,6 @@ def check_changes():
     return response
 
 
-@bp.route("/check-delete", methods=["POST"])
 def check_delete():
     items = request.form.getlist("selected-items")
     root_path = Path(g.admin_context.pad.root.source_filename).parent
@@ -227,7 +216,6 @@ def check_delete():
     return "\n".join(f'<li>{p}</li>' for p in sorted(result))
 
 
-@bp.route("/delete-content", methods=["POST"])
 def delete_content():
     items = request.form.getlist("selected-items")
     for path in items:
@@ -241,7 +229,6 @@ def delete_content():
     return _("Deleted.")
 
 
-@bp.route("/new-flowblock")
 def new_flowblock():
     flow_type = request.args.get("flow_type")
     field_name = request.args.get("field_name")
@@ -255,7 +242,6 @@ def new_flowblock():
                            block_index=f"uuid_{uuid_index}")
 
 
-@bp.route("/slugify")
 def slug_from_title():
     title = request.args.get("title")
     slug = slugify(title)
@@ -264,7 +250,6 @@ def slug_from_title():
     return response
 
 
-@bp.route("/new-content", methods=["POST"])
 def new_content():
     parent = request.args.get("parent")
     model = request.form.get("model")
@@ -295,7 +280,6 @@ def new_content():
     return response
 
 
-@bp.route("/new-attachment", methods=["POST"])
 def new_attachment():
     uploaded = request.files.get("file")
     if not uploaded:
@@ -316,7 +300,6 @@ def new_attachment():
     return response
 
 
-@bp.route("/replace-attachment", methods=["POST"])
 def replace_attachment():
     uploaded = request.files.get("file")
     if not uploaded:
@@ -329,3 +312,33 @@ def replace_attachment():
     record_url = url_for("tekir_admin.edit_attachment", path=path)
     response.headers["HX-Redirect"] = record_url
     return response
+
+
+def make_blueprint():
+    bp = Blueprint("api", __name__, url_prefix="/api")
+
+    bp.add_url_rule("/page-count", view_func=page_count)
+    bp.add_url_rule("/open-folder", view_func=open_folder)
+    bp.add_url_rule("/clean-build", view_func=clean_build)
+    bp.add_url_rule("/build", view_func=build)
+    bp.add_url_rule("/publish-build", view_func=publish_build,
+                    methods=["POST"])
+    bp.add_url_rule("/navigables", view_func=navigables)
+    bp.add_url_rule("/save-content", view_func=save_content,
+                    methods=["POST"])
+    bp.add_url_rule("/check-changes", view_func=check_changes,
+                    methods=["POST"])
+    bp.add_url_rule("/check-delete", view_func=check_delete,
+                    methods=["POST"])
+    bp.add_url_rule("/delete-content", view_func=delete_content,
+                    methods=["POST"])
+    bp.add_url_rule("/new-flowblock", view_func=new_flowblock)
+    bp.add_url_rule("/slugify", view_func=slug_from_title)
+    bp.add_url_rule("/new-content", view_func=new_content,
+                    methods=["POST"])
+    bp.add_url_rule("/new-attachment", view_func=new_attachment,
+                    methods=["POST"])
+    bp.add_url_rule("/replace-attachment", view_func=replace_attachment,
+                    methods=["POST"])
+
+    return bp

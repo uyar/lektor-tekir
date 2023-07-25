@@ -13,23 +13,6 @@ from flask_babel import gettext as _
 from . import api
 
 
-bp = Blueprint("tekir_admin", __name__, url_prefix="/tekir-admin/<lang_code>",
-               template_folder=Path(__file__).parent / "templates",
-               static_folder=Path(__file__).parent / "static")
-bp.register_blueprint(api.bp)
-
-
-@bp.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault("lang_code", g.lang_code)
-
-
-@bp.url_value_preprocessor
-def pull_language_code(endpoint, values):
-    g.lang_code = values.pop("lang_code")
-
-
-@bp.route("/")
 def summary():
     builder = g.admin_context.info.get_builder()
     output_path = Path(builder.destination_path)
@@ -54,7 +37,6 @@ def get_ancestors(record):
     return ancestors
 
 
-@bp.route("/contents")
 def contents():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
@@ -71,17 +53,39 @@ def contents():
                            ancestors=ancestors, child_models=child_models)
 
 
-@bp.route("/content/edit")
 def edit_content():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
     return render_template("tekir_content_edit.html", record=record)
 
 
-@bp.route("/attachment/edit")
 def edit_attachment():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
     ancestors = get_ancestors(record)
     return render_template("tekir_attachment_edit.html", record=record,
                            ancestors=ancestors)
+
+
+def make_blueprint():
+    bp = Blueprint("tekir_admin", __name__,
+                   url_prefix="/tekir-admin/<lang_code>",
+                   template_folder=Path(__file__).parent / "templates",
+                   static_folder=Path(__file__).parent / "static")
+
+    @bp.url_defaults
+    def add_language_code(endpoint, values):
+        values.setdefault("lang_code", g.lang_code)
+
+    @bp.url_value_preprocessor
+    def pull_language_code(endpoint, values):
+        g.lang_code = values.pop("lang_code")
+
+    bp.add_url_rule("/", view_func=summary)
+    bp.add_url_rule("/contents", view_func=contents)
+    bp.add_url_rule("/content/edit", view_func=edit_content)
+    bp.add_url_rule("/attachment/edit", view_func=edit_attachment)
+
+    bp.register_blueprint(api.make_blueprint())
+
+    return bp

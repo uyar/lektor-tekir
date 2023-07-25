@@ -43,7 +43,7 @@
       </select>
     </div>
 
-    <button id="publish-confirm" hx-post="{{ url_for('tekir_admin.api.deploy') }}"
+    <button id="publish-confirm" hx-post="{{ url_for('tekir_admin.api.publish_build') }}"
         hx-swap="none">
       {{ _('Publish') }}
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
