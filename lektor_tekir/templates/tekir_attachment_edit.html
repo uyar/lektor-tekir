@@ -6,11 +6,15 @@
 {{ render_breadcrumbs(record, ancestors) }}
 
   {% if record._attachment_type == "image" %}
-<p>{{ _('Size') }}: {{ record.width }}x{{record.height}}</p>
+  <div id="attachment-media">
+    <img src="{{ record.path }}" alt="" widtn="{{ record.width }}" height="{{ record.height }}"/>
+  </div>
 
-<button class="add-content" data-formid="replace-attachment-form">{{ _('Replace') }}</button>
+  <div id="attachment-summary">
+    <p>{{ _('Size') }}: {{ record.width }}x{{record.height}}</p>
 
-<img src="{{ record.path }}" alt="" widtn="{{ record.width }}" height="{{ record.height }}"/>
+    <button class="add-content" data-formid="replace-attachment-form">{{ _('Replace') }}</button>
+  </div>
   {% endif %}
 
 <dialog id="replace-attachment-dialog">

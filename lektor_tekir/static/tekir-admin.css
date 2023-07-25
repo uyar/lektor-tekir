@@ -399,6 +399,22 @@ details:last-of-type .down-block {
   margin-inline-end: 1em;
 }
 
+main.tekir_attachment_edit {
+  grid-template-areas:
+    "breadcrumbs breadcrumbs"
+    "media       summary";
+  grid-template-columns: auto auto;
+  grid-template-rows: auto 1fr;
+}
+
+#attachment-summary {
+  grid-area: summary;
+}
+
+#attachment-media {
+  grid-area: media;
+}
+
 /* MEDIA QUERIES */
 
 @media (prefers-color-scheme: dark) {
