@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         window.location.href = window.location.href.replace("/" + pageLang + "/", "/" + uiLang + "/");
     }
 
-    document.querySelectorAll("#tekir-langs a").forEach((el) => {
+    document.querySelectorAll("#tekir-langs a.button").forEach((el) => {
         el.addEventListener("click", (ev) => {
             localStorage.setItem("ui-language", ev.currentTarget.innerHTML);
         });
@@ -18,18 +18,14 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
 
     document.querySelectorAll("button.color-mode").forEach((el) => {
         el.addEventListener("click", (ev) => {
-            if (ev.currentTarget.classList.contains("light")) {
-                document.documentElement.setAttribute("color-mode", "light");
-                localStorage.setItem("color-mode", "light");
-            } else {
-                document.documentElement.setAttribute("color-mode", "dark");
-                localStorage.setItem("color-mode", "dark");
-            }
+            const mode = ev.currentTarget.dataset.mode;
+            document.documentElement.setAttribute("color-mode", mode);
+            localStorage.setItem("color-mode", mode);
         });
     });
 
     document.querySelector("main").addEventListener("click", (ev) => {
-        const el = ev.target;
+        const el = ev.target.closest("button") ?? ev.target;
         const main = el.closest("main");
 
         if (main.classList.contains("tekir_overview")) {
@@ -105,7 +101,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 details.nextElementSibling.after(details);
             } else if (el.classList.contains("tekir-navigate")) {
                 document.getElementById("navigate-select").setAttribute("data-src", el.id);
-                navigateDialog. showModal();
+                navigateDialog.showModal();
             } else if (el.id == "navigate-select") {
                 document.getElementById(el.dataset.src).value = document.getElementById("navigables").value;
                 navigateDialog.close();

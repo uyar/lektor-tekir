@@ -12,24 +12,28 @@
   <div class="field">
     <p>{{ _('Folder:') }} <span id="output-path">{{ output_path }}</span></p>
     <button hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output_path) }}"
-        hx-swap="none">{{ _('Open in file manager') }}</button>
+        hx-swap="none">
+      {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
+    </button>
   </div>
 
   <div class="field">
     <p>{{ _('Time:') }} <span id="output-time">{{ output_time }}</span></p>
     <button hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
         hx-target="#output-time">
-      {{ _('Clean') }}
+      {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
     <button hx-get="{{ url_for('tekir_admin.api.build') }}"
         hx-target="#output-time">
-      {{ _('Build') }}
+      {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
   </div>
 
-  <button id="tekir-publish">{{ _('Publish') }}</button>
+  <button id="tekir-publish">
+    {% include 'icons/cloud-upload.svg' %} <span>{{ _('Publish') }}</span>
+  </button>
 </section>
 
 <dialog id="publish-select">

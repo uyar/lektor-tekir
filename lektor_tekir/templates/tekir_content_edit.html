@@ -10,10 +10,14 @@
 
     <button id="save-content"
         hx-post="{{ url_for('tekir_admin.api.save_content', path=record.path) }}"
-        hx-target="#save-result">{{ _('Save') }}</button>
+        hx-target="#save-result">
+      {% include 'icons/document-save.svg' %} <span>{{ _('Save') }}</span>
+    </button>
     <button id="check-changes"
         hx-post="{{ url_for('tekir_admin.api.check_changes', path=record.path) }}"
-        hx-target="#changes-result">{{ _('Close') }}</button>
+        hx-target="#changes-result">
+      {% include 'icons/document-close.svg' %} <span>{{ _('Close') }}</span>
+    </button>
   </form>
 
   <dialog id="save-dialog">

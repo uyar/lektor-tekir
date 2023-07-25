@@ -5,6 +5,7 @@ Changes
 ----------------
 
 - Add support for replacing attachments.
+- Add icons to action buttons.
 
 0.4 (2023-07-19)
 ----------------

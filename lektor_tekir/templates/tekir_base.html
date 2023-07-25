@@ -16,19 +16,20 @@
       <nav id="tekir-langs" aria-label="{{ _('Language selection') }}">
         <ul role="list">
           {% for locale in translations() %}
-            {% set base_path = url_for('tekir_admin.overview').split('/')[:-2] %}
-            {% set route = request.full_path.split('/')[(base_path | length) + 1:] %}
-          <li><a href="{{ '%s/%s/%s' % ('/'.join(base_path), locale, '/'.join(route)) }}">{{ locale }}</a></li>
+          <li>
+            {% set alt_url = url_for(request.endpoint, lang_code=locale, **request.args) %}
+            <a class="button" href="{{ alt_url }}">{{ locale }}</a>
+          </li>
           {% endfor %}
         </ul>
       </nav>
 
       <div id="tekir-color-modes" aria-label="{{ _('Color mode selection') }}">
-        <button class="color-mode light" aria-label="{{ _('Switch to light mode') }}">
-          {% include 'sun.svg' %}
+        <button class="color-mode" data-mode="light" title="{{ _('Switch to light mode') }}">
+          {% include 'icons/sun.svg' %}
         </button>
-        <button class="color-mode dark" aria-label="{{ _('Switch to dark mode') }}">
-          {% include 'moon.svg' %}
+        <button class="color-mode" data-mode="dark" title="{{ _('Switch to dark mode') }}">
+          {% include 'icons/moon.svg' %}
         </button>
       </div>
     </div>
@@ -36,8 +37,16 @@
 
   <nav id="main-tabs" aria-label="{{ _('main navigation') }}">
     <ul role="list">
-      <li><a href="{{ url_for('tekir_admin.overview') }}">{% include 'home.svg' %} {{ _('Overview') }}</a></li>
-      <li><a href="{{ url_for('tekir_admin.contents', path='/') }}">{% include 'contents.svg' %} {{ _('Content') }}</a></li>
+      <li>
+        <a class="button" href="{{ url_for('tekir_admin.overview') }}">
+          {% include 'icons/user-home.svg' %} <span>{{ _('Overview') }}</span>
+        </a>
+      </li>
+      <li>
+        <a class="button" href="{{ url_for('tekir_admin.contents', path='/') }}">
+          {% include 'icons/contents.svg' %} <span>{{ _('Content') }}</span>
+        </a>
+      </li>
     </ul>
   </nav>
 

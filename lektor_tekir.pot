@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-25 10:49+0300\n"
+"POT-Creation-Date: 2023-07-25 13:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,9 +50,9 @@ msgstr ""
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:207 lektor_tekir/templates/tekir_contents.html:50
-#: lektor_tekir/templates/tekir_contents.html:84
-#: lektor_tekir/templates/tekir_contents.html:132
+#: lektor_tekir/api.py:207 lektor_tekir/templates/tekir_contents.html:59
+#: lektor_tekir/templates/tekir_contents.html:97
+#: lektor_tekir/templates/tekir_contents.html:146
 #: lektor_tekir/templates/tekir_macros.html:70
 msgid "Add"
 msgstr ""
@@ -62,7 +62,7 @@ msgid "An attachment with this name already exists for this item."
 msgstr ""
 
 #: lektor_tekir/api.py:227 lektor_tekir/templates/tekir_attachment_edit.html:28
-#: lektor_tekir/templates/tekir_contents.html:149
+#: lektor_tekir/templates/tekir_contents.html:163
 msgid "Upload"
 msgstr ""
 
@@ -75,21 +75,21 @@ msgid "Replace"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_attachment_edit.html:19
-#: lektor_tekir/templates/tekir_contents.html:140
+#: lektor_tekir/templates/tekir_contents.html:154
 msgid "File"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_attachment_edit.html:20
-#: lektor_tekir/templates/tekir_contents.html:141
+#: lektor_tekir/templates/tekir_contents.html:155
 msgid "Use button to select file or drag and drop your file into this area."
 msgstr ""
 
 #: lektor_tekir/templates/tekir_attachment_edit.html:29
-#: lektor_tekir/templates/tekir_content_edit.html:27
-#: lektor_tekir/templates/tekir_content_edit.html:36
-#: lektor_tekir/templates/tekir_contents.html:133
-#: lektor_tekir/templates/tekir_contents.html:150
-#: lektor_tekir/templates/tekir_overview.html:51
+#: lektor_tekir/templates/tekir_content_edit.html:31
+#: lektor_tekir/templates/tekir_content_edit.html:40
+#: lektor_tekir/templates/tekir_contents.html:147
+#: lektor_tekir/templates/tekir_contents.html:164
+#: lektor_tekir/templates/tekir_overview.html:55
 msgid "Cancel"
 msgstr ""
 
@@ -102,117 +102,117 @@ msgstr ""
 msgid "Language selection"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:26
+#: lektor_tekir/templates/tekir_base.html:27
 msgid "Color mode selection"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:27
+#: lektor_tekir/templates/tekir_base.html:28
 msgid "Switch to light mode"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:30
+#: lektor_tekir/templates/tekir_base.html:31
 msgid "Switch to dark mode"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:37
+#: lektor_tekir/templates/tekir_base.html:38
 msgid "main navigation"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:39
+#: lektor_tekir/templates/tekir_base.html:42
 msgid "Overview"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_base.html:40
+#: lektor_tekir/templates/tekir_base.html:47
 msgid "Content"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:13
+#: lektor_tekir/templates/tekir_content_edit.html:14
 msgid "Save"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:16
-#: lektor_tekir/templates/tekir_content_edit.html:21
+#: lektor_tekir/templates/tekir_content_edit.html:19
+#: lektor_tekir/templates/tekir_content_edit.html:25
 msgid "Close"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:26
+#: lektor_tekir/templates/tekir_content_edit.html:30
 msgid "Continue"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:35
-#: lektor_tekir/templates/tekir_contents.html:25
-#: lektor_tekir/templates/tekir_contents.html:62
+#: lektor_tekir/templates/tekir_content_edit.html:39
+#: lektor_tekir/templates/tekir_contents.html:31
+#: lektor_tekir/templates/tekir_contents.html:72
 msgid "Select"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:11
+#: lektor_tekir/templates/tekir_contents.html:12
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:12
+#: lektor_tekir/templates/tekir_contents.html:15
 msgid "View"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:14
-#: lektor_tekir/templates/tekir_overview.html:15
-msgid "Open in file manager"
+#: lektor_tekir/templates/tekir_contents.html:19
+#: lektor_tekir/templates/tekir_overview.html:16
+msgid "Open folder"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:18
+#: lektor_tekir/templates/tekir_contents.html:24
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:26
-#: lektor_tekir/templates/tekir_contents.html:125
+#: lektor_tekir/templates/tekir_contents.html:32
+#: lektor_tekir/templates/tekir_contents.html:139
 msgid "Name"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:27
+#: lektor_tekir/templates/tekir_contents.html:33
 msgid "Type"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:43
-#: lektor_tekir/templates/tekir_contents.html:77
-msgid "Delete selected items"
+#: lektor_tekir/templates/tekir_contents.html:50
+#: lektor_tekir/templates/tekir_contents.html:88
+msgid "Delete selected"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:46
+#: lektor_tekir/templates/tekir_contents.html:54
 msgid "No subpages."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:55
+#: lektor_tekir/templates/tekir_contents.html:65
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:63
+#: lektor_tekir/templates/tekir_contents.html:73
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:80
+#: lektor_tekir/templates/tekir_contents.html:92
 msgid "No attachments."
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:90
+#: lektor_tekir/templates/tekir_contents.html:104
 msgid "This operation will delete the following content items:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:92
+#: lektor_tekir/templates/tekir_contents.html:106
 msgid "Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:95
+#: lektor_tekir/templates/tekir_contents.html:109
 msgid "Yes, delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:96
+#: lektor_tekir/templates/tekir_contents.html:110
 msgid "No, cancel"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:102
+#: lektor_tekir/templates/tekir_contents.html:116
 msgid "Content Type"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_contents.html:117
+#: lektor_tekir/templates/tekir_contents.html:131
 msgid "Title"
 msgstr ""
 
@@ -224,11 +224,11 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_macros.html:89
+#: lektor_tekir/templates/tekir_macros.html:91
 msgid "Move up"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_macros.html:90
+#: lektor_tekir/templates/tekir_macros.html:94
 msgid "Move down"
 msgstr ""
 
@@ -244,24 +244,24 @@ msgstr ""
 msgid "Folder:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_overview.html:19
+#: lektor_tekir/templates/tekir_overview.html:21
 msgid "Time:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_overview.html:22
+#: lektor_tekir/templates/tekir_overview.html:24
 msgid "Clean"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_overview.html:27
+#: lektor_tekir/templates/tekir_overview.html:29
 msgid "Build"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_overview.html:32
-#: lektor_tekir/templates/tekir_overview.html:48
+#: lektor_tekir/templates/tekir_overview.html:35
+#: lektor_tekir/templates/tekir_overview.html:52
 msgid "Publish"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_overview.html:38
+#: lektor_tekir/templates/tekir_overview.html:42
 msgid "Server"
 msgstr ""
 
