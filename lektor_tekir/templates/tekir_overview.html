@@ -36,7 +36,7 @@
   </button>
 </section>
 
-<dialog id="publish-select">
+<dialog id="publish-dialog">
   <form action="." method="POST">
     <div class="field">
       <label for="field-server">{{ _('Server') }}</label>
@@ -52,7 +52,7 @@
       {{ _('Publish') }}
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
-    <button id="publish-cancel">{{ _('Cancel') }}</button>
+    <button class="modal-close">{{ _('Cancel') }}</button>
   </form>
 </dialog>
 {% endblock %}

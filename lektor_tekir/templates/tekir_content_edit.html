@@ -22,13 +22,13 @@
 
   <dialog id="save-dialog">
     <p id="save-result"></p>
-    <button id="save-close">{{ _('Close') }}</button>
+    <button class="modal-close">{{ _('Close') }}</button>
   </dialog>
 
   <dialog id="changes-dialog">
     <p id="changes-result"></p>
     <button id="changes-continue">{{ _('Continue') }}</button>
-    <button id="changes-cancel">{{ _('Cancel') }}</button>
+    <button class="modal-close">{{ _('Cancel') }}</button>
   </dialog>
 
   <dialog id="navigate-dialog">
@@ -37,6 +37,6 @@
           hx-get="{{ url_for('tekir_admin.api.navigables') }}"></select>
     </div>
     <button id="navigate-select">{{ _('Select') }}</button>
-    <button id="navigate-cancel">{{ _('Cancel') }}</button>
+    <button class="modal-close">{{ _('Cancel') }}</button>
   </dialog>
 {% endblock %}
