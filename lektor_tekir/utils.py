@@ -75,17 +75,17 @@ def get_child_models(record: Record) -> list[DataModel]:
     return [m for m in data_models.values() if not m.hidden]
 
 
-def get_navigables(record: Record) -> list[tuple[str, str, str]]:
+def get_navigables(record: Record) -> list[tuple[str, str, bool]]:
     options: list[tuple[str, str, str]] = [
-        ("", "----", ""),
-        ("/", "home", "selected" if record.path == "/" else "")
+        ("", "----", False),
+        ("/", "/", record.path == "/"),
     ]
     for ancestor in get_ancestors(record)[1:]:
-        options.append((ancestor.path, ancestor["_slug"], ""))
+        options.append((ancestor.path, ancestor["_slug"], False))
     if record.path != "/":
-        options.append((record.path, record["_slug"], "selected"))
+        options.append((record.path, record["_slug"], True))
     for child in record.children:
-        options.append((child.path, child["_slug"], ""))
+        options.append((child.path, child["_slug"], False))
     return options
 
 
