@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         const el = ev.target;
         const main = el.closest("main");
 
-        if (main.classList.contains("tekir_summary")) {
+        if (main.classList.contains("tekir_overview")) {
             const publishDialog = document.getElementById("publish-select");
             if (el.id == "tekir-publish") {
                 publishDialog.showModal();

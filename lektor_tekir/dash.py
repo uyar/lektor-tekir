@@ -13,7 +13,7 @@ from flask_babel import gettext as _
 from . import api, utils
 
 
-def summary():
+def overview():
     builder = g.admin_context.info.get_builder()
     output_path = Path(builder.destination_path)
     home_page = output_path / "index.html"
@@ -23,7 +23,7 @@ def summary():
     else:
         output_time = _("No output")
     servers = g.admin_context.pad.config.get_servers()
-    return render_template("tekir_summary.html", servers=servers,
+    return render_template("tekir_overview.html", servers=servers,
                            output_path=output_path, output_time=output_time)
 
 
@@ -71,7 +71,7 @@ def make_blueprint():
     def pull_language_code(endpoint, values):
         g.lang_code = values.pop("lang_code")
 
-    bp.add_url_rule("/", view_func=summary)
+    bp.add_url_rule("/", view_func=overview)
     bp.add_url_rule("/contents", view_func=contents)
     bp.add_url_rule("/content/edit", view_func=edit_content)
     bp.add_url_rule("/attachment/edit", view_func=edit_attachment)

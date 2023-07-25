@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-21 22:41+0300\n"
+"POT-Creation-Date: 2023-07-25 10:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,51 +17,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:56 lektor_tekir/api.py:71 lektor_tekir/dash.py:38
+#: lektor_tekir/api.py:50 lektor_tekir/api.py:63 lektor_tekir/dash.py:24
 msgid "No output"
 msgstr ""
 
-#: lektor_tekir/api.py:94 lektor_tekir/templates/tekir_macros.html:6
+#: lektor_tekir/api.py:83 lektor_tekir/templates/tekir_macros.html:6
 #: lektor_tekir/templates/tekir_macros.html:8
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/api.py:191
+#: lektor_tekir/api.py:99
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:194
+#: lektor_tekir/api.py:102
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:210
+#: lektor_tekir/api.py:116
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
-#: lektor_tekir/api.py:248
+#: lektor_tekir/api.py:150
 msgid "Deleted."
 msgstr ""
 
-#: lektor_tekir/api.py:282
+#: lektor_tekir/api.py:179
 msgid "Every content item must have a title."
 msgstr ""
 
-#: lektor_tekir/api.py:287
+#: lektor_tekir/api.py:184
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:312 lektor_tekir/templates/tekir_contents.html:50
+#: lektor_tekir/api.py:207 lektor_tekir/templates/tekir_contents.html:50
 #: lektor_tekir/templates/tekir_contents.html:84
 #: lektor_tekir/templates/tekir_contents.html:132
 #: lektor_tekir/templates/tekir_macros.html:70
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/api.py:321
+#: lektor_tekir/api.py:216
 msgid "An attachment with this name already exists for this item."
 msgstr ""
 
-#: lektor_tekir/api.py:334 lektor_tekir/templates/tekir_attachment_edit.html:28
+#: lektor_tekir/api.py:227 lektor_tekir/templates/tekir_attachment_edit.html:28
 #: lektor_tekir/templates/tekir_contents.html:149
 msgid "Upload"
 msgstr ""
@@ -89,7 +89,7 @@ msgstr ""
 #: lektor_tekir/templates/tekir_content_edit.html:36
 #: lektor_tekir/templates/tekir_contents.html:133
 #: lektor_tekir/templates/tekir_contents.html:150
-#: lektor_tekir/templates/tekir_summary.html:51
+#: lektor_tekir/templates/tekir_overview.html:51
 msgid "Cancel"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgid "main navigation"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:39
-msgid "Summary"
+msgid "Overview"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:40
@@ -154,7 +154,7 @@ msgid "View"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_contents.html:14
-#: lektor_tekir/templates/tekir_summary.html:15
+#: lektor_tekir/templates/tekir_overview.html:15
 msgid "Open in file manager"
 msgstr ""
 
@@ -232,36 +232,36 @@ msgstr ""
 msgid "Move down"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:5
+#: lektor_tekir/templates/tekir_overview.html:5
 msgid "Number of Pages"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:10
+#: lektor_tekir/templates/tekir_overview.html:10
 msgid "Output"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:13
+#: lektor_tekir/templates/tekir_overview.html:13
 msgid "Folder:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:19
+#: lektor_tekir/templates/tekir_overview.html:19
 msgid "Time:"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:22
+#: lektor_tekir/templates/tekir_overview.html:22
 msgid "Clean"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:27
+#: lektor_tekir/templates/tekir_overview.html:27
 msgid "Build"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:32
-#: lektor_tekir/templates/tekir_summary.html:48
+#: lektor_tekir/templates/tekir_overview.html:32
+#: lektor_tekir/templates/tekir_overview.html:48
 msgid "Publish"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_summary.html:38
+#: lektor_tekir/templates/tekir_overview.html:38
 msgid "Server"
 msgstr ""
 

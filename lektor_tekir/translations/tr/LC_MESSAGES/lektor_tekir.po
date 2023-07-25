@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-19 23:11+0300\n"
+"POT-Creation-Date: 2023-07-25 10:49+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -18,51 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:56 lektor_tekir/api.py:71 lektor_tekir/dash.py:38
+#: lektor_tekir/api.py:50 lektor_tekir/api.py:63 lektor_tekir/dash.py:24
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:94 lektor_tekir/templates/tekir_macros.html:6
+#: lektor_tekir/api.py:83 lektor_tekir/templates/tekir_macros.html:6
 #: lektor_tekir/templates/tekir_macros.html:8
 msgid "home"
 msgstr "ana sayfa"
 
-#: lektor_tekir/api.py:191
+#: lektor_tekir/api.py:99
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:194
+#: lektor_tekir/api.py:102
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:210
+#: lektor_tekir/api.py:116
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
-#: lektor_tekir/api.py:248
+#: lektor_tekir/api.py:150
 msgid "Deleted."
 msgstr "Silindi."
 
-#: lektor_tekir/api.py:282
+#: lektor_tekir/api.py:179
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:287
+#: lektor_tekir/api.py:184
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:312 lektor_tekir/templates/tekir_contents.html:50
+#: lektor_tekir/api.py:207 lektor_tekir/templates/tekir_contents.html:50
 #: lektor_tekir/templates/tekir_contents.html:84
 #: lektor_tekir/templates/tekir_contents.html:132
 #: lektor_tekir/templates/tekir_macros.html:70
 msgid "Add"
 msgstr "Ekle"
 
-#: lektor_tekir/api.py:321
+#: lektor_tekir/api.py:216
 msgid "An attachment with this name already exists for this item."
 msgstr "Bu içerik unsuru için bu isimde bir ek zaten var."
 
-#: lektor_tekir/api.py:334 lektor_tekir/templates/tekir_attachment_edit.html:28
+#: lektor_tekir/api.py:227 lektor_tekir/templates/tekir_attachment_edit.html:28
 #: lektor_tekir/templates/tekir_contents.html:149
 msgid "Upload"
 msgstr "Yükle"
@@ -92,7 +92,7 @@ msgstr ""
 #: lektor_tekir/templates/tekir_content_edit.html:36
 #: lektor_tekir/templates/tekir_contents.html:133
 #: lektor_tekir/templates/tekir_contents.html:150
-#: lektor_tekir/templates/tekir_summary.html:51
+#: lektor_tekir/templates/tekir_overview.html:51
 msgid "Cancel"
 msgstr "Vazgeç"
 
@@ -122,8 +122,8 @@ msgid "main navigation"
 msgstr "ana navigasyon"
 
 #: lektor_tekir/templates/tekir_base.html:39
-msgid "Summary"
-msgstr "Özet"
+msgid "Overview"
+msgstr "Genel Bakış"
 
 #: lektor_tekir/templates/tekir_base.html:40
 msgid "Content"
@@ -157,7 +157,7 @@ msgid "View"
 msgstr "Görüntüle"
 
 #: lektor_tekir/templates/tekir_contents.html:14
-#: lektor_tekir/templates/tekir_summary.html:15
+#: lektor_tekir/templates/tekir_overview.html:15
 msgid "Open in file manager"
 msgstr "Dosya yöneticisinde aç"
 
@@ -235,36 +235,36 @@ msgstr "Yukarı"
 msgid "Move down"
 msgstr "Aşağı"
 
-#: lektor_tekir/templates/tekir_summary.html:5
+#: lektor_tekir/templates/tekir_overview.html:5
 msgid "Number of Pages"
 msgstr "Sayfa Sayısı"
 
-#: lektor_tekir/templates/tekir_summary.html:10
+#: lektor_tekir/templates/tekir_overview.html:10
 msgid "Output"
 msgstr "Çıktı"
 
-#: lektor_tekir/templates/tekir_summary.html:13
+#: lektor_tekir/templates/tekir_overview.html:13
 msgid "Folder:"
 msgstr "Klasör:"
 
-#: lektor_tekir/templates/tekir_summary.html:19
+#: lektor_tekir/templates/tekir_overview.html:19
 msgid "Time:"
 msgstr "Zaman:"
 
-#: lektor_tekir/templates/tekir_summary.html:22
+#: lektor_tekir/templates/tekir_overview.html:22
 msgid "Clean"
 msgstr "Temizle"
 
-#: lektor_tekir/templates/tekir_summary.html:27
+#: lektor_tekir/templates/tekir_overview.html:27
 msgid "Build"
 msgstr "Üret"
 
-#: lektor_tekir/templates/tekir_summary.html:32
-#: lektor_tekir/templates/tekir_summary.html:48
+#: lektor_tekir/templates/tekir_overview.html:32
+#: lektor_tekir/templates/tekir_overview.html:48
 msgid "Publish"
 msgstr "Yayımla"
 
-#: lektor_tekir/templates/tekir_summary.html:38
+#: lektor_tekir/templates/tekir_overview.html:38
 msgid "Server"
 msgstr "Sunucu"
 
