@@ -11,6 +11,7 @@ What works:
 - Publishing (deploying) the site.
 - Multiple language support in the UI (English and Turkish at the moment).
 - Light/dark mode toggle.
+- A widget for navigating content elements in the site.
 
 What's planned in the short term:
 

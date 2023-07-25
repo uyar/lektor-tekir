@@ -224,17 +224,12 @@ def new_flowblock() -> str | Response:
                            block_index=f"uuid_{uuid_index}")
 
 
-def navigables():
-    path = request.args.get("path")
-    record = g.admin_context.tree.get(path)._primary_record
-    options = [("", "----", "selected" if not path else "")]
-    options.append(("/", _("home"), "selected" if path == "/" else ""))
-    if path and (path != "/"):
-        options.append((record.path, record["_slug"], "selected"))
-    for child in record.children:
-        options.append((child.path, child["_slug"], ""))
+def navigables() -> str | Response:
+    path: str = request.args.get("path", "/")
+    record: Record = g.admin_context.tree.get(path)._primary_record
+    navigables: list[tuple[str, str, str]] = utils.get_navigables(record)
     return "\n".join(f'<option value="{value}" {selected}>{label}</option>'
-                     for value, label, selected in options)
+                     for value, label, selected in navigables)
 
 
 def make_blueprint():

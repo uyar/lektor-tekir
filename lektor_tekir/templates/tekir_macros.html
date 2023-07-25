@@ -42,7 +42,8 @@
     <input type="text" class="tekir-navigate" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"
         hx-get="{{ url_for('tekir_admin.api.navigables') }}"
         hx-vals='js:{path: event.target.value ? event.target.value : "{{ record.path }}"}'
-        hx-trigger="click" hx-target="#navigables"/>
+        hx-trigger="click"
+        hx-target="#navigables"/>
       {% else %}
     <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
       {% endif %}

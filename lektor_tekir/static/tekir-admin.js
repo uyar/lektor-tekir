@@ -74,6 +74,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 document.getElementById("navigate-select").setAttribute("data-src", el.id);
                 navigateDialog.showModal();
             } else if (el.id == "navigate-select") {
+                ev.preventDefault();
                 document.getElementById(el.dataset.src).value = document.getElementById("navigables").value;
                 navigateDialog.close();
             }
