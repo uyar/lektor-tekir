@@ -76,7 +76,7 @@ def get_child_models(record: Record) -> list[DataModel]:
 
 
 def get_navigables(record: Record) -> list[tuple[str, str, bool]]:
-    options: list[tuple[str, str, str]] = [
+    options: list[tuple[str, str, bool]] = [
         ("", "----", False),
         ("/", "/", record.path == "/"),
     ]

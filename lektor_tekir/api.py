@@ -17,6 +17,7 @@ from flask import Blueprint, Response, g, render_template, request, url_for
 from flask_babel import format_datetime
 from flask_babel import gettext as _
 from lektor.builder import Builder
+from lektor.constants import PRIMARY_ALT
 from lektor.db import Pad, Record
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
@@ -40,7 +41,7 @@ def open_folder() -> str | Response:
         path: str | None = request.args.get("path")
         if path is None:
             return Response("", status=HTTPStatus.BAD_REQUEST)
-        record: Record = g.admin_context.tree.get(path)._primary_record
+        record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
         fs_path = str(Path(record.source_filename).parent)
     file_manager: str = FILE_MANAGERS.get(sys.platform, "xdg-open")
     subprocess.run([file_manager, fs_path])
@@ -82,7 +83,7 @@ def publish_build() -> str | Response:
 
 def check_delete() -> str:
     items: list[str] = request.form.getlist("selected-items")
-    records: list[Record] = [g.admin_context.tree.get(i)._primary_record
+    records: list[Record] = [g.admin_context.pad.get(i, alt=PRIMARY_ALT)
                              for i in items]
     root: Record = g.admin_context.pad.root
     paths: list[str] = utils.get_record_paths(records, root=root)
@@ -92,7 +93,7 @@ def check_delete() -> str:
 
 def delete_content() -> str:
     items: list[str] = request.form.getlist("selected-items")
-    records: list[Record] = [g.admin_context.tree.get(i)._primary_record
+    records: list[Record] = [g.admin_context.pad.get(i, alt=PRIMARY_ALT)
                              for i in items]
     for record in records:
         utils.delete_record(record)
@@ -148,7 +149,7 @@ def new_attachment() -> str | Response:
     try:
         path: str = utils.create_attachment(
             pad=g.admin_context.pad,
-            parent=g.admin_context.tree.get(parent)._primary_record,
+            parent=g.admin_context.pad.get(parent, alt=PRIMARY_ALT),
             uploaded=uploaded,
         )
     except ValueError:
@@ -164,7 +165,7 @@ def check_changes() -> Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.tree.get(path)._primary_record
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     record_url: str = url_for("tekir_admin.contents", path=record.path)
     content: str = utils.get_content(record, request.form)
     source = Path(record.source_filename)
@@ -183,7 +184,7 @@ def save_content() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.tree.get(path)._primary_record
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     content: str = utils.get_content(record, request.form)
     source = Path(record.source_filename)
     if content == source.read_text():
@@ -215,7 +216,7 @@ def new_flowblock() -> str | Response:
     flow_type: str | None = request.args.get("flow_type")
     if (path is None) or (field_name is None) or (flow_type is None):
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.tree.get(path)._primary_record
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     block: FlowBlock = utils.create_flowblock(record=record,
                                               flow_type=flow_type)
     uuid_index: str = uuid4().hex
@@ -226,7 +227,7 @@ def new_flowblock() -> str | Response:
 
 def navigables() -> str:
     path: str = request.args.get("path", "/")
-    record: Record = g.admin_context.tree.get(path)._primary_record
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     if record is None:
         record = g.admin_context.pad.root
     navigables: list[tuple[str, str, bool]] = utils.get_navigables(record)

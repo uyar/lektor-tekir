@@ -14,6 +14,7 @@ from flask import Blueprint, Response, g, render_template, request
 from flask_babel import format_datetime
 from flask_babel import gettext as _
 from lektor.builder import Builder
+from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel
 from lektor.db import Record
 
@@ -44,7 +45,7 @@ def contents() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.tree.get(path)._primary_record
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     ancestors: list[Record] = utils.get_ancestors(record)
     child_models: list[DataModel] = utils.get_child_models(record)
     child_models.sort(key=i18n_name)
@@ -56,7 +57,7 @@ def edit_content() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.tree.get(path)._primary_record
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     return render_template("tekir_content_edit.html", record=record)
 
 
@@ -64,7 +65,7 @@ def edit_attachment() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.tree.get(path)._primary_record
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     ancestors: list[Record] = utils.get_ancestors(record)
     return render_template("tekir_attachment_edit.html", record=record,
                            ancestors=ancestors)
