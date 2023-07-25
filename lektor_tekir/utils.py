@@ -7,10 +7,15 @@ from __future__ import annotations
 
 from datetime import datetime
 from pathlib import Path
+from shutil import rmtree
+from uuid import uuid4
 
 from lektor.builder import Builder
 from lektor.datamodel import DataModel, Field, FlowBlockModel
-from lektor.db import Record
+from lektor.db import Pad, Page, Record
+from lektor.types.flow import FlowBlock
+from slugify import slugify
+from werkzeug.datastructures.file_storage import FileStorage
 from werkzeug.datastructures.structures import ImmutableMultiDict
 
 
@@ -45,6 +50,21 @@ def get_ancestors(record: Record) -> list[Record]:
         ancestors.append(current)
     ancestors.reverse()
     return ancestors
+
+
+def get_record_paths(records: list[Record], *, root: Record) -> list[str]:
+    root_fs_path = Path(root.source_filename).parent
+    paths: list[str] = []
+    for record in records:
+        if record.is_attachment:
+            paths.append(record.path[1:])  # strip the trailing '/'
+        else:
+            record_dir = Path(record.source_filename).parent
+            for record_fs_path in record_dir.glob("**/*"):
+                if record_fs_path.is_file():
+                    record_path = record_fs_path.relative_to(root_fs_path)
+                    paths.append(str(record_path))
+    return paths
 
 
 def get_child_models(record: Record) -> list[DataModel]:
@@ -112,7 +132,7 @@ def flowblock_entry(record: Record, field: Field,
     return f"{field.name}:\n\n" + "".join(entries)
 
 
-def get_content(record: Record, form: ImmutableMultiDict):
+def get_content(record: Record, form: ImmutableMultiDict) -> str:
     entries: list[str] = []
 
     default_model: str = "page"
@@ -140,3 +160,54 @@ def get_content(record: Record, form: ImmutableMultiDict):
         entries.append(entry)
 
     return ENTRY_SEP.join(entries)
+
+
+def delete_record(record: Record) -> None:
+    if record.is_attachment:
+        filename: str = record.source_filename.rstrip(".lr")
+        Path(filename).unlink()
+    else:
+        record_dir = Path(record.source_filename).parent
+        rmtree(record_dir)
+
+
+def create_subpage(*, pad: Pad, parent: str, model: str, title: str,
+                   form: ImmutableMultiDict) -> str:
+    slug: str = form.get("slug") or slugify(title)
+    path: str = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
+    fs_path = Path(pad.db.to_fs_path(path))
+    if fs_path.exists():
+        raise ValueError("Duplicate slug")
+
+    data: dict[str, str] = {
+        "_model": model,
+        "_template": pad.db.datamodels[model].get_default_template_name(),
+        "_slug": slug,
+        "_path": path,
+        "_alt": pad.root.alt,
+    }
+    page = Page(data=data, pad=pad)
+
+    fs_path.mkdir()
+    contents_file = fs_path / "contents.lr"
+    content: str = get_content(page, form)
+    contents_file.write_text(content)
+    return path
+
+
+def create_attachment(*, pad: Pad, parent: Record,
+                      uploaded: FileStorage) -> str:
+    slug: str | None = uploaded.filename
+    if slug is None:
+        slug = uuid4().hex
+    path: str = f"{parent.path}/{slug}" if parent.path != "/" else f"/{slug}"
+    fs_path = Path(pad.db.to_fs_path(path))
+    if fs_path.exists():
+        raise ValueError("Duplicate slug")
+    uploaded.save(fs_path)
+    return path
+
+
+def create_flowblock(*, record: Record, flow_type: str) -> FlowBlock:
+    data: dict[str, str] = {"_flowblock": flow_type}
+    return FlowBlock(data=data, pad=record.pad, record=record)

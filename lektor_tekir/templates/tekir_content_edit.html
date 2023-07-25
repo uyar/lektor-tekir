@@ -13,7 +13,7 @@
         hx-target="#save-result">
       {% include 'icons/document-save.svg' %} <span>{{ _('Save') }}</span>
     </button>
-    <button id="check-changes"
+    <button
         hx-post="{{ url_for('tekir_admin.api.check_changes', path=record.path) }}"
         hx-target="#changes-result">
       {% include 'icons/document-close.svg' %} <span>{{ _('Close') }}</span>

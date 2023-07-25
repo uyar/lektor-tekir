@@ -12,7 +12,7 @@
   <div class="subsection">
     <p>{{ _('Folder:') }} <span id="output-path">{{ output.path }}</span></p>
     <button
-        hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output_path) }}"
+        hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output.path) }}"
         hx-swap="none">
       {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
     </button>

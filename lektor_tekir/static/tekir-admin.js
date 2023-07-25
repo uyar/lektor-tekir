@@ -31,7 +31,13 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         if (el.classList.contains("modal-close")) {
             ev.preventDefault();
             el.closest("dialog").close();
-        } else if (main.classList.contains("tekir_overview")) {
+        } else if (el.classList.contains("add-content")) {
+            ev.preventDefault();
+            const form = document.getElementById(el.dataset.formid);
+            form.reset();
+            form.querySelector(".warning").innerHTML = "";
+            form.closest("dialog").showModal();
+    } else if (main.classList.contains("tekir_overview")) {
             if (el.id == "publish-button") {
                 document.getElementById("publish-dialog").showModal();
             }
@@ -46,12 +52,6 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                     checkbox.closest("tr").remove();
                 });
                 deleteDialog.close();
-            } else if (el.classList.contains("add-content")) {
-                ev.preventDefault();
-                const form = document.getElementById(el.dataset.formid);
-                form.reset();
-                form.querySelector(".warning").innerHTML = "";
-                form.closest("dialog").showModal();
             }
         } else if (main.classList.contains("tekir_content_edit")) {
             const details = el.closest("details");
@@ -76,18 +76,6 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             } else if (el.id == "navigate-select") {
                 document.getElementById(el.dataset.src).value = document.getElementById("navigables").value;
                 navigateDialog.close();
-            }
-        } else if (main.classList.contains("tekir_attachment_edit")) {
-            const replaceAttachmentDialog = document.getElementById("replace-attachment-form");
-            if (el.id == "replace-attachment") {
-                ev.preventDefault();
-                document.querySelector("#replace-attachment-form form").reset();
-                document.getElementById("replace-attachment-result").innerHTML = "";
-                replaceAttachmentDialog.showModal();
-            } else if (el.id == "replace-attachment-confirm") {
-                if (document.getElementById("replace-attachment-result").innerHTML == "OK") {
-                    replaceAttachmentDialog.close();
-                }
             }
         }
     });

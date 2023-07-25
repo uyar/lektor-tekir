@@ -161,7 +161,7 @@
     <div class="warning" id="add-subpage-result"></div>
 
     <button class="confirm"
-        hx-post="{{ url_for('tekir_admin.api.new_content', parent=record.path) }}"
+        hx-post="{{ url_for('tekir_admin.api.new_subpage', parent=record.path) }}"
         hx-target="#add-subpage-result">{{ _('Add') }}</button>
     <button class="cancel modal-close">{{ _('Cancel') }}</button>
   </form>
