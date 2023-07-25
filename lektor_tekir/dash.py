@@ -10,7 +10,7 @@ from pathlib import Path
 from flask import Blueprint, g, render_template, request
 from flask_babel import gettext as _
 
-from . import api
+from . import api, utils
 
 
 def summary():
@@ -27,20 +27,10 @@ def summary():
                            output_path=output_path, output_time=output_time)
 
 
-def get_ancestors(record):
-    ancestors = []
-    current = record
-    while current.parent:
-        current = current.parent
-        ancestors.append(current)
-    ancestors.reverse()
-    return ancestors
-
-
 def contents():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
-    ancestors = get_ancestors(record)
+    ancestors = utils.get_ancestors(record)
     child_model_name = record.datamodel.child_config.model
     if child_model_name is not None:
         child_models = [record.pad.db.datamodels[child_model_name]]
@@ -62,7 +52,7 @@ def edit_content():
 def edit_attachment():
     path = request.args.get("path", "/")
     record = g.admin_context.tree.get(path)._primary_record
-    ancestors = get_ancestors(record)
+    ancestors = utils.get_ancestors(record)
     return render_template("tekir_attachment_edit.html", record=record,
                            ancestors=ancestors)
 
