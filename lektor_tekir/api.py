@@ -5,12 +5,12 @@
 
 import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
 from shutil import rmtree
 from uuid import uuid4
 
 from flask import Blueprint, Response, g, render_template, request, url_for
+from flask_babel import format_datetime
 from flask_babel import gettext as _
 from lektor.db import Record
 from lektor.publisher import publish
@@ -25,12 +25,6 @@ FILE_MANAGERS = {
     "linux": "xdg-open",
     "win32": "explorer",
 }
-
-
-def page_count():
-    root_path = Path(g.admin_context.pad.root.source_filename).parent
-    pages = {c.parent for c in root_path.glob("**/contents*.lr")}
-    return str(len(pages))
 
 
 def open_folder():
@@ -54,14 +48,10 @@ def build():
     builder = g.admin_context.info.get_builder()
     builder.build_all()
     builder.touch_site_config()
-    output_path = Path(builder.destination_path)
-    home_page = output_path / "index.html"
-    if home_page.exists():
-        mtime = int(home_page.stat().st_mtime)
-        output_time = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M')
-    else:
-        output_time = _("No output")
-    return output_time
+    output_time = utils.get_output_time(builder)
+    if output_time is None:
+        return _("No output")
+    return format_datetime(output_time)
 
 
 def publish_build():
@@ -238,7 +228,6 @@ def replace_attachment():
 def make_blueprint():
     bp = Blueprint("api", __name__, url_prefix="/api")
 
-    bp.add_url_rule("/page-count", view_func=page_count)
     bp.add_url_rule("/open-folder", view_func=open_folder)
     bp.add_url_rule("/clean-build", view_func=clean_build)
     bp.add_url_rule("/build", view_func=build)

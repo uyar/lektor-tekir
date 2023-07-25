@@ -4,16 +4,16 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>{{ g.admin_context.pad.env.project.name }} - {{ _('Admin Panel') }}</title>
-  <link rel="stylesheet" href="{{ url_for('tekir_admin.static', filename='tekir-admin.css') }}">
+  <link rel="stylesheet" href="{{ url_for('tekir_admin.static', filename='tekir-admin.css') }}"/>
   <script src="{{ url_for('tekir_admin.static', filename='htmx.min.js') }}"></script>
   <script src="{{ url_for('tekir_admin.static', filename='tekir-admin.js') }}"></script>
 </head>
 <body>
   <header id="main-header">
-    <h1>{{ _('Admin Panel') }}</h1>
+    <p class="heading">{{ _('Admin Panel') }}</p>
 
-    <div id="tekir-settings">
-      <nav id="tekir-langs" aria-label="{{ _('Language selection') }}">
+    <div id="settings-panel">
+      <nav id="language-panel" aria-label="{{ _('Language selection') }}">
         <ul role="list">
           {% for locale in translations() %}
           <li>
@@ -24,7 +24,7 @@
         </ul>
       </nav>
 
-      <div id="tekir-color-modes" aria-label="{{ _('Color mode selection') }}">
+      <div id="theme-panel" aria-label="{{ _('Color mode selection') }}">
         <button class="color-mode" data-mode="light" title="{{ _('Switch to light mode') }}">
           {% include 'icons/sun.svg' %}
         </button>

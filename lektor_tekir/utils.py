@@ -3,7 +3,26 @@
 # lektor-tekir is released under the BSD license.
 # Read the included LICENSE.txt file for details.
 
+from datetime import datetime
+from pathlib import Path
+
+
 MULTILINE = {"text", "strings", "markdown", "html", "rst", "flow"}
+
+
+def get_page_count(record):
+    fs_path = Path(record.source_filename).parent
+    pages = {c.parent for c in fs_path.glob("**/contents*.lr")}
+    return len(pages)
+
+
+def get_output_time(builder):
+    output_path = Path(builder.destination_path)
+    home_page = output_path / "index.html"
+    if not home_page.exists():
+        return None
+    mtime = int(output_path.stat().st_mtime)
+    return datetime.fromtimestamp(mtime)
 
 
 def get_ancestors(record):

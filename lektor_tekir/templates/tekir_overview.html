@@ -1,58 +1,65 @@
 {% extends 'tekir_base.html' %}
 
 {% block body %}
-<section id="tekir-page-count">
+<section id="site-summary">
   <h2>{{ _('Number of Pages') }}</h2>
-  <p hx-get="{{ url_for('tekir_admin.api.page_count') }}" hx-trigger="load">&nbsp;</p>
+  <p id="page-count">{{ page_count }}</p>
 </section>
 
-<section id="tekir-build">
+<section id="output-info">
   <h2>{{ _('Output') }}</h2>
 
-  <div class="field">
-    <p>{{ _('Folder:') }} <span id="output-path">{{ output_path }}</span></p>
-    <button hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output_path) }}"
+  <div class="subsection">
+    <p>{{ _('Folder:') }} <span id="output-path">{{ output.path }}</span></p>
+    <button
+        hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output_path) }}"
         hx-swap="none">
       {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
     </button>
   </div>
 
-  <div class="field">
-    <p>{{ _('Time:') }} <span id="output-time">{{ output_time }}</span></p>
-    <button hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
+  <div class="subsection">
+    <p>{{ _('Time:') }} <span id="output-time">{{ output.time }}</span></p>
+    <button
+        hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
         hx-target="#output-time">
       {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
-    <button hx-get="{{ url_for('tekir_admin.api.build') }}"
+    <button
+        hx-get="{{ url_for('tekir_admin.api.build') }}"
         hx-target="#output-time">
       {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
   </div>
 
-  <button id="tekir-publish">
+  <button id="publish-button">
     {% include 'icons/cloud-upload.svg' %} <span>{{ _('Publish') }}</span>
   </button>
 </section>
 
 <dialog id="publish-dialog">
-  <form action="." method="POST">
+  {% set servers = g.admin_context.pad.config.get_servers() %}
+  <form id="publish-form" action="." method="POST">
     <div class="field">
       <label for="field-server">{{ _('Server') }}</label>
       <select id="field-server" name="server" required>
         {% for server_id, server in servers.items() %}
-        <option value="{{ server_id }}" {{ 'selected' if server.default else '' }}>{{ server.name }}: {{ server.target }}</option>
+        <option value="{{ server_id }}" {{ 'selected' if server.default else '' }}>
+          {{ server.name }}: {{ server.target }}
+        </option>
         {% endfor %}
       </select>
     </div>
 
-    <button id="publish-confirm" hx-post="{{ url_for('tekir_admin.api.publish_build') }}"
+    <button class="confirm"
+        hx-post="{{ url_for('tekir_admin.api.publish_build') }}"
         hx-swap="none">
       {{ _('Publish') }}
       <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
     </button>
-    <button class="modal-close">{{ _('Cancel') }}</button>
+    <button class="cancel modal-close">{{ _('Cancel') }}</button>
   </form>
 </dialog>
 {% endblock %}

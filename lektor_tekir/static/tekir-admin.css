@@ -122,7 +122,10 @@ body {
 }
 
 main {
+  display: grid;
   grid-area: main-content;
+  gap: 2rem 3rem;
+  padding: 2rem;
 }
 
 /* MAIN HEADER */
@@ -137,27 +140,27 @@ main {
   color: var(--color-bg-light);
 }
 
-h1 {
+#main-header .heading {
   margin: 0;
   font-size: 1.5em;
 }
 
-#tekir-settings {
+#settings-panel {
   display: inline-flex;
   align-items: center;
   gap: 2em;
   font-size: 90%;
 }
 
-#tekir-settings :is(button, a.button) {
+#settings-panel :is(button, a.button) {
   align-items: center;
   justify-content: center;
   height: 2.5em;
   aspect-ratio: 1;
 }
 
-#tekir-color-modes,
-#tekir-langs ul {
+#theme-panel,
+#language-panel ul {
   display: inline-flex;
   gap: 0.5em;
 }
@@ -185,17 +188,10 @@ h1 {
   padding-inline: 0.5rem;
 }
 
-/* MAIN CONTENT */
-
-main {
-  padding: 3rem;
-}
+/* COMMON */
 
 section {
-  margin-block: 1rem;
   padding: 1rem;
-  border: 1px solid;
-  border-radius: 0.125rem;
 }
 
 section > h2 {
@@ -210,6 +206,10 @@ section > h2 + p {
 
 section > *:last-child {
   margin-block-end: 0;
+}
+
+.subsection {
+  margin-block: 2.5em;
 }
 
 th,
@@ -229,7 +229,32 @@ details {
   background-color: var(--color-bg);
 }
 
-/* CUSTOM */
+/* SPECIAL */
+
+main.tekir_overview {
+  grid-template-areas: "summary" "output";
+  grid-template-rows: auto 1fr;
+}
+
+#site-summary {
+  grid-area: summary;
+  max-width: min(20em, 50%);
+}
+
+#page-count {
+  font-size: 2.5em;
+}
+
+#output-info {
+  grid-area: output;
+}
+
+#output-path,
+#output-time {
+  margin-inline-start: 1em;
+  padding: 0.25rem;
+  background-color: hsl(0, 0%, 60%);
+}
 
 .warning:not(:empty) {
   margin-block: 1em;
@@ -242,21 +267,6 @@ h2.title {
   margin-block: 1rem 2rem;
   font-size: 3em;
   font-style: italic;
-}
-
-#tekir-page-count {
-  max-width: min(20em, 50%);
-}
-
-#tekir-page-count p {
-  font-size: 2.5em;
-}
-
-#output-path,
-#output-time {
-  margin-inline-start: 1em;
-  padding: 0.25rem;
-  background-color: hsl(0, 0%, 50%);
 }
 
 #tekir-breadcrumbs {

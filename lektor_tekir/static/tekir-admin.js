@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             ev.preventDefault();
             el.closest("dialog").close();
         } else if (main.classList.contains("tekir_overview")) {
-            if (el.id == "tekir-publish") {
+            if (el.id == "publish-button") {
                 document.getElementById("publish-dialog").showModal();
             }
         } else if (main.classList.contains("tekir_contents")) {
