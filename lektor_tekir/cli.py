@@ -12,7 +12,7 @@ from lektor.admin.modules import serve
 from lektor.admin.webui import WebUI
 from lektor.cli import cli
 
-from lektor_tekir import api, dash
+from lektor_tekir import dash
 
 
 class TekirAdminUI(WebUI):
@@ -20,7 +20,6 @@ class TekirAdminUI(WebUI):
         super().__init__(*args, **kwargs)
 
         self.register_blueprint(dash.bp)
-        self.register_blueprint(api.bp)
 
         locale_dir = Path(__file__).parent / "translations"
         babel = Babel(self, locale_selector=lambda: g.lang_code,

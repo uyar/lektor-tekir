@@ -26,7 +26,7 @@ FILE_MANAGERS = {
     "win32": "explorer",
 }
 
-bp = Blueprint("tekir_admin_api", __name__, url_prefix="/tekir-admin/api")
+bp = Blueprint("api", __name__, url_prefix="/api")
 
 
 @bp.route("/page-count")
@@ -49,7 +49,6 @@ def open_folder():
 
 @bp.route("/clean-build")
 def clean_build():
-    g.lang_code = request.args.get("lang", "en")
     builder = g.admin_context.info.get_builder()
     builder.prune(all=True)
     builder.touch_site_config()
@@ -58,7 +57,6 @@ def clean_build():
 
 @bp.route("/build")
 def build():
-    g.lang_code = request.args.get("lang", "en")
     builder = g.admin_context.info.get_builder()
     builder.build_all()
     builder.touch_site_config()
@@ -87,7 +85,6 @@ def deploy():
 
 @bp.route("/navigables")
 def navigables():
-    g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
     options = [("", "----", "selected" if not path else "")]
@@ -181,7 +178,6 @@ def get_content(record):
 
 @bp.route("/save-content", methods=["POST"])
 def save_content():
-    g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
     content = get_content(record)
@@ -196,7 +192,6 @@ def save_content():
 
 @bp.route("/check-changes", methods=["POST"])
 def check_changes():
-    g.lang_code = request.args.get("lang", "en")
     path = request.args.get("path")
     record = g.admin_context.tree.get(path)._primary_record
     content = get_content(record)
@@ -216,7 +211,6 @@ def check_changes():
 
 @bp.route("/check-delete", methods=["POST"])
 def check_delete():
-    g.lang_code = request.args.get("lang", "en")
     items = request.form.getlist("selected-items")
     root_path = Path(g.admin_context.pad.root.source_filename).parent
     result = []
@@ -235,7 +229,6 @@ def check_delete():
 
 @bp.route("/delete-content", methods=["POST"])
 def delete_content():
-    g.lang_code = request.args.get("lang", "en")
     items = request.form.getlist("selected-items")
     for path in items:
         record = g.admin_context.tree.get(path)._primary_record
@@ -250,7 +243,6 @@ def delete_content():
 
 @bp.route("/new-flowblock")
 def new_flowblock():
-    g.lang_code = request.args.get("lang", "en")
     flow_type = request.args.get("flow_type")
     field_name = request.args.get("field_name")
     path = request.args.get("path")
@@ -274,7 +266,6 @@ def slug_from_title():
 
 @bp.route("/new-content", methods=["POST"])
 def new_content():
-    g.lang_code = request.args.get("lang", "en")
     parent = request.args.get("parent")
     model = request.form.get("model")
     title = request.form.get("title").strip()
@@ -306,7 +297,6 @@ def new_content():
 
 @bp.route("/new-attachment", methods=["POST"])
 def new_attachment():
-    g.lang_code = request.args.get("lang", "en")
     uploaded = request.files.get("file")
     if not uploaded:
         return _("Add")
@@ -328,7 +318,6 @@ def new_attachment():
 
 @bp.route("/replace-attachment", methods=["POST"])
 def replace_attachment():
-    g.lang_code = request.args.get("lang", "en")
     uploaded = request.files.get("file")
     if not uploaded:
         return _("Upload")

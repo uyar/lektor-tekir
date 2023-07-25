@@ -40,7 +40,7 @@
     <input type="time" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
       {% elif widget == 'navigate' %}
     <input type="text" class="tekir-navigate" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"
-        hx-get="{{ url_for('tekir_admin_api.navigables', lang=g.lang_code) }}"
+        hx-get="{{ url_for('tekir_admin.api.navigables') }}"
         hx-vals='js:{path: event.target.value ? event.target.value : "{{ record.path }}"}'
         hx-trigger="click" hx-target="#navigables"/>
       {% else %}
@@ -70,7 +70,7 @@
         <span class="add-button">{{ _('Add') }}</span>
         {% set block_models = record.pad.db.flowblocks %}
         {% for flow_type in (field.type.flow_blocks or block_models) %}
-        <button hx-get="{{ url_for('tekir_admin_api.new_flowblock', lang=g.lang_code, flow_type=flow_type, field_name=field_name, path=record.path) }}"
+        <button hx-get="{{ url_for('tekir_admin.api.new_flowblock', flow_type=flow_type, field_name=field_name, path=record.path) }}"
             hx-target="#{{ field_name }}-add-block"
             hx-swap="beforebegin">{{ block_models[flow_type].name_i18n.get(g.lang_code, block_models[flow_type].name) }}</button>
         {% endfor %}

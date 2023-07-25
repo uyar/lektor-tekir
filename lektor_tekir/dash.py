@@ -10,10 +10,13 @@ from pathlib import Path
 from flask import Blueprint, g, render_template, request
 from flask_babel import gettext as _
 
+from . import api
+
 
 bp = Blueprint("tekir_admin", __name__, url_prefix="/tekir-admin/<lang_code>",
                template_folder=Path(__file__).parent / "templates",
                static_folder=Path(__file__).parent / "static")
+bp.register_blueprint(api.bp)
 
 
 @bp.url_defaults

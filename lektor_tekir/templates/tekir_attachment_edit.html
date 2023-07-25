@@ -24,7 +24,7 @@
     <div class="warning" id="replace-attachment-result"></div>
     <button id="replace-attachment-confirm"
         hx-encoding="multipart/form-data"
-        hx-post="{{ url_for('tekir_admin_api.replace_attachment', lang=g.lang_code, path=record.path) }}"
+        hx-post="{{ url_for('tekir_admin.api.replace_attachment', path=record.path) }}"
         hx-target="#replace-attachment-result">{{ _('Upload') }}</button>
     <button id="replace-attachment-cancel">{{ _('Cancel') }}</button>
   </form>
