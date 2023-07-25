@@ -185,7 +185,7 @@ def new_content():
     source_path.mkdir()
     contents_file = source_path / "contents.lr"
     contents_file.write_text(utils.get_content(record, request.form))
-    response = Response("OK")
+    response = Response(_("Added."))
     record_url = url_for("tekir_admin.edit_content", path=path)
     response.headers["HX-Redirect"] = record_url
     return response
@@ -205,7 +205,7 @@ def new_attachment():
     if attachment_path.exists():
         return _("An attachment with this name already exists for this item.")
     uploaded.save(attachment_path)
-    response = Response("OK")
+    response = Response(_("Added."))
     record_url = url_for("tekir_admin.edit_attachment", path=path)
     response.headers["HX-Redirect"] = record_url
     return response

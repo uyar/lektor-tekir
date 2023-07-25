@@ -52,14 +52,6 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 form.reset();
                 form.querySelector(".warning").innerHTML = "";
                 form.closest("dialog").showModal();
-            } else if (el.id == "add-subpage-confirm") {
-                if (document.getElementById("add-subpage-result").innerHTML == "OK") {
-                    document.getElementById("add-subpage-dialog").close();
-                }
-            } else if (el.id == "add-attachment-confirm") {
-                if (document.getElementById("add-attachment-result").innerHTML == "OK") {
-                    document.getElementById("add-attachment-dialog").close();
-                }
             }
         } else if (main.classList.contains("tekir_content_edit")) {
             const details = el.closest("details");

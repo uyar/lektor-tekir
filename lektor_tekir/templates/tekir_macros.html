@@ -1,7 +1,7 @@
 {% macro render_breadcrumbs(record, ancestors) %}
-<div id="tekir-breadcrumbs">
+<div id="breadcrumbs">
   <p>{{ _('You are here:') }}</p>
-  <ul>
+  <ul role="list">
     {% for item in ancestors %}
     <li><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item._slug or _('home') }}</a></li>
     {% endfor %}
