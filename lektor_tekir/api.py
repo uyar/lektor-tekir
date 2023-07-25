@@ -139,9 +139,9 @@ def new_subpage() -> str | Response:
 def new_attachment() -> str | Response:
     uploaded: FileStorage | None = request.files.get("file")
     if not uploaded:
-        return _("Add")
+        return _("Please upload a file.")
 
-    parent: str | None = request.args.get("parent")
+    parent: str | None = request.args.get("path")
     if parent is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 

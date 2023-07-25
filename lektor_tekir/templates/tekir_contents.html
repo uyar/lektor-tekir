@@ -1,6 +1,6 @@
 {% extends 'tekir_base.html' %}
 
-{% from 'tekir_macros.html' import render_breadcrumbs %}
+{% from 'tekir_macros.html' import render_breadcrumbs, render_upload_dialog %}
 
 {% block body %}
 {{ render_breadcrumbs(record, ancestors) }}
@@ -167,22 +167,5 @@
   </form>
 </dialog>
 
-<dialog id="add-attachment-dialog">
-  <form id="add-attachment-form" action="." method="POST" enctype="multipart/form-data">
-    <div class="field">
-      <label for="field-file">{{ _('File') }}</label>
-      <small>{{ _('Use button to select file or drag and drop your file into this area.') }}</small>
-      <input type="file" id="field-file" name="file" required/>
-    </div>
-
-    <div class="warning" id="add-attachment-result"></div>
-
-    <button class="confirm"
-        hx-encoding="multipart/form-data"
-        hx-post="{{ url_for('tekir_admin.api.new_attachment', parent=record.path) }}"
-        hx-target="#add-attachment-result">{{ _('Upload') }}</button>
-
-    <button class="cancel modal-close">{{ _('Cancel') }}</button>
-  </form>
-</dialog>
+{{ render_upload_dialog("add-attachment", endpoint="new_attachment", path=record.path) }}
 {% endblock %}

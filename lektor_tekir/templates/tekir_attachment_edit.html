@@ -1,6 +1,6 @@
 {% extends 'tekir_base.html' %}
 
-{% from 'tekir_macros.html' import render_breadcrumbs %}
+{% from 'tekir_macros.html' import render_breadcrumbs, render_upload_dialog %}
 
 {% block body %}
 {{ render_breadcrumbs(record, ancestors) }}
@@ -17,21 +17,6 @@
   </div>
   {% endif %}
 
-<dialog id="replace-attachment-dialog">
-  <form id="replace-attachment-form" action="." method="POST" enctype="multipart/form-data">
-    <div class="field">
-      <label for="field-file">{{ _('File') }}</label>
-      <small>{{ _('Use button to select file or drag and drop your file into this area.') }}</small>
-      <input type="file" id="field-file" name="file" required/>
-    </div>
+{{ render_upload_dialog("replace-attachment", endpoint="replace_attachment", path=record.path) }}
 
-    <div class="warning" id="replace-attachment-result"></div>
-
-    <button class="confirm"
-        hx-encoding="multipart/form-data"
-        hx-post="{{ url_for('tekir_admin.api.replace_attachment', path=record.path) }}"
-        hx-target="#replace-attachment-result">{{ _('Upload') }}</button>
-    <button class="modal-close">{{ _('Cancel') }}</button>
-  </form>
-</dialog>
 {% endblock %}
