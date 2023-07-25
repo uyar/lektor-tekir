@@ -28,9 +28,10 @@ requires-python = "~=3.8"
 dependencies = ["lektor", "python-slugify", "flask-babel"]
 
 [project.optional-dependencies]
+types = ["mypy", "types-python-slugify"]
 style = ["ruff"]
 dev = [
-    "lektor-tekir[style]",
+    "lektor-tekir[types,style]",
     "babel",
     "build",
     "twine",
@@ -50,6 +51,9 @@ include-package-data = false
 [tool.setuptools.package-data]
 lektor_tekir = ["templates/*", "static/**/*", "translations/**/*"]
 
+[tool.mypy]
+ignore_missing_imports = true
+
 [tool.ruff]
 select = ["E", "F", "I"]
 ignore = ["E731"]
@@ -61,8 +65,13 @@ lines-after-imports = 2
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = style
+envlist = types, style
 isolated_build = True
+
+[testenv:types]
+extras = types
+commands =
+    mypy lektor_tekir
 
 [testenv:style]
 skip_install = true

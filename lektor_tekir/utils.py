@@ -14,7 +14,8 @@ from lektor.db import Record
 from werkzeug.datastructures.structures import ImmutableMultiDict
 
 
-BOOL_VALUES: set[str] = {"true": "yes", "false": "no", "1": "yes", "0": "no"}
+BOOL_VALUES: dict[str, str] = {"true": "yes", "false": "no",
+                               "1": "yes", "0": "no"}
 MULTILINE: set[str] = {"text", "strings", "markdown", "html", "rst", "flow"}
 
 ENTRY_SEP = "---\n"
