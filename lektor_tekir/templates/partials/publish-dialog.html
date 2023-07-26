@@ -1,0 +1,22 @@
+<form action="." method="POST">
+  <div class="field">
+    <label for="field-server">{{ _('Server') }}</label>
+    <select id="field-server" name="server" required>
+      {% for server_id, server in servers.items() %}
+      <option value="{{ server_id }}" {{ 'selected' if server.default else '' }}>
+        {{ server.name }}: {{ server.target }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button class="confirm"
+      hx-post="{{ url_for('tekir_admin.api.publish_build') }}"
+      hx-target="#publish-dialog .warning">
+    {{ _('Publish') }}
+    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+  </button>
+  <button class="cancel modal-close">{{ _('Close') }}</button>
+
+  <pre class="warning"></pre>
+</form>

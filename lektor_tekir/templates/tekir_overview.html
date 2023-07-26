@@ -1,65 +1,19 @@
 {% extends 'tekir_base.html' %}
 
 {% block body %}
-<section id="site-summary">
-  <h2>{{ _('Number of Pages') }}</h2>
-  <p id="page-count">{{ page_count }}</p>
+<section id="site-summary"
+    hx-get="{{ url_for('tekir_admin.api.site_summary') }}"
+    hx-trigger="load">
 </section>
 
-<section id="output-info">
-  <h2>{{ _('Output') }}</h2>
-
-  <div class="subsection">
-    <p>{{ _('Folder:') }} <span id="output-path">{{ output.path }}</span></p>
-    <button
-        hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output.path) }}"
-        hx-swap="none">
-      {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
-    </button>
-  </div>
-
-  <div class="subsection">
-    <p>{{ _('Time:') }} <span id="output-time">{{ output.time }}</span></p>
-    <button
-        hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
-        hx-target="#output-time">
-      {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
-      <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-    </button>
-    <button
-        hx-get="{{ url_for('tekir_admin.api.build') }}"
-        hx-target="#output-time">
-      {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
-      <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-    </button>
-  </div>
-
-  <button id="publish-button">
-    {% include 'icons/cloud-upload.svg' %} <span>{{ _('Publish') }}</span>
-  </button>
+<section id="site-output"
+    hx-get="{{ url_for('tekir_admin.api.site_output') }}"
+    hx-trigger="load">
 </section>
 
 <dialog id="publish-dialog">
-  {% set servers = g.admin_context.pad.config.get_servers() %}
-  <form id="publish-form" action="." method="POST">
-    <div class="field">
-      <label for="field-server">{{ _('Server') }}</label>
-      <select id="field-server" name="server" required>
-        {% for server_id, server in servers.items() %}
-        <option value="{{ server_id }}" {{ 'selected' if server.default else '' }}>
-          {{ server.name }}: {{ server.target }}
-        </option>
-        {% endfor %}
-      </select>
-    </div>
+</dialog>
 
-    <button class="confirm"
-        hx-post="{{ url_for('tekir_admin.api.publish_build') }}"
-        hx-swap="none">
-      {{ _('Publish') }}
-      <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-    </button>
-    <button class="cancel modal-close">{{ _('Cancel') }}</button>
-  </form>
+<dialog id="error-dialog">
 </dialog>
 {% endblock %}

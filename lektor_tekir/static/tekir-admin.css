@@ -291,26 +291,25 @@ section > *:last-child {
 
 main.tekir_overview {
   grid-template-areas:
-    "summary"
-    "output";
+    "site-summary"
+    "site-output";
   grid-template-rows: auto 1fr;
 }
 
 #site-summary {
-  grid-area: summary;
+  grid-area: site-summary;
   max-width: min(20em, 50%);
 }
 
-#output-info {
-  grid-area: output;
+#site-output {
+  grid-area: site-output;
 }
 
 #page-count {
   font-size: 2.5em;
 }
 
-#output-path,
-#output-time {
+:where(#output-path, #output-time) .target {
   margin-inline-start: 1em;
   padding: 0.25rem;
   background-color: hsl(0, 0%, 60%);
@@ -413,6 +412,15 @@ main.tekir_attachment_edit {
 
 #attachment-media {
   grid-area: media;
+}
+
+#publish-dialog {
+  max-height: 50dvh;
+}
+
+.error-report {
+  padding: 1rem;
+  overflow: auto;
 }
 
 /* MEDIA QUERIES */

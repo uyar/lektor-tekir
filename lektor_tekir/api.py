@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from datetime import datetime
@@ -35,6 +36,16 @@ FILE_MANAGERS: dict[str, str] = {
 }
 
 
+def error_response(errors: list[str]) -> Response:
+    content: str = render_template("partials/error-dialog.html", errors=errors)
+    response = Response(content)
+    response.headers["HX-Retarget"] = "#error-dialog"
+    response.headers["HX-Reswap"] = "innerHTML"
+    trigger = '{"showModal": {"modal_id": "error-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
+
+
 def open_folder() -> str | Response:
     fs_path: str | None = request.args.get("fs_path")
     if fs_path is None:
@@ -43,9 +54,31 @@ def open_folder() -> str | Response:
             return Response("", status=HTTPStatus.BAD_REQUEST)
         record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
         fs_path = str(Path(record.source_filename).parent)
+
     file_manager: str = FILE_MANAGERS.get(sys.platform, "xdg-open")
-    subprocess.run([file_manager, fs_path])
+    try:
+        subprocess.run([file_manager, fs_path])
+    except Exception as e:
+        errors = [str(e)]
+        return error_response(errors)
     return ""
+
+
+def site_summary() -> str:
+    root: Record = g.admin_context.pad.root
+    page_count: int = utils.get_page_count(root)
+    return render_template("partials/site-summary.html", page_count=page_count)
+
+
+def site_output() -> str:
+    builder: Builder = g.admin_context.info.get_builder()
+    output: dict[str, str] = {"path": builder.destination_path}
+    output_time: datetime | None = utils.get_output_time(builder)
+    if output_time is None:
+        output["time"] = _("No output")
+    else:
+        output["time"] = format_datetime(output_time)
+    return render_template("partials/site-output.html", output=output)
 
 
 def clean_build() -> str:
@@ -55,14 +88,30 @@ def clean_build() -> str:
     return _("No output")
 
 
-def build() -> str:
+def build() -> str | Response:
     builder: Builder = g.admin_context.info.get_builder()
-    builder.build_all()
+    n_failures: int = builder.build_all()
+    if n_failures > 0:
+        errors = []
+        for failure in Path(builder.failure_controller.path).glob("*.json"):
+            error: dict[str, str] = json.loads(failure.read_text())
+            errors.append(f'{error["artifact"]}: {error["exception"]}')
+        return error_response(errors)
     builder.touch_site_config()
     output_time: datetime | None = utils.get_output_time(builder)
     if output_time is None:
         return _("No output")
     return format_datetime(output_time)
+
+
+def publish_info() -> Response:
+    servers: list[ServerInfo] = g.admin_context.pad.config.get_servers()
+    content: str = render_template("partials/publish-dialog.html",
+                                   servers=servers)
+    response = Response(content)
+    trigger = '{"showModal": {"modal_id": "publish-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
 
 
 def publish_build() -> str | Response:
@@ -76,9 +125,11 @@ def publish_build() -> str | Response:
                                         server_info.target,
                                         builder.destination_path,
                                         server_info=server_info)
+    messages = []
     for line in event_iter:
-        print(line)
-    return ""
+        messages.append(line)
+    content = "\n".join(messages)
+    return Response(content)
 
 
 def check_delete() -> str:
@@ -246,8 +297,11 @@ def make_blueprint():
     bp = Blueprint("api", __name__, url_prefix="/api")
 
     bp.add_url_rule("/open-folder", view_func=open_folder)
+    bp.add_url_rule("/site-summary", view_func=site_summary)
+    bp.add_url_rule("/site-output", view_func=site_output)
     bp.add_url_rule("/clean-build", view_func=clean_build)
     bp.add_url_rule("/build", view_func=build)
+    bp.add_url_rule("/publish-info", view_func=publish_info)
     bp.add_url_rule("/publish-build", view_func=publish_build,
                     methods=["POST"])
     bp.add_url_rule("/check-delete", view_func=check_delete,

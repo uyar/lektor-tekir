@@ -5,15 +5,11 @@
 
 from __future__ import annotations
 
-from datetime import datetime
 from http import HTTPStatus
 from locale import strxfrm
 from pathlib import Path
 
 from flask import Blueprint, Response, g, render_template, request
-from flask_babel import format_datetime
-from flask_babel import gettext as _
-from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel
 from lektor.db import Record
@@ -26,19 +22,7 @@ def i18n_name(item: DataModel) -> str:
 
 
 def overview() -> str:
-    root: Record = g.admin_context.pad.root
-    page_count: int = utils.get_page_count(root)
-
-    builder: Builder = g.admin_context.info.get_builder()
-    output: dict[str, str] = {"path": builder.destination_path}
-    output_time: datetime | None = utils.get_output_time(builder)
-    if output_time is None:
-        output["time"] = _("No output")
-    else:
-        output["time"] = format_datetime(output_time)
-
-    return render_template("tekir_overview.html", page_count=page_count,
-                           output=output)
+    return render_template("tekir_overview.html")
 
 
 def contents() -> str | Response:

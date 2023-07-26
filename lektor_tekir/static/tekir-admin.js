@@ -37,10 +37,6 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             form.reset();
             form.querySelector(".warning").innerHTML = "";
             form.closest("dialog").showModal();
-    } else if (main.classList.contains("tekir_overview")) {
-            if (el.id == "publish-button") {
-                document.getElementById("publish-dialog").showModal();
-            }
         } else if (main.classList.contains("tekir_contents")) {
             const deleteDialog = document.getElementById("delete-dialog");
             if (el.classList.contains("delete-content")) {
@@ -79,6 +75,10 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
                 navigateDialog.close();
             }
         }
+    });
+
+    document.body.addEventListener("showModal", (ev) => {
+        document.getElementById(ev.detail.modal_id).showModal();
     });
 
     document.body.addEventListener("showChanges", (ev) => {

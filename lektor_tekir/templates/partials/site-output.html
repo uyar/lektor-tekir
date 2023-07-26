@@ -1,0 +1,32 @@
+<h2>{{ _('Output') }}</h2>
+
+<div class="subsection" id="output-path">
+  <p>{{ _('Folder:') }} <span class="target">{{ output.path }}</span></p>
+  <button
+      hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output.path) }}"
+      hx-swap="none">
+    {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
+  </button>
+</div>
+
+<div class="subsection" id="output-time">
+  <p>{{ _('Time:') }} <span class="target">{{ output.time }}</span></p>
+  <button
+      hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
+      hx-target="#output-time .target">
+    {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
+    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+  </button>
+  <button
+      hx-get="{{ url_for('tekir_admin.api.build') }}"
+      hx-target="#output-time .target">
+    {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
+    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+  </button>
+</div>
+
+<button
+    hx-get="{{ url_for('tekir_admin.api.publish_info') }}"
+    hx-target="#publish-dialog">
+  {% include 'icons/cloud-upload.svg' %} <span>{{ _('Publish') }}</span>
+</button>
