@@ -12,27 +12,16 @@
   <header id="main-header">
     <p class="heading">{{ _('Admin Panel') }}</p>
 
-    <div id="settings-panel">
-      <nav id="language-panel" aria-label="{{ _('Language selection') }}">
-        <ul role="list">
-          {% for locale in translations() %}
-          <li>
-            {% set alt_url = url_for(request.endpoint, lang_code=locale, **request.args) %}
-            <a class="button" href="{{ alt_url }}">{{ locale }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </nav>
-
-      <div id="theme-panel" aria-label="{{ _('Color mode selection') }}">
-        <button class="color-mode" data-mode="light" title="{{ _('Switch to light mode') }}">
-          {% include 'icons/sun.svg' %}
-        </button>
-        <button class="color-mode" data-mode="dark" title="{{ _('Switch to dark mode') }}">
-          {% include 'icons/moon.svg' %}
-        </button>
-      </div>
-    </div>
+    <nav id="language-panel" aria-label="{{ _('Language selection') }}">
+      <ul role="list">
+        {% for locale in translations() %}
+        <li>
+          {% set alt_url = url_for(request.endpoint, lang_code=locale, **request.args) %}
+          <a class="button" href="{{ alt_url }}">{{ locale }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
   </header>
 
   <nav id="main-tabs" aria-label="{{ _('main navigation') }}">

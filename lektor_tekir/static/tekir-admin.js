@@ -11,19 +11,6 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         });
     });
 
-    const colorMode = localStorage.getItem("color-mode");
-    if (colorMode) {
-        document.documentElement.setAttribute("color-mode", colorMode);
-    }
-
-    document.querySelectorAll("button.color-mode").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            const mode = ev.currentTarget.dataset.mode;
-            document.documentElement.setAttribute("color-mode", mode);
-            localStorage.setItem("color-mode", mode);
-        });
-    });
-
     document.querySelector("main").addEventListener("click", (ev) => {
         const el = ev.target.closest("button") ?? ev.target;
         const main = el.closest("main");

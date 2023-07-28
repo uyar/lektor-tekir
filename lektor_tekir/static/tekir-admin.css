@@ -1,28 +1,16 @@
 :root {
   --color: hsl(232, 58%, 59%);
+  --color-bg: hsl(0, 0%, 95%);
+  --color-text: hsl(0, 0%, 0%);
+  --color-link: hsl(240, 100%, 50%);
 
-  --color-bg-light: hsl(0, 0%, 95%);
-  --color-text-light: hsl(0, 0%, 0%);
-  --color-link-light: hsl(240, 100%, 50%);
-
-  --color-bg-dark: hsl(0, 0%, 15%);
-  --color-text-dark: hsl(0, 0%, 100%);
-  --color-link-dark: hsl(240, 100%, 85%);
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
 }
 
-:root[color-mode="light"] {
-  --color-bg: var(--color-bg-light);
-  --color-text: var(--color-text-light);
-  --color-link: var(--color-link-light);
-}
-
-:root[color-mode="dark"] {
-  --color-bg: var(--color-bg-dark);
-  --color-text: var(--color-text-dark);
-  --color-link: var(--color-link-dark);
-}
-
-/* BASICS */
+/* RESET */
 
 *,
 *::before,
@@ -36,6 +24,43 @@
 
 body {
   margin: 0;
+}
+
+a {
+  text-underline-offset: 0.25rem;
+}
+
+ul[role="list"] {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: start;
+}
+
+input,
+select,
+textarea {
+  background-color: inherit;
+  color: inherit;
+  font: inherit;
+}
+
+/* BASICS */
+
+body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: system-ui, sans-serif;
@@ -51,107 +76,71 @@ pre,
 
 a {
   color: var(--color-link);
-  text-underline-offset: 0.25rem;
-}
-
-ul[role="list"] {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-img,
-svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-svg {
-  fill: currentColor;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-th {
-  text-align: start;
 }
 
 th,
-td {
-  padding: 0.25rem 0.5em;
+td,
+input,
+select,
+textarea {
+  padding: var(--space-xs) var(--space-s);
 }
 
 details {
-  margin: 1em 0;
+  margin-block: 1em;
+}
+
+svg {
+  stroke: currentColor;
+  fill: currentColor;
 }
 
 /* FORMS */
 
-input,
-select,
-textarea,
-button {
-  background-color: inherit;
-  color: inherit;
-  font: inherit;
-}
-
-:root[color-mode="dark"] :is(dialog, input) {
-  color-scheme: dark;
-}
-
-select option {
-  background-color: var(--color-bg);
-}
-
 label {
   display: block;
-  margin-block-end: 0.25rem;
-}
-
-input,
-select,
-textarea {
-  padding: 0.25rem 0.5rem;
+  margin-block-end: 0.25em;
 }
 
 input[type="text"],
+input[type="file"],
 textarea {
   width: 100%;
 }
 
 input[type="file"] {
-  width: 100%;
-  padding: 1rem;
+  padding: var(--space-m);
   outline: 1px dashed;
 }
 
 button,
 a.button {
+  --icon-height: 2em;
+  --button-padding: var(--space-s);
+
   display: inline-flex;
   position: relative;
-  align-items: flex-end;
-  padding: 0.5rem;
+  align-items: center;
+  height: calc(var(--icon-height) + 2 * var(--button-padding));
+  padding: var(--button-padding);
   border: 1px solid var(--color-link);
-  border-radius: 0.5rem;
+  border-radius: var(--space-s);
+  background-color: inherit;
   color: inherit;
   text-decoration: none;
 }
 
 :is(button, a.button) :is(img, svg) {
   width: auto;
-  height: 2em;
+  height: var(--icon-height);
+}
+
+:is(button, a.button):hover :is(img, svg) {
+  transform: scale(1.2);
 }
 
 :is(button, a.button) :is(img, svg):not(:only-child) {
-  margin-inline-end: 0.5em;
-}
-
-:is(button, a.button) :is(img, svg):hover {
-  transform: scale(1.5);
+  margin-inline-end: 0.75em;
 }
 
 .field {
@@ -161,39 +150,42 @@ a.button {
 /* LAYOUT */
 
 body {
-  display: grid;
-  grid-template-areas:
-    ".         main-header"
-    "main-tabs main-content";
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
+  --tabs-width: var(--space-l);
+  --main-padding: var(--space-m);
+
+  display: flex;
+  flex-direction: column;
   min-height: 100dvh;
 }
 
-#main-header {
-  grid-area: main-header;
-  padding: 1rem;
+#main-header,
+main {
+  gap: 2em 4em;
+  padding-block: var(--space-l);
+  padding-inline: calc(var(--tabs-width) + var(--main-padding)) var(--main-padding);
 }
 
 #main-tabs {
-  grid-area: main-tabs;
-  padding: 2rem;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: var(--tabs-width);
+  height: 100%;
+  padding: var(--main-padding);
+  transition: 0.3s;
 }
 
-main {
-  display: grid;
-  grid-area: main-content;
-  gap: 2rem 3rem;
-  padding: 2rem;
+#main-tabs:hover {
+  width: fit-content;
 }
 
 /* MAIN HEADER */
 
 #main-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1em 4em;
   background-color: var(--color);
   color: var(--color-bg-light);
 }
@@ -203,59 +195,59 @@ main {
   font-size: 1.5em;
 }
 
-#settings-panel {
-  display: inline-flex;
-  align-items: center;
-  gap: 2em;
-  font-size: 90%;
-}
-
-#settings-panel :is(button, a.button) {
-  align-items: center;
-  justify-content: center;
-  height: 2.5em;
-  aspect-ratio: 1;
-}
-
-#theme-panel,
 #language-panel ul {
   display: inline-flex;
   gap: 0.5em;
+  font-size: 90%;
 }
 
-.color-mode svg {
-  stroke: currentColor;
+#language-panel :is(button, a.button) {
+  --icon-height: 1.5em;
+
+  justify-content: center;
+  aspect-ratio: 1;
 }
 
 /* MAIN TABS */
 
+#main-tabs {
+  background-color: black;
+  color: white;
+}
+
 #main-tabs ul {
   display: flex;
   flex-direction: column;
-  gap: 3em;
+  gap: 1.5em;
 }
 
 #main-tabs a.button {
-  height: 3em;
-  aspect-ratio: 3.5;
-  padding-inline: 0.5rem;
+  visibility: hidden;
+  border: none;
   font-size: 90%;
+}
+
+#main-tabs:hover a.button {
+  visibility: visible;
 }
 
 /* COMMON */
 
+main {
+  display: grid;
+}
+
 h1 {
-  margin-block: 1rem 2rem;
   font-size: 3em;
   font-style: italic;
 }
 
 section {
-  padding: 1rem;
+  padding: var(--space-m);
 }
 
 section > h2 {
-  margin-block-start: 0;
+  margin-block: 0 1em;
   color: var(--color);
   font-weight: normal;
 }
@@ -268,23 +260,23 @@ section > *:last-child {
   margin-block-end: 0;
 }
 
-.subsection {
-  margin-block: 2.5em;
+.subsection:not(:first-of-type) {
+  margin-block-start: 2em;
 }
 
 .htmx-indicator {
   position: absolute;
   z-index: 1;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: var(--button-padding);
+  left: var(--button-padding);
   background-color: var(--color-bg);
 }
 
 .warning:not(:empty) {
   margin-block: 1em;
-  padding: 1em;
+  padding: var(--space-m);
   background-color: hsl(350, 94%, 86%);
-  color: var(--color-text-light);
+  color: var(--color-text);
 }
 
 /* SPECIAL */
@@ -427,8 +419,17 @@ main.tekir_attachment_edit {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: var(--color-bg-dark);
-    --color-text: var(--color-text-dark);
-    --color-link: var(--color-link-dark);
+    --color-bg: hsl(0, 0%, 15%);
+    --color-text: hsl(0, 0%, 100%);
+    --color-link: hsl(240, 100%, 85%);
+  }
+
+  dialog,
+  input {
+    color-scheme: dark;
+  }
+
+  select option {
+    background-color: var(--color-bg);
   }
 }

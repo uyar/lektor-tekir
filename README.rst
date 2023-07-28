@@ -10,7 +10,7 @@ What works:
 - Adding, deleting and replacing attachments.
 - Publishing (deploying) the site.
 - Multiple language support in the UI (English and Turkish at the moment).
-- Light/dark mode toggle.
+- Support for light/dark mode preference.
 - A widget for navigating content elements in the site.
 
 What's planned in the short term:
@@ -40,5 +40,7 @@ And use the edit buttons on pages.
 
 The ``lektor-tekir`` CLI is identical to the Lektor CLI
 except that it patches the ``serve`` command to enable its own panel.
+
+All icons are from the Breeze project.
 
 .. _Lektor: https://www.getlektor.com/
