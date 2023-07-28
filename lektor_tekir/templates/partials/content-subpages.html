@@ -1,0 +1,49 @@
+<h2>{{ _('Subpages') }}</h2>
+
+{% if subpages %}
+<form id="subpages-form" action="." method="POST">
+  <input type="hidden" name="form_id" value="subpages-form"/>
+  <div class="field content-listing">
+    <table>
+      <thead>
+        <tr>
+          <th>{{ _('Select') }}</th>
+          <th>{{ _('Name') }}</th>
+          <th>{{ _('Type') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subpage in subpages %}
+        <tr>
+          <td>
+            <input type="checkbox" name="selected-items" value="{{ subpage.path }}"/>
+          </td>
+          <td>
+            <a href="{{ url_for('tekir_admin.contents', path=subpage.path) }}">{{ subpage._slug }}</a>
+          </td>
+          <td>
+            {{ subpage.datamodel.name_i18n.get(g.lang_code, subpage.datamodel.name) }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <button
+      hx-post="{{ url_for('tekir_admin.api.delete_collect') }}"
+      hx-target="#delete-dialog">
+    {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
+  </button>
+{% else %}
+  <div class="field content-listing">
+    <p>{{ _('No subpages.') }}</p>
+  </div>
+{% endif %}
+
+  <button
+      hx-get="{{ url_for('tekir_admin.api.new_subpage', path=record.path) }}"
+      hx-target="#new-subpage-dialog">
+    {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
+  </button>
+</form>

@@ -1,0 +1,45 @@
+<h2>{{ _('Attachments') }}</h2>
+
+{% if attachments %}
+<form id="attachments-form" action="." method="POST">
+  <input type="hidden" name="form_id" value="attachments-form"/>
+  <div class="field content-listing">
+    <table>
+      <thead>
+        <tr>
+          <th>{{ _('Select') }}</th>
+          <th>{{ _('File name') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attachment in attachments %}
+        <tr>
+          <td>
+            <input type="checkbox" name="selected-items" value="{{ attachment.path }}"/>
+          </td>
+          <td>
+            <a href="{{ url_for('tekir_admin.contents', path=attachment.path) }}">{{ record.url_to(attachment) }}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <button
+      hx-post="{{ url_for('tekir_admin.api.delete_collect') }}"
+      hx-target="#delete-dialog">
+    {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
+  </button>
+{% else %}
+  <div class="field content-listing">
+    <p>{{ _('No attachments.') }}</p>
+  </div>
+{% endif %}
+
+  <button
+      hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='add_attachment') }}"
+      hx-target="#upload-dialog">
+    {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
+  </button>
+</form>

@@ -191,7 +191,7 @@ def create_subpage(*, pad: Pad, parent: str, model: str, title: str,
     path: str = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
     fs_path = Path(pad.db.to_fs_path(path))
     if fs_path.exists():
-        raise ValueError("Duplicate slug")
+        raise FileExistsError("Duplicate slug")
 
     data: dict[str, str] = {
         "_model": model,
@@ -217,7 +217,7 @@ def create_attachment(*, pad: Pad, parent: Record,
     path: str = f"{parent.path}/{slug}" if parent.path != "/" else f"/{slug}"
     fs_path = Path(pad.db.to_fs_path(path))
     if fs_path.exists():
-        raise ValueError("Duplicate slug")
+        raise FileExistsError("Duplicate slug")
     uploaded.save(fs_path)
     return path
 

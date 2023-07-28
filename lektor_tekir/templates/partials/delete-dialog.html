@@ -1,0 +1,16 @@
+<p>{{ _('This operation will delete the following content items:') }}</p>
+
+<div class="report warning">
+  <ol>
+    {% for item in items %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ol>
+</div>
+
+<p>{{ _('Do you want to continue?') }}</p>
+<button class="confirm"
+    hx-post="{{ url_for('tekir_admin.api.delete_content') }}"
+    hx-swap="none"
+    hx-include="#{{ form_id }}">{{ _('Yes, delete') }}</button>
+<button class="cancel modal-close">{{ _('No, cancel') }}</button>

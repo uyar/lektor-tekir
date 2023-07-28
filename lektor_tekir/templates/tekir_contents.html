@@ -1,171 +1,30 @@
 {% extends 'tekir_base.html' %}
 
-{% from 'tekir_macros.html' import render_breadcrumbs, render_upload_dialog %}
-
 {% block body %}
-{{ render_breadcrumbs(record, ancestors) }}
-
-<div id="content-summary">
-  <h1>{{ record.title }}</h2>
-
-  <a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path) }}">
-    {% include 'icons/edit-entry.svg' %} <span>{{ _('Edit') }}</span>
-  </a>
-  <a class="button" href="{{ record.path }}">
-    {% include 'icons/preview_sel.svg' %} <span>{{ _('View') }}</span>
-  </a>
-  <button
-      hx-get="{{ url_for('tekir_admin.api.open_folder', path=record.path) }}"
-      hx-swap="none">
-    {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
-  </button>
+<div id="content-summary"
+    hx-get="{{ url_for('tekir_admin.api.content_summary', path=record.path) }}"
+    hx-trigger="load">
 </div>
 
-<section id="subpages">
-  <h2>{{ _('Subpages') }}</h2>
-
-  {% if record.children %}
-  <form id="subpages-form" action="." method="POST">
-    <div class="field content-listing">
-      <table>
-        <thead>
-          <tr>
-            <th>{{ _('Select') }}</th>
-            <th>{{ _('Name') }}</th>
-            <th>{{ _('Type') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in record.children %}
-          <tr>
-            <td>
-              <input type="checkbox" name="selected-items" value="{{ item.path }}"/>
-            </td>
-            <td>
-              <a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item._slug }}</a>
-            </td>
-            <td>
-              {{ item.datamodel.name_i18n.get(g.lang_code, item.datamodel.name) }}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <button class="delete-content"
-        hx-post="{{ url_for('tekir_admin.api.check_delete') }}"
-        hx-target="#delete-items">
-      {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
-    </button>
-  {% else %}
-    <div class="field content-listing">
-      <p>{{ _('No subpages.') }}</p>
-    </div>
-  {% endif %}
-
-    <button class="add-content" data-formid="add-subpage-form">
-      {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
-    </button>
-  </form>
+<section id="content-subpages"
+    hx-get="{{ url_for('tekir_admin.api.content_subpages', path=record.path) }}"
+    hx-trigger="load">
 </section>
 
-<section id="attachments">
-  <h2>{{ _('Attachments') }}</h2>
-
-  {% if record.attachments %}
-  <form id="attachments-form" action="." method="POST">
-    <div class="field content-listing">
-      <table>
-        <thead>
-          <tr>
-            <th>{{ _('Select') }}</th>
-            <th>{{ _('File name') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in record.attachments %}
-          <tr>
-            <td>
-              <input type="checkbox" name="selected-items" value="{{ item.path }}"/>
-            </td>
-            <td>
-              <a href="{{ url_for('tekir_admin.edit_attachment', path=item.path) }}">{{ record.url_to(item) }}</a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <button class="delete-content"
-        hx-post="{{ url_for('tekir_admin.api.check_delete') }}"
-        hx-target="#delete-items">
-      {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
-    </button>
-  {% else %}
-    <div class="field content-listing">
-      <p>{{ _('No attachments.') }}</p>
-    </div>
-  {% endif %}
-
-    <button class="add-content" data-formid="add-attachment-form">
-      {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
-    </button>
-  </form>
+<section id="content-attachments"
+    hx-get="{{ url_for('tekir_admin.api.content_attachments', path=record.path) }}"
+    hx-trigger="load">
 </section>
 
 <dialog id="delete-dialog">
-  <p>{{ _('This operation will delete the following content items:') }}</p>
-
-  <ol id="delete-items"></ol>
-
-  <p>{{ _('Do you want to continue?') }}</p>
-  <button class="confirm" id="delete-continue"
-      hx-post="{{ url_for('tekir_admin.api.delete_content') }}"
-      hx-swap="none">{{ _('Yes, delete') }}</button>
-  <button class="cancel modal-close">{{ _('No, cancel') }}</button>
 </dialog>
 
-<dialog id="add-subpage-dialog">
-  <form id="add-subpage-form" action="." method="POST">
-    <div class="field">
-      <label for="field-model">{{ _('Content Type') }}</label>
-      {% if (child_models | length) == 1 %}
-      {{ child_models[0].name_i18n.get(g.lang_code, child_models[0].name) }}
-      <input type="hidden" id="field-model" name="model" value="{{ child_models[0].id }}"/>
-      {% else %}
-      <select id="field-model" name="model" required>
-        {% for model in child_models %}
-        <option value="{{ model.id }}" {{ 'selected' if model.id == 'page' else '' }}>
-          {{ model.name_i18n.get(g.lang_code, model.name) }}
-        </option>
-        {% endfor %}
-      </select>
-      {% endif %}
-    </div>
-
-    <div class="field">
-      <label for="field-title">{{ _('Title') }}</label>
-      <input type="text" id="field-title" name="title" required
-          hx-get="{{ url_for('tekir_admin.api.slug_from_title') }}"
-          hx-trigger="keyup delay:500ms changed"
-          hx-swap="none"/>
-    </div>
-
-    <div class="field">
-      <label for="field-slug">{{ _('Name') }}</label>
-      <input type="text" id="field-slug" name="slug"/>
-    </div>
-
-    <div class="warning" id="add-subpage-result"></div>
-
-    <button class="confirm"
-        hx-post="{{ url_for('tekir_admin.api.new_subpage', parent=record.path) }}"
-        hx-target="#add-subpage-result">{{ _('Add') }}</button>
-    <button class="cancel modal-close">{{ _('Cancel') }}</button>
-  </form>
+<dialog id="new-subpage-dialog">
 </dialog>
 
-{{ render_upload_dialog("add-attachment", endpoint="new_attachment", path=record.path) }}
+<dialog id="upload-dialog">
+</dialog>
+
+<dialog id="error-dialog">
+</dialog>
 {% endblock %}

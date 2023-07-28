@@ -4,6 +4,7 @@ Changes
 0.5 (unreleased)
 ----------------
 
+- Convert main navigation to hoverable sidebar.
 - Add support for replacing attachments.
 - Add icons to action buttons.
 

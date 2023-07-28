@@ -10,6 +10,7 @@ import subprocess
 import sys
 from datetime import datetime
 from http import HTTPStatus
+from locale import strxfrm
 from pathlib import Path
 from typing import Iterable
 from uuid import uuid4
@@ -19,6 +20,7 @@ from flask_babel import format_datetime
 from flask_babel import gettext as _
 from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
+from lektor.datamodel import DataModel
 from lektor.db import Pad, Record
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
@@ -36,17 +38,21 @@ FILE_MANAGERS: dict[str, str] = {
 }
 
 
+def i18n_name(item: DataModel) -> str:
+    return strxfrm(item.name_i18n.get(g.lang_code, item.name))
+
+
 def error_response(errors: list[str]) -> Response:
     content: str = render_template("partials/error-dialog.html", errors=errors)
     response = Response(content)
     response.headers["HX-Retarget"] = "#error-dialog"
     response.headers["HX-Reswap"] = "innerHTML"
-    trigger = '{"showModal": {"modal_id": "error-dialog"}}'
+    trigger = '{"showModal": {"modal": "#error-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
 
 
-def open_folder() -> str | Response:
+def open_folder() -> Response:
     fs_path: str | None = request.args.get("fs_path")
     if fs_path is None:
         path: str | None = request.args.get("path")
@@ -61,7 +67,7 @@ def open_folder() -> str | Response:
     except Exception as e:
         errors = [str(e)]
         return error_response(errors)
-    return ""
+    return Response("")
 
 
 def site_summary() -> str:
@@ -109,7 +115,7 @@ def publish_info() -> Response:
     content: str = render_template("partials/publish-dialog.html",
                                    servers=servers)
     response = Response(content)
-    trigger = '{"showModal": {"modal_id": "publish-dialog"}}'
+    trigger = '{"showModal": {"modal": "#publish-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
 
@@ -129,26 +135,76 @@ def publish_build() -> str | Response:
     for line in event_iter:
         event_lines.append(line)
     content = "\n".join(event_lines)
-    return Response(content)
+    return content
 
 
-def check_delete() -> str:
+def content_summary() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    ancestors: list[Record] = utils.get_ancestors(record)
+    template = "content-summary.html" if not record.is_attachment else \
+        "attachment-summary.html"
+    return render_template(f"partials/{template}", record=record,
+                           ancestors=ancestors)
+
+
+def content_subpages() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    subpages = sorted(record.children, key=lambda s: s["_slug"])
+    return render_template("partials/content-subpages.html", record=record,
+                           subpages=subpages)
+
+
+def content_attachments() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    attachments = sorted(record.attachments, key=lambda s: s["_slug"])
+    return render_template("partials/content-attachments.html", record=record,
+                           attachments=attachments)
+
+
+def delete_collect() -> Response:
     items: list[str] = request.form.getlist("selected-items")
+    form_id: str | None = request.form.get("form_id")
+    if form_id is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
     records: list[Record] = [g.admin_context.pad.get(i, alt=PRIMARY_ALT)
                              for i in items]
     root: Record = g.admin_context.pad.root
     paths: list[str] = utils.get_record_paths(records, root=root)
-    paths.sort()
-    return "\n".join(f'<li>{p}</li>' for p in paths)
+    content: str = render_template("partials/delete-dialog.html",
+                                   items=sorted(paths),
+                                   form_id=form_id)
+    response = Response(content)
+    trigger = '{"showModal": {"modal": "#delete-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
 
 
-def delete_content() -> str:
+def delete_content() -> Response:
     items: list[str] = request.form.getlist("selected-items")
+    form_id: str | None = request.form.get("form_id")
+    if form_id is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
     records: list[Record] = [g.admin_context.pad.get(i, alt=PRIMARY_ALT)
                              for i in items]
     for record in records:
         utils.delete_record(record)
-    return _("Deleted.")
+    response = Response("")
+    detail = '{"form": "%(form)s", "modal": "%(modal)s"}' % {
+        "form": f"#{form_id}",
+        "modal": "#delete-dialog",
+    }
+    trigger = '{"deleteCheckedRows": %(detail)s}' % {"detail": detail}
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
 
 
 def slug_from_title() -> Response:
@@ -157,11 +213,32 @@ def slug_from_title() -> Response:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     slug: str = slugify(title)
     response = Response(slug)
-    response.headers["HX-Trigger"] = '{"updateSlug": {"slug": "%s"}}' % slug
+    detail = '{"target": "%(sel)s", "attr": "%(attr)s", "value": "%(val)s"}' % {
+        "sel": "#field-slug",
+        "attr": "placeholder",
+        "val": slug,
+    }
+    trigger = '{"updateAttr": %(detail)s}' % {"detail": detail}
+    response.headers["HX-Trigger"] = trigger
     return response
 
 
-def new_subpage() -> str | Response:
+def new_subpage() -> Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    child_models: list[DataModel] = utils.get_child_models(record)
+    models: list[DataModel] = sorted(child_models, key=i18n_name)
+    content: str = render_template("partials/new-subpage-dialog.html",
+                                   record=record, models=models)
+    response = Response(content)
+    trigger = '{"showModal": {"modal": "#new-subpage-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
+
+
+def add_subpage() -> Response:
     parent: str | None = request.args.get("parent")
     model: str | None = request.form.get("model")
     if (parent is None) or (model is None):
@@ -169,7 +246,8 @@ def new_subpage() -> str | Response:
 
     title: str = request.form.get("title", "").strip()
     if title == "":
-        return _("Every content item must have a title.")
+        errors = [_("Every content item must have a title.")]
+        return error_response(errors)
 
     try:
         path: str = utils.create_subpage(
@@ -179,23 +257,39 @@ def new_subpage() -> str | Response:
             title=title,
             form=request.form,
         )
-    except ValueError:
-        return _("A content item with this name already exists.")
+    except FileExistsError:
+        errors = [_("A content item with this name already exists.")]
+        return error_response(errors)
 
-    response = Response(_("Added."))
+    response = Response("")
     record_url = url_for("tekir_admin.edit_content", path=path)
     response.headers["HX-Redirect"] = record_url
     return response
 
 
-def new_attachment() -> str | Response:
-    uploaded: FileStorage | None = request.files.get("file")
-    if not uploaded:
-        return _("Please upload a file.")
+def upload_attachment() -> Response:
+    path: str | None = request.args.get("path")
+    endpoint: str | None = request.args.get("op")
+    if (path is None) or (endpoint is None):
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    content: str = render_template("partials/upload-dialog.html",
+                                   record=record, endpoint=endpoint)
+    response = Response(content)
+    trigger = '{"showModal": {"modal": "#upload-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
 
+
+def add_attachment() -> Response:
     parent: str | None = request.args.get("path")
     if parent is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
+
+    uploaded: FileStorage | None = request.files.get("file")
+    if not uploaded:
+        errors = [_("Please upload a file.")]
+        return error_response(errors)
 
     try:
         path: str = utils.create_attachment(
@@ -203,11 +297,32 @@ def new_attachment() -> str | Response:
             parent=g.admin_context.pad.get(parent, alt=PRIMARY_ALT),
             uploaded=uploaded,
         )
-    except ValueError:
-        return _("An attachment with this name already exists for this item.")
+    except FileExistsError:
+        errors = [_("An attachment with this name already exists.")]
+        return error_response(errors)
 
-    response = Response(_("Added."))
-    record_url = url_for("tekir_admin.edit_attachment", path=path)
+    response = Response()
+    record_url: str = url_for("tekir_admin.contents", path=path)
+    response.headers["HX-Redirect"] = record_url
+    return response
+
+
+def replace_attachment() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+
+    uploaded: FileStorage | None = request.files.get("file")
+    if not uploaded:
+        errors = [_("Please upload a file.")]
+        return error_response(errors)
+
+    pad: Pad = g.admin_context.pad
+    source_path = Path(pad.db.to_fs_path(path))
+    uploaded.save(source_path)
+
+    response = Response("")
+    record_url: str = url_for("tekir_admin.contents", path=path)
     response.headers["HX-Redirect"] = record_url
     return response
 
@@ -243,22 +358,6 @@ def save_content() -> str | Response:
     else:
         source.write_text(content)
         return _("Content saved.")
-
-
-def replace_attachment() -> str | Response:
-    uploaded: FileStorage | None = request.files.get("file")
-    if not uploaded:
-        return _("Please upload a file.")
-    path: str | None = request.args.get("path")
-    if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
-    pad: Pad = g.admin_context.pad
-    source_path = Path(pad.db.to_fs_path(path))
-    uploaded.save(source_path)
-    response = Response("")
-    record_url: str = url_for("tekir_admin.edit_attachment", path=path)
-    response.headers["HX-Redirect"] = record_url
-    return response
 
 
 def new_flowblock() -> str | Response:
@@ -297,6 +396,7 @@ def make_blueprint():
     bp = Blueprint("api", __name__, url_prefix="/api")
 
     bp.add_url_rule("/open-folder", view_func=open_folder)
+
     bp.add_url_rule("/site-summary", view_func=site_summary)
     bp.add_url_rule("/site-output", view_func=site_output)
     bp.add_url_rule("/clean-build", view_func=clean_build)
@@ -304,15 +404,22 @@ def make_blueprint():
     bp.add_url_rule("/publish-info", view_func=publish_info)
     bp.add_url_rule("/publish-build", view_func=publish_build,
                     methods=["POST"])
-    bp.add_url_rule("/check-delete", view_func=check_delete,
+
+    bp.add_url_rule("/content-summary", view_func=content_summary)
+    bp.add_url_rule("/content-subpages", view_func=content_subpages)
+    bp.add_url_rule("/content-attachments", view_func=content_attachments)
+    bp.add_url_rule("/delete-collect", view_func=delete_collect,
                     methods=["POST"])
     bp.add_url_rule("/delete-content", view_func=delete_content,
                     methods=["POST"])
     bp.add_url_rule("/slugify", view_func=slug_from_title)
-    bp.add_url_rule("/new-content", view_func=new_subpage,
+    bp.add_url_rule("/new-subpage", view_func=new_subpage)
+    bp.add_url_rule("/add-subpage", view_func=add_subpage,
                     methods=["POST"])
-    bp.add_url_rule("/new-attachment", view_func=new_attachment,
+    bp.add_url_rule("/upload-attachment", view_func=upload_attachment)
+    bp.add_url_rule("/add-attachment", view_func=add_attachment,
                     methods=["POST"])
+
     bp.add_url_rule("/check-changes", view_func=check_changes,
                     methods=["POST"])
     bp.add_url_rule("/save-content", view_func=save_content,

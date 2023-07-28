@@ -1,0 +1,32 @@
+{% extends 'tekir_base.html' %}
+
+{% block body %}
+<div id="content-summary"
+    hx-get="{{ url_for('tekir_admin.api.content_summary', path=record.path) }}"
+    hx-trigger="load">
+</div>
+
+<div id="attachment-preview">
+  {% if record._attachment_type == "image" %}
+  <img src="{{ record.path }}" alt="" widtn="{{ record.width }}" height="{{ record.height }}"/>
+  {% endif %}
+</div>
+
+<div id="attachment-info">
+  {% if record._attachment_type == "image" %}
+  <p>{{ _('Image Size') }}: {{ record.width }} x {{record.height}}</p>
+  {% endif %}
+
+  <button
+      hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='replace_attachment') }}"
+      hx-target="#upload-dialog">
+    {% include 'icons/document-swap.svg' %} <span>{{ _('Replace') }}</span>
+  </button>
+</div>
+
+<dialog id="upload-dialog">
+</dialog>
+
+<dialog id="error-dialog">
+</dialog>
+{% endblock %}

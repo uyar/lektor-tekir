@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         window.location.href = window.location.href.replace("/" + pageLang + "/", "/" + uiLang + "/");
     }
 
-    document.querySelectorAll("#tekir-langs a.button").forEach((el) => {
+    document.querySelectorAll("#language-panel a.button").forEach((el) => {
         el.addEventListener("click", (ev) => {
             localStorage.setItem("ui-language", ev.currentTarget.innerHTML);
         });
@@ -18,24 +18,6 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         if (el.classList.contains("modal-close")) {
             ev.preventDefault();
             el.closest("dialog").close();
-        } else if (el.classList.contains("add-content")) {
-            ev.preventDefault();
-            const form = document.getElementById(el.dataset.formid);
-            form.reset();
-            form.querySelector(".warning").innerHTML = "";
-            form.closest("dialog").showModal();
-        } else if (main.classList.contains("tekir_contents")) {
-            const deleteDialog = document.getElementById("delete-dialog");
-            if (el.classList.contains("delete-content")) {
-                document.getElementById("delete-continue").setAttribute("hx-include", "#" + el.closest("form").id);
-                deleteDialog.showModal();
-            } else if (el.id == "delete-continue") {
-                const formId = el.getAttribute("hx-include");
-                document.querySelector(formId).querySelectorAll("input:checked").forEach((checkbox) => {
-                    checkbox.closest("tr").remove();
-                });
-                deleteDialog.close();
-            }
         } else if (main.classList.contains("tekir_content_edit")) {
             const details = el.closest("details");
             const navigateDialog = document.getElementById("navigate-dialog");
@@ -64,16 +46,23 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         }
     });
 
+    document.body.addEventListener("updateAttr", (ev) => {
+        document.querySelector(ev.detail.target).setAttribute(ev.detail.attr, ev.detail.value);
+    });
+
     document.body.addEventListener("showModal", (ev) => {
-        document.getElementById(ev.detail.modal_id).showModal();
+        document.querySelector(ev.detail.modal).showModal();
+    });
+
+    document.body.addEventListener("deleteCheckedRows", (ev) => {
+        document.querySelector(ev.detail.form).querySelectorAll("input:checked").forEach((checkbox) => {
+            checkbox.closest("tr").remove();
+        });
+        document.querySelector(ev.detail.modal).close();
     });
 
     document.body.addEventListener("showChanges", (ev) => {
         document.getElementById("changes-continue").setAttribute("data-href", ev.detail.href);
         document.getElementById("changes-dialog").showModal();
-    });
-
-    document.body.addEventListener("updateSlug", (ev) => {
-        document.getElementById("field-slug").setAttribute("placeholder", ev.detail.slug);
     });
 });

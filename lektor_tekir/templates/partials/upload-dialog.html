@@ -1,0 +1,13 @@
+<form action="." method="POST" enctype="multipart/form-data">
+  <div class="field">
+    <label for="field-file">{{ _('File') }}</label>
+    <small>{{ _('Use button to select file or drag and drop your file into this area.') }}</small>
+    <input type="file" id="field-file" name="file" required/>
+  </div>
+
+  <button class="confirm"
+      hx-encoding="multipart/form-data"
+      hx-post="{{ url_for('tekir_admin.api.' + endpoint, path=record.path) }}"
+      hx-swap="none">{{ _('Upload') }}</button>
+  <button class="modal-close">{{ _('Cancel') }}</button>
+</form>

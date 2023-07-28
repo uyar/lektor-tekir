@@ -1,5 +1,5 @@
 {% macro render_breadcrumbs(record, ancestors) %}
-<div id="breadcrumbs">
+<div class="breadcrumbs">
   <p>{{ _('You are here:') }}</p>
   <ul role="list">
     {% for item in ancestors %}
@@ -100,24 +100,4 @@
     {{ render_field(block, block_field, prefix='%s-%s-%s-' % (field_name, block_index, block.flowblockmodel.id)) }}
   {% endfor %}
 </details>
-{% endmacro %}
-
-{% macro render_upload_dialog(prefix, endpoint, path) %}
-<dialog id="{{ prefix }}-dialog">
-  <form id="{{ prefix }}-form" action="." method="POST" enctype="multipart/form-data">
-    <div class="field">
-      <label for="field-file">{{ _('File') }}</label>
-      <small>{{ _('Use button to select file or drag and drop your file into this area.') }}</small>
-      <input type="file" id="field-file" name="file" required/>
-    </div>
-
-    <div class="warning" id="{{ prefix }}-result"></div>
-
-    <button class="confirm"
-        hx-encoding="multipart/form-data"
-        hx-post="{{ url_for('tekir_admin.api.' + endpoint, path=path) }}"
-        hx-target="#{{ prefix }}-result">{{ _('Upload') }}</button>
-    <button class="modal-close">{{ _('Cancel') }}</button>
-  </form>
-</dialog>
 {% endmacro %}
