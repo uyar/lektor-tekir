@@ -1,7 +1,10 @@
 <h2>{{ _('Output') }}</h2>
 
 <div class="subsection" id="output-path">
-  <p>{{ _('Folder:') }} <span class="target">{{ output.path }}</span></p>
+  <div class="field">
+    <p>{{ _('Folder:') }}</p>
+    <p class="target">{{ output.path }}</p>
+  </div>
   <button
       hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output.path) }}"
       hx-swap="none">
@@ -10,7 +13,10 @@
 </div>
 
 <div class="subsection" id="output-time">
-  <p>{{ _('Time:') }} <span class="target">{{ output.time }}</span></p>
+  <div class="field">
+    <p>{{ _('Time:') }}</p>
+    <p class="target">{{ output.time }}</p>
+  </div>
   <button
       hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
       hx-target="#output-time .target">

@@ -125,10 +125,10 @@ def publish_build() -> str | Response:
                                         server_info.target,
                                         builder.destination_path,
                                         server_info=server_info)
-    messages = []
+    event_lines: list[str] = []
     for line in event_iter:
-        messages.append(line)
-    content = "\n".join(messages)
+        event_lines.append(line)
+    content = "\n".join(event_lines)
     return Response(content)
 
 

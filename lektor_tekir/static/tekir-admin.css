@@ -272,11 +272,14 @@ section > *:last-child {
   background-color: var(--color-bg);
 }
 
-.warning:not(:empty) {
+.report:not(:empty) {
   margin-block: 1em;
   padding: var(--space-m);
-  background-color: hsl(350, 94%, 86%);
-  color: var(--color-text);
+}
+
+.errors {
+  background-color: hsl(0, 92%, 25%);
+  color: white;
 }
 
 /* SPECIAL */
@@ -290,7 +293,6 @@ main.tekir_overview {
 
 #site-summary {
   grid-area: site-summary;
-  max-width: min(20em, 50%);
 }
 
 #site-output {
@@ -301,10 +303,15 @@ main.tekir_overview {
   font-size: 2.5em;
 }
 
+:where(#output-path, #output-time) p {
+  width: fit-content;
+  margin-block: 0.25em;
+}
+
 :where(#output-path, #output-time) .target {
-  margin-inline-start: 1em;
-  padding: 0.25rem;
-  background-color: hsl(0, 0%, 60%);
+  padding: var(--space-xs);
+  background-color: hsl(0, 0%, 40%);
+  color: white;
 }
 
 main.tekir_contents {
