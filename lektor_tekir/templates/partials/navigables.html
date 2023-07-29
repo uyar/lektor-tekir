@@ -1,0 +1,3 @@
+{% for value, label, selected in navigables %}
+<option value="{{ value }}"{{ ' selected' if selected else ''}}>{{ label }}</option>
+{% endfor %}

@@ -1,0 +1,14 @@
+<form id="navigate-form" action="." method="POST">
+  <div class="field">
+    <select id="navigables" name="path"
+        hx-get="{{ url_for('tekir_admin.api.navigables') }}"
+        hx-vals='js:{path: event.target.value}'>
+      {% for value, label, selected in navigables %}
+      <option value="{{ value }}"{{ ' selected' if selected else '' }}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button class="confirm" id="navigate-select" data-dst="{{ field_id }}">{{ _('Select') }}</button>
+  <button class="cancel modal-close">{{ _('Cancel') }}</button>
+</form>

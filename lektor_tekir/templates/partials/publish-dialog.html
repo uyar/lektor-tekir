@@ -3,7 +3,7 @@
     <label for="field-server">{{ _('Server') }}</label>
     <select id="field-server" name="server" required>
       {% for server_id, server in servers.items() %}
-      <option value="{{ server_id }}" {{ 'selected' if server.default else '' }}>
+      <option value="{{ server_id }}"{{ ' selected' if server.default else '' }}>
         {{ server.name }}: {{ server.target }}
       </option>
       {% endfor %}

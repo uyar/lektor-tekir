@@ -43,8 +43,8 @@ def i18n_name(item: DataModel) -> str:
 
 
 def error_response(errors: list[str]) -> Response:
-    content: str = render_template("partials/error-dialog.html", errors=errors)
-    response = Response(content)
+    markup: str = render_template("partials/error-dialog.html", errors=errors)
+    response = Response(markup)
     response.headers["HX-Retarget"] = "#error-dialog"
     response.headers["HX-Reswap"] = "innerHTML"
     trigger = '{"showModal": {"modal": "#error-dialog"}}'
@@ -112,9 +112,9 @@ def build() -> str | Response:
 
 def publish_info() -> Response:
     servers: list[ServerInfo] = g.admin_context.pad.config.get_servers()
-    content: str = render_template("partials/publish-dialog.html",
-                                   servers=servers)
-    response = Response(content)
+    markup: str = render_template("partials/publish-dialog.html",
+                                  servers=servers)
+    response = Response(markup)
     trigger = '{"showModal": {"modal": "#publish-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
@@ -179,10 +179,9 @@ def delete_collect() -> Response:
                              for i in items]
     root: Record = g.admin_context.pad.root
     paths: list[str] = utils.get_record_paths(records, root=root)
-    content: str = render_template("partials/delete-dialog.html",
-                                   items=sorted(paths),
-                                   form_id=form_id)
-    response = Response(content)
+    markup: str = render_template("partials/delete-dialog.html",
+                                  items=sorted(paths), form_id=form_id)
+    response = Response(markup)
     trigger = '{"showModal": {"modal": "#delete-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
@@ -213,9 +212,9 @@ def slug_from_title() -> Response:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     slug: str = slugify(title)
     response = Response(slug)
-    detail = '{"target": "%(sel)s", "attr": "%(attr)s", "value": "%(val)s"}' % {
+    detail = '{"target": "%(sel)s", "attr": "%(att)s", "value": "%(val)s"}' % {
         "sel": "#field-slug",
-        "attr": "placeholder",
+        "att": "placeholder",
         "val": slug,
     }
     trigger = '{"updateAttr": %(detail)s}' % {"detail": detail}
@@ -230,9 +229,9 @@ def new_subpage() -> Response:
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     child_models: list[DataModel] = utils.get_child_models(record)
     models: list[DataModel] = sorted(child_models, key=i18n_name)
-    content: str = render_template("partials/new-subpage-dialog.html",
-                                   record=record, models=models)
-    response = Response(content)
+    markup: str = render_template("partials/new-subpage-dialog.html",
+                                  record=record, models=models)
+    response = Response(markup)
     trigger = '{"showModal": {"modal": "#new-subpage-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
@@ -273,9 +272,9 @@ def upload_attachment() -> Response:
     if (path is None) or (endpoint is None):
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    content: str = render_template("partials/upload-dialog.html",
-                                   record=record, endpoint=endpoint)
-    response = Response(content)
+    markup: str = render_template("partials/upload-dialog.html",
+                                  record=record, endpoint=endpoint)
+    response = Response(markup)
     trigger = '{"showModal": {"modal": "#upload-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
@@ -307,7 +306,7 @@ def add_attachment() -> Response:
     return response
 
 
-def replace_attachment() -> str | Response:
+def replace_attachment() -> Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
@@ -327,10 +326,32 @@ def replace_attachment() -> str | Response:
     return response
 
 
+def save_content() -> Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    content: str = utils.get_content(record, request.form)
+    source = Path(record.source_filename)
+    if content == source.read_text():
+        message = _("No changes.")
+    else:
+        source.write_text(content)
+        message = _("Content saved.")
+
+    markup: str = render_template("partials/save-dialog.html", message=message)
+    response = Response(markup)
+    trigger = '{"showModal": {"modal": "#save-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
+
+
 def check_changes() -> Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
+
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     record_url: str = url_for("tekir_admin.contents", path=record.path)
     content: str = utils.get_content(record, request.form)
@@ -340,24 +361,13 @@ def check_changes() -> Response:
         response.headers["HX-Redirect"] = record_url
     else:
         message = _("There are unsaved changes. Do you want to continue?")
-        trigger = '{"showChanges": {"href": "%s"}}' % record_url
-        response = Response(message)
+        markup: str = render_template("partials/changes-dialog.html",
+                                      message=message, record_url=record_url)
+        response = Response(markup)
+        trigger = '{"showModal": {"modal": "#changes-dialog"}}'
+        response.headers["HX-Trigger-After-Swap"] = trigger
         response.headers["HX-Trigger"] = trigger
     return response
-
-
-def save_content() -> str | Response:
-    path: str | None = request.args.get("path")
-    if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    content: str = utils.get_content(record, request.form)
-    source = Path(record.source_filename)
-    if content == source.read_text():
-        return _("No changes.")
-    else:
-        source.write_text(content)
-        return _("Content saved.")
 
 
 def new_flowblock() -> str | Response:
@@ -375,21 +385,34 @@ def new_flowblock() -> str | Response:
                            block_index=f"uuid_{uuid_index}")
 
 
-def navigables() -> str:
+def start_navigate() -> str | Response:
+    field_id = request.args.get("field_id")
+    if field_id is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+
     path: str = request.args.get("path", "/")
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     if record is None:
         record = g.admin_context.pad.root
+
     navigables: list[tuple[str, str, bool]] = utils.get_navigables(record)
-    options: list[str] = []
-    for value, label, selected in navigables:
-        option = '<option value="%(v)s" %(s)s>%(l)s</option>' % {
-            "v": value,
-            "l": label if label != "/" else _("home"),
-            "s": "selected" if selected else "",
-        }
-        options.append(option)
-    return "\n".join(options)
+    markup: str = render_template("partials/navigate-dialog.html",
+                                  navigables=navigables, field_id=field_id)
+    response = Response(markup)
+    trigger = '{"showModal": {"modal": "#navigate-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
+
+
+def navigables() -> str:
+    path: str = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+
+    navigables: list[tuple[str, str, bool]] = utils.get_navigables(record)
+    return render_template("partials/navigables.html",
+                           navigables=navigables)
 
 
 def make_blueprint():
@@ -420,13 +443,15 @@ def make_blueprint():
     bp.add_url_rule("/add-attachment", view_func=add_attachment,
                     methods=["POST"])
 
-    bp.add_url_rule("/check-changes", view_func=check_changes,
-                    methods=["POST"])
     bp.add_url_rule("/save-content", view_func=save_content,
+                    methods=["POST"])
+    bp.add_url_rule("/check-changes", view_func=check_changes,
                     methods=["POST"])
     bp.add_url_rule("/replace-attachment", view_func=replace_attachment,
                     methods=["POST"])
     bp.add_url_rule("/new-flowblock", view_func=new_flowblock)
+
+    bp.add_url_rule("/start-navigate", view_func=start_navigate)
     bp.add_url_rule("/navigables", view_func=navigables)
 
     return bp

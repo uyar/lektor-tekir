@@ -20,13 +20,7 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             el.closest("dialog").close();
         } else if (main.classList.contains("tekir_content_edit")) {
             const details = el.closest("details");
-            const navigateDialog = document.getElementById("navigate-dialog");
-            if (el.id == "save-content") {
-                document.getElementById("save-dialog").showModal();
-            } else if (el.id == "changes-continue") {
-                document.getElementById("changes-dialog").close();
-                window.location.href = el.dataset.href;
-            } else if (el.classList.contains("delete-block")) {
+            if (el.classList.contains("delete-block")) {
                 ev.preventDefault();
                 details.remove();
             } else if (el.classList.contains("up-block")) {
@@ -35,13 +29,10 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             } else if (el.classList.contains("down-block")) {
                 ev.preventDefault();
                 details.nextElementSibling.after(details);
-            } else if (el.classList.contains("tekir-navigate")) {
-                document.getElementById("navigate-select").setAttribute("data-src", el.id);
-                navigateDialog.showModal();
             } else if (el.id == "navigate-select") {
                 ev.preventDefault();
-                document.getElementById(el.dataset.src).value = document.getElementById("navigables").value;
-                navigateDialog.close();
+                document.getElementById(el.dataset.dst).value = document.getElementById("navigables").value;
+                el.closest("dialog").close();
             }
         }
     });
@@ -59,10 +50,5 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
             checkbox.closest("tr").remove();
         });
         document.querySelector(ev.detail.modal).close();
-    });
-
-    document.body.addEventListener("showChanges", (ev) => {
-        document.getElementById("changes-continue").setAttribute("data-href", ev.detail.href);
-        document.getElementById("changes-dialog").showModal();
     });
 });

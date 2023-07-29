@@ -3,42 +3,29 @@
 {% from 'tekir_macros.html' import render_field %}
 
 {% block body %}
-<form id="content-edit" action="." method="POST">
+<form id="content-edit-form" action="." method="POST">
   {% for field in record.datamodel.fields %}
     {{ render_field(record, field, prefix='') }}
   {% endfor %}
 
   <button id="save-content"
       hx-post="{{ url_for('tekir_admin.api.save_content', path=record.path) }}"
-      hx-target="#save-result">
+      hx-target="#save-dialog">
     {% include 'icons/document-save.svg' %} <span>{{ _('Save') }}</span>
   </button>
   <button
       hx-post="{{ url_for('tekir_admin.api.check_changes', path=record.path) }}"
-      hx-target="#changes-result">
+      hx-target="#changes-dialog">
     {% include 'icons/document-close.svg' %} <span>{{ _('Close') }}</span>
   </button>
 </form>
 
 <dialog id="save-dialog">
-  <div id="save-result"></div>
-  <button class="modal-close">{{ _('Close') }}</button>
 </dialog>
 
 <dialog id="changes-dialog">
-  <div id="changes-result"></div>
-  <button class="confirm" id="changes-continue">{{ _('Continue') }}</button>
-  <button class="cancel modal-close">{{ _('Cancel') }}</button>
 </dialog>
 
 <dialog id="navigate-dialog">
-  <form id="navigate-form" action="." method="POST">
-    <div class="field">
-      <select id="navigables" name="path"
-          hx-get="{{ url_for('tekir_admin.api.navigables') }}"></select>
-    </div>
-    <button class="confirm" id="navigate-select">{{ _('Select') }}</button>
-    <button class="cancel modal-close">{{ _('Cancel') }}</button>
-  </form>
 </dialog>
 {% endblock %}

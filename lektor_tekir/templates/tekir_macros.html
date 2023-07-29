@@ -25,12 +25,12 @@
     {% elif field.type.name == 'date' %}
     <input type="date" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
     {% elif field.type.name == 'boolean' %}
-    <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}" {{ 'checked' if field_value else '' }}/>
+    <input type="checkbox" id="{{ field_id }}" name="{{ field_name }}"{{ ' checked' if field_value else '' }}/>
     {% elif field.type.name == 'select' %}
     <select id="{{ field_id }}" name="{{ field_name }}">
       <option value="">----</option>
       {% for choice, label in field.type.source.iter_choices(pad, record) %}
-      <option value="{{ choice }}" {{ 'selected' if choice == field_value else '' }}>{{ label.get(g.lang_code, label.get('en')) }}</option>
+      <option value="{{ choice }}"{{ ' selected' if choice == field_value else '' }}>{{ label.get(g.lang_code, label.get('en')) }}</option>
       {% endfor %}
     </select>
     {% elif field.type.name == 'url' %}
@@ -40,10 +40,10 @@
     <input type="time" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
       {% elif widget == 'navigate' %}
     <input type="text" class="tekir-navigate" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"
-        hx-get="{{ url_for('tekir_admin.api.navigables') }}"
-        hx-vals='js:{path: event.target.value ? event.target.value : "{{ record.path }}"}'
+        hx-get="{{ url_for('tekir_admin.api.start_navigate', field_id=field_id) }}"
+        hx-vals='js:{path: event.target.value ?? "{{ record.path }}"}'
         hx-trigger="click"
-        hx-target="#navigables"/>
+        hx-target="#navigate-dialog"/>
       {% else %}
     <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
       {% endif %}
@@ -63,7 +63,7 @@
     <fieldset>
       {% if field_value %}
         {% for block in field_value.blocks %}
-          {{ render_flowblock(block, field_name, '%d' % loop.index) }}
+        {{ render_flowblock(block, field_name, '%d' % loop.index) }}
         {% endfor %}
       {% endif %}
 
@@ -71,7 +71,8 @@
         <span class="add-button">{{ _('Add') }}</span>
         {% set block_models = record.pad.db.flowblocks %}
         {% for flow_type in (field.type.flow_blocks or block_models) %}
-        <button hx-get="{{ url_for('tekir_admin.api.new_flowblock', flow_type=flow_type, field_name=field_name, path=record.path) }}"
+        <button
+            hx-get="{{ url_for('tekir_admin.api.new_flowblock', flow_type=flow_type, field_name=field_name, path=record.path) }}"
             hx-target="#{{ field_name }}-add-block"
             hx-swap="beforebegin">{{ block_models[flow_type].name_i18n.get(g.lang_code, block_models[flow_type].name) }}</button>
         {% endfor %}
@@ -83,7 +84,7 @@
 
 {% macro render_flowblock(block, field_name, block_index) %}
 {% set new_block = block_index.startswith('uuid_') %}
-<details id="{{ '%s-%s' % (field_name, block_index) }}" {{ 'class=new-block' if new_block else '' }} {{ 'open' if new_block else '' }}>
+<details id="{{ '%s-%s' % (field_name, block_index) }}"{{ ' class=new-block' if new_block else '' }}{{ ' open' if new_block else '' }}>
   <summary>
     {{ block.flowblockmodel.name_i18n.get(g.lang_code) }}
     <button class="delete-block" title="{{ _('Delete') }}">
