@@ -87,13 +87,13 @@
 <details id="{{ '%s-%s' % (field_name, block_index) }}"{{ ' class=new-block' if new_block else '' }}{{ ' open' if new_block else '' }}>
   <summary>
     {{ block.flowblockmodel.name_i18n.get(g.lang_code) }}
-    <button class="delete-block" title="{{ _('Delete') }}">
+    <button class="flowblock delete-block" title="{{ _('Delete') }}">
       {% include 'icons/delete.svg' %}
     </button>
-    <button class="up-block" title="{{ _('Move up') }}">
+    <button class="flowblock up-block" title="{{ _('Move up') }}">
       {% include 'icons/go-up.svg' %}
     </button>
-    <button class="down-block" title="{{ _('Move down') }}">
+    <button class="flowblock down-block" title="{{ _('Move down') }}">
       {% include 'icons/go-down.svg' %}
     </button>
   </summary>

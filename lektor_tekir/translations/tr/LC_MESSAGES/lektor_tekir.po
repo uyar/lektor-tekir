@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-29 14:32+0300\n"
+"POT-Creation-Date: 2023-07-29 17:44+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -22,38 +22,33 @@ msgstr ""
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:249
+#: lektor_tekir/api.py:248
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:261
+#: lektor_tekir/api.py:260
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:291 lektor_tekir/api.py:317
+#: lektor_tekir/api.py:290 lektor_tekir/api.py:316
 msgid "Please upload a file."
 msgstr "Lütfen bir dosya yükleyin."
 
-#: lektor_tekir/api.py:301
+#: lektor_tekir/api.py:300
 msgid "An attachment with this name already exists."
 msgstr "Bu isimde bir ek zaten var."
 
-#: lektor_tekir/api.py:342
-msgid "There are unsaved changes. Do you want to continue?"
-msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
-
-#: lektor_tekir/api.py:357
+#: lektor_tekir/api.py:338
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:360
+#: lektor_tekir/api.py:341
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:388 lektor_tekir/templates/tekir_macros.html:6
-#: lektor_tekir/templates/tekir_macros.html:8
-msgid "home"
-msgstr "ana sayfa"
+#: lektor_tekir/api.py:364
+msgid "There are unsaved changes. Do you want to continue?"
+msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
 #: lektor_tekir/templates/tekir_attachment.html:17
 msgid "Image Size"
@@ -91,30 +86,17 @@ msgstr "Kaydet"
 #: lektor_tekir/templates/partials/error-dialog.html:3
 #: lektor_tekir/templates/partials/publish-dialog.html:19
 #: lektor_tekir/templates/tekir_content_edit.html:19
-#: lektor_tekir/templates/tekir_content_edit.html:25
 msgid "Close"
 msgstr "Kapat"
-
-#: lektor_tekir/templates/tekir_content_edit.html:30
-msgid "Continue"
-msgstr "Devam et"
-
-#: lektor_tekir/templates/partials/new-subpage-dialog.html:34
-#: lektor_tekir/templates/partials/upload-dialog.html:12
-#: lektor_tekir/templates/tekir_content_edit.html:31
-#: lektor_tekir/templates/tekir_content_edit.html:41
-msgid "Cancel"
-msgstr "Vazgeç"
-
-#: lektor_tekir/templates/partials/content-attachments.html:10
-#: lektor_tekir/templates/partials/content-subpages.html:10
-#: lektor_tekir/templates/tekir_content_edit.html:40
-msgid "Select"
-msgstr "Seç"
 
 #: lektor_tekir/templates/tekir_macros.html:3
 msgid "You are here:"
 msgstr "Buradasınız:"
+
+#: lektor_tekir/templates/tekir_macros.html:6
+#: lektor_tekir/templates/tekir_macros.html:8
+msgid "home"
+msgstr "ana sayfa"
 
 #: lektor_tekir/templates/partials/content-attachments.html:43
 #: lektor_tekir/templates/partials/content-subpages.html:47
@@ -123,21 +105,39 @@ msgstr "Buradasınız:"
 msgid "Add"
 msgstr "Ekle"
 
-#: lektor_tekir/templates/tekir_macros.html:89
+#: lektor_tekir/templates/tekir_macros.html:90
 msgid "Delete"
 msgstr "Sil"
 
-#: lektor_tekir/templates/tekir_macros.html:92
+#: lektor_tekir/templates/tekir_macros.html:93
 msgid "Move up"
 msgstr "Yukarı"
 
-#: lektor_tekir/templates/tekir_macros.html:95
+#: lektor_tekir/templates/tekir_macros.html:96
 msgid "Move down"
 msgstr "Aşağı"
+
+#: lektor_tekir/templates/partials/changes-dialog.html:5
+#: lektor_tekir/templates/partials/save-dialog.html:7
+msgid "Continue"
+msgstr "Devam et"
+
+#: lektor_tekir/templates/partials/changes-dialog.html:6
+#: lektor_tekir/templates/partials/navigate-dialog.html:13
+#: lektor_tekir/templates/partials/new-subpage-dialog.html:34
+#: lektor_tekir/templates/partials/upload-dialog.html:12
+msgid "Cancel"
+msgstr "Vazgeç"
 
 #: lektor_tekir/templates/partials/content-attachments.html:1
 msgid "Attachments"
 msgstr "Ekler"
+
+#: lektor_tekir/templates/partials/content-attachments.html:10
+#: lektor_tekir/templates/partials/content-subpages.html:10
+#: lektor_tekir/templates/partials/navigate-dialog.html:12
+msgid "Select"
+msgstr "Seç"
 
 #: lektor_tekir/templates/partials/content-attachments.html:11
 msgid "File name"
@@ -218,6 +218,10 @@ msgstr "Sunucu"
 #: lektor_tekir/templates/partials/site-output.html:37
 msgid "Publish"
 msgstr "Yayımla"
+
+#: lektor_tekir/templates/partials/save-dialog.html:5
+msgid "Finish"
+msgstr "Bitir"
 
 #: lektor_tekir/templates/partials/site-output.html:1
 msgid "Output"

@@ -340,7 +340,8 @@ def save_content() -> Response:
         source.write_text(content)
         message = _("Content saved.")
 
-    markup: str = render_template("partials/save-dialog.html", message=message)
+    markup: str = render_template("partials/save-dialog.html",
+                                  message=message, record=record)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#save-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -404,8 +405,8 @@ def start_navigate() -> str | Response:
     return response
 
 
-def navigables() -> str:
-    path: str = request.args.get("path")
+def navigables() -> str | Response:
+    path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)

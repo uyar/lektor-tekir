@@ -2,4 +2,6 @@
   {{ message }}
 </div>
 
-<button class="modal-close">{{ _('Close') }}</button>
+<a class="button" href="{{ url_for('tekir_admin.contents', path=record.path) }}">{{ _('Finish') }}</a>
+
+<button class="modal-close">{{ _('Continue') }}</button>
