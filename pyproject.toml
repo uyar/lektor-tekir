@@ -1,6 +1,6 @@
 [project]
 name = "lektor-tekir"
-version = "0.4"
+version = "0.5"
 description = "An alternative admin panel for Lektor."
 readme = "README.rst"
 
@@ -49,7 +49,7 @@ packages = ["lektor_tekir"]
 include-package-data = false
 
 [tool.setuptools.package-data]
-lektor_tekir = ["templates/*", "static/**/*", "translations/**/*"]
+lektor_tekir = ["templates/**/*", "static/**/*", "translations/**/*"]
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -95,7 +95,7 @@ deps =
     build
     twine
 commands =
-    pybabel compile -d lektor_tekir/translations/
+    pybabel compile -D lektor_tekir -d lektor_tekir/translations/
     python -c "import shutil; shutil.rmtree('dist', ignore_errors=True)"
     python -m build
     twine check dist/*

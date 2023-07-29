@@ -1,12 +1,13 @@
 Changes
 =======
 
-0.5 (unreleased)
+0.5 (2023-07-29)
 ----------------
 
 - Convert main navigation to hoverable sidebar.
 - Add support for replacing attachments.
 - Add icons to action buttons.
+- Major code refactor.
 
 0.4 (2023-07-19)
 ----------------
