@@ -41,6 +41,18 @@ And use the edit buttons on pages.
 The ``lektor-tekir`` CLI is identical to the Lektor CLI
 except that it patches the ``serve`` command to enable its own panel.
 
-All icons are from the Breeze project.
+Acknowledgements
+----------------
+
+A big thank you to the following wonderful projects:
+
+- `HTMX`_ for the JavaScript framework (license: BSD 2-Clause)
+- `Breeze Icons`_ for the icons (license: GNU LGPL v3+)
+- `SVG Loaders`_ for the button spinners (license: MIT)
+
+And, goes without saying, to `Lektor`_ of course.
 
 .. _Lektor: https://www.getlektor.com/
+.. _HTMX: https://htmx.org/
+.. _Breeze Icons: https://invent.kde.org/frameworks/breeze-icons
+.. _SVG Loaders: https://samherbert.net/svg-loaders/
