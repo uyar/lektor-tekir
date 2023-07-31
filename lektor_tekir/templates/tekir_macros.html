@@ -35,7 +35,9 @@
     </select>
     {% elif field.type.name == 'url' %}
     <input type="url" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
-    {% elif field.type.name  == 'string' %}
+    {% elif field.type.name == 'slug' %}
+    <input type="text" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
+    {% elif field.type.name == 'string' %}
       {% if widget == 'time' %}
     <input type="time" id="{{ field_id }}" name="{{ field_name }}" value="{{ field_value }}"/>
       {% elif widget == 'navigate' %}

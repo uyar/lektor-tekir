@@ -1,6 +1,11 @@
 Changes
 =======
 
+0.6 (unreleased)
+----------------
+
+- Add support for editing system fields.
+
 0.5 (2023-07-29)
 ----------------
 

@@ -26,6 +26,8 @@ MULTILINE: set[str] = {"text", "strings", "markdown", "html", "rst", "flow"}
 ENTRY_SEP = "---\n"
 BLOCK_SEP = "----\n"
 
+SYSTEM_FIELDS: list[str] = ["_slug", "_template", "_hidden", "_discoverable"]
+
 
 def get_page_count(record: Record) -> int:
     fs_path = Path(record.source_filename).parent
@@ -96,7 +98,7 @@ def field_entry(field: Field, form: ImmutableMultiDict, *,
 
     if field.type.name == "boolean":
         value = "yes" if value == "on" else "no"
-        if value == BOOL_VALUES.get(field.default, field.default):
+        if value == BOOL_VALUES.get(field.default, field.default or "no"):
             value = ""
 
     if not value:
@@ -148,22 +150,9 @@ def flowblock_entry(record: Record, field: Field,
 
 def get_content(record: Record, form: ImmutableMultiDict) -> str:
     entries: list[str] = []
-
-    default_model: str = "page"
-    try:
-        allowed_model = record.parent.datamodel.child_config.model
-        if allowed_model is not None:
-            default_model = allowed_model
-    except AttributeError:
-        pass
-    if record["_model"] != default_model:
-        entries.append(f"_model: {record['_model']}\n")
-
     model: DataModel = record.datamodel
-    if record["_template"] != model.get_default_template_name():
-        entries.append(f"_template: {record['_template']}\n")
-
-    fields: list[Field] = model.fields
+    system_fields: list[Field] = [model.field_map[f] for f in SYSTEM_FIELDS]
+    fields: list[Field] = system_fields + model.fields
     for field in fields:
         if field.type.name == "flow":
             entry = flowblock_entry(record, field, form)
@@ -172,7 +161,6 @@ def get_content(record: Record, form: ImmutableMultiDict) -> str:
         if entry == "":
             continue
         entries.append(entry)
-
     return ENTRY_SEP.join(entries)
 
 

@@ -3,7 +3,7 @@ lektor-tekir
 
 lektor-tekir is an alternative admin panel for `Lektor`_.
 
-What works:
+Features:
 
 - Navigating content.
 - Adding, editing and deleting content items.
@@ -13,20 +13,16 @@ What works:
 - Support for light/dark mode preference.
 - A widget for navigating content elements in the site.
 
-What's planned in the short term:
+Planned:
 
 - Editing attachments.
-- Editing system fields.
 - Dividing edit form fields into tabs.
 - Supporting Git.
 - Managing content translations.
-- TinyMCE, Quill or some other editor integration.
-
-What's planned in the longer term:
-
 - Managing databags.
+- HTML editor integration.
+- Image editor integration.
 - Markdown editor integration.
-- Managing everything (templates, static assets, models, flow blocks, etc).
 
 It can be installed using pip::
 

@@ -8,6 +8,14 @@
     {{ render_field(record, field, prefix='') }}
   {% endfor %}
 
+  <details>
+    <summary>{{ _('System Fields') }}</summary>
+
+    {% for field in system_fields %}
+    {{ render_field(record, field, prefix='') }}
+    {% endfor %}
+  </details>
+
   <button id="save-content"
       hx-post="{{ url_for('tekir_admin.api.save_content', path=record.path) }}"
       hx-target="#save-dialog">
