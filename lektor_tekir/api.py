@@ -21,7 +21,7 @@ from flask_babel import gettext as _
 from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel
-from lektor.db import Pad, Record
+from lektor.db import Attachment, Pad, Page, Query, Record
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
 from lektor.types.flow import FlowBlock
@@ -155,7 +155,10 @@ def content_subpages() -> str | Response:
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    subpages = sorted(record.children, key=lambda s: s["_slug"])
+    children: Query = record.children
+    order_by: list[str] | None = children.get_order_by()
+    subpages: Iterable[Page] = children if order_by is not None else \
+        sorted(children, key=lambda s: s["_slug"])
     return render_template("partials/content-subpages.html", record=record,
                            subpages=subpages)
 
@@ -165,7 +168,10 @@ def content_attachments() -> str | Response:
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    attachments = sorted(record.attachments, key=lambda s: s["_slug"])
+    children: Query = record.attachments
+    order_by: list[str] | None = children.get_order_by()
+    attachments: Iterable[Attachment] = children if order_by is not None else \
+        sorted(children, key=lambda s: s["_slug"])
     return render_template("partials/content-attachments.html", record=record,
                            attachments=attachments)
 
