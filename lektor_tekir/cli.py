@@ -37,6 +37,13 @@ def rewrite_html_tekir(fp, edit_url):
 
 
 def main():
+    # XXX: remove when turkish translation is guaranteed to be installed
+    import lektor
+    turkish_dst = Path(lektor.__path__[0]) / "translations" / "tr.json"
+    if not turkish_dst.exists():
+        turkish_src = Path(__file__).parent / "static" / "tr.json"
+        turkish_dst.write_bytes(turkish_src.read_bytes())
+
     admin.WebAdmin = TekirAdminUI
     serve.rewrite_html_for_editing = rewrite_html_tekir
     cli()

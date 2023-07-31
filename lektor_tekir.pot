@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-29 17:44+0300\n"
+"POT-Creation-Date: 2023-07-31 20:23+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,31 +21,31 @@ msgstr ""
 msgid "No output"
 msgstr ""
 
-#: lektor_tekir/api.py:248
+#: lektor_tekir/api.py:254
 msgid "Every content item must have a title."
 msgstr ""
 
-#: lektor_tekir/api.py:260
+#: lektor_tekir/api.py:266
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:290 lektor_tekir/api.py:316
+#: lektor_tekir/api.py:296 lektor_tekir/api.py:322
 msgid "Please upload a file."
 msgstr ""
 
-#: lektor_tekir/api.py:300
+#: lektor_tekir/api.py:306
 msgid "An attachment with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:338
+#: lektor_tekir/api.py:344
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:341
+#: lektor_tekir/api.py:347
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:364
+#: lektor_tekir/api.py:370
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
@@ -78,13 +78,17 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_content_edit.html:14
+#: lektor_tekir/templates/tekir_content_edit.html:12
+msgid "System Fields"
+msgstr ""
+
+#: lektor_tekir/templates/tekir_content_edit.html:22
 msgid "Save"
 msgstr ""
 
 #: lektor_tekir/templates/partials/error-dialog.html:3
 #: lektor_tekir/templates/partials/publish-dialog.html:19
-#: lektor_tekir/templates/tekir_content_edit.html:19
+#: lektor_tekir/templates/tekir_content_edit.html:27
 msgid "Close"
 msgstr ""
 
@@ -100,19 +104,19 @@ msgstr ""
 #: lektor_tekir/templates/partials/content-attachments.html:43
 #: lektor_tekir/templates/partials/content-subpages.html:47
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:33
-#: lektor_tekir/templates/tekir_macros.html:71
+#: lektor_tekir/templates/tekir_macros.html:73
 msgid "Add"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_macros.html:90
+#: lektor_tekir/templates/tekir_macros.html:92
 msgid "Delete"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_macros.html:93
+#: lektor_tekir/templates/tekir_macros.html:95
 msgid "Move up"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_macros.html:96
+#: lektor_tekir/templates/tekir_macros.html:98
 msgid "Move down"
 msgstr ""
 
