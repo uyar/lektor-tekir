@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-31 20:23+0300\n"
+"POT-Creation-Date: 2023-08-05 00:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,31 +21,31 @@ msgstr ""
 msgid "No output"
 msgstr ""
 
-#: lektor_tekir/api.py:254
+#: lektor_tekir/api.py:258
 msgid "Every content item must have a title."
 msgstr ""
 
-#: lektor_tekir/api.py:266
+#: lektor_tekir/api.py:270
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:296 lektor_tekir/api.py:322
+#: lektor_tekir/api.py:300 lektor_tekir/api.py:328
 msgid "Please upload a file."
 msgstr ""
 
-#: lektor_tekir/api.py:306
+#: lektor_tekir/api.py:312
 msgid "An attachment with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:344
+#: lektor_tekir/api.py:353
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:347
+#: lektor_tekir/api.py:356
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:370
+#: lektor_tekir/api.py:381
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
@@ -101,8 +101,8 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:43
-#: lektor_tekir/templates/partials/content-subpages.html:47
+#: lektor_tekir/templates/partials/content-attachments.html:51
+#: lektor_tekir/templates/partials/content-subpages.html:55
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:33
 #: lektor_tekir/templates/tekir_macros.html:73
 msgid "Add"
@@ -136,22 +136,22 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:10
-#: lektor_tekir/templates/partials/content-subpages.html:10
+#: lektor_tekir/templates/partials/content-attachments.html:12
+#: lektor_tekir/templates/partials/content-subpages.html:12
 #: lektor_tekir/templates/partials/navigate-dialog.html:12
 msgid "Select"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:11
+#: lektor_tekir/templates/partials/content-attachments.html:14
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:32
-#: lektor_tekir/templates/partials/content-subpages.html:36
+#: lektor_tekir/templates/partials/content-attachments.html:38
+#: lektor_tekir/templates/partials/content-subpages.html:42
 msgid "Delete selected"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:36
+#: lektor_tekir/templates/partials/content-attachments.html:43
 msgid "No attachments."
 msgstr ""
 
@@ -159,16 +159,16 @@ msgstr ""
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:11
+#: lektor_tekir/templates/partials/content-subpages.html:14
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:27
 msgid "Name"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:12
+#: lektor_tekir/templates/partials/content-subpages.html:15
 msgid "Type"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:40
+#: lektor_tekir/templates/partials/content-subpages.html:47
 msgid "No subpages."
 msgstr ""
 
@@ -183,6 +183,18 @@ msgstr ""
 #: lektor_tekir/templates/partials/content-summary.html:16
 #: lektor_tekir/templates/partials/site-output.html:11
 msgid "Open folder"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:20
+msgid "Translations"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:22
+msgid "Primary"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:31
+msgid "Add and delete operations are available only through the primary language."
 msgstr ""
 
 #: lektor_tekir/templates/partials/delete-dialog.html:1

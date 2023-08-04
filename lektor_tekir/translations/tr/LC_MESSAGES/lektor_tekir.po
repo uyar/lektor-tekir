@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-07-31 20:23+0300\n"
+"POT-Creation-Date: 2023-08-05 00:34+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -22,31 +22,31 @@ msgstr ""
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:254
+#: lektor_tekir/api.py:258
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:266
+#: lektor_tekir/api.py:270
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:296 lektor_tekir/api.py:322
+#: lektor_tekir/api.py:300 lektor_tekir/api.py:328
 msgid "Please upload a file."
 msgstr "Lütfen bir dosya yükleyin."
 
-#: lektor_tekir/api.py:306
+#: lektor_tekir/api.py:312
 msgid "An attachment with this name already exists."
 msgstr "Bu isimde bir ek zaten var."
 
-#: lektor_tekir/api.py:344
+#: lektor_tekir/api.py:353
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:347
+#: lektor_tekir/api.py:356
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:370
+#: lektor_tekir/api.py:381
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
@@ -102,8 +102,8 @@ msgstr "Buradasınız:"
 msgid "home"
 msgstr "ana sayfa"
 
-#: lektor_tekir/templates/partials/content-attachments.html:43
-#: lektor_tekir/templates/partials/content-subpages.html:47
+#: lektor_tekir/templates/partials/content-attachments.html:51
+#: lektor_tekir/templates/partials/content-subpages.html:55
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:33
 #: lektor_tekir/templates/tekir_macros.html:73
 msgid "Add"
@@ -137,22 +137,22 @@ msgstr "Vazgeç"
 msgid "Attachments"
 msgstr "Ekler"
 
-#: lektor_tekir/templates/partials/content-attachments.html:10
-#: lektor_tekir/templates/partials/content-subpages.html:10
+#: lektor_tekir/templates/partials/content-attachments.html:12
+#: lektor_tekir/templates/partials/content-subpages.html:12
 #: lektor_tekir/templates/partials/navigate-dialog.html:12
 msgid "Select"
 msgstr "Seç"
 
-#: lektor_tekir/templates/partials/content-attachments.html:11
+#: lektor_tekir/templates/partials/content-attachments.html:14
 msgid "File name"
 msgstr "Dosya ismi"
 
-#: lektor_tekir/templates/partials/content-attachments.html:32
-#: lektor_tekir/templates/partials/content-subpages.html:36
+#: lektor_tekir/templates/partials/content-attachments.html:38
+#: lektor_tekir/templates/partials/content-subpages.html:42
 msgid "Delete selected"
 msgstr "Seçilenleri sil"
 
-#: lektor_tekir/templates/partials/content-attachments.html:36
+#: lektor_tekir/templates/partials/content-attachments.html:43
 msgid "No attachments."
 msgstr "Ek yok."
 
@@ -160,16 +160,16 @@ msgstr "Ek yok."
 msgid "Subpages"
 msgstr "Altsayfalar"
 
-#: lektor_tekir/templates/partials/content-subpages.html:11
+#: lektor_tekir/templates/partials/content-subpages.html:14
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:27
 msgid "Name"
 msgstr "İsim"
 
-#: lektor_tekir/templates/partials/content-subpages.html:12
+#: lektor_tekir/templates/partials/content-subpages.html:15
 msgid "Type"
 msgstr "Tip"
 
-#: lektor_tekir/templates/partials/content-subpages.html:40
+#: lektor_tekir/templates/partials/content-subpages.html:47
 msgid "No subpages."
 msgstr "Altsayfa yok."
 
@@ -185,6 +185,18 @@ msgstr "Görüntüle"
 #: lektor_tekir/templates/partials/site-output.html:11
 msgid "Open folder"
 msgstr "Klasörü aç"
+
+#: lektor_tekir/templates/partials/content-summary.html:20
+msgid "Translations"
+msgstr "Çeviriler"
+
+#: lektor_tekir/templates/partials/content-summary.html:22
+msgid "Primary"
+msgstr "Birincil"
+
+#: lektor_tekir/templates/partials/content-summary.html:31
+msgid "Add and delete operations are available only through the primary language."
+msgstr "Ekleme ve silme işlemleri yalnızca birincil dil üzerinden yapılabilir."
 
 #: lektor_tekir/templates/partials/delete-dialog.html:1
 msgid "This operation will delete the following content items:"

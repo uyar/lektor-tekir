@@ -21,7 +21,7 @@ from flask_babel import gettext as _
 from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel
-from lektor.db import Attachment, Pad, Page, Query, Record
+from lektor.db import Attachment, Pad, Page, Query, Record, get_alts
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
 from lektor.types.flow import FlowBlock
@@ -144,10 +144,11 @@ def content_summary() -> str | Response:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     alt: str = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
+    alts: list[str] = get_alts(record)
     ancestors: list[Record] = utils.get_ancestors(record)
     template = "content-summary.html" if not record.is_attachment else \
         "attachment-summary.html"
-    return render_template(f"partials/{template}", record=record,
+    return render_template(f"partials/{template}", record=record, alts=alts,
                            ancestors=ancestors)
 
 

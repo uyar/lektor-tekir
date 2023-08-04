@@ -364,6 +364,26 @@ main.tekir_attachment {
   grid-area: content-summary;
 }
 
+#content-translations {
+  margin-block-start: 1em;
+}
+
+#content-translations ul {
+  display: inline-flex;
+  gap: 0.5em;
+}
+
+#content-translations a {
+  padding: 0.25rem;
+  text-decoration: none;
+  text-transform: lowercase;
+}
+
+#content-translations a.active {
+  background-color: orange;
+  color: black;
+}
+
 #content-subpages {
   grid-area: content-subpages;
 }
