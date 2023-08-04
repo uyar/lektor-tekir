@@ -2,17 +2,17 @@
 
 {% block body %}
 <div id="content-summary"
-    hx-get="{{ url_for('tekir_admin.api.content_summary', path=record.path) }}"
+    hx-get="{{ url_for('tekir_admin.api.content_summary', path=record.path, alt=record.alt) }}"
     hx-trigger="load">
 </div>
 
 <section id="content-subpages"
-    hx-get="{{ url_for('tekir_admin.api.content_subpages', path=record.path) }}"
+    hx-get="{{ url_for('tekir_admin.api.content_subpages', path=record.path, alt=record.alt) }}"
     hx-trigger="load">
 </section>
 
 <section id="content-attachments"
-    hx-get="{{ url_for('tekir_admin.api.content_attachments', path=record.path) }}"
+    hx-get="{{ url_for('tekir_admin.api.content_attachments', path=record.path, alt=record.alt) }}"
     hx-trigger="load">
 </section>
 

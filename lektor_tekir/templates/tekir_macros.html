@@ -3,7 +3,7 @@
   <p>{{ _('You are here:') }}</p>
   <ul role="list">
     {% for item in ancestors %}
-    <li><a href="{{ url_for('tekir_admin.contents', path=item.path) }}">{{ item._slug or _('home') }}</a></li>
+    <li><a href="{{ url_for('tekir_admin.contents', path=item.path, alt=record.alt) }}">{{ item._slug or _('home') }}</a></li>
     {% endfor %}
     <li>{{ record._slug or _('home') }}</li>
   </ul>

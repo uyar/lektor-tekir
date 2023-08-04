@@ -18,7 +18,7 @@
             <input type="checkbox" name="selected-items" value="{{ attachment.path }}"/>
           </td>
           <td>
-            <a href="{{ url_for('tekir_admin.contents', path=attachment.path) }}">{{ record.url_to(attachment) }}</a>
+            <a href="{{ url_for('tekir_admin.contents', path=attachment.path, alt=record.alt) }}">{{ attachment._slug }}</a>
           </td>
         </tr>
         {% endfor %}

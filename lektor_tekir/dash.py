@@ -25,7 +25,8 @@ def contents() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
     template = "tekir_contents.html" if not record.is_attachment else \
         "tekir_attachment.html"
     return render_template(template, record=record)
@@ -35,7 +36,8 @@ def edit_content() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
     system_fields: list[Field] = [record.datamodel.field_map[k]
                                   for k in SYSTEM_FIELDS]
     return render_template("tekir_content_edit.html", record=record,

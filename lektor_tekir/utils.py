@@ -48,7 +48,7 @@ def get_ancestors(record: Record) -> list[Record]:
     ancestors: list[Record] = []
     current = record
     while current.parent:
-        current = current.parent
+        current = record.pad.get(current.parent.path, alt=current.alt)
         ancestors.append(current)
     ancestors.reverse()
     return ancestors

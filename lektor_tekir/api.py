@@ -142,7 +142,8 @@ def content_summary() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
     ancestors: list[Record] = utils.get_ancestors(record)
     template = "content-summary.html" if not record.is_attachment else \
         "attachment-summary.html"
@@ -154,7 +155,8 @@ def content_subpages() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
     children: Query = record.children
     order_by: list[str] | None = children.get_order_by()
     subpages: Iterable[Page] = children if order_by is not None else \
@@ -167,7 +169,8 @@ def content_attachments() -> str | Response:
     path: str | None = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
     children: Query = record.attachments
     order_by: list[str] | None = children.get_order_by()
     attachments: Iterable[Attachment] = children if order_by is not None else \
@@ -287,8 +290,8 @@ def upload_attachment() -> Response:
 
 
 def add_attachment() -> Response:
-    parent: str | None = request.args.get("path")
-    if parent is None:
+    record_path: str | None = request.args.get("path")
+    if record_path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
     uploaded: FileStorage | None = request.files.get("file")
@@ -296,10 +299,12 @@ def add_attachment() -> Response:
         errors = [_("Please upload a file.")]
         return error_response(errors)
 
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(record_path, alt=alt)
     try:
         path: str = utils.create_attachment(
             pad=g.admin_context.pad,
-            parent=g.admin_context.pad.get(parent, alt=PRIMARY_ALT),
+            parent=record,
             uploaded=uploaded,
         )
     except FileExistsError:
@@ -307,7 +312,7 @@ def add_attachment() -> Response:
         return error_response(errors)
 
     response = Response()
-    record_url: str = url_for("tekir_admin.contents", path=path)
+    record_url: str = url_for("tekir_admin.contents", path=path, alt=alt)
     response.headers["HX-Redirect"] = record_url
     return response
 
@@ -322,12 +327,14 @@ def replace_attachment() -> Response:
         errors = [_("Please upload a file.")]
         return error_response(errors)
 
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+
     pad: Pad = g.admin_context.pad
     source_path = Path(pad.db.to_fs_path(path))
     uploaded.save(source_path)
 
     response = Response("")
-    record_url: str = url_for("tekir_admin.contents", path=path)
+    record_url: str = url_for("tekir_admin.contents", path=path, alt=alt)
     response.headers["HX-Redirect"] = record_url
     return response
 
@@ -337,7 +344,8 @@ def save_content() -> Response:
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
     content: str = utils.get_content(record, request.form)
     source = Path(record.source_filename)
     if content == source.read_text():
@@ -359,8 +367,10 @@ def check_changes() -> Response:
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    record_url: str = url_for("tekir_admin.contents", path=record.path)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
+    record_url: str = url_for("tekir_admin.contents", path=record.path,
+                              alt=alt)
     content: str = utils.get_content(record, request.form)
     source = Path(record.source_filename)
     if content == source.read_text():

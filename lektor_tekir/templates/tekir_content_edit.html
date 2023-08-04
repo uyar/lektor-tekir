@@ -17,12 +17,12 @@
   </details>
 
   <button id="save-content"
-      hx-post="{{ url_for('tekir_admin.api.save_content', path=record.path) }}"
+      hx-post="{{ url_for('tekir_admin.api.save_content', path=record.path, alt=record.alt) }}"
       hx-target="#save-dialog">
     {% include 'icons/document-save.svg' %} <span>{{ _('Save') }}</span>
   </button>
   <button
-      hx-post="{{ url_for('tekir_admin.api.check_changes', path=record.path) }}"
+      hx-post="{{ url_for('tekir_admin.api.check_changes', path=record.path, alt=record.alt) }}"
       hx-target="#changes-dialog">
     {% include 'icons/document-close.svg' %} <span>{{ _('Close') }}</span>
   </button>

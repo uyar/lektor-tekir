@@ -19,7 +19,7 @@
             <input type="checkbox" name="selected-items" value="{{ subpage.path }}"/>
           </td>
           <td>
-            <a href="{{ url_for('tekir_admin.contents', path=subpage.path) }}">{{ subpage._slug }}</a>
+            <a href="{{ url_for('tekir_admin.contents', path=subpage.path, alt=record.alt) }}">{{ subpage._slug }}</a>
           </td>
           <td>
             {{ subpage.datamodel.name_i18n.get(g.lang_code, subpage.datamodel.name) }}
