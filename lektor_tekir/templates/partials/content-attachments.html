@@ -2,21 +2,26 @@
 
 {% if attachments %}
 <form id="attachments-form" action="." method="POST">
+  {% set primary = record.alt == '_primary' %}
   <input type="hidden" name="form_id" value="attachments-form"/>
   <div class="field content-listing">
     <table>
       <thead>
         <tr>
+          {% if primary %}
           <th>{{ _('Select') }}</th>
+          {% endif %}
           <th>{{ _('File name') }}</th>
         </tr>
       </thead>
       <tbody>
         {% for attachment in attachments %}
         <tr>
+          {% if primary %}
           <td>
             <input type="checkbox" name="selected-items" value="{{ attachment.path }}"/>
           </td>
+          {% endif %}
           <td>
             <a href="{{ url_for('tekir_admin.contents', path=attachment.path, alt=record.alt) }}">{{ attachment._slug }}</a>
           </td>
@@ -26,20 +31,24 @@
     </table>
   </div>
 
+  {% if primary %}
   <button
       hx-post="{{ url_for('tekir_admin.api.delete_collect') }}"
       hx-target="#delete-dialog">
     {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
   </button>
+  {% endif %}
 {% else %}
   <div class="field content-listing">
     <p>{{ _('No attachments.') }}</p>
   </div>
 {% endif %}
 
+  {% if primary %}
   <button
       hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='add_attachment') }}"
       hx-target="#upload-dialog">
     {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
   </button>
+  {% endif %}
 </form>
