@@ -376,11 +376,23 @@ main.tekir_attachment {
 
 #content-translations ul {
   display: inline-flex;
+  align-items: center;
   gap: 2em;
 }
 
+#content-translations button {
+  height: unset;
+  margin: var(--space-xs);
+  padding: 0;
+  border: none;
+}
+
+#content-translations svg {
+  height: 1em;
+}
+
 #content-translations a {
-  padding: 0.25rem;
+  padding: var(--space-xs);
   text-decoration: none;
 }
 

@@ -37,7 +37,7 @@
 
   {% if primary %}
   <button
-      hx-post="{{ url_for('tekir_admin.api.delete_collect') }}"
+      hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
       hx-target="#delete-dialog">
     {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
   </button>

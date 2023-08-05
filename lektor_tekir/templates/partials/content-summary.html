@@ -18,21 +18,11 @@
 
 <div id="content-translations">
   <h2>{{ _('Translations') }}:</h2>
-  <ul role="list">
-    <li>
-      <a href="{{ url_for('tekir_admin.contents', path=record.path) }}"{{ ' class=active' if record.alt == '_primary' else '' }}>{{ _('Primary') }}</a>
-    </li>
-    {% for lang in alts %}
-      {% set lang_name = alts[lang].name_i18n.get(lang, lang) %}
-    <li>
-      {% if alts[lang].exists %}
-      <a href="{{ url_for('tekir_admin.contents', path=record.path, alt=lang) }}"{{ ' class=active' if record.alt == lang else ''}}>{{ lang_name }}</a>
-      {% else %}
-      {{ lang_name }}{{ (' (' + _('Overlaid') + ')') if alts[lang].is_primary_overlay else '' }}
-      {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+  <div
+      hx-get="{{ url_for('tekir_admin.api.content_translations', path=record.path, alt=record.alt) }}"
+      hx-trigger="load"
+      hx-swap="outerHTML">
+  </div>
 </div>
 
 {% if record.alt != '_primary' %}

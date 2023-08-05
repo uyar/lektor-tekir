@@ -1,0 +1,32 @@
+<ul role="list">
+  {% for lang, alt in alts.items() %}
+    {% set primary = record.alt == '_primary' %}
+    {% set active = record.alt == lang %}
+  <li>
+    {% if lang == '_primary' %}
+      {% set lang_name = alt.name_i18n.get(record.pad.db.config.primary_alternative, alt.name) + ' (' + _('Primary') + ')' %}
+      {% set lang_url = url_for('tekir_admin.contents', path=record.path) %}
+    {% else %}
+      {% set lang_name = alt.name_i18n.get(lang, alt.name) + ((' (' + _('Overlaid') + ')') if alts[lang].is_primary_overlay else '') %}
+      {% set lang_url = url_for('tekir_admin.contents', path=record.path, alt=lang) %}
+    {% endif %}
+    {% if alt.exists %}
+    <a href="{{ lang_url }}"{{ ' class=active' if active else '' }}>{{ lang_name }}</a>
+      {% if primary and (lang != '_primary') %}
+    <button
+        hx-get="{{ url_for('tekir_admin.api.delete_alt_confirm', path=record.path, alt=lang) }}"
+        hx-target="#delete-dialog">
+      {% include 'icons/delete.svg' %}
+    </button>
+      {% endif %}
+    {% else %}
+    {{ lang_name }}
+      {% if primary %}
+    <button>
+      {% include 'icons/document-new.svg' %}
+    </button>
+      {% endif %}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

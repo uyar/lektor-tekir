@@ -145,13 +145,21 @@ def content_summary() -> str | Response:
     alt: str = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     ancestors: list[Record] = utils.get_ancestors(record)
-
-    node: TreeItem = g.admin_context.tree.get(path)
-    alts = {k: v for k, v in node.alts.items() if k != PRIMARY_ALT}
     template = "content-summary.html" if not record.is_attachment else \
         "attachment-summary.html"
     return render_template(f"partials/{template}", record=record,
-                           ancestors=ancestors, alts=alts)
+                           ancestors=ancestors)
+
+
+def content_translations() -> str | Response:
+    path: str | None = request.args.get("path")
+    if path is None:
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    alt: str = request.args.get("alt", PRIMARY_ALT)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
+    node: TreeItem = g.admin_context.tree.get(path)
+    return render_template("partials/content-translations.html", record=record,
+                           alts=node.alts)
 
 
 def content_subpages() -> str | Response:
@@ -182,7 +190,7 @@ def content_attachments() -> str | Response:
                            attachments=attachments)
 
 
-def delete_collect() -> Response:
+def delete_confirm() -> Response:
     items: list[str] = request.form.getlist("selected-items")
     form_id: str | None = request.form.get("form_id")
     if form_id is None:
@@ -193,6 +201,27 @@ def delete_collect() -> Response:
     paths: list[str] = utils.get_record_paths(records, root=root)
     markup: str = render_template("partials/delete-dialog.html",
                                   items=sorted(paths), form_id=form_id)
+    response = Response(markup)
+    trigger = '{"showModal": {"modal": "#delete-dialog"}}'
+    response.headers["HX-Trigger-After-Swap"] = trigger
+    return response
+
+
+def delete_alt_confirm() -> Response:
+    path: str | None = request.args.get("path")
+    alt: str = request.args.get("alt")
+    if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
+    root: Record = g.admin_context.pad.root
+    root_dir = Path(root.source_filename).parent
+    item = Path(record.source_filename).relative_to(root_dir)
+    vals = '{"path": "%(path)s", "alt": "%(alt)s"}' % {
+        "path": record.path,
+        "alt": record.alt,
+    }
+    markup: str = render_template("partials/delete-dialog.html", items=[item],
+                                  vals=vals)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#delete-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -216,6 +245,19 @@ def delete_content() -> Response:
     trigger = '{"deleteCheckedRows": %(detail)s}' % {"detail": detail}
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
+
+
+def delete_alt() -> str | Response:
+    path: str | None = request.args.get("path")
+    alt: str = request.args.get("alt")
+    if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
+        return Response("", status=HTTPStatus.BAD_REQUEST)
+    record: Record = g.admin_context.pad.get(path, alt=alt)
+    Path(record.source_filename).unlink()
+    primary: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    node: TreeItem = g.admin_context.tree.get(path)
+    return render_template("partials/content-translations.html",
+                           record=primary, alts=node.alts)
 
 
 def slug_from_title() -> Response:
@@ -449,12 +491,17 @@ def make_blueprint():
                     methods=["POST"])
 
     bp.add_url_rule("/content-summary", view_func=content_summary)
+    bp.add_url_rule("/content-translations", view_func=content_translations)
     bp.add_url_rule("/content-subpages", view_func=content_subpages)
     bp.add_url_rule("/content-attachments", view_func=content_attachments)
-    bp.add_url_rule("/delete-collect", view_func=delete_collect,
+
+    bp.add_url_rule("/delete-confirm", view_func=delete_confirm,
                     methods=["POST"])
+    bp.add_url_rule("/delete-alt-confirm", view_func=delete_alt_confirm)
     bp.add_url_rule("/delete-content", view_func=delete_content,
                     methods=["POST"])
+    bp.add_url_rule("/delete-alt", view_func=delete_alt)
+
     bp.add_url_rule("/slugify", view_func=slug_from_title)
     bp.add_url_rule("/new-subpage", view_func=new_subpage)
     bp.add_url_rule("/add-subpage", view_func=add_subpage,

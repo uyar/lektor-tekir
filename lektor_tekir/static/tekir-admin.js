@@ -45,6 +45,5 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         document.querySelector(ev.detail.form).querySelectorAll("input:checked").forEach((checkbox) => {
             checkbox.closest("tr").remove();
         });
-        document.querySelector(ev.detail.modal).close();
     });
 });
