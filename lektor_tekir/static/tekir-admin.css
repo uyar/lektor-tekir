@@ -260,14 +260,14 @@ h1 {
   font-style: italic;
 }
 
-section {
-  padding: var(--space-m);
-}
-
-section > h2 {
+h2 {
   margin-block: 0 1em;
   color: var(--color);
   font-weight: normal;
+}
+
+section {
+  padding: var(--space-m);
 }
 
 section > h2 + * {
@@ -365,18 +365,23 @@ main.tekir_attachment {
 }
 
 #content-translations {
-  margin-block-start: 1em;
+  margin-block-start: 2em;
+}
+
+#content-translations h2 {
+  display: inline;
+  margin-inline-end: 1em;
+  font-size: 1em;
 }
 
 #content-translations ul {
   display: inline-flex;
-  gap: 0.5em;
+  gap: 2em;
 }
 
 #content-translations a {
   padding: 0.25rem;
   text-decoration: none;
-  text-transform: lowercase;
 }
 
 #content-translations a.active {

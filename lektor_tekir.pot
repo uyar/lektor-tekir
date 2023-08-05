@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-05 00:34+0300\n"
+"POT-Creation-Date: 2023-08-05 19:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,31 +21,31 @@ msgstr ""
 msgid "No output"
 msgstr ""
 
-#: lektor_tekir/api.py:258
+#: lektor_tekir/api.py:260
 msgid "Every content item must have a title."
 msgstr ""
 
-#: lektor_tekir/api.py:270
+#: lektor_tekir/api.py:272
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:300 lektor_tekir/api.py:328
+#: lektor_tekir/api.py:302 lektor_tekir/api.py:330
 msgid "Please upload a file."
 msgstr ""
 
-#: lektor_tekir/api.py:312
+#: lektor_tekir/api.py:314
 msgid "An attachment with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:353
+#: lektor_tekir/api.py:355
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:356
+#: lektor_tekir/api.py:358
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:381
+#: lektor_tekir/api.py:383
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
@@ -189,11 +189,15 @@ msgstr ""
 msgid "Translations"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-summary.html:22
+#: lektor_tekir/templates/partials/content-summary.html:23
 msgid "Primary"
 msgstr ""
 
 #: lektor_tekir/templates/partials/content-summary.html:31
+msgid "Overlaid"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:40
 msgid "Add and delete operations are available only through the primary language."
 msgstr ""
 

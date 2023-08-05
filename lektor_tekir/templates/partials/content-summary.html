@@ -17,11 +17,20 @@
 </button>
 
 <div id="content-translations">
-  <span>{{ _('Translations') }}:</span>
+  <h2>{{ _('Translations') }}:</h2>
   <ul role="list">
-    <li><a href="{{ url_for('tekir_admin.contents', path=record.path) }}"{{ ' class=active' if record.alt == '_primary' else '' }}>{{ _('Primary') }}</a></li>
+    <li>
+      <a href="{{ url_for('tekir_admin.contents', path=record.path) }}"{{ ' class=active' if record.alt == '_primary' else '' }}>{{ _('Primary') }}</a>
+    </li>
     {% for lang in alts %}
-    <li><a href="{{ url_for('tekir_admin.contents', path=record.path, alt=lang) }}"{{ ' class=active' if record.alt == lang else ''}}>{{ lang }}</a></li>
+      {% set lang_name = alts[lang].name_i18n.get(lang, lang) %}
+    <li>
+      {% if alts[lang].exists %}
+      <a href="{{ url_for('tekir_admin.contents', path=record.path, alt=lang) }}"{{ ' class=active' if record.alt == lang else ''}}>{{ lang_name }}</a>
+      {% else %}
+      {{ lang_name }}{{ (' (' + _('Overlaid') + ')') if alts[lang].is_primary_overlay else '' }}
+      {% endif %}
+    </li>
     {% endfor %}
   </ul>
 </div>
