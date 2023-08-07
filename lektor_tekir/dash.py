@@ -5,13 +5,9 @@
 
 from __future__ import annotations
 
-from http import HTTPStatus
 from pathlib import Path
 
 from flask import Blueprint, Response, g, render_template, request
-from lektor.constants import PRIMARY_ALT
-from lektor.datamodel import Field
-from lektor.db import Record
 
 from . import api
 from .utils import SYSTEM_FIELDS
@@ -22,24 +18,19 @@ def overview() -> str:
 
 
 def contents() -> str | Response:
-    path = request.args.get("path")
-    if path is None:
-        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
-    alt = request.args.get("alt", PRIMARY_ALT)
-    record: Record = g.admin_context.pad.get(path, alt=alt)
+    record, status = api._record(g.admin_context.pad, request.args)
+    if record is None:
+        return Response("", status=status)
     template = "tekir_contents.html" if not record.is_attachment else \
         "tekir_attachment.html"
     return render_template(template, record=record)
 
 
 def edit_content() -> str | Response:
-    path = request.args.get("path")
-    if path is None:
-        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
-    alt = request.args.get("alt", PRIMARY_ALT)
-    record: Record = g.admin_context.pad.get(path, alt=alt)
-    system_fields: list[Field] = [record.datamodel.field_map[k]
-                                  for k in SYSTEM_FIELDS]
+    record, status = api._record(g.admin_context.pad, request.args)
+    if record is None:
+        return Response("", status=status)
+    system_fields = [record.datamodel.field_map[k] for k in SYSTEM_FIELDS]
     return render_template("tekir_content_edit.html", record=record,
                            system_fields=system_fields)
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-05 19:10+0300\n"
+"POT-Creation-Date: 2023-08-07 14:43+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -18,35 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:84 lektor_tekir/api.py:94 lektor_tekir/api.py:109
+#: lektor_tekir/api.py:69
+msgid "File manager not set for platform:"
+msgstr "Bu platform için dosya yöneticisi ayarlanmamış:"
+
+#: lektor_tekir/api.py:103 lektor_tekir/api.py:113 lektor_tekir/api.py:128
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:260
+#: lektor_tekir/api.py:318
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:272
+#: lektor_tekir/api.py:330
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:302 lektor_tekir/api.py:330
+#: lektor_tekir/api.py:360 lektor_tekir/api.py:384
 msgid "Please upload a file."
 msgstr "Lütfen bir dosya yükleyin."
 
-#: lektor_tekir/api.py:314
+#: lektor_tekir/api.py:372
 msgid "An attachment with this name already exists."
 msgstr "Bu isimde bir ek zaten var."
 
-#: lektor_tekir/api.py:355
+#: lektor_tekir/api.py:409
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:358
+#: lektor_tekir/api.py:412
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:383
+#: lektor_tekir/api.py:434
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
@@ -190,17 +194,17 @@ msgstr "Klasörü aç"
 msgid "Translations"
 msgstr "Çeviriler"
 
-#: lektor_tekir/templates/partials/content-summary.html:23
+#: lektor_tekir/templates/partials/content-summary.html:30
+msgid "Add and delete operations are available only through the primary language."
+msgstr "Ekleme ve silme işlemleri yalnızca birincil dil üzerinden yapılabilir."
+
+#: lektor_tekir/templates/partials/content-translations.html:7
 msgid "Primary"
 msgstr "Birincil"
 
-#: lektor_tekir/templates/partials/content-summary.html:31
+#: lektor_tekir/templates/partials/content-translations.html:10
 msgid "Overlaid"
 msgstr "Örten"
-
-#: lektor_tekir/templates/partials/content-summary.html:40
-msgid "Add and delete operations are available only through the primary language."
-msgstr "Ekleme ve silme işlemleri yalnızca birincil dil üzerinden yapılabilir."
 
 #: lektor_tekir/templates/partials/delete-dialog.html:1
 msgid "This operation will delete the following content items:"
@@ -210,11 +214,12 @@ msgstr "Bu işlem aşağıdaki içerik unsurlarını silecek:"
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: lektor_tekir/templates/partials/delete-dialog.html:15
+#: lektor_tekir/templates/partials/delete-dialog.html:16
+#: lektor_tekir/templates/partials/delete-dialog.html:21
 msgid "Yes, delete"
 msgstr "Evet, sil"
 
-#: lektor_tekir/templates/partials/delete-dialog.html:16
+#: lektor_tekir/templates/partials/delete-dialog.html:23
 msgid "No, cancel"
 msgstr "Hayır, vazgeç"
 

@@ -29,7 +29,7 @@
   </div>
 
   <button class="confirm"
-      hx-post="{{ url_for('tekir_admin.api.add_subpage', parent=record.path) }}"
+      hx-post="{{ url_for('tekir_admin.api.add_subpage', path=record.path) }}"
       hx-swap="none">{{ _('Add') }}</button>
   <button class="cancel modal-close">{{ _('Cancel') }}</button>
 </form>

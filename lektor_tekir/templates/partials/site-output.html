@@ -6,7 +6,7 @@
     <p class="target">{{ output.path }}</p>
   </div>
   <button
-      hx-get="{{ url_for('tekir_admin.api.open_folder', fs_path=output.path) }}"
+      hx-get="{{ url_for('tekir_admin.api.open_folder', folder=output.path) }}"
       hx-swap="none">
     {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
   </button>
