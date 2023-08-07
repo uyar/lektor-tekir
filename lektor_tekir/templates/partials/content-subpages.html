@@ -1,8 +1,9 @@
 <h2>{{ _('Subpages') }}</h2>
 
-{% if subpages %}
+{% set primary = record.alt == '_primary' %}
+
 <form id="subpages-form" action="." method="POST">
-  {% set primary = record.alt == '_primary' %}
+  {% if subpages %}
   <input type="hidden" name="form_id" value="subpages-form"/>
   <div class="field content-listing">
     <table>
@@ -35,18 +36,18 @@
     </table>
   </div>
 
-  {% if primary %}
+    {% if primary %}
   <button
       hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
       hx-target="#delete-dialog">
     {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
   </button>
-  {% endif %}
-{% else %}
+    {% endif %}
+  {% else %}
   <div class="field content-listing">
     <p>{{ _('No subpages.') }}</p>
   </div>
-{% endif %}
+  {% endif %}
 
   {% if primary %}
   <button

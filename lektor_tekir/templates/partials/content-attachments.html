@@ -1,8 +1,9 @@
 <h2>{{ _('Attachments') }}</h2>
 
-{% if attachments %}
+{% set primary = record.alt == '_primary' %}
+
 <form id="attachments-form" action="." method="POST">
-  {% set primary = record.alt == '_primary' %}
+  {% if attachments %}
   <input type="hidden" name="form_id" value="attachments-form"/>
   <div class="field content-listing">
     <table>
@@ -31,18 +32,18 @@
     </table>
   </div>
 
-  {% if primary %}
+    {% if primary %}
   <button
       hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
       hx-target="#delete-dialog">
     {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
   </button>
-  {% endif %}
-{% else %}
+    {% endif %}
+  {% else %}
   <div class="field content-listing">
     <p>{{ _('No attachments.') }}</p>
   </div>
-{% endif %}
+  {% endif %}
 
   {% if primary %}
   <button
