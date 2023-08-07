@@ -8,7 +8,6 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
-from datetime import datetime
 from http import HTTPStatus
 from locale import strxfrm
 from pathlib import Path
@@ -24,9 +23,7 @@ from lektor.datamodel import DataModel
 from lektor.db import Attachment, Pad, Page, Query, Record, TreeItem
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
-from lektor.types.flow import FlowBlock
 from slugify import slugify
-from werkzeug.datastructures.file_storage import FileStorage
 
 from . import utils
 
@@ -43,7 +40,7 @@ def i18n_name(item: DataModel) -> str:
 
 
 def error_response(errors: list[str]) -> Response:
-    markup: str = render_template("partials/error-dialog.html", errors=errors)
+    markup = render_template("partials/error-dialog.html", errors=errors)
     response = Response(markup)
     response.headers["HX-Retarget"] = "#error-dialog"
     response.headers["HX-Reswap"] = "innerHTML"
@@ -53,15 +50,15 @@ def error_response(errors: list[str]) -> Response:
 
 
 def open_folder() -> Response:
-    fs_path: str | None = request.args.get("fs_path")
+    fs_path = request.args.get("fs_path")
     if fs_path is None:
-        path: str | None = request.args.get("path")
+        path = request.args.get("path")
         if path is None:
             return Response("", status=HTTPStatus.BAD_REQUEST)
         record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
         fs_path = str(Path(record.source_filename).parent)
 
-    file_manager: str = FILE_MANAGERS.get(sys.platform, "xdg-open")
+    file_manager = FILE_MANAGERS.get(sys.platform, "xdg-open")
     try:
         subprocess.run([file_manager, fs_path])
     except Exception as e:
@@ -72,14 +69,14 @@ def open_folder() -> Response:
 
 def site_summary() -> str:
     root: Record = g.admin_context.pad.root
-    page_count: int = utils.get_page_count(root)
+    page_count = utils.get_page_count(root)
     return render_template("partials/site-summary.html", page_count=page_count)
 
 
 def site_output() -> str:
     builder: Builder = g.admin_context.info.get_builder()
-    output: dict[str, str] = {"path": builder.destination_path}
-    output_time: datetime | None = utils.get_output_time(builder)
+    output = {"path": builder.destination_path}
+    output_time = utils.get_output_time(builder)
     if output_time is None:
         output["time"] = _("No output")
     else:
@@ -96,7 +93,7 @@ def clean_build() -> str:
 
 def build() -> str | Response:
     builder: Builder = g.admin_context.info.get_builder()
-    n_failures: int = builder.build_all()
+    n_failures = builder.build_all()
     if n_failures > 0:
         errors = []
         for failure in Path(builder.failure_controller.path).glob("*.json"):
@@ -104,7 +101,7 @@ def build() -> str | Response:
             errors.append(f'{error["artifact"]}: {error["exception"]}')
         return error_response(errors)
     builder.touch_site_config()
-    output_time: datetime | None = utils.get_output_time(builder)
+    output_time = utils.get_output_time(builder)
     if output_time is None:
         return _("No output")
     return format_datetime(output_time)
@@ -112,8 +109,7 @@ def build() -> str | Response:
 
 def publish_info() -> Response:
     servers: list[ServerInfo] = g.admin_context.pad.config.get_servers()
-    markup: str = render_template("partials/publish-dialog.html",
-                                  servers=servers)
+    markup = render_template("partials/publish-dialog.html", servers=servers)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#publish-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -121,7 +117,7 @@ def publish_info() -> Response:
 
 
 def publish_build() -> str | Response:
-    server_id: str | None = request.form.get("server")
+    server_id = request.form.get("server")
     if server_id is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     pad: Pad = g.admin_context.pad
@@ -139,12 +135,12 @@ def publish_build() -> str | Response:
 
 
 def content_summary() -> str | Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
-    ancestors: list[Record] = utils.get_ancestors(record)
+    ancestors = utils.get_ancestors(record)
     template = "content-summary.html" if not record.is_attachment else \
         "attachment-summary.html"
     return render_template(f"partials/{template}", record=record,
@@ -152,10 +148,10 @@ def content_summary() -> str | Response:
 
 
 def content_translations() -> str | Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     node: TreeItem = g.admin_context.tree.get(path)
     return render_template("partials/content-translations.html", record=record,
@@ -163,13 +159,13 @@ def content_translations() -> str | Response:
 
 
 def content_subpages() -> str | Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     children: Query = record.children
-    order_by: list[str] | None = children.get_order_by()
+    order_by = children.get_order_by()
     subpages: Iterable[Page] = children if order_by is not None else \
         sorted(children, key=lambda s: s["_slug"])
     return render_template("partials/content-subpages.html", record=record,
@@ -177,13 +173,13 @@ def content_subpages() -> str | Response:
 
 
 def content_attachments() -> str | Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     children: Query = record.attachments
-    order_by: list[str] | None = children.get_order_by()
+    order_by = children.get_order_by()
     attachments: Iterable[Attachment] = children if order_by is not None else \
         sorted(children, key=lambda s: s["_slug"])
     return render_template("partials/content-attachments.html", record=record,
@@ -191,16 +187,15 @@ def content_attachments() -> str | Response:
 
 
 def delete_confirm() -> Response:
-    items: list[str] = request.form.getlist("selected-items")
-    form_id: str | None = request.form.get("form_id")
+    items = request.form.getlist("selected-items")
+    form_id = request.form.get("form_id")
     if form_id is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    records: list[Record] = [g.admin_context.pad.get(i, alt=PRIMARY_ALT)
-                             for i in items]
-    root: Record = g.admin_context.pad.root
-    paths: list[str] = utils.get_record_paths(records, root=root)
-    markup: str = render_template("partials/delete-dialog.html",
-                                  items=sorted(paths), form_id=form_id)
+    pad: Pad = g.admin_context.pad
+    records: list[Record] = [pad.get(i, alt=PRIMARY_ALT) for i in items]
+    paths = utils.get_record_paths(records, root=pad.root)
+    markup = render_template("partials/delete-dialog.html",
+                             items=sorted(paths), form_id=form_id)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#delete-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -208,20 +203,21 @@ def delete_confirm() -> Response:
 
 
 def delete_alt_confirm() -> Response:
-    path: str | None = request.args.get("path")
-    alt: str = request.args.get("alt")
+    path = request.args.get("path")
+    alt = request.args.get("alt")
     if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=alt)
-    root: Record = g.admin_context.pad.root
+    pad: Pad = g.admin_context.pad
+    record: Record = pad.get(path, alt=alt)
+    root: Record = pad.root
     root_dir = Path(root.source_filename).parent
     item = Path(record.source_filename).relative_to(root_dir)
     vals = '{"path": "%(path)s", "alt": "%(alt)s"}' % {
         "path": record.path,
         "alt": record.alt,
     }
-    markup: str = render_template("partials/delete-dialog.html", items=[item],
-                                  vals=vals)
+    markup = render_template("partials/delete-dialog.html", items=[item],
+                             vals=vals)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#delete-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -229,12 +225,12 @@ def delete_alt_confirm() -> Response:
 
 
 def delete_content() -> Response:
-    items: list[str] = request.form.getlist("selected-items")
-    form_id: str | None = request.form.get("form_id")
+    items = request.form.getlist("selected-items")
+    form_id = request.form.get("form_id")
     if form_id is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    records: list[Record] = [g.admin_context.pad.get(i, alt=PRIMARY_ALT)
-                             for i in items]
+    pad: Pad = g.admin_context.pad
+    records: list[Record] = [pad.get(i, alt=PRIMARY_ALT) for i in items]
     for record in records:
         utils.delete_record(record)
     response = Response("")
@@ -248,23 +244,24 @@ def delete_content() -> Response:
 
 
 def delete_alt() -> str | Response:
-    path: str | None = request.args.get("path")
-    alt: str = request.args.get("alt")
+    path = request.args.get("path")
+    alt = request.args.get("alt")
     if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    record: Record = g.admin_context.pad.get(path, alt=alt)
+    pad: Pad = g.admin_context.pad
+    record: Record = pad.get(path, alt=alt)
     Path(record.source_filename).unlink()
-    primary: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
+    primary: Record = pad.get(path, alt=PRIMARY_ALT)
     node: TreeItem = g.admin_context.tree.get(path)
     return render_template("partials/content-translations.html",
                            record=primary, alts=node.alts)
 
 
 def slug_from_title() -> Response:
-    title: str | None = request.args.get("title")
+    title = request.args.get("title")
     if title is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    slug: str = slugify(title)
+    slug = slugify(title)
     response = Response(slug)
     detail = '{"target": "%(sel)s", "attr": "%(att)s", "value": "%(val)s"}' % {
         "sel": "#field-slug",
@@ -277,14 +274,14 @@ def slug_from_title() -> Response:
 
 
 def new_subpage() -> Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    child_models: list[DataModel] = utils.get_child_models(record)
-    models: list[DataModel] = sorted(child_models, key=i18n_name)
-    markup: str = render_template("partials/new-subpage-dialog.html",
-                                  record=record, models=models)
+    child_models = utils.get_child_models(record)
+    models = sorted(child_models, key=i18n_name)
+    markup = render_template("partials/new-subpage-dialog.html", record=record,
+                             models=models)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#new-subpage-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -292,18 +289,18 @@ def new_subpage() -> Response:
 
 
 def add_subpage() -> Response:
-    parent: str | None = request.args.get("parent")
-    model: str | None = request.form.get("model")
+    parent = request.args.get("parent")
+    model = request.form.get("model")
     if (parent is None) or (model is None):
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    title: str = request.form.get("title", "").strip()
+    title = request.form.get("title", "").strip()
     if title == "":
         errors = [_("Every content item must have a title.")]
         return error_response(errors)
 
     try:
-        path: str = utils.create_subpage(
+        path = utils.create_subpage(
             pad=g.admin_context.pad,
             parent=parent,
             model=model,
@@ -321,13 +318,13 @@ def add_subpage() -> Response:
 
 
 def upload_attachment() -> Response:
-    path: str | None = request.args.get("path")
-    endpoint: str | None = request.args.get("op")
+    path = request.args.get("path")
+    endpoint = request.args.get("op")
     if (path is None) or (endpoint is None):
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    markup: str = render_template("partials/upload-dialog.html",
-                                  record=record, endpoint=endpoint)
+    markup = render_template("partials/upload-dialog.html", record=record,
+                             endpoint=endpoint)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#upload-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -335,19 +332,19 @@ def upload_attachment() -> Response:
 
 
 def add_attachment() -> Response:
-    record_path: str | None = request.args.get("path")
+    record_path = request.args.get("path")
     if record_path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    uploaded: FileStorage | None = request.files.get("file")
+    uploaded = request.files.get("file")
     if not uploaded:
         errors = [_("Please upload a file.")]
         return error_response(errors)
 
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(record_path, alt=alt)
     try:
-        path: str = utils.create_attachment(
+        path = utils.create_attachment(
             pad=g.admin_context.pad,
             parent=record,
             uploaded=uploaded,
@@ -357,41 +354,41 @@ def add_attachment() -> Response:
         return error_response(errors)
 
     response = Response()
-    record_url: str = url_for("tekir_admin.contents", path=path, alt=alt)
+    record_url = url_for("tekir_admin.contents", path=path, alt=alt)
     response.headers["HX-Redirect"] = record_url
     return response
 
 
 def replace_attachment() -> Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    uploaded: FileStorage | None = request.files.get("file")
+    uploaded = request.files.get("file")
     if not uploaded:
         errors = [_("Please upload a file.")]
         return error_response(errors)
 
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
 
-    pad: Pad = g.admin_context.pad
+    pad = g.admin_context.pad
     source_path = Path(pad.db.to_fs_path(path))
     uploaded.save(source_path)
 
     response = Response("")
-    record_url: str = url_for("tekir_admin.contents", path=path, alt=alt)
+    record_url = url_for("tekir_admin.contents", path=path, alt=alt)
     response.headers["HX-Redirect"] = record_url
     return response
 
 
 def save_content() -> Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
-    content: str = utils.get_content(record, request.form)
+    content = utils.get_content(record, request.form)
     source = Path(record.source_filename)
     if content == source.read_text():
         message = _("No changes.")
@@ -399,8 +396,8 @@ def save_content() -> Response:
         source.write_text(content)
         message = _("Content saved.")
 
-    markup: str = render_template("partials/save-dialog.html",
-                                  message=message, record=record)
+    markup = render_template("partials/save-dialog.html", message=message,
+                             record=record)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#save-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -408,23 +405,22 @@ def save_content() -> Response:
 
 
 def check_changes() -> Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
-    record_url: str = url_for("tekir_admin.contents", path=record.path,
-                              alt=alt)
-    content: str = utils.get_content(record, request.form)
+    record_url = url_for("tekir_admin.contents", path=record.path, alt=alt)
+    content = utils.get_content(record, request.form)
     source = Path(record.source_filename)
     if content == source.read_text():
         response = Response("")
         response.headers["HX-Redirect"] = record_url
     else:
         message = _("There are unsaved changes. Do you want to continue?")
-        markup: str = render_template("partials/changes-dialog.html",
-                                      message=message, record_url=record_url)
+        markup = render_template("partials/changes-dialog.html",
+                                 message=message, record_url=record_url)
         response = Response(markup)
         trigger = '{"showModal": {"modal": "#changes-dialog"}}'
         response.headers["HX-Trigger-After-Swap"] = trigger
@@ -433,16 +429,16 @@ def check_changes() -> Response:
 
 
 def new_flowblock() -> str | Response:
-    path: str | None = request.args.get("path")
-    field_name: str | None = request.args.get("field_name")
-    flow_type: str | None = request.args.get("flow_type")
+    path = request.args.get("path")
+    field_name = request.args.get("field_name")
+    flow_type = request.args.get("flow_type")
     if (path is None) or (field_name is None) or (flow_type is None):
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-    block: FlowBlock = utils.create_flowblock(record=record,
-                                              flow_type=flow_type)
-    uuid_index: str = uuid4().hex
-    return render_template("tekir_flowblock.html", block=block,
+    block = utils.create_flowblock(record=record, flow_type=flow_type)
+    uuid_index = uuid4().hex
+    return render_template("tekir_flowblock.html",
+                           block=block,
                            field_name=field_name,
                            block_index=f"uuid_{uuid_index}")
 
@@ -452,14 +448,14 @@ def start_navigate() -> str | Response:
     if field_id is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
 
-    path: str = request.args.get("path", "/")
+    path = request.args.get("path", "/")
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     if record is None:
         record = g.admin_context.pad.root
 
-    navigables: list[tuple[str, str, bool]] = utils.get_navigables(record)
-    markup: str = render_template("partials/navigate-dialog.html",
-                                  navigables=navigables, field_id=field_id)
+    navigables = utils.get_navigables(record)
+    markup = render_template("partials/navigate-dialog.html",
+                             navigables=navigables, field_id=field_id)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#navigate-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -467,14 +463,12 @@ def start_navigate() -> str | Response:
 
 
 def navigables() -> str | Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
-
-    navigables: list[tuple[str, str, bool]] = utils.get_navigables(record)
-    return render_template("partials/navigables.html",
-                           navigables=navigables)
+    navigables = utils.get_navigables(record)
+    return render_template("partials/navigables.html", navigables=navigables)
 
 
 def make_blueprint():

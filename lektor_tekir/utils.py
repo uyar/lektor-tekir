@@ -31,7 +31,7 @@ SYSTEM_FIELDS: list[str] = ["_slug", "_template", "_hidden", "_discoverable"]
 
 def get_page_count(record: Record) -> int:
     fs_path = Path(record.source_filename).parent
-    pages: set[Path] = {c.parent for c in fs_path.glob("**/contents*.lr")}
+    pages = {c.parent for c in fs_path.glob("**/contents*.lr")}
     return len(pages)
 
 
@@ -131,7 +131,7 @@ def flowblock_entry(record: Record, field: Field,
         block_model_ids: set[str] = {f.split("-")[2] for f in block_fields}
         if len(block_model_ids) > 1:
             raise RuntimeError("All fields must be of the same flowblock type")
-        block_model_id: str = list(block_model_ids)[0]
+        block_model_id = list(block_model_ids)[0]
         block_model: FlowBlockModel = record.pad.db.flowblocks[block_model_id]
         block_header = f"#### {block_model_id} ####\n"
         block_prefix = f"{field.name}-{i}-{block_model_id}-"
@@ -176,7 +176,7 @@ def delete_record(record: Record) -> None:
 def create_subpage(*, pad: Pad, parent: str, model: str, title: str,
                    form: ImmutableMultiDict) -> str:
     slug: str = form.get("slug") or slugify(title)
-    path: str = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
+    path = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
     fs_path = Path(pad.db.to_fs_path(path))
     if fs_path.exists():
         raise FileExistsError("Duplicate slug")
@@ -192,17 +192,17 @@ def create_subpage(*, pad: Pad, parent: str, model: str, title: str,
 
     fs_path.mkdir()
     contents_file = fs_path / "contents.lr"
-    content: str = get_content(page, form)
+    content = get_content(page, form)
     contents_file.write_text(content)
     return path
 
 
 def create_attachment(*, pad: Pad, parent: Record,
                       uploaded: FileStorage) -> str:
-    slug: str | None = uploaded.filename
+    slug = uploaded.filename
     if slug is None:
         slug = uuid4().hex
-    path: str = f"{parent.path}/{slug}" if parent.path != "/" else f"/{slug}"
+    path = f"{parent.path}/{slug}" if parent.path != "/" else f"/{slug}"
     fs_path = Path(pad.db.to_fs_path(path))
     if fs_path.exists():
         raise FileExistsError("Duplicate slug")

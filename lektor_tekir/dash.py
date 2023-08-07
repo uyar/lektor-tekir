@@ -22,10 +22,10 @@ def overview() -> str:
 
 
 def contents() -> str | Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     template = "tekir_contents.html" if not record.is_attachment else \
         "tekir_attachment.html"
@@ -33,10 +33,10 @@ def contents() -> str | Response:
 
 
 def edit_content() -> str | Response:
-    path: str | None = request.args.get("path")
+    path = request.args.get("path")
     if path is None:
         return Response("", status=HTTPStatus.BAD_REQUEST)
-    alt: str = request.args.get("alt", PRIMARY_ALT)
+    alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     system_fields: list[Field] = [record.datamodel.field_map[k]
                                   for k in SYSTEM_FIELDS]
@@ -45,7 +45,8 @@ def edit_content() -> str | Response:
 
 
 def make_blueprint() -> Blueprint:
-    bp = Blueprint("tekir_admin", __name__,
+    bp = Blueprint("tekir_admin",
+                   __name__,
                    url_prefix="/tekir-admin/<lang_code>",
                    template_folder=Path(__file__).parent / "templates",
                    static_folder=Path(__file__).parent / "static")
@@ -62,6 +63,7 @@ def make_blueprint() -> Blueprint:
     bp.add_url_rule("/contents", view_func=contents)
     bp.add_url_rule("/content/edit", view_func=edit_content)
 
-    bp.register_blueprint(api.make_blueprint())
+    tekir_api = api.make_blueprint()
+    bp.register_blueprint(tekir_api)
 
     return bp

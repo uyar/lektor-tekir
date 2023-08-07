@@ -19,10 +19,12 @@ class TekirAdminUI(WebUI):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.register_blueprint(dash.make_blueprint())
+        tekir_admin = dash.make_blueprint()
+        self.register_blueprint(tekir_admin)
 
         locale_dir = Path(__file__).parent / "translations"
-        babel = Babel(self, locale_selector=lambda: g.lang_code,
+        babel = Babel(self,
+                      locale_selector=lambda: g.lang_code,
                       default_domain="lektor_tekir",
                       default_translation_directories=str(locale_dir))
         self.jinja_env.globals["translations"] = babel.list_translations
@@ -37,7 +39,7 @@ def rewrite_html_tekir(fp, edit_url):
 
 
 def main():
-    # XXX: remove when turkish translation is guaranteed to be installed
+    # XXX: remove when Turkish translation is guaranteed to be installed
     import lektor
     turkish_dst = Path(lektor.__path__[0]) / "translations" / "tr.json"
     if not turkish_dst.exists():
