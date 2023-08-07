@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-07 14:43+0300\n"
+"POT-Creation-Date: 2023-08-07 22:23+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,8 +105,8 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:51
-#: lektor_tekir/templates/partials/content-subpages.html:55
+#: lektor_tekir/templates/partials/content-attachments.html:53
+#: lektor_tekir/templates/partials/content-subpages.html:61
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:33
 #: lektor_tekir/templates/tekir_macros.html:73
 msgid "Add"
@@ -140,22 +140,22 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:12
-#: lektor_tekir/templates/partials/content-subpages.html:12
+#: lektor_tekir/templates/partials/content-attachments.html:13
+#: lektor_tekir/templates/partials/content-subpages.html:13
 #: lektor_tekir/templates/partials/navigate-dialog.html:12
 msgid "Select"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:14
+#: lektor_tekir/templates/partials/content-attachments.html:15
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:38
-#: lektor_tekir/templates/partials/content-subpages.html:42
+#: lektor_tekir/templates/partials/content-attachments.html:40
+#: lektor_tekir/templates/partials/content-subpages.html:48
 msgid "Delete selected"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:43
+#: lektor_tekir/templates/partials/content-attachments.html:45
 msgid "No attachments."
 msgstr ""
 
@@ -163,37 +163,61 @@ msgstr ""
 msgid "Subpages"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:14
+#: lektor_tekir/templates/partials/content-subpages.html:15
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:27
 msgid "Name"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:15
+#: lektor_tekir/templates/partials/content-subpages.html:16
+#: lektor_tekir/templates/partials/new-subpage-dialog.html:19
+msgid "Title"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-subpages.html:17
+#: lektor_tekir/templates/partials/content-summary.html:7
 msgid "Type"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:47
+#: lektor_tekir/templates/partials/content-subpages.html:53
 msgid "No subpages."
 msgstr ""
 
 #: lektor_tekir/templates/partials/content-summary.html:8
+msgid "Hidden"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:8
+#: lektor_tekir/templates/partials/content-summary.html:9
+msgid "Yes"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:8
+#: lektor_tekir/templates/partials/content-summary.html:9
+msgid "No"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:9
+msgid "Undiscoverable"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-summary.html:13
 msgid "Edit"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-summary.html:11
+#: lektor_tekir/templates/partials/content-summary.html:16
 msgid "View"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-summary.html:16
+#: lektor_tekir/templates/partials/content-summary.html:21
 #: lektor_tekir/templates/partials/site-output.html:11
 msgid "Open folder"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-summary.html:20
+#: lektor_tekir/templates/partials/content-summary.html:25
 msgid "Translations"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-summary.html:30
+#: lektor_tekir/templates/partials/content-summary.html:35
 msgid "Add and delete operations are available only through the primary language."
 msgstr ""
 
@@ -228,10 +252,6 @@ msgstr ""
 
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:3
 msgid "Content Type"
-msgstr ""
-
-#: lektor_tekir/templates/partials/new-subpage-dialog.html:19
-msgid "Title"
 msgstr ""
 
 #: lektor_tekir/templates/partials/publish-dialog.html:3

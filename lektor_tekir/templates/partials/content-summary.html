@@ -3,6 +3,11 @@
 {{ render_breadcrumbs(record, ancestors) }}
 
 <h1>{{ record.title }}</h2>
+<p>
+  <em>{{ _('Type') }}:</em> {{ record.datamodel.name_i18n.get(g.lang_code, record.datamodel.name) }} &mdash;
+  <em>{{ _('Hidden') }}:</em> {{ _('Yes') if record._hidden else _('No') }} &mdash;
+  <em>{{ _('Undiscoverable') }}:</em> {{ _('Yes') if not record._discoverable else _('No') }}
+</p>
 
 <a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path, alt=record.alt) }}">
   {% include 'icons/edit-entry.svg' %} <span>{{ _('Edit') }}</span>
