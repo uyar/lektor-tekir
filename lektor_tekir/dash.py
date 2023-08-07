@@ -24,7 +24,7 @@ def overview() -> str:
 def contents() -> str | Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     template = "tekir_contents.html" if not record.is_attachment else \
@@ -35,7 +35,7 @@ def contents() -> str | Response:
 def edit_content() -> str | Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     system_fields: list[Field] = [record.datamodel.field_map[k]

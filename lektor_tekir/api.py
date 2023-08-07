@@ -54,7 +54,7 @@ def open_folder() -> Response:
     if fs_path is None:
         path = request.args.get("path")
         if path is None:
-            return Response("", status=HTTPStatus.BAD_REQUEST)
+            return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
         record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
         fs_path = str(Path(record.source_filename).parent)
 
@@ -119,7 +119,7 @@ def publish_info() -> Response:
 def publish_build() -> str | Response:
     server_id = request.form.get("server")
     if server_id is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     pad: Pad = g.admin_context.pad
     server_info: ServerInfo = pad.config.get_server(server_id)
     builder: Builder = g.admin_context.info.get_builder()
@@ -137,7 +137,7 @@ def publish_build() -> str | Response:
 def content_summary() -> str | Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     ancestors = utils.get_ancestors(record)
@@ -150,7 +150,7 @@ def content_summary() -> str | Response:
 def content_translations() -> str | Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     node: TreeItem = g.admin_context.tree.get(path)
@@ -161,7 +161,7 @@ def content_translations() -> str | Response:
 def content_subpages() -> str | Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     children: Query = record.children
@@ -175,7 +175,7 @@ def content_subpages() -> str | Response:
 def content_attachments() -> str | Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
     children: Query = record.attachments
@@ -190,7 +190,7 @@ def delete_confirm() -> Response:
     items = request.form.getlist("selected-items")
     form_id = request.form.get("form_id")
     if form_id is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     pad: Pad = g.admin_context.pad
     records: list[Record] = [pad.get(i, alt=PRIMARY_ALT) for i in items]
     paths = utils.get_record_paths(records, root=pad.root)
@@ -206,7 +206,7 @@ def delete_alt_confirm() -> Response:
     path = request.args.get("path")
     alt = request.args.get("alt")
     if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     pad: Pad = g.admin_context.pad
     record: Record = pad.get(path, alt=alt)
     root: Record = pad.root
@@ -228,7 +228,7 @@ def delete_content() -> Response:
     items = request.form.getlist("selected-items")
     form_id = request.form.get("form_id")
     if form_id is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     pad: Pad = g.admin_context.pad
     records: list[Record] = [pad.get(i, alt=PRIMARY_ALT) for i in items]
     for record in records:
@@ -247,7 +247,7 @@ def delete_alt() -> str | Response:
     path = request.args.get("path")
     alt = request.args.get("alt")
     if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     pad: Pad = g.admin_context.pad
     record: Record = pad.get(path, alt=alt)
     Path(record.source_filename).unlink()
@@ -260,7 +260,7 @@ def delete_alt() -> str | Response:
 def slug_from_title() -> Response:
     title = request.args.get("title")
     if title is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     slug = slugify(title)
     response = Response(slug)
     detail = '{"target": "%(sel)s", "attr": "%(att)s", "value": "%(val)s"}' % {
@@ -276,7 +276,7 @@ def slug_from_title() -> Response:
 def new_subpage() -> Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     child_models = utils.get_child_models(record)
     models = sorted(child_models, key=i18n_name)
@@ -292,7 +292,7 @@ def add_subpage() -> Response:
     parent = request.args.get("parent")
     model = request.form.get("model")
     if (parent is None) or (model is None):
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     title = request.form.get("title", "").strip()
     if title == "":
@@ -321,7 +321,7 @@ def upload_attachment() -> Response:
     path = request.args.get("path")
     endpoint = request.args.get("op")
     if (path is None) or (endpoint is None):
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     markup = render_template("partials/upload-dialog.html", record=record,
                              endpoint=endpoint)
@@ -334,7 +334,7 @@ def upload_attachment() -> Response:
 def add_attachment() -> Response:
     record_path = request.args.get("path")
     if record_path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     uploaded = request.files.get("file")
     if not uploaded:
@@ -362,7 +362,7 @@ def add_attachment() -> Response:
 def replace_attachment() -> Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     uploaded = request.files.get("file")
     if not uploaded:
@@ -384,7 +384,7 @@ def replace_attachment() -> Response:
 def save_content() -> Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
@@ -407,7 +407,7 @@ def save_content() -> Response:
 def check_changes() -> Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     alt = request.args.get("alt", PRIMARY_ALT)
     record: Record = g.admin_context.pad.get(path, alt=alt)
@@ -433,7 +433,7 @@ def new_flowblock() -> str | Response:
     field_name = request.args.get("field_name")
     flow_type = request.args.get("flow_type")
     if (path is None) or (field_name is None) or (flow_type is None):
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     block = utils.create_flowblock(record=record, flow_type=flow_type)
     uuid_index = uuid4().hex
@@ -446,7 +446,7 @@ def new_flowblock() -> str | Response:
 def start_navigate() -> str | Response:
     field_id = request.args.get("field_id")
     if field_id is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     path = request.args.get("path", "/")
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
@@ -465,7 +465,7 @@ def start_navigate() -> str | Response:
 def navigables() -> str | Response:
     path = request.args.get("path")
     if path is None:
-        return Response("", status=HTTPStatus.BAD_REQUEST)
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
     record: Record = g.admin_context.pad.get(path, alt=PRIMARY_ALT)
     navigables = utils.get_navigables(record)
     return render_template("partials/navigables.html", navigables=navigables)
