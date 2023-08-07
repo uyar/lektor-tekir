@@ -24,12 +24,18 @@
   </div>
 
   <div class="field">
-    <label for="field-slug">{{ _('Name') }}</label>
-    <input type="text" id="field-slug" name="slug"/>
+    <label for="field-_slug">{{ _('Name') }}</label>
+    <input type="text" id="field-_slug" name="_slug"/>
   </div>
 
+  {% if endpoint == "add_subpage" %}
   <button class="confirm"
-      hx-post="{{ url_for('tekir_admin.api.add_subpage', path=record.path) }}"
+      hx-post="{{ url_for('tekir_admin.api.' + endpoint, path=record.path) }}"
       hx-swap="none">{{ _('Add') }}</button>
+  {% elif endpoint == "add_translation" %}
+  <button class="confirm"
+      hx-post="{{ url_for('tekir_admin.api.' + endpoint, path=record.path, lang=lang) }}"
+      hx-swap="none">{{ _('Add') }}</button>
+  {% endif %}
   <button class="cancel modal-close">{{ _('Cancel') }}</button>
 </form>

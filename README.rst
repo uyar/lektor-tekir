@@ -8,6 +8,7 @@ Features:
 - Navigating content.
 - Adding, editing and deleting content items.
 - Adding, deleting and replacing attachments.
+- Managing content translations.
 - Publishing (deploying) the site.
 - Multiple language support in the UI (English and Turkish at the moment).
 - Support for light/dark mode preference.
@@ -18,7 +19,6 @@ Planned:
 - Editing attachments.
 - Dividing edit form fields into tabs.
 - Supporting Git.
-- Managing content translations.
 - Managing databags.
 - HTML editor integration.
 - Image editor integration.
@@ -32,7 +32,7 @@ To use it, run::
 
   lektor-tekir serve
 
-And use the edit buttons on pages.
+And use the Lektor edit button as usual.
 
 The ``lektor-tekir`` CLI is identical to the Lektor CLI
 except that it patches the ``serve`` command to enable its own panel.

@@ -16,7 +16,7 @@
     hx-include="#{{ form_id }}">{{ _('Yes, delete') }}</button>
 {% else %}
 <button class="confirm modal-close"
-    hx-get="{{ url_for('tekir_admin.api.delete_alt') }}"
+    hx-get="{{ url_for('tekir_admin.api.delete_translation') }}"
     hx-target="#content-translations ul"
     hx-vals="{{ vals }}">{{ _('Yes, delete') }}</button>
 {% endif %}

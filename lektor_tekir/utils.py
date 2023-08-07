@@ -8,9 +8,11 @@ from __future__ import annotations
 from datetime import datetime
 from pathlib import Path
 from shutil import rmtree
+from typing import Mapping
 from uuid import uuid4
 
 from lektor.builder import Builder
+from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel, Field, FlowBlockModel
 from lektor.db import Pad, Page, Record
 from lektor.types.flow import FlowBlock
@@ -91,8 +93,9 @@ def get_navigables(record: Record) -> list[tuple[str, str, bool]]:
     return options
 
 
-def field_entry(record: Record, field: Field, form: ImmutableMultiDict, *,
-                form_field: str | None = None) -> str:
+def field_entry(record: Record, field: Field, form: Mapping[str, str], *,
+                form_field: str | None = None,
+                primary: Record | None = None) -> str:
     field_name: str = form_field if form_field is not None else field.name
     value: str = form.get(field_name, "").strip()
 
@@ -102,8 +105,10 @@ def field_entry(record: Record, field: Field, form: ImmutableMultiDict, *,
         if value == default_value:
             value = ""
 
-    if (field.name == "_slug") and (value == record["_slug"]):
-        value = ""
+    if field.name == "_slug":
+        canonical = record if primary is None else primary
+        if value == canonical["_slug"]:
+            value = ""
 
     if field.name == "_template":
         model: DataModel = record.datamodel
@@ -120,8 +125,8 @@ def field_entry(record: Record, field: Field, form: ImmutableMultiDict, *,
         return f"{field.name}: {value}\n"
 
 
-def flowblock_entry(record: Record, field: Field,
-                    form: ImmutableMultiDict) -> str:
+def flowblock_entry(record: Record, field: Field, form: Mapping[str, str], *,
+                    primary: Record | None = None) -> str:
     all_block_fields: list[str] = [k for k in form
                                    if k.startswith(f"{field.name}-")]
     if len(all_block_fields) == 0:
@@ -149,7 +154,8 @@ def flowblock_entry(record: Record, field: Field,
         for block_field in block_model.fields:
             form_field = f"{block_prefix}{block_field.name}"
             block_entry: str = field_entry(record, block_field, form,
-                                           form_field=form_field)
+                                           form_field=form_field,
+                                           primary=primary)
             if block_entry == "":
                 continue
             block_entries.append(block_entry)
@@ -157,16 +163,17 @@ def flowblock_entry(record: Record, field: Field,
     return f"{field.name}:\n\n" + "".join(entries)
 
 
-def get_source(record: Record, form: ImmutableMultiDict) -> str:
+def get_source(record: Record, form: Mapping[str, str], *,
+               primary: Record | None = None) -> str:
     entries: list[str] = []
     model: DataModel = record.datamodel
     system_fields: list[Field] = [model.field_map[f] for f in SYSTEM_FIELDS]
     fields: list[Field] = system_fields + model.fields
     for field in fields:
         if field.type.name == "flow":
-            entry = flowblock_entry(record, field, form)
+            entry = flowblock_entry(record, field, form, primary=primary)
         else:
-            entry = field_entry(record, field, form)
+            entry = field_entry(record, field, form, primary=primary)
         if entry == "":
             continue
         entries.append(entry)
@@ -183,8 +190,8 @@ def delete_record(record: Record) -> None:
 
 
 def create_subpage(*, pad: Pad, parent: str, model: str, title: str,
-                   form: ImmutableMultiDict) -> str:
-    slug: str = form.get("slug") or slugify(title)
+                   form: Mapping[str, str]) -> str:
+    slug: str = form.get("_slug") or slugify(title)
     path = f"{parent}/{slug}" if parent != "/" else f"/{slug}"
     fs_path = Path(pad.db.to_fs_path(path))
     if fs_path.exists():
@@ -195,15 +202,34 @@ def create_subpage(*, pad: Pad, parent: str, model: str, title: str,
         "_template": pad.db.datamodels[model].get_default_template_name(),
         "_slug": slug,
         "_path": path,
-        "_alt": pad.root.alt,
+        "_alt": PRIMARY_ALT,
     }
     page = Page(data=data, pad=pad)
 
     fs_path.mkdir()
-    source_file = fs_path / "contents.lr"
-    source = get_source(page, form)
+    source_file = Path(page.source_filename)
+    source = get_source(page, dict(**form, _discoverable="on"))
     source_file.write_text(source)
     return path
+
+
+def create_translation(*, pad: Pad, record: Record, alt: str,
+                       form: ImmutableMultiDict):
+    model: str = record.datamodel.id
+    slug: str = form.get("_slug") or record["_slug"]
+    data: dict[str, str] = {
+        "_model": model,
+        "_template": pad.db.datamodels[model].get_default_template_name(),
+        "_slug": slug,
+        "_path": record.path,
+        "_alt": alt,
+    }
+    page = Page(data=data, pad=pad)
+    source_file = Path(page.source_filename)
+    primary: Record = pad.get(record.path, alt=PRIMARY_ALT)
+    source = get_source(page, dict(**form, _discoverable="on"),
+                        primary=primary)
+    source_file.write_text(source)
 
 
 def create_attachment(*, pad: Pad, parent: Record,

@@ -218,7 +218,7 @@ def delete_confirm() -> Response:
     return response
 
 
-def delete_alt_confirm() -> Response:
+def delete_translation_confirm() -> Response:
     path = request.args.get("path")
     alt = request.args.get("alt")
     if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
@@ -261,7 +261,7 @@ def delete_content() -> Response:
     return response
 
 
-def delete_alt() -> str | Response:
+def delete_translation() -> str | Response:
     path = request.args.get("path")
     alt = request.args.get("alt")
     if (path is None) or (alt is None) or (alt == PRIMARY_ALT):
@@ -284,8 +284,8 @@ def slug_from_title() -> Response:
     slug = slugify(title)
     response = Response(slug)
     detail = '{"target": "%(sel)s", "attr": "%(att)s", "value": "%(val)s"}' % {
-        "sel": "#field-slug",
-        "att": "placeholder",
+        "sel": "#field-_slug",
+        "att": "value",
         "val": slug,
     }
     trigger = '{"updateAttr": %(detail)s}' % {"detail": detail}
@@ -294,14 +294,28 @@ def slug_from_title() -> Response:
 
 
 def new_subpage() -> Response:
+    endpoint = request.args.get("op")
+    if endpoint is None:
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
+
+    if endpoint == "add_translation":
+        lang = request.args.get("lang")
+        if lang is None:
+            return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
+
     pad: Pad = g.admin_context.pad
     record, status = _record(pad, request.args, alt=PRIMARY_ALT)
     if record is None:
         return Response("", status=status)
-    child_models = utils.get_child_models(record)
-    models = sorted(child_models, key=i18n_name)
+
+    if endpoint == "add_subpage":
+        child_models = utils.get_child_models(record)
+        models = sorted(child_models, key=i18n_name)
+        lang = None
+    elif endpoint == "add_translation":
+        models = [record.datamodel]
     markup = render_template("partials/new-subpage-dialog.html", record=record,
-                             models=models)
+                             models=models, lang=lang, endpoint=endpoint)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#new-subpage-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -332,6 +346,29 @@ def add_subpage() -> Response:
 
     response = Response("")
     record_url = url_for("tekir_admin.edit_content", path=path)
+    response.headers["HX-Redirect"] = record_url
+    return response
+
+
+def add_translation() -> Response:
+    pad: Pad = g.admin_context.pad
+    record, status = _record(pad, request.args, alt=PRIMARY_ALT)
+    if record is None:
+        return Response("", status=status)
+
+    alt = request.args.get("lang")
+    if (alt is None) or (alt == PRIMARY_ALT):
+        return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
+
+    try:
+        utils.create_translation(pad=pad, record=record, alt=alt,
+                                 form=request.form)
+    except FileExistsError:
+        errors = [_("A translation for this language already exists.")]
+        return error_response(errors)
+
+    response = Response("")
+    record_url = url_for("tekir_admin.edit_content", path=record.path, alt=alt)
     response.headers["HX-Redirect"] = record_url
     return response
 
@@ -508,14 +545,17 @@ def make_blueprint():
 
     bp.add_url_rule("/delete-confirm", view_func=delete_confirm,
                     methods=["POST"])
-    bp.add_url_rule("/delete-alt-confirm", view_func=delete_alt_confirm)
+    bp.add_url_rule("/delete-translation-confirm",
+                    view_func=delete_translation_confirm)
     bp.add_url_rule("/delete-content", view_func=delete_content,
                     methods=["POST"])
-    bp.add_url_rule("/delete-alt", view_func=delete_alt)
+    bp.add_url_rule("/delete-translation", view_func=delete_translation)
 
     bp.add_url_rule("/slugify", view_func=slug_from_title)
     bp.add_url_rule("/new-subpage", view_func=new_subpage)
     bp.add_url_rule("/add-subpage", view_func=add_subpage,
+                    methods=["POST"])
+    bp.add_url_rule("/add-translation", view_func=add_translation,
                     methods=["POST"])
     bp.add_url_rule("/upload-attachment", view_func=upload_attachment)
     bp.add_url_rule("/add-attachment", view_func=add_attachment,

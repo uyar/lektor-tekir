@@ -14,7 +14,7 @@
     <a href="{{ lang_url }}"{{ ' class=active' if active else '' }}>{{ lang_name }}</a>
       {% if primary and (lang != '_primary') %}
     <button
-        hx-get="{{ url_for('tekir_admin.api.delete_alt_confirm', path=record.path, alt=lang) }}"
+        hx-get="{{ url_for('tekir_admin.api.delete_translation_confirm', path=record.path, alt=lang) }}"
         hx-target="#delete-dialog">
       {% include 'icons/delete.svg' %}
     </button>
@@ -22,7 +22,9 @@
     {% else %}
     {{ lang_name }}
       {% if primary %}
-    <button>
+    <button
+        hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_translation', path=record.path, lang=lang) }}"
+        hx-target="#new-subpage-dialog">
       {% include 'icons/document-new.svg' %}
     </button>
       {% endif %}
