@@ -403,12 +403,12 @@ def save_content() -> Response:
     record, status = _record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
-    content = utils.get_content(record, request.form)
-    source = Path(record.source_filename)
-    if content == source.read_text():
+    source = utils.get_source(record, request.form)
+    source_path = Path(record.source_filename)
+    if source == source_path.read_text():
         message = _("No changes.")
     else:
-        source.write_text(content)
+        source_path.write_text(source)
         message = _("Content saved.")
 
     markup = render_template("partials/save-dialog.html", message=message,
@@ -425,9 +425,9 @@ def check_changes() -> Response:
         return Response("", status=status)
     record_url = url_for("tekir_admin.contents", path=record.path,
                          alt=record.alt)
-    content = utils.get_content(record, request.form)
-    source = Path(record.source_filename)
-    if content == source.read_text():
+    source = utils.get_source(record, request.form)
+    source_path = Path(record.source_filename)
+    if source == source_path.read_text():
         response = Response("")
         response.headers["HX-Redirect"] = record_url
     else:

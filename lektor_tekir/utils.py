@@ -91,17 +91,26 @@ def get_navigables(record: Record) -> list[tuple[str, str, bool]]:
     return options
 
 
-def field_entry(field: Field, form: ImmutableMultiDict, *,
+def field_entry(record: Record, field: Field, form: ImmutableMultiDict, *,
                 form_field: str | None = None) -> str:
     field_name: str = form_field if form_field is not None else field.name
     value: str = form.get(field_name, "").strip()
 
     if field.type.name == "boolean":
+        default_value = "yes" if field.default == "yes" else "no"
         value = "yes" if value == "on" else "no"
-        if value == BOOL_VALUES.get(field.default, field.default or "no"):
+        if value == default_value:
             value = ""
 
-    if not value:
+    if (field.name == "_slug") and (value == record["_slug"]):
+        value = ""
+
+    if field.name == "_template":
+        model: DataModel = record.datamodel
+        if value == model.get_default_template_name():
+            value = ""
+
+    if value == "":
         return ""
 
     if field.type.name in MULTILINE:
@@ -139,7 +148,7 @@ def flowblock_entry(record: Record, field: Field,
         block_entries: list[str] = []
         for block_field in block_model.fields:
             form_field = f"{block_prefix}{block_field.name}"
-            block_entry: str = field_entry(block_field, form,
+            block_entry: str = field_entry(record, block_field, form,
                                            form_field=form_field)
             if block_entry == "":
                 continue
@@ -148,7 +157,7 @@ def flowblock_entry(record: Record, field: Field,
     return f"{field.name}:\n\n" + "".join(entries)
 
 
-def get_content(record: Record, form: ImmutableMultiDict) -> str:
+def get_source(record: Record, form: ImmutableMultiDict) -> str:
     entries: list[str] = []
     model: DataModel = record.datamodel
     system_fields: list[Field] = [model.field_map[f] for f in SYSTEM_FIELDS]
@@ -157,7 +166,7 @@ def get_content(record: Record, form: ImmutableMultiDict) -> str:
         if field.type.name == "flow":
             entry = flowblock_entry(record, field, form)
         else:
-            entry = field_entry(field, form)
+            entry = field_entry(record, field, form)
         if entry == "":
             continue
         entries.append(entry)
@@ -191,9 +200,9 @@ def create_subpage(*, pad: Pad, parent: str, model: str, title: str,
     page = Page(data=data, pad=pad)
 
     fs_path.mkdir()
-    contents_file = fs_path / "contents.lr"
-    content = get_content(page, form)
-    contents_file.write_text(content)
+    source_file = fs_path / "contents.lr"
+    source = get_source(page, form)
+    source_file.write_text(source)
     return path
 
 
