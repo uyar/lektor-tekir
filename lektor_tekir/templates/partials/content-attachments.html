@@ -24,7 +24,8 @@
           </td>
           {% endif %}
           <td>
-            <a href="{{ url_for('tekir_admin.contents', path=attachment.path, alt=record.alt) }}">{{ attachment._slug }}</a>
+            {% set alt_param = record.alt if record.alt != '_primary' else None %}
+            <a href="{{ url_for('tekir_admin.contents', path=attachment.path, alt=alt_param) }}">{{ attachment._slug }}</a>
           </td>
         </tr>
         {% endfor %}

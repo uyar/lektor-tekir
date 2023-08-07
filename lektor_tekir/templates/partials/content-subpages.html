@@ -25,7 +25,8 @@
           </td>
           {% endif %}
           <td>
-            <a href="{{ url_for('tekir_admin.contents', path=subpage.path, alt=record.alt) }}">{{ subpage._slug }}</a>
+            {% set alt_param = record.alt if record.alt != '_primary' else None %}
+            <a href="{{ url_for('tekir_admin.contents', path=subpage.path, alt=alt_param) }}">{{ subpage._slug }}</a>
           </td>
           <td>
             {{ subpage.datamodel.name_i18n.get(g.lang_code, subpage.datamodel.name) }}

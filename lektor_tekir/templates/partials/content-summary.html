@@ -7,7 +7,7 @@
 <a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path, alt=record.alt) }}">
   {% include 'icons/edit-entry.svg' %} <span>{{ _('Edit') }}</span>
 </a>
-<a class="button" href="{{ record.path }}">
+<a class="button" href="{{ record.url_path }}">
   {% include 'icons/preview_sel.svg' %} <span>{{ _('View') }}</span>
 </a>
 <button
