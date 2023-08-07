@@ -20,7 +20,7 @@ from flask_babel import gettext as _
 from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel
-from lektor.db import Attachment, Pad, Page, Query, Record, TreeItem
+from lektor.db import Pad, Query, Record, TreeItem
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
 from slugify import slugify
@@ -181,24 +181,24 @@ def content_subpages() -> str | Response:
     record, status = _record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
-    children: Query = record.children
-    order_by = children.get_order_by()
-    subpages: Iterable[Page] = children if order_by is not None else \
-        sorted(children, key=lambda s: s["_slug"])
+    children: Query = record.children.include_hidden(True) \
+                                     .include_undiscoverable(True)
+    if children.get_order_by() is None:
+        children = children.order_by("_slug")
     return render_template("partials/content-subpages.html", record=record,
-                           subpages=subpages)
+                           subpages=children)
 
 
 def content_attachments() -> str | Response:
     record, status = _record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
-    children: Query = record.attachments
-    order_by = children.get_order_by()
-    attachments: Iterable[Attachment] = children if order_by is not None else \
-        sorted(children, key=lambda s: s["_slug"])
+    children: Query = record.attachments.include_hidden(True) \
+                                        .include_undiscoverable(True)
+    if children.get_order_by() is None:
+        children = children.order_by("_slug")
     return render_template("partials/content-attachments.html", record=record,
-                           attachments=attachments)
+                           attachments=children)
 
 
 def delete_confirm() -> Response:

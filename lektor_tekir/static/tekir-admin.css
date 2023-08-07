@@ -348,7 +348,7 @@ main.tekir_contents {
   grid-template-areas:
     "content-summary  content-summary"
     "content-subpages content-attachments";
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: auto 1fr;
 }
 
