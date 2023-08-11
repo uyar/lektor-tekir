@@ -29,7 +29,7 @@ dependencies = ["lektor", "python-slugify", "flask-babel"]
 
 [project.optional-dependencies]
 types = ["mypy", "types-python-slugify"]
-style = ["ruff"]
+style = ["flake8", "flake8-isort", "flake8-pyproject"]
 dev = [
     "lektor-tekir[types,style]",
     "babel",
@@ -54,13 +54,12 @@ lektor_tekir = ["templates/**/*", "static/**/*", "translations/**/*"]
 [tool.mypy]
 ignore_missing_imports = true
 
-[tool.ruff]
-select = ["E", "F", "I"]
-ignore = ["E731"]
-line-length = 79
+[tool.flake8]
+max-line-length = 79
 
-[tool.ruff.isort]
-lines-after-imports = 2
+[tool.isort]
+lines_after_imports = 2
+multi_line_output = 2
 
 [tool.tox]
 legacy_tox_ini = """
@@ -76,15 +75,9 @@ commands =
 [testenv:style]
 skip_install = true
 deps =
-    ruff
-commands =
-    ruff lektor_tekir
-
-[testenv:flake8]
-skip_install = true
-deps =
     flake8
     flake8-isort
+    flake8-pyproject
 commands =
     flake8 lektor_tekir
 
