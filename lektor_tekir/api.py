@@ -97,13 +97,12 @@ def site_summary() -> str:
 
 def site_output() -> str:
     builder: Builder = g.admin_context.info.get_builder()
-    output = {"path": builder.destination_path}
-    output_time = utils.get_output_time(builder)
-    if output_time is None:
-        output["time"] = _("No output")
-    else:
-        output["time"] = format_datetime(output_time)
-    return render_template("partials/site-output.html", output=output)
+    output_path = builder.destination_path
+    build_time = utils.get_build_time(builder)
+    output_time = format_datetime(build_time) if build_time is not None else \
+        _("No output")
+    return render_template("partials/site-output.html",
+                           output_path=output_path, output_time=output_time)
 
 
 def clean_build() -> str:
@@ -119,14 +118,14 @@ def build() -> str | Response:
     if n_failures > 0:
         errors = []
         for failure in Path(builder.failure_controller.path).glob("*.json"):
-            error: dict[str, str] = json.loads(failure.read_text())
+            error = json.loads(failure.read_text())
             errors.append(f'{error["artifact"]}: {error["exception"]}')
         return error_response(errors)
     builder.touch_site_config()
-    output_time = utils.get_output_time(builder)
-    if output_time is None:
-        return _("No output")
-    return format_datetime(output_time)
+    build_time = utils.get_build_time(builder)
+    output_time = format_datetime(build_time) if build_time is not None else \
+        _("No output")
+    return output_time
 
 
 def publish_info() -> Response:

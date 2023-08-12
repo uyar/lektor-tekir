@@ -37,12 +37,12 @@ def get_page_count(record: Record) -> int:
     return len(pages)
 
 
-def get_output_time(builder: Builder) -> datetime | None:
-    output_path = Path(builder.destination_path)
-    home_page = output_path / "index.html"
+def get_build_time(builder: Builder) -> datetime | None:
+    build_path = Path(builder.destination_path)
+    home_page = build_path / "index.html"
     if not home_page.exists():
         return None
-    mtime = int(output_path.stat().st_mtime)
+    mtime = int(build_path.stat().st_mtime)
     return datetime.fromtimestamp(mtime)
 
 

@@ -333,13 +333,9 @@ main.tekir_overview {
   font-size: 2.5em;
 }
 
-:where(#output-path, #output-time) p {
-  width: fit-content;
-  margin-block: 0.25em;
-}
-
 :where(#output-path, #output-time) .target {
-  padding: var(--space-xs);
+  margin-inline-start: 1em;
+  padding: var(--space-s);
   background-color: hsl(0, 0%, 40%);
   color: white;
 }
