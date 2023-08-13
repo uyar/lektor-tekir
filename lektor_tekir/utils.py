@@ -56,18 +56,18 @@ def get_ancestors(record: Record) -> list[Record]:
     return ancestors
 
 
-def get_record_paths(records: list[Record], *, root: Record) -> list[str]:
+def get_record_paths(records: list[Record], *, root: Record) -> list[Path]:
     root_fs_path = Path(root.source_filename).parent
-    paths: list[str] = []
+    paths: list[Path] = []
     for record in records:
         if record.is_attachment:
-            paths.append(record.path[1:])  # strip the trailing '/'
+            record_fs_path = Path(record.source_filename).with_suffix("")
+            paths.append(record_fs_path.relative_to(root_fs_path))
         else:
             record_dir = Path(record.source_filename).parent
             for record_fs_path in record_dir.glob("**/*"):
                 if record_fs_path.is_file():
-                    record_path = record_fs_path.relative_to(root_fs_path)
-                    paths.append(str(record_path))
+                    paths.append(record_fs_path.relative_to(root_fs_path))
     return paths
 
 

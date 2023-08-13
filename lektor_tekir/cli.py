@@ -13,6 +13,7 @@ from lektor.admin.webui import WebUI
 from lektor.cli import cli
 
 from lektor_tekir import dash
+from lektor_tekir.api import i18n_name
 
 
 class TekirAdminUI(WebUI):
@@ -28,6 +29,7 @@ class TekirAdminUI(WebUI):
                       default_domain="lektor_tekir",
                       default_translation_directories=str(locale_dir))
         self.jinja_env.globals["translations"] = babel.list_translations
+        self.jinja_env.globals["i18n_name"] = i18n_name
 
 
 rewrite_html_original = serve.rewrite_html_for_editing

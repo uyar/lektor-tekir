@@ -1,0 +1,17 @@
+<div id="system-fields">
+  <em>{{ i18n_name(record.datamodel, g.lang_code) }}</em>
+  {% if record._hidden %}&mdash; {{ _('Hidden') }}{% endif %}
+  {% if not record._discoverable %}&mdash; {{ _('Undiscoverable') }}{% endif %}
+</div>
+
+<a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path, alt=record.alt) }}">
+  {% include 'icons/edit-entry.svg' %} <span>{{ _('Edit') }}</span>
+</a>
+<a class="button" href="{{ record.url_path }}">
+  {% include 'icons/preview_sel.svg' %} <span>{{ _('View') }}</span>
+</a>
+<button
+    hx-get="{{ url_for('tekir_admin.api.open_folder', path=record.path) }}"
+    hx-swap="none">
+  {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
+</button>

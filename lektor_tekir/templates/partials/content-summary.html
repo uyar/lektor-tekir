@@ -2,36 +2,4 @@
 
 {{ render_breadcrumbs(record, ancestors) }}
 
-<h1>{{ record.title }}</h2>
-<p>
-  <em>{{ _('Type') }}:</em> {{ record.datamodel.name_i18n.get(g.lang_code, record.datamodel.name) }} &mdash;
-  <em>{{ _('Hidden') }}:</em> {{ _('Yes') if record._hidden else _('No') }} &mdash;
-  <em>{{ _('Undiscoverable') }}:</em> {{ _('Yes') if not record._discoverable else _('No') }}
-</p>
-
-<a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path, alt=record.alt) }}">
-  {% include 'icons/edit-entry.svg' %} <span>{{ _('Edit') }}</span>
-</a>
-<a class="button" href="{{ record.url_path }}">
-  {% include 'icons/preview_sel.svg' %} <span>{{ _('View') }}</span>
-</a>
-<button
-    hx-get="{{ url_for('tekir_admin.api.open_folder', path=record.path) }}"
-    hx-swap="none">
-  {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
-</button>
-
-<div id="content-translations">
-  <h2>{{ _('Translations') }}:</h2>
-  <div
-      hx-get="{{ url_for('tekir_admin.api.content_translations', path=record.path, alt=record.alt) }}"
-      hx-trigger="load"
-      hx-swap="outerHTML">
-  </div>
-</div>
-
-{% if record.alt != '_primary' %}
-<div class="report warning">
-  {{ _('Add and delete operations are available only through the primary language.') }}
-</div>
-{% endif %}
+<h1>{{ record.title }}</h1>

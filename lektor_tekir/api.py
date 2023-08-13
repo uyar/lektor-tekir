@@ -20,7 +20,7 @@ from flask_babel import gettext as _
 from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel
-from lektor.db import Pad, Query, Record, TreeItem
+from lektor.db import Alt, Pad, Query, Record, TreeItem
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
 from slugify import slugify
@@ -35,8 +35,8 @@ FILE_MANAGERS: dict[str, str] = {
 }
 
 
-def i18n_name(item: DataModel) -> str:
-    return strxfrm(item.name_i18n.get(g.lang_code, item.name))
+def i18n_name(item: DataModel | Alt, lang_code: str) -> str:
+    return strxfrm(item.name_i18n.get(lang_code, item.id))
 
 
 def error_response(errors: list[str]) -> Response:
@@ -167,6 +167,13 @@ def content_summary() -> str | Response:
                            ancestors=ancestors)
 
 
+def content_operations() -> str | Response:
+    record, status = _record(g.admin_context.pad, request.args)
+    if record is None:
+        return Response("", status=status)
+    return render_template("partials/content-operations.html", record=record,)
+
+
 def content_translations() -> str | Response:
     record, status = _record(g.admin_context.pad, request.args)
     if record is None:
@@ -208,9 +215,9 @@ def delete_confirm() -> Response:
     items = request.form.getlist("selected-items")
     pad: Pad = g.admin_context.pad
     records: list[Record] = [pad.get(i, alt=PRIMARY_ALT) for i in items]
-    paths = utils.get_record_paths(records, root=pad.root)
+    fs_paths = utils.get_record_paths(records, root=pad.root)
     markup = render_template("partials/delete-dialog.html",
-                             items=sorted(paths), form_id=form_id)
+                             items=sorted(fs_paths), form_id=form_id)
     response = Response(markup)
     trigger = '{"showModal": {"modal": "#delete-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
@@ -309,7 +316,7 @@ def new_subpage() -> Response:
 
     if endpoint == "add_subpage":
         child_models = utils.get_child_models(record)
-        models = sorted(child_models, key=i18n_name)
+        models = sorted(child_models, key=lambda m: i18n_name(m, g.lang_code))
         lang = None
     elif endpoint == "add_translation":
         models = [record.datamodel]
@@ -538,6 +545,7 @@ def make_blueprint():
                     methods=["POST"])
 
     bp.add_url_rule("/content-summary", view_func=content_summary)
+    bp.add_url_rule("/content-operations", view_func=content_operations)
     bp.add_url_rule("/content-translations", view_func=content_translations)
     bp.add_url_rule("/content-subpages", view_func=content_subpages)
     bp.add_url_rule("/content-attachments", view_func=content_attachments)

@@ -78,7 +78,6 @@ a {
 }
 
 svg {
-  stroke: 1px currentColor;
   fill: currentColor;
 }
 
@@ -256,6 +255,7 @@ main {
 }
 
 h1 {
+  margin-block: 0.5em 0;
   font-size: 3em;
   font-style: italic;
 }
@@ -267,7 +267,7 @@ h2 {
 }
 
 section {
-  padding: var(--space-m);
+  padding: var(--space-m) 0;
 }
 
 section > h2 + * {
@@ -279,7 +279,7 @@ section > *:last-child {
 }
 
 .subsection:not(:first-of-type) {
-  margin-block-start: 2em;
+  margin-block-start: 3em;
 }
 
 .htmx-indicator {
@@ -315,22 +315,22 @@ section > *:last-child {
 /* SPECIAL */
 
 main.tekir_overview {
-  grid-template-areas:
-    "site-summary"
-    "site-output";
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
 }
 
 #site-summary {
-  grid-area: site-summary;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 #site-output {
-  grid-area: site-output;
+  grid-column: 1;
+  grid-row: 2;
 }
 
 #page-count {
-  font-size: 2.5em;
+  font-size: 3em;
 }
 
 :where(#output-path, #output-time) .target {
@@ -341,76 +341,48 @@ main.tekir_overview {
 }
 
 main.tekir_contents {
-  grid-template-areas:
-    "content-summary  content-summary"
-    "content-subpages content-attachments";
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto auto 1fr;
 }
 
 main.tekir_attachment {
-  grid-template-areas:
-    "content-summary    content-summary"
-    "attachment-preview attachment-info";
-  grid-template-columns: 1fr auto;
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto 1fr;
 }
 
 #content-summary {
-  grid-area: content-summary;
+  grid-column: 1 / span 6;
+  grid-row: 1;
+}
+
+#content-operations {
+  grid-column: 1 / span 3;
+  grid-row: 2;
 }
 
 #content-translations {
-  margin-block-start: 2em;
-}
-
-#content-translations h2 {
-  display: inline;
-  margin-inline-end: 1em;
-  font-size: 1em;
-}
-
-#content-translations ul {
-  display: inline-flex;
-  align-items: center;
-  gap: 2em;
-}
-
-#content-translations button {
-  height: unset;
-  margin: var(--space-xs);
-  padding: 0;
-  border: none;
-}
-
-#content-translations svg {
-  height: 1em;
-}
-
-#content-translations a {
-  padding: var(--space-xs);
-  text-decoration: none;
-}
-
-#content-translations a.active {
-  background-color: orange;
-  color: black;
+  grid-column: 4 / span 3;
+  grid-row: 2;
 }
 
 #content-subpages {
-  grid-area: content-subpages;
+  grid-column: 1 / span 4;
+  grid-row: 3;
 }
 
 #content-attachments {
-  grid-area: content-attachments;
+  grid-column: 5 / span 2;
+  grid-row: 3;
 }
 
 #attachment-preview {
-  grid-area: attachment-preview;
+  grid-column: 1 / span 4;
+  grid-row: 2;
 }
 
 #attachment-info {
-  grid-area: attachment-info;
+  grid-column: 5;
+  grid-row: 2;
 }
 
 .breadcrumbs {
@@ -435,9 +407,68 @@ main.tekir_attachment {
   content: "» ";
 }
 
+#system-fields,
+#content-translations h2 {
+  margin-block-end: 1em;
+  font-size: 1em;
+}
+
+#content-translations ul {
+  display: inline-flex;
+  gap: 1em;
+}
+
+#content-translations li {
+  display: flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-s);
+  border: 1px solid orange;
+}
+
+#content-translations li.active {
+  background-color: orange;
+}
+
+#content-translations li.active a {
+  color: black;
+}
+
+#content-translations a {
+  text-decoration: none;
+}
+
+#content-translations button {
+  height: fit-content;
+  margin-inline-start: var(--space-xs);
+  padding: 0;
+  border: none;
+}
+
+#content-translations svg {
+  height: 1.5em;
+  margin-inline-start: var(--space-xs);
+}
+
 .content-listing {
-  height: 15em;
+  block-size: 16em;
+  margin-block: 1em;
   overflow-y: auto;
+}
+
+.content-listing thead {
+  border-block-end: 1px solid;
+}
+
+.content-listing tbody tr:nth-child(even) {
+  background-color: hsl(0, 0%, 30%);
+}
+
+.content-listing td:nth-child(4) {
+  inline-size: 6em;
+}
+
+#attachment-preview img {
+  max-height: 70dvh;
 }
 
 details :is(button, a.button) {

@@ -76,7 +76,7 @@
         <button
             hx-get="{{ url_for('tekir_admin.api.new_flowblock', flow_type=flow_type, field_name=field_name, path=record.path) }}"
             hx-target="#{{ field_name }}-add-block"
-            hx-swap="beforebegin">{{ block_models[flow_type].name_i18n.get(g.lang_code, block_models[flow_type].name) }}</button>
+            hx-swap="beforebegin">{{ i18n_name(block_models[flow_type], g.lang_code) }}</button>
         {% endfor %}
       </div>
     </fieldset>
@@ -88,7 +88,7 @@
 {% set new_block = block_index.startswith('uuid_') %}
 <details id="{{ '%s-%s' % (field_name, block_index) }}"{{ ' class=new-block' if new_block else '' }}{{ ' open' if new_block else '' }}>
   <summary>
-    {{ block.flowblockmodel.name_i18n.get(g.lang_code) }}
+    {{ i18n_name(block.flowblockmodel, g.lang_code) }}
     <button class="flowblock delete-block" title="{{ _('Delete') }}">
       {% include 'icons/delete.svg' %}
     </button>

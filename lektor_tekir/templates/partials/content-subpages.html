@@ -1,15 +1,15 @@
 <h2>{{ _('Subpages') }}</h2>
 
-{% set primary = record.alt == '_primary' %}
+{% set is_primary = record.alt == '_primary' %}
 
 <form id="subpages-form" action="." method="POST">
   {% if subpages %}
   <input type="hidden" name="form_id" value="subpages-form"/>
-  <div class="field content-listing">
+  <div class="content-listing">
     <table>
       <thead>
         <tr>
-          {% if primary %}
+          {% if is_primary %}
           <th>{{ _('Select') }}</th>
           {% endif %}
           <th>{{ _('Name') }}</th>
@@ -20,20 +20,19 @@
       <tbody>
         {% for subpage in subpages %}
         <tr>
-          {% if primary %}
+          {% if is_primary %}
           <td>
             <input type="checkbox" name="selected-items" value="{{ subpage.path }}"/>
           </td>
           {% endif %}
           <td>
-            {% set alt_param = record.alt if record.alt != '_primary' else None %}
-            <a href="{{ url_for('tekir_admin.contents', path=subpage.path, alt=alt_param) }}">{{ subpage._slug }}</a>
+            <a href="{{ url_for('tekir_admin.contents', path=subpage.path, alt=record.alt) }}">{{ subpage._slug }}</a>
           </td>
           <td>
             {{ subpage.title }}
           </td>
           <td>
-            {{ subpage.datamodel.name_i18n.get(g.lang_code, subpage.datamodel.name) }}
+            {{ i18n_name(subpage.datamodel, g.lang_code) }}
           </td>
         </tr>
         {% endfor %}
@@ -41,7 +40,7 @@
     </table>
   </div>
 
-    {% if primary %}
+    {% if is_primary %}
   <button
       hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
       hx-target="#delete-dialog">
@@ -49,12 +48,12 @@
   </button>
     {% endif %}
   {% else %}
-  <div class="field content-listing">
+  <div class="content-listing">
     <p>{{ _('No subpages.') }}</p>
   </div>
   {% endif %}
 
-  {% if primary %}
+  {% if is_primary %}
   <button
       hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_subpage', path=record.path) }}"
       hx-target="#new-subpage-dialog">
