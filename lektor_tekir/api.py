@@ -9,9 +9,8 @@ import json
 import subprocess
 import sys
 from http import HTTPStatus
-from locale import strxfrm
 from pathlib import Path
-from typing import Iterable, Mapping
+from typing import Iterable
 from uuid import uuid4
 
 from flask import Blueprint, Response, g, render_template, request, url_for
@@ -19,8 +18,7 @@ from flask_babel import format_datetime
 from flask_babel import gettext as _
 from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
-from lektor.datamodel import DataModel
-from lektor.db import Alt, Pad, Query, Record, TreeItem
+from lektor.db import Pad, Query, Record, TreeItem
 from lektor.environment.config import ServerInfo
 from lektor.publisher import publish
 from slugify import slugify
@@ -35,10 +33,6 @@ FILE_MANAGERS: dict[str, str] = {
 }
 
 
-def i18n_name(item: DataModel | Alt, lang_code: str) -> str:
-    return strxfrm(item.name_i18n.get(lang_code, item.id))
-
-
 def error_response(errors: list[str]) -> Response:
     markup = render_template("partials/error-dialog.html", errors=errors)
     response = Response(markup)
@@ -47,20 +41,6 @@ def error_response(errors: list[str]) -> Response:
     trigger = '{"showModal": {"modal": "#error-dialog"}}'
     response.headers["HX-Trigger-After-Swap"] = trigger
     return response
-
-
-def _record(pad: Pad, args: Mapping[str, str], *,
-            alt: str | None = None) -> tuple[Record | None, HTTPStatus]:
-    record_path = args.get("path")
-    if record_path is None:
-        return (None, HTTPStatus.UNPROCESSABLE_ENTITY)
-    if (alt is not None) and ("alt" in args):
-        return (None, HTTPStatus.UNPROCESSABLE_ENTITY)
-    record_alt = alt if alt is not None else args.get("alt", PRIMARY_ALT)
-    record: Record = pad.get(record_path, alt=record_alt)
-    if record is None:
-        return (None, HTTPStatus.NOT_FOUND)
-    return (record, HTTPStatus.OK)
 
 
 def open_folder() -> Response:
@@ -73,8 +53,8 @@ def open_folder() -> Response:
     if folder is not None:
         fs_path = Path(folder)
     else:
-        record, status = _record(g.admin_context.pad, request.args,
-                                 alt=PRIMARY_ALT)
+        record, status = utils.get_record(g.admin_context.pad, request.args,
+                                          alt=PRIMARY_ALT)
         if record is None:
             return Response("", status=status)
         fs_path = Path(record.source_filename).parent
@@ -157,7 +137,7 @@ def publish_build() -> str | Response:
 
 
 def content_summary() -> str | Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     ancestors = utils.get_ancestors(record)
@@ -168,14 +148,14 @@ def content_summary() -> str | Response:
 
 
 def content_operations() -> str | Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     return render_template("partials/content-operations.html", record=record,)
 
 
 def content_translations() -> str | Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     node: TreeItem = g.admin_context.tree.get(record.path)
@@ -184,7 +164,7 @@ def content_translations() -> str | Response:
 
 
 def content_subpages() -> str | Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     children: Query = record.children.include_hidden(True) \
@@ -196,7 +176,7 @@ def content_subpages() -> str | Response:
 
 
 def content_attachments() -> str | Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     children: Query = record.attachments.include_hidden(True) \
@@ -310,13 +290,14 @@ def new_subpage() -> Response:
             return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     pad: Pad = g.admin_context.pad
-    record, status = _record(pad, request.args, alt=PRIMARY_ALT)
+    record, status = utils.get_record(pad, request.args, alt=PRIMARY_ALT)
     if record is None:
         return Response("", status=status)
 
     if endpoint == "add_subpage":
         child_models = utils.get_child_models(record)
-        models = sorted(child_models, key=lambda m: i18n_name(m, g.lang_code))
+        models = sorted(child_models,
+                        key=lambda m: utils.i18n_name(m, g.lang_code))
         lang = None
     elif endpoint == "add_translation":
         models = [record.datamodel]
@@ -339,7 +320,7 @@ def add_subpage() -> Response:
         return error_response(errors)
 
     pad: Pad = g.admin_context.pad
-    parent, status = _record(pad, request.args, alt=PRIMARY_ALT)
+    parent, status = utils.get_record(pad, request.args, alt=PRIMARY_ALT)
     if parent is None:
         return Response("", status=status)
 
@@ -358,7 +339,7 @@ def add_subpage() -> Response:
 
 def add_translation() -> Response:
     pad: Pad = g.admin_context.pad
-    record, status = _record(pad, request.args, alt=PRIMARY_ALT)
+    record, status = utils.get_record(pad, request.args, alt=PRIMARY_ALT)
     if record is None:
         return Response("", status=status)
 
@@ -385,7 +366,7 @@ def upload_attachment() -> Response:
         return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     pad: Pad = g.admin_context.pad
-    record, status = _record(pad, request.args, alt=PRIMARY_ALT)
+    record, status = utils.get_record(pad, request.args, alt=PRIMARY_ALT)
     if record is None:
         return Response("", status=status)
 
@@ -404,7 +385,7 @@ def add_attachment() -> Response:
         return error_response(errors)
 
     pad: Pad = g.admin_context.pad
-    record, status = _record(pad, request.args, alt=PRIMARY_ALT)
+    record, status = utils.get_record(pad, request.args, alt=PRIMARY_ALT)
     if record is None:
         return Response("", status=status)
 
@@ -428,7 +409,7 @@ def replace_attachment() -> Response:
         return error_response(errors)
 
     pad: Pad = g.admin_context.pad
-    record, status = _record(pad, request.args, alt=PRIMARY_ALT)
+    record, status = utils.get_record(pad, request.args, alt=PRIMARY_ALT)
     if record is None:
         return Response("", status=status)
 
@@ -443,7 +424,7 @@ def replace_attachment() -> Response:
 
 
 def save_content() -> Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     source = utils.get_source(record, request.form)
@@ -463,7 +444,7 @@ def save_content() -> Response:
 
 
 def check_changes() -> Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     record_url = url_for("tekir_admin.contents", path=record.path,
@@ -490,7 +471,7 @@ def new_flowblock() -> str | Response:
     if (field_name is None) or (flow_type is None):
         return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
 
@@ -508,7 +489,7 @@ def start_navigate() -> str | Response:
         return Response("", status=HTTPStatus.UNPROCESSABLE_ENTITY)
 
     pad: Pad = g.admin_context.pad
-    record, status = _record(pad, request.args)
+    record, status = utils.get_record(pad, request.args)
     if status == HTTPStatus.NOT_FOUND:
         return Response("", status=status)
     if record is None:
@@ -524,7 +505,7 @@ def start_navigate() -> str | Response:
 
 
 def navigables() -> str | Response:
-    record, status = _record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     navigables = utils.get_navigables(record)

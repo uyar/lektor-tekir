@@ -6,6 +6,8 @@
 from __future__ import annotations
 
 from datetime import datetime
+from http import HTTPStatus
+from locale import strxfrm
 from pathlib import Path
 from shutil import rmtree
 from typing import Mapping
@@ -14,7 +16,7 @@ from uuid import uuid4
 from lektor.builder import Builder
 from lektor.constants import PRIMARY_ALT
 from lektor.datamodel import DataModel, Field, FlowBlockModel
-from lektor.db import Pad, Page, Record
+from lektor.db import Alt, Pad, Page, Record
 from lektor.types.flow import FlowBlock
 from slugify import slugify
 from werkzeug.datastructures.file_storage import FileStorage
@@ -31,6 +33,10 @@ BLOCK_SEP = "----\n"
 SYSTEM_FIELDS: list[str] = ["_slug", "_template", "_hidden", "_discoverable"]
 
 
+def i18n_name(item: DataModel | Alt, lang_code: str) -> str:
+    return strxfrm(item.name_i18n.get(lang_code, item.id))
+
+
 def get_page_count(record: Record) -> int:
     fs_path = Path(record.source_filename).parent
     pages = {c.parent for c in fs_path.glob("**/contents*.lr")}
@@ -44,6 +50,20 @@ def get_build_time(builder: Builder) -> datetime | None:
         return None
     mtime = int(build_path.stat().st_mtime)
     return datetime.fromtimestamp(mtime)
+
+
+def get_record(pad: Pad, args: Mapping[str, str], *,
+               alt: str | None = None) -> tuple[Record | None, HTTPStatus]:
+    record_path = args.get("path")
+    if record_path is None:
+        return (None, HTTPStatus.UNPROCESSABLE_ENTITY)
+    if (alt is not None) and ("alt" in args):
+        return (None, HTTPStatus.UNPROCESSABLE_ENTITY)
+    record_alt = alt if alt is not None else args.get("alt", PRIMARY_ALT)
+    record: Record = pad.get(record_path, alt=record_alt)
+    if record is None:
+        return (None, HTTPStatus.NOT_FOUND)
+    return (record, HTTPStatus.OK)
 
 
 def get_ancestors(record: Record) -> list[Record]:

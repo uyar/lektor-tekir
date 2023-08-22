@@ -9,8 +9,7 @@ from pathlib import Path
 
 from flask import Blueprint, Response, g, render_template, request
 
-from . import api
-from .utils import SYSTEM_FIELDS
+from . import api, utils
 
 
 def overview() -> str:
@@ -18,7 +17,7 @@ def overview() -> str:
 
 
 def contents() -> str | Response:
-    record, status = api._record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
     template = "tekir_contents.html" if not record.is_attachment else \
@@ -27,10 +26,11 @@ def contents() -> str | Response:
 
 
 def edit_content() -> str | Response:
-    record, status = api._record(g.admin_context.pad, request.args)
+    record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
-    system_fields = [record.datamodel.field_map[k] for k in SYSTEM_FIELDS]
+    system_fields = [record.datamodel.field_map[k]
+                     for k in utils.SYSTEM_FIELDS]
     return render_template("tekir_content_edit.html", record=record,
                            system_fields=system_fields)
 

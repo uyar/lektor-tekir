@@ -13,7 +13,7 @@ from lektor.admin.webui import WebUI
 from lektor.cli import cli
 
 from lektor_tekir import dash
-from lektor_tekir.api import i18n_name
+from lektor_tekir.utils import i18n_name
 
 
 class TekirAdminUI(WebUI):
