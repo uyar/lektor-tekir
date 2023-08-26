@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-07 22:23+0300\n"
+"POT-Creation-Date: 2023-08-26 23:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: lektor_tekir/api.py:69
+#: lektor_tekir/api.py:49
 msgid "File manager not set for platform:"
 msgstr ""
 
-#: lektor_tekir/api.py:103 lektor_tekir/api.py:113 lektor_tekir/api.py:128
+#: lektor_tekir/api.py:82 lektor_tekir/api.py:91 lektor_tekir/api.py:106
 msgid "No output"
 msgstr ""
 
@@ -33,23 +33,27 @@ msgstr ""
 msgid "A content item with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:360 lektor_tekir/api.py:384
+#: lektor_tekir/api.py:353
+msgid "A translation for this language already exists."
+msgstr ""
+
+#: lektor_tekir/api.py:383 lektor_tekir/api.py:407
 msgid "Please upload a file."
 msgstr ""
 
-#: lektor_tekir/api.py:372
+#: lektor_tekir/api.py:395
 msgid "An attachment with this name already exists."
 msgstr ""
 
-#: lektor_tekir/api.py:409
+#: lektor_tekir/api.py:432
 msgid "No changes."
 msgstr ""
 
-#: lektor_tekir/api.py:412
+#: lektor_tekir/api.py:435
 msgid "Content saved."
 msgstr ""
 
-#: lektor_tekir/api.py:434
+#: lektor_tekir/api.py:457
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr ""
 
@@ -105,9 +109,10 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:53
-#: lektor_tekir/templates/partials/content-subpages.html:61
-#: lektor_tekir/templates/partials/new-subpage-dialog.html:33
+#: lektor_tekir/templates/partials/content-attachments.html:52
+#: lektor_tekir/templates/partials/content-subpages.html:60
+#: lektor_tekir/templates/partials/new-subpage-dialog.html:34
+#: lektor_tekir/templates/partials/new-subpage-dialog.html:38
 #: lektor_tekir/templates/tekir_macros.html:73
 msgid "Add"
 msgstr ""
@@ -131,7 +136,7 @@ msgstr ""
 
 #: lektor_tekir/templates/partials/changes-dialog.html:6
 #: lektor_tekir/templates/partials/navigate-dialog.html:13
-#: lektor_tekir/templates/partials/new-subpage-dialog.html:34
+#: lektor_tekir/templates/partials/new-subpage-dialog.html:40
 #: lektor_tekir/templates/partials/upload-dialog.html:12
 msgid "Cancel"
 msgstr ""
@@ -150,13 +155,34 @@ msgstr ""
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:40
-#: lektor_tekir/templates/partials/content-subpages.html:48
+#: lektor_tekir/templates/partials/content-attachments.html:39
+#: lektor_tekir/templates/partials/content-subpages.html:47
 msgid "Delete selected"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:45
+#: lektor_tekir/templates/partials/content-attachments.html:44
 msgid "No attachments."
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-operations.html:3
+msgid "Hidden"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-operations.html:4
+msgid "Undiscoverable"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-operations.html:8
+msgid "Edit"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-operations.html:11
+msgid "View"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-operations.html:16
+#: lektor_tekir/templates/partials/site-output.html:11
+msgid "Open folder"
 msgstr ""
 
 #: lektor_tekir/templates/partials/content-subpages.html:1
@@ -174,59 +200,27 @@ msgid "Title"
 msgstr ""
 
 #: lektor_tekir/templates/partials/content-subpages.html:17
-#: lektor_tekir/templates/partials/content-summary.html:7
 msgid "Type"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:53
+#: lektor_tekir/templates/partials/content-subpages.html:52
 msgid "No subpages."
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-summary.html:8
-msgid "Hidden"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-summary.html:8
-#: lektor_tekir/templates/partials/content-summary.html:9
-msgid "Yes"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-summary.html:8
-#: lektor_tekir/templates/partials/content-summary.html:9
-msgid "No"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-summary.html:9
-msgid "Undiscoverable"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-summary.html:13
-msgid "Edit"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-summary.html:16
-msgid "View"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-summary.html:21
-#: lektor_tekir/templates/partials/site-output.html:11
-msgid "Open folder"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-summary.html:25
+#: lektor_tekir/templates/partials/content-translations.html:1
 msgid "Translations"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-summary.html:35
-msgid "Add and delete operations are available only through the primary language."
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-translations.html:7
+#: lektor_tekir/templates/partials/content-translations.html:10
 msgid "Primary"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-translations.html:10
+#: lektor_tekir/templates/partials/content-translations.html:13
 msgid "Overlaid"
+msgstr ""
+
+#: lektor_tekir/templates/partials/content-translations.html:44
+msgid "Add and delete operations are available only through the primary language."
 msgstr ""
 
 #: lektor_tekir/templates/partials/delete-dialog.html:1
@@ -259,7 +253,7 @@ msgid "Server"
 msgstr ""
 
 #: lektor_tekir/templates/partials/publish-dialog.html:16
-#: lektor_tekir/templates/partials/site-output.html:37
+#: lektor_tekir/templates/partials/site-output.html:31
 msgid "Publish"
 msgstr ""
 
@@ -271,19 +265,15 @@ msgstr ""
 msgid "Output"
 msgstr ""
 
-#: lektor_tekir/templates/partials/site-output.html:5
-msgid "Folder:"
+#: lektor_tekir/templates/partials/site-output.html:4
+msgid "Last build"
 msgstr ""
 
 #: lektor_tekir/templates/partials/site-output.html:17
-msgid "Time:"
-msgstr ""
-
-#: lektor_tekir/templates/partials/site-output.html:23
 msgid "Clean"
 msgstr ""
 
-#: lektor_tekir/templates/partials/site-output.html:29
+#: lektor_tekir/templates/partials/site-output.html:24
 msgid "Build"
 msgstr ""
 

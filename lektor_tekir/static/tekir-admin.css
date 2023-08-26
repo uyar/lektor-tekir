@@ -26,10 +26,6 @@ body {
   margin: 0;
 }
 
-a {
-  text-underline-offset: 0.25rem;
-}
-
 ul[role="list"] {
   margin: 0;
   padding: 0;
@@ -54,6 +50,8 @@ input,
 select,
 textarea,
 button {
+  background-color: inherit;
+  color: inherit;
   font: inherit;
 }
 
@@ -65,9 +63,6 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-code,
-kbd,
-samp,
 pre,
 .code {
   font-family: ui-monospace, monospace;
@@ -75,44 +70,39 @@ pre,
 
 a {
   color: var(--color-link);
+  text-underline-offset: 0.25rem;
 }
 
 svg {
   fill: currentColor;
 }
 
-dialog {
-  max-height: 50dvh;
-  overflow: hidden;
+th,
+td {
+  padding: var(--space-xs) var(--space-s);
 }
 
 details {
   margin-block: 1em;
 }
 
-th,
-td,
-input,
-select,
-textarea {
-  padding: var(--space-xs) var(--space-s);
+dialog {
+  max-block-size: 50dvh;
+  max-inline-size: 75dvw;
+  overflow: hidden;
 }
+
+/* FORMS */
 
 input,
 select,
 textarea,
 button,
 a.button {
+  --input-padding: var(--space-s);
+
   margin: 0.25em;
-  background-color: inherit;
-  color: inherit;
-}
-
-/* FORMS */
-
-label {
-  display: block;
-  margin-block-end: 0.25em;
+  padding: var(--input-padding);
 }
 
 input[type="text"],
@@ -123,22 +113,22 @@ textarea {
 
 input[type="file"] {
   padding: var(--space-l);
-  outline: 1px dashed;
+  outline: 1px dashed currentColor;
 }
 
 button,
 a.button {
   --icon-height: 2em;
-  --button-padding: var(--space-s);
 
   display: inline-flex;
   position: relative;
   align-items: center;
-  height: calc(var(--icon-height) + 2 * var(--button-padding));
-  padding: var(--button-padding);
+  height: calc(var(--icon-height) + 2 * var(--input-padding));
   border: 1px solid var(--color-link);
   border-radius: var(--space-s);
-  background-color: inherit;
+}
+
+a.button {
   color: inherit;
   text-decoration: none;
 }
@@ -154,6 +144,11 @@ a.button {
 
 :is(button, a.button) :is(img, svg):not(:only-child) {
   margin-inline-end: 0.75em;
+}
+
+label {
+  display: block;
+  margin-block-end: 0.25em;
 }
 
 .field {
@@ -175,42 +170,21 @@ main {
   flex-grow: 1;
 }
 
-#main-header,
+header,
 main {
-  gap: 2em 4em;
-  padding-block: var(--space-l);
+  padding-block: var(--space-m);
   padding-inline: calc(var(--tabs-width) + var(--main-padding)) var(--main-padding);
 }
 
-#main-tabs {
-  position: fixed;
-  z-index: 1;
-  top: 25%;
-  width: var(--tabs-width);
-  height: 50%;
-  padding: var(--space-m);
-  transition: 0.3s;
-}
-
-#main-tabs:hover {
-  width: fit-content;
-}
-
-/* MAIN HEADER */
-
-#main-header {
+header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   background-color: var(--color);
-  color: var(--color-bg-light);
 }
 
-#main-header .heading {
-  margin: 0;
-  font-size: 1.5em;
-}
+/* LANGUAGE PANEL */
 
 #language-panel ul {
   display: inline-flex;
@@ -228,14 +202,18 @@ main {
 /* MAIN TABS */
 
 #main-tabs {
-  background-color: black;
-  color: white;
+  position: fixed;
+  z-index: 1;
+  top: 25%;
+  width: var(--tabs-width);
+  height: 50%;
+  padding: var(--space-s) var(--space-xs);
+  border-radius: 0 var(--space-s) var(--space-s) 0;
+  background-color: var(--color);
 }
 
-#main-tabs ul {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
+#main-tabs:hover {
+  width: fit-content;
 }
 
 #main-tabs a.button {
@@ -250,10 +228,6 @@ main {
 
 /* COMMON */
 
-main {
-  display: grid;
-}
-
 h1 {
   margin-block: 0.5em 0;
   font-size: 3em;
@@ -261,9 +235,12 @@ h1 {
 }
 
 h2 {
-  margin-block: 0 1em;
   color: var(--color);
   font-weight: normal;
+}
+
+.heading {
+  font-size: 1.5em;
 }
 
 section {
@@ -276,10 +253,6 @@ section > h2 + * {
 
 section > *:last-child {
   margin-block-end: 0;
-}
-
-.subsection:not(:first-of-type) {
-  margin-block-start: 3em;
 }
 
 .htmx-indicator {
@@ -314,38 +287,18 @@ section > *:last-child {
 
 /* SPECIAL */
 
-main.tekir_overview {
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-}
-
-#site-summary {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-#site-output {
-  grid-column: 1;
-  grid-row: 2;
-}
-
 #page-count {
   font-size: 3em;
 }
 
-:where(#output-path, #output-time) .target {
-  margin-inline-start: 1em;
-  padding: var(--space-s);
-  background-color: hsl(0, 0%, 40%);
-  color: white;
-}
-
 main.tekir_contents {
+  display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: auto auto 1fr;
 }
 
 main.tekir_attachment {
+  display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto 1fr;
 }

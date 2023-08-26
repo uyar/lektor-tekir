@@ -1,35 +1,29 @@
 <h2>{{ _('Output') }}</h2>
 
-<div class="subsection" id="output-path">
-  <div class="field">
-    {{ _('Folder:') }}
-    <span class="target">{{ output_path }}</span>
-  </div>
-  <button
-      hx-get="{{ url_for('tekir_admin.api.open_folder', folder=output_path) }}"
-      hx-swap="none">
-    {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
-  </button>
+<div class="field">
+  {{ _('Last build') }}:
+  <em id="build-time">{{ output_time }}</em>
 </div>
 
-<div class="subsection" id="output-time">
-  <div class="field">
-    {{ _('Time:') }}
-    <span class="target">{{ output_time }}</sp>
-  </div>
-  <button
-      hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
-      hx-target="#output-time .target">
-    {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
-    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-  </button>
-  <button
-      hx-get="{{ url_for('tekir_admin.api.build') }}"
-      hx-target="#output-time .target">
-    {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
-    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-  </button>
-</div>
+<button
+    hx-get="{{ url_for('tekir_admin.api.open_folder', folder=output_path) }}"
+    hx-swap="none">
+  {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
+</button>
+
+<button
+    hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
+    hx-target="#build-time">
+  {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
+  <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+</button>
+
+<button
+    hx-get="{{ url_for('tekir_admin.api.build') }}"
+    hx-target="#build-time">
+  {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
+  <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+</button>
 
 <button
     hx-get="{{ url_for('tekir_admin.api.publish_info') }}"
