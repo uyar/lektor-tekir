@@ -7,9 +7,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from flask import Blueprint, Response, g, render_template, request
+from flask import Blueprint, Response, current_app, g, render_template, request
+from flask_babel import Babel
 
 from . import api, utils
+
+
+def preferences() -> str:
+    babel: Babel = current_app.extensions["babel"].instance
+    translations = babel.list_translations()
+    return render_template("tekir_preferences.html", translations=translations)
 
 
 def overview() -> str:
@@ -51,6 +58,7 @@ def make_blueprint() -> Blueprint:
         g.lang_code = values.pop("lang_code")
 
     bp.add_url_rule("/", view_func=overview)
+    bp.add_url_rule("/preferences", view_func=preferences)
     bp.add_url_rule("/contents", view_func=contents)
     bp.add_url_rule("/content/edit", view_func=edit_content)
 

@@ -1,0 +1,26 @@
+{% extends 'tekir_base.html' %}
+
+{% block body %}
+<h2>{{ _('Tekir Admin Panel Preferences') }}</h2>
+<form action="." method="POST">
+  <div class="field">
+    <label for="language">{{ _('Language') }}</label>
+    {% for locale in translations %}
+    <input type="radio" id="language" name="language" value="{{ locale }}"/> {{ locale.get_display_name() }}<br/>
+    {% endfor %}
+  </div>
+</form>
+
+<script>
+  window.addEventListener("DOMContentLoaded", (ev) => {
+      const lang = localStorage.getItem("ui-language");
+      document.querySelector(`input[value="${lang}"]`).setAttribute("checked", "checked");
+  });
+
+  document.querySelectorAll('input[name="language"]').forEach((el) => {
+      el.addEventListener("click", (ev) => {
+          localStorage.setItem("ui-language", ev.currentTarget.value);
+      });
+  });
+</script>
+{% endblock %}

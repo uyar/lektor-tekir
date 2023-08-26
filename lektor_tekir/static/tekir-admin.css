@@ -159,7 +159,6 @@ label {
 
 body {
   --tabs-width: var(--space-l);
-  --main-padding: var(--space-l);
 
   display: flex;
   flex-direction: column;
@@ -167,39 +166,12 @@ body {
 }
 
 main {
-  flex-grow: 1;
-}
+  --main-padding: var(--space-l);
 
-header,
-main {
+  flex-grow: 1;
   padding-block: var(--space-m);
   padding-inline: calc(var(--tabs-width) + var(--main-padding)) var(--main-padding);
 }
-
-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--color);
-}
-
-/* LANGUAGE PANEL */
-
-#language-panel ul {
-  display: inline-flex;
-  gap: 0.5em;
-  font-size: 90%;
-}
-
-#language-panel :is(button, a.button) {
-  --icon-height: 1.5em;
-
-  justify-content: center;
-  aspect-ratio: 1;
-}
-
-/* MAIN TABS */
 
 #main-tabs {
   position: fixed;

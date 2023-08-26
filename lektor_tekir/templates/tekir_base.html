@@ -9,21 +9,6 @@
   <script src="{{ url_for('tekir_admin.static', filename='tekir-admin.js') }}"></script>
 </head>
 <body>
-  <header>
-    <div class="heading">{{ _('Admin Panel') }}</div>
-
-    <nav id="language-panel" aria-label="{{ _('Language selection') }}">
-      <ul role="list">
-        {% for locale in translations() %}
-        <li>
-          {% set alt_url = url_for(request.endpoint, lang_code=locale, **request.args) %}
-          <a class="button" href="{{ alt_url }}">{{ locale }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-    </nav>
-  </header>
-
   <nav id="main-tabs" aria-label="{{ _('main navigation') }}">
     <ul role="list">
       <li>
@@ -34,6 +19,11 @@
       <li>
         <a class="button" href="{{ url_for('tekir_admin.contents', path='/') }}">
           {% include 'icons/contents.svg' %} <span>{{ _('Content') }}</span>
+        </a>
+      </li>
+      <li>
+        <a class="button" href="{{ url_for('tekir_admin.preferences') }}">
+          {% include 'icons/preferences-system-symbolic.svg' %} <span>{{ _('Preferences') }}</span>
         </a>
       </li>
     </ul>

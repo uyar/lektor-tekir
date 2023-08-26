@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-26 23:42+0300\n"
+"POT-Creation-Date: 2023-08-27 01:11+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -22,39 +22,39 @@ msgstr ""
 msgid "File manager not set for platform:"
 msgstr "Bu platform için dosya yöneticisi ayarlanmamış:"
 
-#: lektor_tekir/api.py:82 lektor_tekir/api.py:91 lektor_tekir/api.py:106
+#: lektor_tekir/api.py:83 lektor_tekir/api.py:92 lektor_tekir/api.py:107
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:318
+#: lektor_tekir/api.py:319
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:330
+#: lektor_tekir/api.py:331
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:353
+#: lektor_tekir/api.py:354
 msgid "A translation for this language already exists."
 msgstr "Bu dil için bir çeviri zaten var."
 
-#: lektor_tekir/api.py:383 lektor_tekir/api.py:407
+#: lektor_tekir/api.py:384 lektor_tekir/api.py:408
 msgid "Please upload a file."
 msgstr "Lütfen bir dosya yükleyin."
 
-#: lektor_tekir/api.py:395
+#: lektor_tekir/api.py:396
 msgid "An attachment with this name already exists."
 msgstr "Bu isimde bir ek zaten var."
 
-#: lektor_tekir/api.py:432
+#: lektor_tekir/api.py:433
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:435
+#: lektor_tekir/api.py:436
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:457
+#: lektor_tekir/api.py:458
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
@@ -67,25 +67,24 @@ msgid "Replace"
 msgstr "Değiştir"
 
 #: lektor_tekir/templates/tekir_base.html:6
-#: lektor_tekir/templates/tekir_base.html:13
 msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
-#: lektor_tekir/templates/tekir_base.html:15
-msgid "Language selection"
-msgstr "Dil seçimi"
-
-#: lektor_tekir/templates/tekir_base.html:27
+#: lektor_tekir/templates/tekir_base.html:12
 msgid "main navigation"
 msgstr "ana navigasyon"
 
-#: lektor_tekir/templates/tekir_base.html:31
+#: lektor_tekir/templates/tekir_base.html:16
 msgid "Overview"
 msgstr "Genel Bakış"
 
-#: lektor_tekir/templates/tekir_base.html:36
+#: lektor_tekir/templates/tekir_base.html:21
 msgid "Content"
 msgstr "İçerik"
+
+#: lektor_tekir/templates/tekir_base.html:26
+msgid "Preferences"
+msgstr "Tercihler"
 
 #: lektor_tekir/templates/tekir_content_edit.html:12
 msgid "System Fields"
@@ -129,6 +128,14 @@ msgstr "Yukarı"
 #: lektor_tekir/templates/tekir_macros.html:98
 msgid "Move down"
 msgstr "Aşağı"
+
+#: lektor_tekir/templates/tekir_preferences.html:4
+msgid "Tekir Admin Panel Preferences"
+msgstr "Tekir Yönetim Paneli Tercihleri"
+
+#: lektor_tekir/templates/tekir_preferences.html:7
+msgid "Language"
+msgstr "Dil"
 
 #: lektor_tekir/templates/partials/changes-dialog.html:5
 #: lektor_tekir/templates/partials/save-dialog.html:7

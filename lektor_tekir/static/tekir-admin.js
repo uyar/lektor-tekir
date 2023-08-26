@@ -2,14 +2,8 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
     const uiLang = localStorage.getItem("ui-language");
     const pageLang = document.documentElement.getAttribute("lang");
     if (uiLang && (uiLang != pageLang)) {
-        window.location.href = window.location.href.replace("/" + pageLang + "/", "/" + uiLang + "/");
+        window.location.href = window.location.href.replace(`/${pageLang}/`, `/${uiLang}/`);
     }
-
-    document.querySelectorAll("#language-panel a.button").forEach((el) => {
-        el.addEventListener("click", (ev) => {
-            localStorage.setItem("ui-language", ev.currentTarget.innerHTML);
-        });
-    });
 
     document.querySelector("main").addEventListener("click", (ev) => {
         const el = ev.target.closest("button") ?? ev.target;

@@ -28,7 +28,6 @@ class TekirAdminUI(WebUI):
                       locale_selector=lambda: g.lang_code,
                       default_domain="lektor_tekir",
                       default_translation_directories=str(locale_dir))
-        self.jinja_env.globals["translations"] = babel.list_translations
         self.jinja_env.globals["i18n_name"] = i18n_name
 
 
