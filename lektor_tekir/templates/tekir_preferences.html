@@ -2,6 +2,7 @@
 
 {% block body %}
 <h2>{{ _('Tekir Admin Panel Preferences') }}</h2>
+
 <form action="." method="POST">
   <div class="field">
     <label for="language">{{ _('Language') }}</label>
@@ -9,12 +10,21 @@
     <input type="radio" id="language" name="language" value="{{ locale }}"/> {{ locale.get_display_name() }}<br/>
     {% endfor %}
   </div>
+
+  <div class="field">
+    <label for="theme">{{ _('Theme') }}</label>
+    <input type="radio" id="theme" name="theme" value="light"/> {{ _('Light') }}<br/>
+    <input type="radio" id="theme" name="theme" value="dark"/> {{ _('Dark') }}<br/>
+  </div>
 </form>
 
 <script>
   window.addEventListener("DOMContentLoaded", (ev) => {
       const lang = localStorage.getItem("ui-language");
       document.querySelector(`input[value="${lang}"]`).setAttribute("checked", "checked");
+
+      const mode = localStorage.getItem("color-mode");
+      document.querySelector(`input[value="${mode}"]`).setAttribute("checked", "checked");
   });
 
   document.querySelectorAll('input[name="language"]').forEach((el) => {
@@ -23,6 +33,14 @@
           localStorage.setItem("ui-language", uiLang);
           const pageLang = document.documentElement.getAttribute("lang");
           window.location.href = window.location.href.replace(`/${pageLang}/`, `/${uiLang}/`);
+      });
+  });
+
+  document.querySelectorAll('input[name="theme"]').forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        const mode = ev.currentTarget.value;
+        document.documentElement.setAttribute("color-mode", mode);
+        localStorage.setItem("color-mode", mode);
       });
   });
 </script>

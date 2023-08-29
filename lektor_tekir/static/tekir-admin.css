@@ -1,8 +1,13 @@
 :root {
   --color: hsl(232, 58%, 59%);
-  --color-bg: hsl(0, 0%, 95%);
-  --color-text: hsl(0, 0%, 0%);
-  --color-link: hsl(240, 100%, 50%);
+
+  --color-bg-light: hsl(0, 0%, 95%);
+  --color-text-light: hsl(0, 0%, 0%);
+  --color-link-light: hsl(240, 100%, 50%);
+
+  --color-bg-dark: hsl(0, 0%, 0%);
+  --color-text-dark: hsl(0, 0%, 100%);
+  --color-link-dark: hsl(240, 100%, 85%);
 
   --space-xs: 0.25rem;
   --space-s: 0.5rem;
@@ -10,6 +15,18 @@
   --space-l: 2rem;
 
   --tabs-width: var(--space-l);
+}
+
+:root[color-mode="light"] {
+  --color-bg: var(--color-bg-light);
+  --color-text: var(--color-text-light);
+  --color-link: var(--color-link-light);
+}
+
+:root[color-mode="dark"] {
+  --color-bg: var(--color-bg-dark);
+  --color-text: var(--color-text-dark);
+  --color-link: var(--color-link-dark);
 }
 
 /* RESET */
@@ -172,6 +189,7 @@ main {
   padding: var(--space-m) var(--space-xs);
   border-radius: 0 var(--space-s) var(--space-s) 0;
   background-color: var(--color);
+  color: var(--color-text-dark);
 }
 
 #main-tabs:hover {
@@ -243,6 +261,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
+  margin-block: 1em;
 }
 
 /* SPECIAL */
@@ -411,9 +430,9 @@ details:last-of-type .down-block {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: hsl(0, 0%, 0%);
-    --color-text: hsl(0, 0%, 100%);
-    --color-link: hsl(240, 100%, 85%);
+    --color-bg: var(--color-bg-dark);
+    --color-text: var(--color-text-dark);
+    --color-link: var(--color-link-dark);
   }
 
   dialog,

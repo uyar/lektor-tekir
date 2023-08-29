@@ -5,6 +5,11 @@ window.addEventListener("DOMContentLoaded", (loadEvent) => {
         window.location.href = window.location.href.replace(`/${pageLang}/`, `/${uiLang}/`);
     }
 
+    const colorMode = localStorage.getItem("color-mode");
+    if (colorMode) {
+        document.documentElement.setAttribute("color-mode", colorMode);
+    }
+
     document.querySelector("main").addEventListener("click", (ev) => {
         const el = ev.target.closest("button") ?? ev.target;
         if (el.classList.contains("modal-close")) {
