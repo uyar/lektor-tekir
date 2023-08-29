@@ -147,13 +147,6 @@ def content_summary() -> str | Response:
                            ancestors=ancestors)
 
 
-def content_operations() -> str | Response:
-    record, status = utils.get_record(g.admin_context.pad, request.args)
-    if record is None:
-        return Response("", status=status)
-    return render_template("partials/content-operations.html", record=record,)
-
-
 def content_translations() -> str | Response:
     record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
@@ -526,7 +519,6 @@ def make_blueprint():
                     methods=["POST"])
 
     bp.add_url_rule("/content-summary", view_func=content_summary)
-    bp.add_url_rule("/content-operations", view_func=content_operations)
     bp.add_url_rule("/content-translations", view_func=content_translations)
     bp.add_url_rule("/content-subpages", view_func=content_subpages)
     bp.add_url_rule("/content-attachments", view_func=content_attachments)

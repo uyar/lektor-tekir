@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-27 01:11+0300\n"
+"POT-Creation-Date: 2023-08-29 20:52+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -26,35 +26,35 @@ msgstr "Bu platform için dosya yöneticisi ayarlanmamış:"
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:319
+#: lektor_tekir/api.py:312
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:331
+#: lektor_tekir/api.py:324
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:354
+#: lektor_tekir/api.py:347
 msgid "A translation for this language already exists."
 msgstr "Bu dil için bir çeviri zaten var."
 
-#: lektor_tekir/api.py:384 lektor_tekir/api.py:408
+#: lektor_tekir/api.py:377 lektor_tekir/api.py:401
 msgid "Please upload a file."
 msgstr "Lütfen bir dosya yükleyin."
 
-#: lektor_tekir/api.py:396
+#: lektor_tekir/api.py:389
 msgid "An attachment with this name already exists."
 msgstr "Bu isimde bir ek zaten var."
 
-#: lektor_tekir/api.py:433
+#: lektor_tekir/api.py:426
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:436
+#: lektor_tekir/api.py:429
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:458
+#: lektor_tekir/api.py:451
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
@@ -172,27 +172,6 @@ msgstr "Seçilenleri sil"
 msgid "No attachments."
 msgstr "Ek yok."
 
-#: lektor_tekir/templates/partials/content-operations.html:3
-msgid "Hidden"
-msgstr "Saklı"
-
-#: lektor_tekir/templates/partials/content-operations.html:4
-msgid "Undiscoverable"
-msgstr "Listelenmez"
-
-#: lektor_tekir/templates/partials/content-operations.html:8
-msgid "Edit"
-msgstr "Düzenle"
-
-#: lektor_tekir/templates/partials/content-operations.html:11
-msgid "View"
-msgstr "Görüntüle"
-
-#: lektor_tekir/templates/partials/content-operations.html:16
-#: lektor_tekir/templates/partials/site-output.html:11
-msgid "Open folder"
-msgstr "Klasörü aç"
-
 #: lektor_tekir/templates/partials/content-subpages.html:1
 msgid "Subpages"
 msgstr "Altsayfalar"
@@ -215,21 +194,38 @@ msgstr "Tip"
 msgid "No subpages."
 msgstr "Altsayfa yok."
 
-#: lektor_tekir/templates/partials/content-translations.html:1
+#: lektor_tekir/templates/partials/content-summary.html:9
+msgid "Hidden"
+msgstr "Saklı"
+
+#: lektor_tekir/templates/partials/content-summary.html:10
+msgid "Undiscoverable"
+msgstr "Listelenmez"
+
+#: lektor_tekir/templates/partials/content-summary.html:15
+msgid "Edit"
+msgstr "Düzenle"
+
+#: lektor_tekir/templates/partials/content-summary.html:18
+msgid "View"
+msgstr "Görüntüle"
+
+#: lektor_tekir/templates/partials/content-summary.html:23
+#: lektor_tekir/templates/partials/site-output.html:9
+msgid "Open folder"
+msgstr "Klasörü aç"
+
+#: lektor_tekir/templates/partials/content-translations.html:3
+msgid "Add and delete operations are available only through the primary language."
+msgstr "Ekleme ve silme işlemleri yalnızca birincil dil üzerinden yapılabilir."
+
+#: lektor_tekir/templates/partials/content-translations.html:7
 msgid "Translations"
 msgstr "Çeviriler"
 
-#: lektor_tekir/templates/partials/content-translations.html:10
+#: lektor_tekir/templates/partials/content-translations.html:16
 msgid "Primary"
 msgstr "Birincil"
-
-#: lektor_tekir/templates/partials/content-translations.html:13
-msgid "Overlaid"
-msgstr "Örten"
-
-#: lektor_tekir/templates/partials/content-translations.html:44
-msgid "Add and delete operations are available only through the primary language."
-msgstr "Ekleme ve silme işlemleri yalnızca birincil dil üzerinden yapılabilir."
 
 #: lektor_tekir/templates/partials/delete-dialog.html:1
 msgid "This operation will delete the following content items:"
@@ -273,15 +269,15 @@ msgstr "Bitir"
 msgid "Output"
 msgstr "Çıktı"
 
-#: lektor_tekir/templates/partials/site-output.html:4
+#: lektor_tekir/templates/partials/site-output.html:3
 msgid "Last build"
 msgstr "Son üretim"
 
-#: lektor_tekir/templates/partials/site-output.html:17
+#: lektor_tekir/templates/partials/site-output.html:15
 msgid "Clean"
 msgstr "Temizle"
 
-#: lektor_tekir/templates/partials/site-output.html:24
+#: lektor_tekir/templates/partials/site-output.html:22
 msgid "Build"
 msgstr "Üret"
 
