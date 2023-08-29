@@ -244,7 +244,7 @@ h2 {
 }
 
 .report:not(:empty) {
-  max-block-size: 50%;
+  max-block-size: 25dvh;
   margin-block: 1em;
   padding: var(--space-s) var(--space-m);
   overflow: auto;
@@ -269,7 +269,6 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
-  margin-block: 1em;
 }
 
 /* SPECIAL */
@@ -380,20 +379,20 @@ main.tekir_attachment {
 
 .content-listing {
   block-size: 16em;
-  margin-block: 1em;
+  margin-block: 2em;
   overflow-y: auto;
 }
 
 .content-listing thead {
-  border-block-end: 1px solid;
+  border-block-end: 1px solid currentColor;
+}
+
+.content-listing tbody tr:first-of-type td {
+  padding-block-start: var(--space-s);
 }
 
 .content-listing tbody tr:nth-child(even) {
   background-color: hsl(0, 0%, 30%);
-}
-
-.content-listing td:nth-child(4) {
-  inline-size: 6em;
 }
 
 #attachment-preview img {

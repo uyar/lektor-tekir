@@ -13,8 +13,6 @@
           <th>{{ _('Select') }}</th>
           {% endif %}
           <th>{{ _('Name') }}</th>
-          <th>{{ _('Title') }}</th>
-          <th>{{ _('Type') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -28,25 +26,11 @@
           <td>
             <a href="{{ url_for('tekir_admin.contents', path=subpage.path, alt=record.alt) }}">{{ subpage._slug }}</a>
           </td>
-          <td>
-            {{ subpage.title }}
-          </td>
-          <td>
-            {{ i18n_name(subpage.datamodel, g.lang_code) }}
-          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
-
-    {% if is_primary %}
-  <button
-      hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
-      hx-target="#delete-dialog">
-    {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
-  </button>
-    {% endif %}
   {% else %}
   <div class="content-listing">
     <p>{{ _('No subpages.') }}</p>
@@ -54,10 +38,18 @@
   {% endif %}
 
   {% if is_primary %}
-  <button
-      hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_subpage', path=record.path) }}"
-      hx-target="#new-subpage-dialog">
-    {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
-  </button>
+  <div class="button-group">
+    <button
+        hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
+        hx-target="#delete-dialog">
+    {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
+    </button>
+
+    <button
+        hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_subpage', path=record.path) }}"
+        hx-target="#new-subpage-dialog">
+      {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
+    </button>
+  </div>
   {% endif %}
 </form>

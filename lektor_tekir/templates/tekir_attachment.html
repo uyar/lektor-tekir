@@ -14,14 +14,17 @@
 
 <div id="attachment-info">
   {% if record._attachment_type == "image" %}
-  <p>{{ _('Image Size') }}: {{ record.width }} x {{record.height}}</p>
+  <p>{{ _('Image Size') }}:<br/>
+    {{ record.width }} x {{record.height}}</p>
   {% endif %}
 
-  <button
-      hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='replace_attachment') }}"
-      hx-target="#upload-dialog">
-    {% include 'icons/document-swap.svg' %} <span>{{ _('Replace') }}</span>
-  </button>
+  <div class="button-group">
+    <button
+        hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='replace_attachment') }}"
+        hx-target="#upload-dialog">
+      {% include 'icons/document-swap.svg' %} <span>{{ _('Change Image') }}</span>
+    </button>
+  </div>
 </div>
 
 <dialog id="upload-dialog">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-29 21:50+0300\n"
+"POT-Creation-Date: 2023-08-29 22:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,8 +61,8 @@ msgstr ""
 msgid "Image Size"
 msgstr ""
 
-#: lektor_tekir/templates/tekir_attachment.html:23
-msgid "Replace"
+#: lektor_tekir/templates/tekir_attachment.html:24
+msgid "Change Image"
 msgstr ""
 
 #: lektor_tekir/templates/tekir_base.html:6
@@ -108,8 +108,8 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:52
-#: lektor_tekir/templates/partials/content-subpages.html:60
+#: lektor_tekir/templates/partials/content-attachments.html:51
+#: lektor_tekir/templates/partials/content-subpages.html:51
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:34
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:38
 #: lektor_tekir/templates/tekir_macros.html:73
@@ -178,13 +178,13 @@ msgstr ""
 msgid "File name"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:39
-#: lektor_tekir/templates/partials/content-subpages.html:47
-msgid "Delete selected"
+#: lektor_tekir/templates/partials/content-attachments.html:36
+msgid "No attachments."
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-attachments.html:44
-msgid "No attachments."
+#: lektor_tekir/templates/partials/content-attachments.html:45
+#: lektor_tekir/templates/partials/content-subpages.html:45
+msgid "Delete selected"
 msgstr ""
 
 #: lektor_tekir/templates/partials/content-subpages.html:1
@@ -196,16 +196,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: lektor_tekir/templates/partials/content-subpages.html:16
-#: lektor_tekir/templates/partials/new-subpage-dialog.html:19
-msgid "Title"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-subpages.html:17
-msgid "Type"
-msgstr ""
-
-#: lektor_tekir/templates/partials/content-subpages.html:52
+#: lektor_tekir/templates/partials/content-subpages.html:36
 msgid "No subpages."
 msgstr ""
 
@@ -265,6 +256,10 @@ msgstr ""
 
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:3
 msgid "Content Type"
+msgstr ""
+
+#: lektor_tekir/templates/partials/new-subpage-dialog.html:19
+msgid "Title"
 msgstr ""
 
 #: lektor_tekir/templates/partials/publish-dialog.html:3

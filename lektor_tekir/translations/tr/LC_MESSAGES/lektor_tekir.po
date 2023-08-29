@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-29 21:50+0300\n"
+"POT-Creation-Date: 2023-08-29 22:22+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -62,9 +62,9 @@ msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 msgid "Image Size"
 msgstr "Resim Boyutları"
 
-#: lektor_tekir/templates/tekir_attachment.html:23
-msgid "Replace"
-msgstr "Değiştir"
+#: lektor_tekir/templates/tekir_attachment.html:24
+msgid "Change Image"
+msgstr "Resmi değiştir"
 
 #: lektor_tekir/templates/tekir_base.html:6
 msgid "Admin Panel"
@@ -109,8 +109,8 @@ msgstr "Buradasınız:"
 msgid "home"
 msgstr "ana sayfa"
 
-#: lektor_tekir/templates/partials/content-attachments.html:52
-#: lektor_tekir/templates/partials/content-subpages.html:60
+#: lektor_tekir/templates/partials/content-attachments.html:51
+#: lektor_tekir/templates/partials/content-subpages.html:51
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:34
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:38
 #: lektor_tekir/templates/tekir_macros.html:73
@@ -179,14 +179,14 @@ msgstr "Seç"
 msgid "File name"
 msgstr "Dosya ismi"
 
-#: lektor_tekir/templates/partials/content-attachments.html:39
-#: lektor_tekir/templates/partials/content-subpages.html:47
-msgid "Delete selected"
-msgstr "Seçilenleri sil"
-
-#: lektor_tekir/templates/partials/content-attachments.html:44
+#: lektor_tekir/templates/partials/content-attachments.html:36
 msgid "No attachments."
 msgstr "Ek yok."
+
+#: lektor_tekir/templates/partials/content-attachments.html:45
+#: lektor_tekir/templates/partials/content-subpages.html:45
+msgid "Delete selected"
+msgstr "Seçilenleri sil"
 
 #: lektor_tekir/templates/partials/content-subpages.html:1
 msgid "Subpages"
@@ -197,16 +197,7 @@ msgstr "Altsayfalar"
 msgid "Name"
 msgstr "İsim"
 
-#: lektor_tekir/templates/partials/content-subpages.html:16
-#: lektor_tekir/templates/partials/new-subpage-dialog.html:19
-msgid "Title"
-msgstr "Başlık"
-
-#: lektor_tekir/templates/partials/content-subpages.html:17
-msgid "Type"
-msgstr "Tip"
-
-#: lektor_tekir/templates/partials/content-subpages.html:52
+#: lektor_tekir/templates/partials/content-subpages.html:36
 msgid "No subpages."
 msgstr "Altsayfa yok."
 
@@ -267,6 +258,10 @@ msgstr "Aşağıdaki hatalarla karşılaşıldı:"
 #: lektor_tekir/templates/partials/new-subpage-dialog.html:3
 msgid "Content Type"
 msgstr "İçerik Tipi"
+
+#: lektor_tekir/templates/partials/new-subpage-dialog.html:19
+msgid "Title"
+msgstr "Başlık"
 
 #: lektor_tekir/templates/partials/publish-dialog.html:3
 msgid "Server"
