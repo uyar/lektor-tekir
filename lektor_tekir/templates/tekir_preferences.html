@@ -13,6 +13,7 @@
 
   <div class="field">
     <label for="theme">{{ _('Theme') }}</label>
+    <input type="radio" id="theme" name="theme" value="default"/> {{ _('System default') }}<br/>
     <input type="radio" id="theme" name="theme" value="light"/> {{ _('Light') }}<br/>
     <input type="radio" id="theme" name="theme" value="dark"/> {{ _('Dark') }}<br/>
   </div>
@@ -20,10 +21,10 @@
 
 <script>
   window.addEventListener("DOMContentLoaded", (ev) => {
-      const lang = localStorage.getItem("ui-language");
+      const lang = localStorage.getItem("ui-language") ?? "en";
       document.querySelector(`input[value="${lang}"]`).setAttribute("checked", "checked");
 
-      const mode = localStorage.getItem("color-mode");
+      const mode = localStorage.getItem("color-mode") ?? "default";
       document.querySelector(`input[value="${mode}"]`).setAttribute("checked", "checked");
   });
 
@@ -39,8 +40,13 @@
   document.querySelectorAll('input[name="theme"]').forEach((el) => {
       el.addEventListener("click", (ev) => {
         const mode = ev.currentTarget.value;
-        document.documentElement.setAttribute("color-mode", mode);
-        localStorage.setItem("color-mode", mode);
+        if (mode == "default") {
+            document.documentElement.removeAttribute("color-mode");
+            localStorage.removeItem("color-mode");
+        } else {
+            document.documentElement.setAttribute("color-mode", mode);
+            localStorage.setItem("color-mode", mode);
+        }
       });
   });
 </script>

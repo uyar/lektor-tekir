@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-29 21:36+0300\n"
+"POT-Creation-Date: 2023-08-29 21:50+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -142,10 +142,14 @@ msgid "Theme"
 msgstr "Tema"
 
 #: lektor_tekir/templates/tekir_preferences.html:16
+msgid "System default"
+msgstr "Sistem varsayılanı"
+
+#: lektor_tekir/templates/tekir_preferences.html:17
 msgid "Light"
 msgstr "Açık"
 
-#: lektor_tekir/templates/tekir_preferences.html:17
+#: lektor_tekir/templates/tekir_preferences.html:18
 msgid "Dark"
 msgstr "Koyu"
 

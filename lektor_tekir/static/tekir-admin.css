@@ -23,10 +23,18 @@
   --color-link: var(--color-link-light);
 }
 
+:root[color-mode="light"] :is(dialog, input) {
+  color-scheme: light;
+}
+
 :root[color-mode="dark"] {
   --color-bg: var(--color-bg-dark);
   --color-text: var(--color-text-dark);
   --color-link: var(--color-link-dark);
+}
+
+:root[color-mode="dark"] :is(dialog, input) {
+  color-scheme: dark;
 }
 
 /* RESET */
