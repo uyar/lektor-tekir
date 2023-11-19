@@ -2,35 +2,43 @@
 
 <div>{{ _('Last build') }}: <em id="build-time">{{ output_time }}</em></div>
 
-<div role="toolbar">
-  <button
-      hx-get="{{ url_for('tekir_admin.api.open_folder', folder=output_path) }}"
-      hx-swap="none">
-    {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
-  </button>
+<ul role="toolbar">
+  <li>
+    <button
+        hx-get="{{ url_for('tekir_admin.api.open_folder', folder=output_path) }}"
+        hx-swap="none">
+      {% include 'icons/document-open-folder.svg' %} <span>{{ _('Open folder') }}</span>
+    </button>
+  </li>
 
-  <button
-      hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
-      hx-target="#build-time">
-    {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
-    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-  </button>
+  <li>
+    <button
+        hx-get="{{ url_for('tekir_admin.api.clean_build') }}"
+        hx-target="#build-time">
+      {% include 'icons/run-build-clean.svg' %} <span>{{ _('Clean') }}</span>
+      <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+    </button>
+  </li>
 
-  <button
-      hx-get="{{ url_for('tekir_admin.api.build') }}"
-      hx-target="#build-time">
-    {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
-    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-  </button>
-</div>
+  <li>
+    <button
+        hx-get="{{ url_for('tekir_admin.api.build') }}"
+        hx-target="#build-time">
+      {% include 'icons/run-build.svg' %} <span>{{ _('Build') }}</span>
+      <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+    </button>
+  </li>
+</ul>
 
-<div role="toolbar">
-  <button
-      hx-get="{{ url_for('tekir_admin.api.publish_info') }}"
-      hx-target="#publish-dialog">
-    {% include 'icons/cloud-upload.svg' %} <span>{{ _('Publish') }}</span>
-  </button>
-</div>
+<ul role="toolbar">
+  <li>
+    <button
+        hx-get="{{ url_for('tekir_admin.api.publish_info') }}"
+        hx-target="#publish-dialog">
+      {% include 'icons/cloud-upload.svg' %} <span>{{ _('Publish') }}</span>
+    </button>
+  </li>
+</ul>
 
 <dialog id="publish-dialog">
 </dialog>

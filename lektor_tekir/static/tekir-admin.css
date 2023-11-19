@@ -170,11 +170,13 @@ img.htmx-indicator {
   background-color: var(--color-bg);
 }
 
-div[role="toolbar"] {
+ul[role="toolbar"] {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-m);
   margin-block: var(--space-m);
+  padding: 0;
+  list-style: none;
 }
 
 /* MAIN TABS */
@@ -232,12 +234,9 @@ h3 {
   font-weight: normal;
 }
 
-h2 {
+section h2 {
+  margin-block: 0 var(--space-s);
   color: var(--color-primary);
-}
-
-.heading {
-  font-size: 1.5em;
 }
 
 .error {
@@ -307,10 +306,8 @@ div.document-title {
   font-size: 2em;
 }
 
-#system-fields,
-#content-translations h2 {
-  margin-block-end: 1em;
-  font-size: 1em;
+div.system-fields {
+  font-size: 90%;
 }
 
 #content-translations li {

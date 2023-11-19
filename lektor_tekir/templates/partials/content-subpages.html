@@ -38,20 +38,24 @@
   {% endif %}
 
   {% if is_primary %}
-  <div role="toolbar">
+  <ul role="toolbar">
     {% if subpages %}
-    <button
-        hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
-        hx-target="#delete-dialog">
-    {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
-    </button>
+    <li>
+      <button
+          hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
+          hx-target="#delete-dialog">
+      {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
+      </button>
+    </li>
     {% endif %}
 
-    <button
-        hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_subpage', path=record.path) }}"
-        hx-target="#new-subpage-dialog">
-      {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
-    </button>
-  </div>
+    <li>
+      <button
+          hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_subpage', path=record.path) }}"
+          hx-target="#new-subpage-dialog">
+        {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
+      </button>
+    </li>
+  </ul>
   {% endif %}
 </form>

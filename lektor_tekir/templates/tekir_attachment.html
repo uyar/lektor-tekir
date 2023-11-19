@@ -18,13 +18,15 @@
     {{ record.width }} x {{record.height}}</p>
   {% endif %}
 
-  <div role="toolbar">
-    <button
-        hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='replace_attachment') }}"
-        hx-target="#upload-dialog">
-      {% include 'icons/document-swap.svg' %} <span>{{ _('Change Image') }}</span>
-    </button>
-  </div>
+  <ul role="toolbar">
+    <li>
+      <button
+          hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='replace_attachment') }}"
+          hx-target="#upload-dialog">
+        {% include 'icons/document-swap.svg' %} <span>{{ _('Change Image') }}</span>
+      </button>
+    </li>
+  </ul>
 </div>
 
 <dialog id="upload-dialog">

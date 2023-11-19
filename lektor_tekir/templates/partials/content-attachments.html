@@ -38,20 +38,24 @@
   {% endif %}
 
   {% if is_primary %}
-  <div role="toolbar">
+  <ul role="toolbar">
     {% if attachments %}
-    <button
-        hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
-        hx-target="#delete-dialog">
-      {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
-    </button>
+    <li>
+      <button
+          hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
+          hx-target="#delete-dialog">
+        {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
+      </button>
+    </li>
     {% endif %}
 
-    <button
-        hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='add_attachment') }}"
-        hx-target="#upload-dialog">
-      {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
-    </button>
-  </div>
+    <li>
+      <button
+          hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='add_attachment') }}"
+          hx-target="#upload-dialog">
+        {% include 'icons/document-new.svg' %} <span>{{ _('Add') }}</span>
+      </button>
+    </li>
+  </ul>
   {% endif %}
 </form>
