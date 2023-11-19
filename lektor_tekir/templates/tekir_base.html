@@ -9,19 +9,19 @@
   <script src="{{ url_for('tekir_admin.static', filename='tekir-admin.js') }}"></script>
 </head>
 <body>
-  <nav id="main-tabs" aria-label="{{ _('main navigation') }}">
-    <ul role="list">
-      <li>
+  <nav id="main-tabs" aria-label="{{ _('Main navigation') }}" tabindex="0">
+    <ul>
+      <li data-name="overview">
         <a class="button" href="{{ url_for('tekir_admin.overview') }}">
           {% include 'icons/user-home.svg' %} <span>{{ _('Overview') }}</span>
         </a>
       </li>
-      <li>
+      <li data-name="contents">
         <a class="button" href="{{ url_for('tekir_admin.contents', path='/') }}">
-          {% include 'icons/contents.svg' %} <span>{{ _('Content') }}</span>
+          {% include 'icons/contents.svg' %} <span>{{ _('Contents') }}</span>
         </a>
       </li>
-      <li>
+      <li data-name="preferences">
         <a class="button" href="{{ url_for('tekir_admin.preferences') }}">
           {% include 'icons/preferences-system-symbolic.svg' %} <span>{{ _('Preferences') }}</span>
         </a>

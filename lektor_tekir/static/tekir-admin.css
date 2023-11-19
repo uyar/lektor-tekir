@@ -14,7 +14,7 @@
   --space-m: 1rem;
   --space-l: 2rem;
 
-  --main-tabs-width: var(--space-l);
+  --main-tabs-width: var(--space-m);
 }
 
 :root[color-mode="light"] {
@@ -55,7 +55,7 @@ pre,
   font-family: ui-monospace, monospace;
 }
 
-ul[role="list"] {
+nav ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -187,37 +187,43 @@ main {
   padding-inline: calc(var(--main-tabs-width) + var(--space-l)) var(--space-l);
 }
 
+/* MAIN TABS */
+
 #main-tabs {
   position: fixed;
   z-index: 1;
   inset: 25% 0;
   block-size: 50%;
   inline-size: var(--main-tabs-width);
-  padding: var(--space-m) var(--space-xs);
+  padding: var(--space-s);
   border-radius: 0 var(--space-s) var(--space-s) 0;
   background-color: var(--color-primary);
-  color: var(--color-text-dark);
+  color: var(--color-text-light);
 }
 
-#main-tabs:hover {
+:is(#main-tabs:hover, #main-tabs:focus-within) {
   inline-size: fit-content;
 }
 
+#main-tabs ul {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: var(--space-s);
+  block-size: 100%;
+}
+
+#main-tabs ul li[data-name="preferences"] {
+  grid-row: 4;
+}
+
 #main-tabs a.button {
-  visibility: hidden;
+  display: none;
   border: none;
   font-size: 90%;
 }
 
-#main-tabs:hover a.button {
-  visibility: visible;
-}
-
-#main-tabs ul {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
-  block-size: 100%;
+:is(#main-tabs:hover, #main-tabs:focus-within) a.button {
+  display: inline-flex;
 }
 
 /* COMMON */

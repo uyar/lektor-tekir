@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-29 22:22+0300\n"
+"POT-Creation-Date: 2023-11-19 19:13+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.12.1\n"
+"Generated-By: Babel 2.13.0\n"
 
 #: lektor_tekir/api.py:49
 msgid "File manager not set for platform:"
@@ -62,7 +62,7 @@ msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 msgid "Image Size"
 msgstr "Resim Boyutları"
 
-#: lektor_tekir/templates/tekir_attachment.html:24
+#: lektor_tekir/templates/tekir_attachment.html:25
 msgid "Change Image"
 msgstr "Resmi değiştir"
 
@@ -71,16 +71,16 @@ msgid "Admin Panel"
 msgstr "Yönetim Paneli"
 
 #: lektor_tekir/templates/tekir_base.html:12
-msgid "main navigation"
-msgstr "ana navigasyon"
+msgid "Main navigation"
+msgstr "Ana navigasyon"
 
 #: lektor_tekir/templates/tekir_base.html:16
 msgid "Overview"
 msgstr "Genel Bakış"
 
 #: lektor_tekir/templates/tekir_base.html:21
-msgid "Content"
-msgstr "İçerik"
+msgid "Contents"
+msgstr "İçerikler"
 
 #: lektor_tekir/templates/tekir_base.html:26
 msgid "Preferences"
