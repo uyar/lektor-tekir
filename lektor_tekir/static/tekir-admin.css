@@ -1,20 +1,20 @@
 :root {
-  --color: hsl(232, 58%, 59%);
+  --color-primary: hsl(24, 70%, 52%);
 
   --color-bg-light: hsl(0, 0%, 95%);
   --color-text-light: hsl(0, 0%, 0%);
   --color-link-light: hsl(240, 100%, 50%);
 
-  --color-bg-dark: hsl(0, 0%, 0%);
+  --color-bg-dark: hsl(0, 0%, 10%);
   --color-text-dark: hsl(0, 0%, 100%);
-  --color-link-dark: hsl(240, 100%, 85%);
+  --color-link-dark: hsl(240, 85%, 75%);
 
   --space-xs: 0.25rem;
   --space-s: 0.5rem;
   --space-m: 1rem;
   --space-l: 2rem;
 
-  --tabs-width: var(--space-l);
+  --main-tabs-width: var(--space-l);
 }
 
 :root[color-mode="light"] {
@@ -23,21 +23,13 @@
   --color-link: var(--color-link-light);
 }
 
-:root[color-mode="light"] :is(dialog, input) {
-  color-scheme: light;
-}
-
 :root[color-mode="dark"] {
   --color-bg: var(--color-bg-dark);
   --color-text: var(--color-text-dark);
   --color-link: var(--color-link-dark);
 }
 
-:root[color-mode="dark"] :is(dialog, input) {
-  color-scheme: dark;
-}
-
-/* RESET */
+/* BASICS */
 
 *,
 *::before,
@@ -45,12 +37,22 @@
   box-sizing: border-box;
 }
 
-* {
-  line-height: calc(1em + 0.5rem);
-}
-
 body {
   margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-link);
+  text-underline-offset: var(--space-xs);
+}
+
+pre,
+.code {
+  font-family: ui-monospace, monospace;
 }
 
 ul[role="list"] {
@@ -59,10 +61,15 @@ ul[role="list"] {
   list-style: none;
 }
 
-img {
+img,
+svg {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+svg {
+  fill: currentColor;
 }
 
 table {
@@ -71,6 +78,11 @@ table {
 
 th {
   text-align: start;
+}
+
+th,
+td {
+  padding: var(--space-xs) var(--space-s);
 }
 
 input,
@@ -82,32 +94,19 @@ button {
   font: inherit;
 }
 
-/* BASICS */
+:root[color-mode="light"] :is(dialog, input) {
+  color-scheme: light;
+}
 
-body {
+:root[color-mode="dark"] :is(dialog, input) {
+  color-scheme: dark;
+}
+
+select option {
   background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: system-ui, sans-serif;
 }
 
-pre,
-.code {
-  font-family: ui-monospace, monospace;
-}
-
-a {
-  color: var(--color-link);
-  text-underline-offset: var(--space-xs);
-}
-
-svg {
-  fill: currentColor;
-}
-
-th,
-td {
-  padding: var(--space-xs) var(--space-s);
-}
+/* BASICS */
 
 dialog {
   max-block-size: 50dvh;
@@ -185,7 +184,7 @@ main {
   gap: 2em;
   flex-grow: 1;
   padding-block: var(--space-m);
-  padding-inline: calc(var(--tabs-width) + var(--space-l)) var(--space-l);
+  padding-inline: calc(var(--main-tabs-width) + var(--space-l)) var(--space-l);
 }
 
 #main-tabs {
@@ -193,10 +192,10 @@ main {
   z-index: 1;
   inset: 25% 0;
   block-size: 50%;
-  inline-size: var(--tabs-width);
+  inline-size: var(--main-tabs-width);
   padding: var(--space-m) var(--space-xs);
   border-radius: 0 var(--space-s) var(--space-s) 0;
-  background-color: var(--color);
+  background-color: var(--color-primary);
   color: var(--color-text-dark);
 }
 
@@ -229,7 +228,7 @@ h1 {
 }
 
 h2 {
-  color: var(--color);
+  color: var(--color-primary);
   font-weight: normal;
 }
 
@@ -328,7 +327,7 @@ main.tekir_attachment {
 
 .breadcrumbs p {
   margin-block-end: 0;
-  color: var(--color);
+  color: var(--color-primary);
   font-style: italic;
   text-transform: lowercase;
 }
@@ -445,9 +444,5 @@ details:last-of-type .down-block {
   dialog,
   input {
     color-scheme: dark;
-  }
-
-  select option {
-    background-color: var(--color-bg);
   }
 }
