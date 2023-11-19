@@ -103,8 +103,8 @@ def build() -> str | Response:
         return error_response(errors)
     builder.touch_site_config()
     build_time = utils.get_build_time(builder)
-    output_time = format_datetime(build_time) if build_time is not None else \
-        _("No output")
+    output_time = format_datetime(build_time, format="long") \
+        if build_time is not None else _("No output")
     return output_time
 
 
