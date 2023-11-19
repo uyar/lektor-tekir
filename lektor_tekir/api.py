@@ -79,8 +79,8 @@ def site_output() -> str:
     builder: Builder = g.admin_context.info.get_builder()
     output_path = builder.destination_path
     build_time = utils.get_build_time(builder)
-    output_time = format_datetime(build_time) if build_time is not None else \
-        _("No output")
+    output_time = format_datetime(build_time, format="long") \
+        if build_time is not None else _("No output")
     return render_template("partials/site-output.html",
                            output_path=output_path, output_time=output_time)
 

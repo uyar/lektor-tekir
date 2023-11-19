@@ -170,6 +170,13 @@ img.htmx-indicator {
   background-color: var(--color-bg);
 }
 
+div[role="toolbar"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+  margin-block: var(--space-m);
+}
+
 /* MAIN TABS */
 
 #main-tabs {
@@ -248,12 +255,6 @@ h2 {
   padding: 0 var(--space-m);
 }
 
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-}
-
 /* MODALS */
 
 dialog {
@@ -277,12 +278,8 @@ dialog .report:not(:empty) {
   grid-column: 1;
 }
 
-main.tekir_overview {
-  grid-template-rows: auto 1fr;
-}
-
 #page-count {
-  font-size: 3em;
+  font-size: 2em;
 }
 
 main.tekir_contents {
