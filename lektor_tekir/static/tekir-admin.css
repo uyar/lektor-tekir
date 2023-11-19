@@ -56,12 +56,6 @@ pre,
   font-family: ui-monospace, monospace;
 }
 
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 img,
 svg {
   display: block;
@@ -86,6 +80,12 @@ td {
   padding: var(--space-xs) var(--space-s);
 }
 
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 :root[color-mode="light"] :is(dialog, input) {
   color-scheme: light;
 }
@@ -96,14 +96,6 @@ td {
 
 select option {
   background-color: var(--color-bg);
-}
-
-/* BASICS */
-
-dialog {
-  max-block-size: 50dvh;
-  max-inline-size: 75dvw;
-  overflow: hidden;
 }
 
 /* FORMS */
@@ -166,22 +158,6 @@ img.htmx-indicator {
   background-color: var(--color-bg);
 }
 
-/* LAYOUT */
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-block-size: 100dvh;
-}
-
-main {
-  display: grid;
-  gap: 2em;
-  flex-grow: 1;
-  padding-block: var(--space-m);
-  padding-inline: calc(var(--main-tabs-width) + var(--space-l)) var(--space-l);
-}
-
 /* MAIN TABS */
 
 #main-tabs {
@@ -222,6 +198,16 @@ main {
 
 /* COMMON */
 
+main {
+  --n-columns: 2;
+
+  display: grid;
+  grid-template-columns: repeat(var(--n-columns), auto);
+  gap: var(--space-l);
+  padding-block: var(--space-m);
+  padding-inline: calc(var(--main-tabs-width) + var(--space-l)) var(--space-l);
+}
+
 h1 {
   font-size: 3em;
   font-style: italic;
@@ -234,13 +220,6 @@ h2 {
 
 .heading {
   font-size: 1.5em;
-}
-
-.report:not(:empty) {
-  max-block-size: 25dvh;
-  margin-block: 1em;
-  padding: var(--space-s) var(--space-m);
-  overflow: auto;
 }
 
 .error {
@@ -264,7 +243,27 @@ h2 {
   gap: 1em;
 }
 
+/* MODALS */
+
+dialog {
+  max-block-size: 50dvh;
+  max-inline-size: 75dvw;
+  overflow: hidden;
+}
+
+dialog .report:not(:empty) {
+  max-block-size: 25dvh;
+  margin-block: var(--space-m);
+  padding: var(--space-s) var(--space-m);
+  overflow: auto;
+}
+
 /* SPECIAL */
+
+#site-output,
+#content-summary {
+  grid-column: 1;
+}
 
 main.tekir_overview {
   grid-template-rows: auto 1fr;
@@ -427,6 +426,12 @@ details:last-of-type .down-block {
 }
 
 /* MEDIA QUERIES */
+
+@media (max-width: 40rem) {
+  main {
+    --n-columns: 1;
+  }
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
