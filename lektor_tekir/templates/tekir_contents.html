@@ -1,6 +1,12 @@
 {% extends 'tekir_base.html' %}
 
 {% block body %}
+
+{% from 'tekir_macros.html' import render_breadcrumbs %}
+<div class="breadcrumbs">
+  {{ render_breadcrumbs(record, ancestors) }}
+</div>
+
 <section id="content-summary"
     hx-get="{{ url_for('tekir_admin.api.content_summary', path=record.path, alt=record.alt) }}"
     hx-trigger="load">

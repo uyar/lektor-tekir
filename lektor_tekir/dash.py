@@ -27,9 +27,10 @@ def contents() -> str | Response:
     record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
+    ancestors = utils.get_ancestors(record)
     template = "tekir_contents.html" if not record.is_attachment else \
         "tekir_attachment.html"
-    return render_template(template, record=record)
+    return render_template(template, record=record, ancestors=ancestors)
 
 
 def edit_content() -> str | Response:

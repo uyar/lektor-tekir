@@ -1,16 +1,12 @@
-{% from 'tekir_macros.html' import render_breadcrumbs %}
+<div class="document-title">{{ record.title }}</div>
 
-{{ render_breadcrumbs(record, ancestors) }}
-
-<h1>{{ record.title }}</h1>
-
-<div id="system-fields">
+<div class="system-fields">
   <em>{{ i18n_name(record.datamodel, g.lang_code) }}</em>
   {% if record._hidden %}&mdash; {{ _('Hidden') }}{% endif %}
   {% if not record._discoverable %}&mdash; {{ _('Undiscoverable') }}{% endif %}
 </div>
 
-<div class="button-group">
+<div role="toolbar">
   <a class="button" href="{{ url_for('tekir_admin.edit_content', path=record.path, alt=record.alt) }}">
     {% include 'icons/edit-entry.svg' %} <span>{{ _('Edit') }}</span>
   </a>

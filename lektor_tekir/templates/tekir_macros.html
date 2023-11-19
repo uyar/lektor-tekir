@@ -1,13 +1,13 @@
 {% macro render_breadcrumbs(record, ancestors) %}
-<div class="breadcrumbs">
-  <p>{{ _('You are here:') }}</p>
-  <ul role="list">
+<p>{{ _('You are here:') }}</p>
+<nav aria-label="{{ _('Upper pages') }}">
+  <ul>
     {% for item in ancestors %}
     <li><a href="{{ url_for('tekir_admin.contents', path=item.path, alt=record.alt) }}">{{ item._slug or _('home') }}</a></li>
     {% endfor %}
     <li>{{ record._slug or _('home') }}</li>
   </ul>
-</div>
+</nav>
 {% endmacro %}
 
 {% macro render_field(item, field, prefix) %}

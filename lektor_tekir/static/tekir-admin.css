@@ -282,65 +282,29 @@ dialog .report:not(:empty) {
   font-size: 2em;
 }
 
-main.tekir_contents {
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: auto 1fr;
-}
-
-main.tekir_attachment {
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: auto 1fr;
-}
-
-#content-summary {
-  grid-column: 1 / span 6;
-  grid-row: 1;
-}
-
-#content-translations {
-  grid-column: 4 / span 3;
-  grid-row: 1;
-  align-self: end;
-}
-
-#content-subpages {
-  grid-column: 1 / span 3;
-  grid-row: 2;
-}
-
-#content-attachments {
-  grid-column: 4 / span 3;
-  grid-row: 2;
-}
-
-#attachment-preview {
-  grid-column: 1 / span 4;
-  grid-row: 2;
-}
-
-#attachment-info {
-  grid-column: 5;
-  grid-row: 2;
-}
-
-.breadcrumbs {
+div.breadcrumbs {
   font-size: 85%;
-}
-
-.breadcrumbs p {
-  margin-block-end: 0;
-  color: var(--color-primary);
-  font-style: italic;
   text-transform: lowercase;
 }
 
-.breadcrumbs ul {
-  display: inline-flex;
-  gap: 0.5em;
+div.breadcrumbs p {
+  margin: 0;
+  color: var(--color-primary);
+  font-style: italic;
 }
 
-.breadcrumbs li:not(:first-child)::before {
+div.breadcrumbs ul {
+  display: inline-flex;
+  gap: var(--space-xs);
+}
+
+div.breadcrumbs ul li:not(:first-child)::before {
   content: "» ";
+}
+
+div.document-title {
+  margin-bottom: var(--space-s);
+  font-size: 2em;
 }
 
 #system-fields,
@@ -449,8 +413,7 @@ details:last-of-type .down-block {
     --color-link: var(--color-link-dark);
   }
 
-  dialog,
-  input {
+  :is(dialog, input) {
     color-scheme: dark;
   }
 }

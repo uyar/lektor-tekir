@@ -140,11 +140,9 @@ def content_summary() -> str | Response:
     record, status = utils.get_record(g.admin_context.pad, request.args)
     if record is None:
         return Response("", status=status)
-    ancestors = utils.get_ancestors(record)
     template = "content-summary.html" if not record.is_attachment else \
         "attachment-summary.html"
-    return render_template(f"partials/{template}", record=record,
-                           ancestors=ancestors)
+    return render_template(f"partials/{template}", record=record)
 
 
 def content_translations() -> str | Response:

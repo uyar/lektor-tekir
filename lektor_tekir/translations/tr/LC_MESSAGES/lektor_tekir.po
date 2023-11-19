@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-19 19:13+0300\n"
+"POT-Creation-Date: 2023-11-19 22:08+0300\n"
 "PO-Revision-Date: 2023-06-25 21:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -26,35 +26,35 @@ msgstr "Bu platform için dosya yöneticisi ayarlanmamış:"
 msgid "No output"
 msgstr "Çıktı yok"
 
-#: lektor_tekir/api.py:312
+#: lektor_tekir/api.py:310
 msgid "Every content item must have a title."
 msgstr "Her içerik unsurunun bir başlığı olması zorunludur."
 
-#: lektor_tekir/api.py:324
+#: lektor_tekir/api.py:322
 msgid "A content item with this name already exists."
 msgstr "Bu isimde bir içerik unsuru zaten var."
 
-#: lektor_tekir/api.py:347
+#: lektor_tekir/api.py:345
 msgid "A translation for this language already exists."
 msgstr "Bu dil için bir çeviri zaten var."
 
-#: lektor_tekir/api.py:377 lektor_tekir/api.py:401
+#: lektor_tekir/api.py:375 lektor_tekir/api.py:399
 msgid "Please upload a file."
 msgstr "Lütfen bir dosya yükleyin."
 
-#: lektor_tekir/api.py:389
+#: lektor_tekir/api.py:387
 msgid "An attachment with this name already exists."
 msgstr "Bu isimde bir ek zaten var."
 
-#: lektor_tekir/api.py:426
+#: lektor_tekir/api.py:424
 msgid "No changes."
 msgstr "Değişiklik yok."
 
-#: lektor_tekir/api.py:429
+#: lektor_tekir/api.py:427
 msgid "Content saved."
 msgstr "İçerik kaydedildi."
 
-#: lektor_tekir/api.py:451
+#: lektor_tekir/api.py:449
 msgid "There are unsaved changes. Do you want to continue?"
 msgstr "Kaydedilmemiş değişiklikler var. Devam etmek istiyor musunuz?"
 
@@ -100,9 +100,13 @@ msgstr "Kaydet"
 msgid "Close"
 msgstr "Kapat"
 
-#: lektor_tekir/templates/tekir_macros.html:3
+#: lektor_tekir/templates/tekir_macros.html:2
 msgid "You are here:"
 msgstr "Buradasınız:"
+
+#: lektor_tekir/templates/tekir_macros.html:3
+msgid "Upper pages"
+msgstr "Üst sayfalar"
 
 #: lektor_tekir/templates/tekir_macros.html:6
 #: lektor_tekir/templates/tekir_macros.html:8
@@ -137,19 +141,19 @@ msgstr "Tekir Yönetim Paneli Tercihleri"
 msgid "Language"
 msgstr "Dil"
 
-#: lektor_tekir/templates/tekir_preferences.html:15
+#: lektor_tekir/templates/tekir_preferences.html:20
 msgid "Theme"
 msgstr "Tema"
 
-#: lektor_tekir/templates/tekir_preferences.html:16
+#: lektor_tekir/templates/tekir_preferences.html:24
 msgid "System default"
 msgstr "Sistem varsayılanı"
 
-#: lektor_tekir/templates/tekir_preferences.html:17
+#: lektor_tekir/templates/tekir_preferences.html:28
 msgid "Light"
 msgstr "Açık"
 
-#: lektor_tekir/templates/tekir_preferences.html:18
+#: lektor_tekir/templates/tekir_preferences.html:32
 msgid "Dark"
 msgstr "Koyu"
 
@@ -201,23 +205,23 @@ msgstr "İsim"
 msgid "No subpages."
 msgstr "Altsayfa yok."
 
-#: lektor_tekir/templates/partials/content-summary.html:9
+#: lektor_tekir/templates/partials/content-summary.html:5
 msgid "Hidden"
 msgstr "Saklı"
 
-#: lektor_tekir/templates/partials/content-summary.html:10
+#: lektor_tekir/templates/partials/content-summary.html:6
 msgid "Undiscoverable"
 msgstr "Listelenmez"
 
-#: lektor_tekir/templates/partials/content-summary.html:15
+#: lektor_tekir/templates/partials/content-summary.html:11
 msgid "Edit"
 msgstr "Düzenle"
 
-#: lektor_tekir/templates/partials/content-summary.html:18
+#: lektor_tekir/templates/partials/content-summary.html:14
 msgid "View"
 msgstr "Görüntüle"
 
-#: lektor_tekir/templates/partials/content-summary.html:23
+#: lektor_tekir/templates/partials/content-summary.html:19
 #: lektor_tekir/templates/partials/site-output.html:9
 msgid "Open folder"
 msgstr "Klasörü aç"
