@@ -38,12 +38,14 @@
   {% endif %}
 
   {% if is_primary %}
-  <div class="button-group">
+  <div role="toolbar">
+    {% if subpages %}
     <button
         hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
         hx-target="#delete-dialog">
     {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
     </button>
+    {% endif %}
 
     <button
         hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_subpage', path=record.path) }}"

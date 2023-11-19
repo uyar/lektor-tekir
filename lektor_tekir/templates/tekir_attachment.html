@@ -18,7 +18,7 @@
     {{ record.width }} x {{record.height}}</p>
   {% endif %}
 
-  <div class="button-group">
+  <div role="toolbar">
     <button
         hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='replace_attachment') }}"
         hx-target="#upload-dialog">

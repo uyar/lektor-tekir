@@ -38,12 +38,14 @@
   {% endif %}
 
   {% if is_primary %}
-  <div class="button-group">
+  <div role="toolbar">
+    {% if attachments %}
     <button
         hx-post="{{ url_for('tekir_admin.api.delete_confirm') }}"
         hx-target="#delete-dialog">
       {% include 'icons/delete.svg' %} <span>{{ _('Delete selected') }}</span>
     </button>
+    {% endif %}
 
     <button
         hx-get="{{ url_for('tekir_admin.api.upload_attachment', path=record.path, op='add_attachment') }}"
