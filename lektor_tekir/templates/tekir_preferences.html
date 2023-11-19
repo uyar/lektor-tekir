@@ -1,39 +1,57 @@
 {% extends 'tekir_base.html' %}
 
 {% block body %}
-<h2>{{ _('Tekir Admin Panel Preferences') }}</h2>
+<h1>{{ _('Tekir Admin Panel Preferences') }}</h1>
 
-<form action="." method="POST">
+<form id="preferences" action="." method="POST">
   <div class="field">
-    <label for="language">{{ _('Language') }}</label>
-    {% for locale in translations %}
-    <input type="radio" id="language" name="language" value="{{ locale }}"/> {{ locale.get_display_name() }}<br/>
-    {% endfor %}
+    <h3>{{ _('Language') }}</h3>
+    <ul class="field-options">
+      {% for locale in translations %}
+      <li>
+        <input type="radio" id="language_{{ locale }}" name="language" value="{{ locale }}"/>
+        <label for="language_{{ locale }}">{{ locale.get_display_name() }}</label>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 
   <div class="field">
-    <label for="theme">{{ _('Theme') }}</label>
-    <input type="radio" id="theme" name="theme" value="system"/> {{ _('System default') }}<br/>
-    <input type="radio" id="theme" name="theme" value="light"/> {{ _('Light') }}<br/>
-    <input type="radio" id="theme" name="theme" value="dark"/> {{ _('Dark') }}<br/>
+    <h3>{{ _('Theme') }}</h3>
+    <ul class="field-options">
+      <li>
+        <input type="radio" id="theme_system" name="theme" value="system"/>
+        <label for="theme_system">{{ _('System default') }}</label>
+      </li>
+      <li>
+        <input type="radio" id="theme_light" name="theme" value="light"/>
+        <label for="theme_light">{{ _('Light') }}</label>
+      </li>
+      <li>
+        <input type="radio" id="theme_dark" name="theme" value="dark"/>
+        <label for="theme_dark">{{ _('Dark') }}</label>
+      </li>
+    </ul>
   </div>
 </form>
 
 <script>
   window.addEventListener("DOMContentLoaded", (ev) => {
       const lang = localStorage.getItem("ui-language") ?? "en";
-      document.querySelector(`input[value="${lang}"]`).checked = true;
+      document.getElementById(`language_${lang}`).checked = true;
 
       const mode = localStorage.getItem("color-mode") ?? "system";
-      document.querySelector(`input[value="${mode}"]`).checked = true;
+      document.getElementById(`theme_${mode}`).checked = true;
   });
 
   document.querySelectorAll('input[name="language"]').forEach((el) => {
       el.addEventListener("click", (ev) => {
           const uiLang = ev.currentTarget.value;
-          localStorage.setItem("ui-language", uiLang);
           const pageLang = document.documentElement.getAttribute("lang");
-          window.location.href = window.location.href.replace(`/${pageLang}/`, `/${uiLang}/`);
+          if (uiLang != pageLang) {
+            localStorage.setItem("ui-language", uiLang);
+            window.location.href = window.location.href.replace(`/${pageLang}/`, `/${uiLang}/`);
+          }
       });
   });
 

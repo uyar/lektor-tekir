@@ -94,10 +94,6 @@ nav ul {
   color-scheme: dark;
 }
 
-select option {
-  background-color: var(--color-bg);
-}
-
 /* FORMS */
 
 input,
@@ -114,7 +110,7 @@ textarea,
 input[type="text"],
 input[type="file"],
 textarea {
-  width: 100%;
+  inline-size: 100%;
 }
 
 input[type="file"] {
@@ -122,13 +118,29 @@ input[type="file"] {
   outline: 1px dashed currentColor;
 }
 
-label {
-  display: block;
-  margin-block-end: 0.25em;
+select option {
+  background-color: var(--color-bg);
 }
 
-.field {
-  margin-block: 1em;
+div.field {
+  margin-block: var(--space-m);
+}
+
+:is(label, div.field h3) {
+  display: block;
+  margin-block: 0 var(--space-xs);
+  font-size: 1em;
+}
+
+ul.field-options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.field-options label {
+  display: inline;
+  font-size: var(--input-font-size);
 }
 
 /* BUTTONS */
@@ -208,14 +220,13 @@ main {
   padding-inline: calc(var(--main-tabs-width) + var(--space-l)) var(--space-l);
 }
 
-h1 {
-  font-size: 3em;
-  font-style: italic;
+h2,
+h3 {
+  font-weight: normal;
 }
 
 h2 {
   color: var(--color-primary);
-  font-weight: normal;
 }
 
 .heading {
@@ -260,6 +271,7 @@ dialog .report:not(:empty) {
 
 /* SPECIAL */
 
+#preferences,
 #site-output,
 #content-summary {
   grid-column: 1;
