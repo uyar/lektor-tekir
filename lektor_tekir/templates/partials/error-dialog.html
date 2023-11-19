@@ -1,3 +1,7 @@
 <p>{{ _('The following errors were encountered:') }}</p>
-<pre class="report error">{{ '\n\n'.join(errors) }}</pre>
-<button class="modal-close">{{ _('Close') }}</button>
+<pre class="report error">{{ '\n'.join(errors) }}</pre>
+<ul role="toolbar">
+  <li>
+    <button class="modal-close">{{ _('Close') }}</button>
+  </li>
+</ul>

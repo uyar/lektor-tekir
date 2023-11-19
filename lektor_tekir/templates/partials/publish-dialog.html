@@ -1,7 +1,7 @@
 <form action="." method="POST">
   <div class="field">
-    <label for="field-server">{{ _('Server') }}</label>
-    <select id="field-server" name="server" required>
+    <label for="publish-server">{{ _('Server') }}</label>
+    <select id="publish-server" name="server" required>
       {% for server_id, server in servers.items() %}
       <option value="{{ server_id }}"{{ ' selected' if server.default else '' }}>
         {{ server.name }}: {{ server.target }}
@@ -10,13 +10,19 @@
     </select>
   </div>
 
-  <button class="confirm"
-      hx-post="{{ url_for('tekir_admin.api.publish_build') }}"
-      hx-target="#publish-dialog .report">
-    {{ _('Publish') }}
-    <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
-  </button>
-  <button class="cancel modal-close">{{ _('Close') }}</button>
+  <ul role="toolbar">
+    <li>
+      <button class="confirm"
+          hx-post="{{ url_for('tekir_admin.api.publish_build') }}"
+          hx-target="#publish-dialog .report">
+        {{ _('Publish') }}
+        <img class="htmx-indicator" src="{{ url_for('tekir_admin.static', filename='ball-triangle.svg') }}">
+      </button>
+    </li>
+    <li>
+      <button class="cancel modal-close">{{ _('Close') }}</button>
+    </li>
+  </ul>
 
   <pre class="report"></pre>
 </form>
