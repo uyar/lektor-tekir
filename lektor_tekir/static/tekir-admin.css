@@ -273,7 +273,8 @@ dialog .report:not(:empty) {
 
 #preferences,
 #site-output,
-#content-summary {
+#content-summary,
+#attachment-preview {
   grid-column: 1;
 }
 
