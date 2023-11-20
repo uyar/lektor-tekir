@@ -1,13 +1,6 @@
-{% if record.alt != '_primary' %}
-<div class="report warning">
-  {{ _('Add and delete operations are available only through the primary language.') }}
-</div>
-{% endif %}
-
 <h2>{{ _('Translations') }}</h2>
 
 <ul role="toolbar">
-  {% set is_primary = record.alt == '_primary' %}
   {% for alt in alts.values() %}
     {% set alt_name = i18n_name(alt, g.lang_code) %}
     {% set alt_url = url_for('tekir_admin.contents', path=record.path, alt=alt.id) %}
@@ -24,22 +17,18 @@
 
     {% if alt.exists %}
     <a href="{{ alt_url }}">{{ alt_name }}</a>
-      {% if is_primary and (alt.id != '_primary') %}
     <button
         hx-get="{{ url_for('tekir_admin.api.delete_translation_confirm', path=record.path, alt=alt.id) }}"
         hx-target="#delete-dialog">
       {% include 'icons/delete.svg' %}
     </button>
-      {% endif %}
     {% else %}
     {{ alt_name }}
-      {% if is_primary %}
     <button
         hx-get="{{ url_for('tekir_admin.api.new_subpage', op='add_translation', path=record.path, lang=alt.id) }}"
         hx-target="#new-subpage-dialog">
       {% include 'icons/document-new.svg' %}
     </button>
-      {% endif %}
     {% endif %}
   </li>
   {% endfor %}

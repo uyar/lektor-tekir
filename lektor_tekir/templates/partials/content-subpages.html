@@ -1,7 +1,5 @@
 <h2>{{ _('Subpages') }}</h2>
 
-{% set is_primary = record.alt == '_primary' %}
-
 <form id="subpages-form" action="." method="POST">
   {% if subpages %}
   <input type="hidden" name="form_id" value="subpages-form"/>
@@ -9,20 +7,16 @@
     <table>
       <thead>
         <tr>
-          {% if is_primary %}
           <th>{{ _('Select') }}</th>
-          {% endif %}
           <th>{{ _('Name') }}</th>
         </tr>
       </thead>
       <tbody>
         {% for subpage in subpages %}
         <tr>
-          {% if is_primary %}
           <td>
             <input type="checkbox" name="selected-items" value="{{ subpage.path }}"/>
           </td>
-          {% endif %}
           <td>
             <a href="{{ url_for('tekir_admin.contents', path=subpage.path, alt=record.alt) }}">{{ subpage._slug }}</a>
           </td>
@@ -37,7 +31,6 @@
   </div>
   {% endif %}
 
-  {% if is_primary %}
   <ul role="toolbar">
     {% if subpages %}
     <li>
@@ -57,5 +50,4 @@
       </button>
     </li>
   </ul>
-  {% endif %}
 </form>

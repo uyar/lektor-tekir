@@ -1,7 +1,5 @@
 <h2>{{ _('Attachments') }}</h2>
 
-{% set is_primary = record.alt == '_primary' %}
-
 <form id="attachments-form" action="." method="POST">
   {% if attachments %}
   <input type="hidden" name="form_id" value="attachments-form"/>
@@ -9,20 +7,16 @@
     <table>
       <thead>
         <tr>
-          {% if is_primary %}
           <th>{{ _('Select') }}</th>
-          {% endif %}
           <th>{{ _('File name') }}</th>
         </tr>
       </thead>
       <tbody>
         {% for attachment in attachments %}
         <tr>
-          {% if is_primary %}
           <td>
             <input type="checkbox" name="selected-items" value="{{ attachment.path }}"/>
           </td>
-          {% endif %}
           <td>
             <a href="{{ url_for('tekir_admin.contents', path=attachment.path, alt=record.alt) }}">{{ attachment._slug }}</a>
           </td>
@@ -37,7 +31,6 @@
   </div>
   {% endif %}
 
-  {% if is_primary %}
   <ul role="toolbar">
     {% if attachments %}
     <li>
@@ -57,5 +50,4 @@
       </button>
     </li>
   </ul>
-  {% endif %}
 </form>
